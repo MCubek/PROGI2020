@@ -16,6 +16,20 @@ on-merge-request-build-backend:
   only:
     - merge_request
 
+on-merge-request-build-frontend:
+  stage: on-merge-request-build-frontend
+  image: trion/ng-cli
+  before_script:
+    - npm ci
+  script:
+    - ng build --prod
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - dist/
+  only:
+    - merge_request
+
 deploy-on-develop:
   stage: deploy-on-develop
   image: ruby:latest
