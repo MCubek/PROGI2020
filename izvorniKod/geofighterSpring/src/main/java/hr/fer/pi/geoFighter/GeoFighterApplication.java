@@ -8,7 +8,6 @@ public class GeoFighterApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GeoFighterApplication.class, args);
-		;
 	}
 
 }
