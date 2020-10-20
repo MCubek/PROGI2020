@@ -1,13 +1,13 @@
-package hr.fer.progi.pi.geofighterSpring;
+package hr.fer.pi.geoFighter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GeofighterSpringApplication {
+public class GeoFighterApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GeofighterSpringApplication.class, args);
+		SpringApplication.run(GeoFighterApplication.class, args);
 	}
 
 }

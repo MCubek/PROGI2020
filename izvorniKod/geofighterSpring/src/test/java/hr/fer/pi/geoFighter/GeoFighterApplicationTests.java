@@ -1,10 +1,10 @@
-package hr.fer.progi.pi.geofighterSpring;
+package hr.fer.pi.geoFighter;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GeofighterSpringApplicationTests {
+class GeoFighterApplicationTests {
 
 	@Test
 	void contextLoads() {
