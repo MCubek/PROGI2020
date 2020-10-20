@@ -22,11 +22,12 @@ on-merge-request-build-frontend:
   before_script:
     - npm ci
   script:
+    - cd izvorniKod/angular-geofighter
     - ng build --prod
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - dist/
+#  artifacts:
+#    expire_in: 1 day
+#    paths:
+#      - izvorniKod/angular-geofighter/dist/
   only:
     - merge_request
 
@@ -37,10 +38,10 @@ deploy-on-develop:
     - apt-get update -qy
     - apt-get install -y ruby-dev
     - gem install dpl
-    - cd backend
+    - cd izvorniKod/geofighterSpring
     - dpl --provider=heroku --app=$HEROKU_BACKEND_APP_DEV --api-key=$HEROKU_API_KEY
     - cd ..
-    - cd frontend
+    - cd angular-geofighter
     - dpl --provider=heroku --app=$HEROKU_FRONTEND_APP_DEV --api-key=$HEROKU_API_KEY
   only:
     - develop
@@ -52,8 +53,9 @@ compile_pdf:
     - cd dokumentacija
     - latexmk -pdf PROGI_ProjektnaDokumentacija_v6.tex
   artifacts:
+    expire_in: 2 days
     paths:
-      - dokumentacija/PROGI_ProjektnaDokumentacija_v66.pdf
+      - dokumentacija/PROGI_ProjektnaDokumentacija_v6.pdf
   only:
     - feature/devdoc
     - devdoc
