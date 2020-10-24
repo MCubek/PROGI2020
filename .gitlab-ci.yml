@@ -39,7 +39,7 @@ deploy-on-develop:
     - apt-get install -y ruby-dev
     - gem install dpl
     - cd izvorniKod/geofighterSpring
-    - dpl --provider=heroku --app=$HEROKU_BACKEND_APP_DEV --api-key=$HEROKU_API_KEY
+    #- dpl --provider=heroku --app=$HEROKU_BACKEND_APP_DEV --api-key=$HEROKU_API_KEY
     - cd ..
     - cd angular-geofighter
     - dpl --provider=heroku --app=$HEROKU_FRONTEND_APP_DEV --api-key=$HEROKU_API_KEY
