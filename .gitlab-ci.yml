@@ -1,0 +1,76 @@
+image: node:latest
+
+stages:
+  - on-merge-request-build-backend
+  - on-merge-request-build-frontend
+  - deploy-on-develop
+  - compile_pdf
+#  - deploy-on-production
+
+on-merge-request-build-backend:
+  stage: on-merge-request-build-backend
+  image: gradle:6.6.1-jdk11
+  script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+    - gradle clean build --stacktrace
+  only:
+    - merge_request
+
+on-merge-request-build-frontend:
+  stage: on-merge-request-build-frontend
+  image: trion/ng-cli
+  before_script:
+    - npm ci
+  script:
+    - cd izvorniKod/angular-geofighter
+    - ng build --prod
+#  artifacts:
+#    expire_in: 1 day
+#    paths:
+#      - izvorniKod/angular-geofighter/dist/
+  only:
+    - merge_request
+
+deploy-on-develop:
+  stage: deploy-on-develop
+  image: ruby:latest
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - cd izvorniKod/geofighterSpring
+    #- dpl --provider=heroku --app=$HEROKU_BACKEND_APP_DEV --api-key=$HEROKU_API_KEY
+    - cd ..
+    - cd angular-geofighter
+    - dpl --provider=heroku --app=$HEROKU_FRONTEND_APP_DEV --api-key=$HEROKU_API_KEY
+  only:
+    - develop
+
+compile_pdf:
+  stage: compile_pdf
+  image: aergus/latex
+  script:
+    - cd dokumentacija
+    - latexmk -pdf PROGI_ProjektnaDokumentacija_v6.tex
+  artifacts:
+    expire_in: 2 days
+    paths:
+      - dokumentacija/PROGI_ProjektnaDokumentacija_v6.pdf
+  only:
+    - devdoc
+    - master
+
+#deploy-on-production:
+#  stage: master
+#  image: ruby:latest
+#  script:
+#    - apt-get update -qy
+#    - apt-get install -y ruby-dev
+#    - gem install dpl
+#    - cd backend
+#    - dpl --provider=heroku --app=$HEROKU_BACKEND_APP --api-key=$HEROKU_API_KEY
+#    - cd ..
+#    - cd frontend
+#    - dpl --provider=heroku --app=$HEROKU_FRONTEND_APP --api-key=$HEROKU_API_KEY
+#  only:
+#    - master

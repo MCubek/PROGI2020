@@ -1,11 +1,9 @@
-/dokumentacija/*.aux
-/dokumentacija/*.lof
-/dokumentacija/*.log
-/dokumentacija/*.lot
-/dokumentacija/*.out
-/dokumentacija/*.pdf
-/dokumentacija/*.synctex.gz
-/dokumentacija/*.toc
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
 
 ### STS ###
 .apt_generated
