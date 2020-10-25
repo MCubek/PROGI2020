@@ -410,7 +410,53 @@
 			\item Korisnik unosi potrebne podatke.
 			\item Sustav šalje prijavu kartografu.
 		\end{packed_enum}
+	\item  \textbf{Opis mogućih odstupanja:}
+	
+	\item[] \begin{packed_item}
+		
+		\item[1.a] Pokušaj slanja nepotpune prijave
+		\item[] \begin{packed_enum}
+			
+			\item  sustav javlja da je prijava nepotpuna, igrač će odustati od prijave lokacije 
+			\item  sustav javlja da je prijava nepotpuna, igrač će ispuniti tražena polja
+			
+		\end{packed_enum}
+		
 	\end{packed_item}
+	\end{packed_item}
+
+\noindent \underbar{\textbf{UC9.1 - Osvajanje nove karte preko prijave}}
+\begin{packed_item}
+	
+	\item \textbf{Glavni sudionik: }Registrirani korisnik
+	\item  \textbf{Cilj:} Osvajanje lokacije(karte)
+	\item  \textbf{Sudionici:} Baza podataka, kartograf
+	\item  \textbf{Preduvjet:} Prihvacena prijava lokacije bez izmjena
+	\item  \textbf{Opis osnovnog tijeka:}
+	
+	\item[] \begin{packed_enum}
+		
+		\item Korisnikova prijava je prihvaćena bez potrebnih daljnjih izmjena
+		\item Korisnik dobiva alert da mu je dodijeljena nova karta
+		\item Nova karta(lokacija se dodaje u kolekciju korisnika)
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC10 - Pregled rang ljestvice}}
+\begin{packed_item}
+	
+	\item \textbf{Glavni sudionik: }Registrirani korisnik
+	\item  \textbf{Cilj:} Pregled rang ljestvice svih igrača
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} -
+	\item  \textbf{Opis osnovnog tijeka:}
+	
+	\item[] \begin{packed_enum}
+		
+		\item Korisnik odabire opciju prikaza rang ljestvice
+		\item Korisniku se otvara rang ljestvica na kojoj može vidjeti sve igrače poredane po rangu
+	\end{packed_enum}
+\end{packed_item}
 	
 				
 					
