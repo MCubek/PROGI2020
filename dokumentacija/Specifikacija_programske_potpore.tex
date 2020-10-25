@@ -60,42 +60,470 @@
 				\subsubsection{Opis obrazaca uporabe}
 					\textit{Funkcionalne zahtjeve razraditi u obliku obrazaca uporabe. Svaki obrazac je potrebno razraditi prema donjem predlošku. Ukoliko u nekom koraku može doći do odstupanja, potrebno je to odstupanje opisati i po mogućnosti ponuditi rješenje kojim bi se tijek obrasca vratio na osnovni tijek.}\\
 					
-
-					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ -$<$ime obrasca$>$}}
-					\begin{packed_item}
-	
-						\item \textbf{Glavni sudionik: }$<$sudionik$>$
-						\item  \textbf{Cilj:} $<$cilj$>$
-						\item  \textbf{Sudionici:} $<$sudionici$>$
-						\item  \textbf{Preduvjet:} $<$preduvjet$>$
-						\item  \textbf{Opis osnovnog tijeka:}
+				
+				\noindent \underbar{\textbf{UC11 - Pregled popisa korisnika}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Administrator
+					\item  \textbf{Cilj:} Pregled popisa korisnika
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen kao administrator
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
 						
+						\item Administrator klikom na opciju za pregled registriranih korisnika šalje upit bazi podataka.
+						\item Baza podataka vraća popis registriranih korisnika.
+						\item Popis korisnika se administratoru prikazuje u web sučelju.
+					\end{packed_enum}
+					
+				\end{packed_item}
+			
+				\noindent \underbar{\textbf{UC11.1 - Brisanje korisnika s popisa}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Administrator
+					\item  \textbf{Cilj:} Izbrisati korisnika s popisa iz baze podataka
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen kao administrator
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Administrator odabire opciju za pregled registriranih korisnika.
+						\item Popis korisnika se administratoru prikazuje u web sučelju.
+						\item Pored imena korisnika administrator odabire opciju za brisanje korisnika.
+						\item Korisnik se briše iz baze podataka.
+						\item Ažurira se popis korisnika u web sučelju.
+					\end{packed_enum}
+					
+				\end{packed_item}
+			
+				\noindent \underbar{\textbf{UC11.2 - Uređivanje osobnih podataka korisnika}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Administrator
+					\item  \textbf{Cilj:} Urediti osobne podatke korisnika
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen kao administrator
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Administrator odabire opciju za pregled registriranih korisnika.
+						\item Popis korisnika se administratoru prikazuje u web sučelju.
+						\item Administrator klikom na ime korisnika šalje upit bazi podataka.
+						\item Podaci o korisniku se prikazuju administratoru.
+						\item Administrator mijenja korisničke podatke i odabire opciju za spremanje.
+						\item Aplikacija šalje nove korisničke podatke bazi podataka.
+					\end{packed_enum}
+					
+					\item  \textbf{Opis mogućih odstupanja:}
+					
+					\item[] \begin{packed_item}
+						
+						\item[3.a] Drugi administrator je u međuvremenu izbrisao korisnika
 						\item[] \begin{packed_enum}
-	
-							\item $<$opis korak jedan$>$
-							\item $<$opis korak dva$>$
-							\item $<$opis korak tri$>$
-							\item $<$opis korak četiri$>$
-							\item $<$opis korak pet$>$
+							
+							\item Administratoru se ispisuje poruka da taj korisnik više ne postoji.
+							
+						\end{packed_enum}
+						\item[6.a] Drugi administrator je u međuvremenu izbrisao korisnika
+						\item[] \begin{packed_enum}
+							
+							\item Administratoru se ispisuje poruka da taj korisnik više ne postoji.
+							
 						\end{packed_enum}
 						
-						\item  \textbf{Opis mogućih odstupanja:}
-						
-						\item[] \begin{packed_item}
-	
-							\item[2.a] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
-							\item[] \begin{packed_enum}
-								
-								\item $<$opis rješenja mogućeg scenarija korak 1$>$
-								\item $<$opis rješenja mogućeg scenarija korak 2$>$
-								
-							\end{packed_enum}
-							\item[2.b] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
-							\item[3.a] $<$opis mogućeg scenarija odstupanja  u koraku 3$>$
-							
-						\end{packed_item}
 					\end{packed_item}
+				\end{packed_item}
 				
+				\noindent \underbar{\textbf{UC11.3 - Isključivanje igrača iz igre}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Administrator
+					\item  \textbf{Cilj:} Isključiti igrača iz igre trajno ili privremeno
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen kao administrator
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Administrator odabire opciju za pregled registriranih korisnika.
+						\item Popis korisnika se administratoru prikazuje u web sučelju.
+						\item Pored imena korisnika administrator odabire opciju za isključenje korisnika.
+						\item Administratoru se prikazuje obrazac u kojem treba odabrati opciju za trajno ili privremeno isključenje uz navedeno vrijeme.
+						\item Administrator potvrđuje odabir.
+						\item Aplikacija zabilježi isključenog korisnika u bazi podataka.
+					\end{packed_enum}
+					
+					\item  \textbf{Opis mogućih odstupanja:}
+					
+					\item[] \begin{packed_item}
+						
+						\item[3.a] Drugi administrator je u međuvremenu izbrisao korisnika
+						\item[] \begin{packed_enum}
+							
+							\item Administratoru se ispisuje poruka da taj korisnik više ne postoji.
+							
+						\end{packed_enum}
+						\item[5.a] Drugi administrator je u međuvremenu izbrisao korisnika
+						\item[] \begin{packed_enum}
+							
+							\item Podaci o isključenom korisniku se ne bilježe u bazi podataka.
+							\item Administratoru se ispisuje poruka da taj korisnik više ne postoji.
+							
+						\end{packed_enum}
+						
+					\end{packed_item}
+				\end{packed_item}
+				
+				\noindent \underbar{\textbf{UC12 - Pregled popisa lokacija}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Administrator
+					\item  \textbf{Cilj:} Pregled popisa lokacija igračkih karata
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen kao administrator
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Administrator klikom na opciju za pregled lokacija šalje upit bazi podataka.
+						\item Baza podataka vraća popis lokacija na kojima su karte.
+						\item Popis lokacija se administratoru prikazuje u web sučelju.
+					\end{packed_enum}
+				\end{packed_item}
+				
+				\noindent \underbar{\textbf{UC12.1 - Uređivanje podataka lokacije}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Administrator
+					\item  \textbf{Cilj:} Urediti podatke o lokaciji karte
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen kao administrator
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Administrator odabire opciju za pregled lokacija.
+						\item Popis lokacija se administratoru prikazuje u web sučelju.
+						\item Administrator klikom na ime lokacije šalje upit bazi podataka.
+						\item Podaci o lokaciji se prikazuju administratoru.
+						\item Administrator mijenja podatke o lokaciji i odabire opciju za spremanje.
+						\item Aplikacija šalje nove podatke o lokaciji bazi podataka.
+					\end{packed_enum}
+					
+					\item  \textbf{Opis mogućih odstupanja:}
+					
+					\item[] \begin{packed_item}
+						
+						\item[3.a] Drugi administrator je u međuvremenu izbrisao lokaciju
+						\item[] \begin{packed_enum}
+							
+							\item Administratoru se ispisuje poruka da ta lokacija više ne postoji.
+							
+						\end{packed_enum}
+						\item[6.a] Drugi administrator je u međuvremenu izbrisao lokaciju
+						\item[] \begin{packed_enum}
+							
+							\item Administratoru se ispisuje poruka da ta lokacija više ne postoji.
+							
+						\end{packed_enum}
+						
+					\end{packed_item}
+				\end{packed_item}
+				
+				\noindent \underbar{\textbf{UC12.2 - Brisanje lokacije s popisa}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Administrator
+					\item  \textbf{Cilj:} Izbrisati lokaciju s popisa iz baze podataka
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen kao administrator
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Administrator odabire opciju za pregled lokacija.
+						\item Popis lokacija se administratoru prikazuje u web sučelju.
+						\item Pored imena lokacije administrator odabire opciju za brisanje lokacije.
+						\item Lokacija se briše iz baze podataka.
+						\item Ažurira se popis lokacija u web sučelju.
+					\end{packed_enum}
+				\end{packed_item}
+				
+				\noindent \underbar{\textbf{UC13 - Pregled prijava kartografa}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Administrator
+					\item  \textbf{Cilj:} Pregledati popis prijava za ulogu kartografa
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen kao administrator
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Administrator klikom na opciju za pregled prijava kartografa šalje upit bazi podataka.
+						\item Baza podataka vraća popis prijava kartografa.
+						\item Popis prijava se administratoru prikazuje u web sučelju.
+					\end{packed_enum}
+					
+					\item  \textbf{Opis mogućih odstupanja:}
+					
+					\item[] \begin{packed_item}
+						
+						\item[2.a] Nema prijava kartografa
+						\item[] \begin{packed_enum}
+							
+							\item Administratoru se ispisuje poruka da nema prijava kartografa
+
+						\end{packed_enum}
+						
+					\end{packed_item}
+				\end{packed_item}
+				
+				\noindent \underbar{\textbf{UC13.1 - Prihvat prijave kartografa}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Administrator
+					\item  \textbf{Cilj:} Prihvatiti prijavu za ulogu kartografa
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen kao administrator
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Administrator klikom na opciju za pregled prijava kartografa šalje upit bazi podataka.
+						\item Popis prijava se administratoru prikazuje u web sučelju.
+						\item Administrator prihvaća prijavu klikom na opciju za prihvat pored prijave kartografa.
+						\item Novi kartograf se pohranjuje u bazu podataka.
+						\item Ažurira se popis prijava kartografa u web sučelju.
+					\end{packed_enum}
+					
+					\item  \textbf{Opis mogućih odstupanja:}
+					
+					\item[] \begin{packed_item}
+						
+						\item[3.a] Drugi administrator je u međuvremenu prihvatio ili odbio prijavu
+						\item[] \begin{packed_enum}
+							
+							\item Administratoru se ispisuje poruka da prijava nije više valjana
+							
+						\end{packed_enum}
+						
+					\end{packed_item}
+				\end{packed_item}
+				
+				\noindent \underbar{\textbf{UC13.2 - Odbijanje prijave kartografa}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Administrator
+					\item  \textbf{Cilj:} Odbiti prijavu za ulogu kartografa
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen kao administrator
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Administrator klikom na opciju za pregled prijava kartografa šalje upit bazi podataka.
+						\item Popis prijava se administratoru prikazuje u web sučelju.
+						\item Administrator odbija prijavu klikom na opciju za odbijanje pored prijave kartografa.
+						\item Prijava kartografa se briše iz baze podataka.
+						\item Ažurira se popis prijava kartografa u web sučelju.
+					\end{packed_enum}
+					
+					\item  \textbf{Opis mogućih odstupanja:}
+					
+					\item[] \begin{packed_item}
+						
+						\item[3.a] Drugi administrator je u međuvremenu prihvatio ili odbio prijavu
+						\item[] \begin{packed_enum}
+							
+							\item Administratoru se ispisuje poruka da prijava nije više valjana.
+							
+						\end{packed_enum}
+						
+					\end{packed_item}
+				\end{packed_item}
+				
+				\noindent \underbar{\textbf{UC14 - Prikaz prijave na karti}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Kartograf
+					\item  \textbf{Cilj:} Prikazati novu prijavu lokacije na karti
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen kao kartograf
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Kartograf klikom na opciju za pregled prijava lokacija šalje upit bazi podataka.
+						\item Prijavljene lokacije se kartografu prikažu na karti.
+					\end{packed_enum}
+				\end{packed_item}
+				
+				\noindent \underbar{\textbf{UC14.1 - Prihvat prijave lokacije}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Kartograf
+					\item  \textbf{Cilj:} Prihvatiti prijavu lokacije
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen kao kartograf
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Kartograf klikom na opciju za pregled prijava lokacija šalje upit bazi podataka.
+						\item Prijavljene lokacije se kartografu prikažu na karti.
+						\item Kartograf klikom na lokaciju otvara prozor s opisom lokacije.
+						\item Kartograf prihvaća lokaciju klikom na opciju za prihvat.
+						\item Prijava lokacije se briše iz baze podataka.
+						\item Nova lokacija se dodaje u bazu podataka
+						\item Ažurira se popis prijava lokacija u web sučelju.
+					\end{packed_enum}
+					
+					\item  \textbf{Opis mogućih odstupanja:}
+					
+					\item[] \begin{packed_item}
+						
+						\item[3.a] Drugi kartograf je u međuvremenu prihvatio ili odbio lokaciju
+						\item[] \begin{packed_enum}
+							
+							\item Administratoru se ispisuje poruka da prijava nije više valjana.
+							
+						\end{packed_enum}
+						
+					\end{packed_item}
+				\end{packed_item}
+				
+				\noindent \underbar{\textbf{UC14.2 - Odbijanje prijave lokacije}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Kartograf
+					\item  \textbf{Cilj:} Odbiti prijavu lokacije
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen kao kartograf
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Kartograf klikom na opciju za pregled prijava lokacija šalje upit bazi podataka.
+						\item Prijavljene lokacije se kartografu prikažu na karti.
+						\item Kartograf klikom na lokaciju otvara prozor s opisom lokacije.
+						\item Kartograf odbija prijavu lokacije klikom na opciju za odbijanje.
+						\item Lokacija se briše iz popisa prijava lokacija u bazi podataka i sa karte u web sučelju.
+					\end{packed_enum}
+					
+					\item  \textbf{Opis mogućih odstupanja:}
+					
+					\item[] \begin{packed_item}
+						
+						\item[3.a] Drugi kartograf je u međuvremenu prihvatio ili odbio lokaciju
+						\item[] \begin{packed_enum}
+							
+							\item Kartografu se ispisuje poruka da prijava nije više valjana.
+							
+						\end{packed_enum}
+						
+					\end{packed_item}
+				\end{packed_item}
+				
+				\noindent \underbar{\textbf{UC14.3 - Uređivanje prijave lokacije}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Kartograf
+					\item  \textbf{Cilj:} Urediti prijavu lokacije
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen kao kartograf
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Kartograf klikom na opciju za pregled prijava lokacija šalje upit bazi podataka.
+						\item Prijavljene lokacije se kartografu prikažu na karti.
+						\item Kartograf klikom na lokaciju otvara prozor s opisom lokacije.
+						\item Kartograf uređuje podatke o prijavi lokacije i odabire opciju za spremanje.
+						\item Prijava lokacije se ažurira u bazi podataka.
+						\item Aplikacija ažurira podatke o prijavi lokacije.
+					\end{packed_enum}
+					
+					\item  \textbf{Opis mogućih odstupanja:}
+					
+					\item[] \begin{packed_item}
+						
+						\item[4.a] Drugi kartograf je u međuvremenu potvrdio ili odbio prijavu lokacije
+						\item[] \begin{packed_enum}
+							
+							\item Kartografu se ispisuje poruka da prijava nije više valjana.
+							
+						\end{packed_enum}
+						
+					\end{packed_item}
+				\end{packed_item}
+				
+				\noindent \underbar{\textbf{UC14.4 - Potvrda prijave s terena}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Kartograf
+					\item  \textbf{Cilj:} Potvrditi prijavu lokacije posjetom lokaciji
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen kao kartograf
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Kartograf klikom na opciju za pregled prijava lokacija šalje upit bazi podataka.
+						\item Prijavljene lokacije se kartografu prikažu na karti.
+						\item Kartograf klikom na lokaciju otvara prozor s opisom lokacije.
+						\item Kartograf označava lokaciju da je potrebna provjera s terena.
+						\item Prijava lokacije se ažurira u bazi podataka.
+						\item Aplikacija ažurira podatke o prijavi lokacije.
+					\end{packed_enum}
+					
+					\item  \textbf{Opis mogućih odstupanja:}
+					
+					\item[] \begin{packed_item}
+						
+						\item[5.a] Drugi kartograf je u međuvremenu potvrdio ili odbio prijavu lokacije
+						\item[] \begin{packed_enum}
+							
+							\item Kartografu se ispisuje poruka da prijava nije više valjana.
+							
+						\end{packed_enum}
+						
+					\end{packed_item}
+				\end{packed_item}
+				
+				\noindent \underbar{\textbf{UC15 - Pregled mape s najkraćim putom do prijavljenih lokacija}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Kartograf
+					\item  \textbf{Cilj:} Prikazati na karti najkraći put do prijavljene lokacije
+					\item  \textbf{Sudionici:} Baza podataka, OSMR sustav
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen kao kartograf
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Kartograf na karti odabire opciju za prikaz najkraćeg puta
+						\item Aplikacija pomoću sustava OSRM riješi problem trgovačkog putnika za sve lokacije označene za potvrdu prijave s terena
+						\item Kartografu se na karti pokaže rješenje trgovačkog putnika
+					\end{packed_enum}
+					
+					\item  \textbf{Opis mogućih odstupanja:}
+					
+					\item[] \begin{packed_item}
+						
+						\item[2.a] OSRM servis je nedostupan
+						\item[] \begin{packed_enum}
+							
+							\item Kartografu se ispisuje poruka da se ne može izračunati najkraći put
+							
+						\end{packed_enum}
+						
+					\end{packed_item}
+				\end{packed_item}
 					
 				\subsubsection{Dijagrami obrazaca uporabe}
 					
