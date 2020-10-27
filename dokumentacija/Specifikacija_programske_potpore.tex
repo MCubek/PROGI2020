@@ -77,7 +77,7 @@
 					\item prihvatiti lokaciju iz prijave
 					\item odbiti lokaciju iz prijave
 					\item može izmijeniti prijavu te zatim lokaciju prihvatiti
-					\item može odabrati opciju da je potrebna potvrda s terena, te ga sustav na mapi vodi najkraćim putom od vlastite lokacije do prijavljene lokacije
+					\item može odabrati opciju da je potrebna potvrda s terena, te ga sustav na mapi vodi najkraćim putem od vlastite lokacije do prijavljene lokacije
 				\end{packed_enum}
 			\end{packed_enum}
 		\item  \underbar{Administrator (inicijator) uz mogućnosti kartografa i igrača može:}
@@ -197,8 +197,8 @@
 						\item[2.a] Neispravan email ili lozinka
 						\item[] \begin{packed_enum}
 							
-							\item  Sustav obavještava korisnika o neuspješnoj prijavi. Korisnik pokušava ponovno
-							\item ustav obavještava korisnika o neuspješnoj prijavi. Korisnik odustaje.
+							\item  Sustav obavještava korisnika o neuspješnoj prijavi. Korisnik pokušava ponovno.
+							\item Sustav obavještava korisnika o neuspješnoj prijavi. Korisnik odustaje.
 							
 						\end{packed_enum}
 						
@@ -241,16 +241,16 @@
 				\begin{packed_item}
 					
 					\item \textbf{Glavni sudionik: }Registrirani korisnik
-					\item  \textbf{Cilj:} Pregledati sve sakupljene karte
+					\item  \textbf{Cilj:} Pregled svih sakupljenih karata
 					\item  \textbf{Sudionici:} Baza podataka
 					\item  \textbf{Preduvjet:} Pregled vlastitog ili tuđeg profila
 					\item  \textbf{Opis osnovnog tijeka:}
 					
 					\item[] \begin{packed_enum}
 						
-						\item Korisnik odlazi na svoj ili tuđi profil
-						\item Odabire opciju pregleda kolekcije karata
-						\item Aplikacija prikazuje sve karte koje taj profil ima u svojoj kolekciji
+						\item Korisnik odlazi na svoj ili tuđi profil.
+						\item Odabire opciju pregleda kolekcije karata.
+						\item Aplikacija prikazuje sve karte koje taj profil ima u svojoj kolekciji.
 					\end{packed_enum}
 				\end{packed_item}
 				
@@ -265,8 +265,8 @@
 					
 					\item[] \begin{packed_enum}
 						
-						\item Korisnik odabire igrača s popisa čiji profil želi otvoriti
-						\item Prikazuju se detalji drugog igrača: ime, rang, statistika zadnjih 10 borbi, te gumb za kolekciju
+						\item Korisnik odabire igrača s popisa čiji profil želi otvoriti.
+						\item Prikazuju se detalji drugog igrača: ime, rang, statistika zadnjih 10 borbi te gumb za kolekciju.
 					\end{packed_enum}
 				\end{packed_item}
 				
@@ -281,8 +281,8 @@
 					
 					\item[] \begin{packed_enum}
 						
-						\item Korisnik odabire jednu od kartica.
-						\item Aplikacija prikazuje sve dostupne podatke o kartici lokacije.
+						\item Korisnik odabire jednu od karata.
+						\item Aplikacija prikazuje sve dostupne podatke o karti lokacije.
 					\end{packed_enum}
 				\end{packed_item}
 				
@@ -314,26 +314,26 @@
 					\item[] \begin{packed_enum}
 						
 						\item Korisnik odabire opciju za pronalazak suparnika.
-						\item Sustav sparuje korisnika s nekime od igrača.
+						\item Sustav uparuje korisnika s nekim od igrača.
 						\item Korisnik izabire karte s kojima će igrati.
-						\item Igrači su naizmjence na potezu, te na vlastitom potezu odabiru atribut kojime se igra i kartu koju žele.
-						\item Nakon što su kartice potrošene, igra se završava.
+						\item Igrači su naizmjence na potezu, na vlastitom potezu odabiru atribut koji se koristi u borbi i kartu koju žele.
+						\item Nakon što su kartice potrošene, igra završava.
 					\end{packed_enum}
 					
 					\item  \textbf{Opis mogućih odstupanja:}
 					
 					\item[] \begin{packed_item}
 						
-						\item[1.a] Igrač odustane ili izgubi konenkciju
+						\item[1.a] Igrač odustane ili izgubi vezu
 						\item[] \begin{packed_enum}
 							
-							\item  Sustav čeka korisnika 30sekundi kako bi se povezao nazad u sustav, ako se to ne dogodi, drugom igraču je dodijeljena pobjeda
+							\item  Sustav čeka korisnika 30 sekundi kako bi se ponovno povezao u sustav, a ako se to ne dogodi, drugom igraču je dodijeljena pobjeda.
 							
 						\end{packed_enum}
 						\item[2.a] Igrač nema dovoljno karata za borbu
 						\item[] \begin{packed_enum}
 							
-							\item  Prilikom pritiska na gumb "Traži borbu" sustav igraču javlja kako nema dovoljno karata za početak borbe (ili ih nema dovoljno ili su na coolodwnu) te mu javlja da pođe u istraživanje kako bi sakupio više karata te uvijek bio spreman i u mogućnosti na borbu
+							\item  Prilikom pritiska na gumb "Traži borbu" sustav igraču javlja kako nema dovoljno karata za početak borbe (ili ih nema dovoljno ili su na cooldownu pa nisu trenutno dostupne). Sustav mu predlaže da pođe u istraživanje kako bi sakupio više karata i uvijek bio spreman na borbu.
 							
 						\end{packed_enum}
 						
@@ -343,17 +343,17 @@
 				\noindent \underbar{\textbf{UC8.1 -Odabir karata za borbu}}
 				\begin{packed_item}
 					
-					\item \textbf{Glavni sudionik: }Registrirani korisnik
-					\item  \textbf{Cilj:} Izbor karata za borbu
-					\item  \textbf{Sudionici:} Baza podataka
-					\item  \textbf{Preduvjet:} Pronađen je suigrač
+					\item \textbf{Glavni sudionik: }Registrirani korisnik.
+					\item  \textbf{Cilj:} Izbor karata za borbu.
+					\item  \textbf{Sudionici:} Baza podataka.
+					\item  \textbf{Preduvjet:} Pronađen je suigrač.
 					\item  \textbf{Opis osnovnog tijeka:}
 					
 					\item[] \begin{packed_enum}
 						
 						\item Aplikacija prikazuje sve sakupljene karte korisnika.
 						\item Korisnik odabire 5 karata za borbu. 
-						\item Korisnik odabire opciju za početak borbe. 
+						\item Korisnik odabire opciju za početak borbe.
 					\end{packed_enum}
 					
 					\item  \textbf{Opis mogućih odstupanja:}
@@ -370,7 +370,7 @@
 					\end{packed_item}
 				\end{packed_item}
 				
-				\noindent \underbar{\textbf{UC8.2 - Kraj borbe}}
+				\noindent \underbar{\textbf{UC8.2 -Kraj borbe}}
 				\begin{packed_item}
 					
 					\item \textbf{Glavni sudionik: }Registrirani korisnik
@@ -382,13 +382,13 @@
 					\item[] \begin{packed_enum}
 						
 						\item Aplikacija prikaže poruku ovisno o pobjedi ili porazu.
-						\item Statistika oba suigrača se osvježava u bazi podataka.
-						\item Kartama koje su korištene se smanjuju bodovi.
+						\item Statistika oba suigrača se osvježi u bazi podataka.
+						\item Kartama koje su korištene smanjuju se 	bodovi.
 						\item Sustav vraća korisnika na početnu stranicu.
 					\end{packed_enum}
 				\end{packed_item}
 				
-				\noindent \underbar{\textbf{UC9 - Prijava nove lokacije}}
+				\noindent \underbar{\textbf{UC9 -Prijava nove lokacije}}
 				\begin{packed_item}
 					
 					\item \textbf{Glavni sudionik: }Registrirani korisnik
@@ -410,28 +410,28 @@
 						\item[1.a] Pokušaj slanja nepotpune prijave
 						\item[] \begin{packed_enum}
 							
-							\item  sustav javlja da je prijava nepotpuna, igrač će odustati od prijave lokacije 
-							\item  sustav javlja da je prijava nepotpuna, igrač će ispuniti tražena polja
+							\item  Sustav javlja da je prijava nepotpuna, igrač će odustati od prijave lokacije. 
+							\item  Sustav javlja da je prijava nepotpuna, igrač će ispuniti tražena polja.
 							
 						\end{packed_enum}
 						
 					\end{packed_item}
 				\end{packed_item}
 				
-				\noindent \underbar{\textbf{UC9.1 - Osvajanje nove karte preko prijave}}
+				\noindent \underbar{\textbf{UC9.1 - Osvajanje nove karte zbog prijave lokacije}}
 				\begin{packed_item}
 					
 					\item \textbf{Glavni sudionik: }Registrirani korisnik
 					\item  \textbf{Cilj:} Osvajanje lokacije(karte)
 					\item  \textbf{Sudionici:} Baza podataka, kartograf
-					\item  \textbf{Preduvjet:} Prihvacena prijava lokacije bez izmjena
+					\item  \textbf{Preduvjet:} Prihvaćena prijava lokacije bez izmjena
 					\item  \textbf{Opis osnovnog tijeka:}
 					
 					\item[] \begin{packed_enum}
 						
-						\item Korisnikova prijava je prihvaćena bez potrebnih daljnjih izmjena
-						\item Korisnik dobiva alert da mu je dodijeljena nova karta
-						\item Nova karta(lokacija se dodaje u kolekciju korisnika)
+						\item Korisnikova prijava je prihvaćena bez potrebnih daljnjih izmjena.
+						\item Korisnik dobiva obavijest da mu je dodijeljena nova karta.
+						\item Nova karta(lokacija) se dodaje u kolekciju korisnika.
 					\end{packed_enum}
 				\end{packed_item}
 				
@@ -573,7 +573,7 @@
 				\begin{packed_item}
 					
 					\item \textbf{Glavni sudionik: }Administrator
-					\item  \textbf{Cilj:} Pregled popisa lokacija igračkih karata
+					\item  \textbf{Cilj:} Pregled popisa lokacija igraćih karata
 					\item  \textbf{Sudionici:} Baza podataka
 					\item  \textbf{Preduvjet:} Korisnik je prijavljen kao administrator
 					\item  \textbf{Opis osnovnog tijeka:}
@@ -895,7 +895,7 @@
 					\end{packed_item}
 				\end{packed_item}
 				
-				\noindent \underbar{\textbf{UC15 - Pregled mape s najkraćim putom do prijavljenih lokacija}}
+				\noindent \underbar{\textbf{UC15 - Pregled mape s najkraćim putem do prijavljenih lokacija}}
 				\begin{packed_item}
 					
 					\item \textbf{Glavni sudionik: }Kartograf
@@ -906,9 +906,9 @@
 					
 					\item[] \begin{packed_enum}
 						
-						\item Kartograf na karti odabire opciju za prikaz najkraćeg puta
-						\item Aplikacija pomoću sustava OSRM riješi problem trgovačkog putnika za sve lokacije označene za potvrdu prijave s terena
-						\item Kartografu se na karti pokaže rješenje trgovačkog putnika
+						\item Kartograf na karti odabire opciju za prikaz najkraćeg puta.
+						\item Aplikacija pomoću sustava OSRM riješi problem trgovačkog putnika za sve lokacije označene za potvrdu prijave s terena.
+						\item Kartografu se na karti pokaže rješenje trgovačkog putnika.
 					\end{packed_enum}
 					
 					\item  \textbf{Opis mogućih odstupanja:}
@@ -918,7 +918,7 @@
 						\item[2.a] OSRM servis je nedostupan
 						\item[] \begin{packed_enum}
 							
-							\item Kartografu se ispisuje poruka da se ne može izračunati najkraći put
+							\item Kartografu se ispisuje poruka da se ne može izračunati najkraći put.
 							
 						\end{packed_enum}
 						
