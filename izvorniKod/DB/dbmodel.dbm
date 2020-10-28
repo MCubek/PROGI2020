@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3-beta1" use-changelog="false" last-position="0,189" last-zoom="1" max-obj-count="4"
+<dbmodel pgmodeler-ver="0.9.3-beta1" use-changelog="false" last-position="0,189" last-zoom="1" max-obj-count="9"
 	 default-schema="public" default-owner="postgres">
 <database name="geoFighter" is-template="false" allow-conns="true">
 	<role name="postgres"/>
@@ -12,14 +12,14 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
 </schema>
 
-<table name="USER" layer="0" alias="USR" collapse-mode="2" max-obj-count="10" z-value="0">
+<table name="USER" layer="0" alias="USR" collapse-mode="2" max-obj-count="12" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="500" y="360"/>
 	<column name="USR_ID" not-null="true">
 		<type name="bigint" length="0"/>
 	</column>
-	<column name="CREATED_DATE" not-null="true" default-value="CURRENT_DATE">
+	<column name="CREATED_TIMESTAMP" not-null="true" default-value="current_timestamp">
 		<type name="timestamp" length="0"/>
 	</column>
 	<column name="EMAIL" not-null="true">
@@ -39,6 +39,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<column name="IBAN">
 		<type name="varchar" length="39"/>
+	</column>
+	<column name="CARTOGRAPHER_CONFIRMED">
+		<type name="varchar" length="1"/>
 	</column>
 	<constraint name="USR_PK" type="pk-constr" table="public.&quot;USER&quot;">
 		<columns names="USR_ID" ref-type="src-columns"/>
@@ -124,38 +127,38 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</customidxs>
 
 	<customidxs object-type="constraint">
-		<object name="USER_fk" index="1"/>
-		<object name="USER_fk1" index="2"/>
+		<object name="CONFIRMED_BY_USER_fk" index="1"/>
+		<object name="CREATED_BY_USER_fk" index="2"/>
 	</customidxs>
 </table>
 
 <relationship name="USER_created_many_LOCATION_CARD" type="rel1n" layer="0"
 	 src-col-pattern="{sc}_{st}"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
+	 src-fk-pattern="CREATED_BY_{st}_fk"
 	 custom-color="#5aa578"
 	 src-table="public.&quot;USER&quot;"
 	 dst-table="public.&quot;LOCATION_CARD&quot;"
 	 src-required="true" dst-required="false">
 	<label ref-type="name-label">
-		<position x="-49.2865" y="-147.332"/>
+		<position x="66.2773" y="-127.332"/>
 	</label>
 </relationship>
 
 <relationship name="USER_cartographer_confirmed_many_LOCATION_CARD" type="rel1n" layer="0"
 	 src-col-pattern="{sc}_{st}"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="{st}_fk"
+	 src-fk-pattern="CONFIRMED_BY_{st}_fk"
 	 custom-color="#4b3e56"
 	 src-table="public.&quot;USER&quot;"
 	 dst-table="public.&quot;LOCATION_CARD&quot;"
 	 src-required="true" dst-required="false">
 	<label ref-type="name-label">
-		<position x="212.764" y="-107.332"/>
+		<position x="207.564" y="-107.332"/>
 	</label>
 </relationship>
 
-<relationship name="many_USER_owns_many_LOCATION_CARD" type="relnn" layer="0"
+<relationship name="USER_owns_LOCATION_CARD" type="relnn" layer="0"
 	 src-col-pattern="{sc}_{st}" dst-col-pattern="{sc}_{dt}"
 	 pk-pattern="{gt}_pk" uq-pattern="{gt}_uq"
 	 src-fk-pattern="{st}_fk" dst-fk-pattern="{dt}_fk"
@@ -164,10 +167,86 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 src-table="public.&quot;USER&quot;"
 	 dst-table="public.&quot;LOCATION_CARD&quot;"
 	 src-required="false" dst-required="false"
-	 table-name="many_USER_has_many_LOCATION_CARD">
+	 table-name="USER_owns_LOCATION_CARD">
 	<label ref-type="name-label">
-		<position x="58.8136" y="47.6677"/>
+		<position x="12.0868" y="47.6677"/>
 	</label>
 </relationship>
+
+<table name="FIGHT" layer="0" alias="FGT" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1320" y="920"/>
+	<column name="FGT_ID" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="STARTED_AT" default-value="current_timestamp">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="FGT_PK" type="pk-constr" table="public.&quot;FIGHT&quot;">
+		<columns names="FGT_ID" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="PLAYER1_has_many_FIGHT" type="rel1n" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="PLAYER1_{st}_fk"
+	 custom-color="#9ac721"
+	 src-table="public.&quot;USER&quot;"
+	 dst-table="public.&quot;FIGHT&quot;"
+	 src-required="true" dst-required="false"/>
+
+<relationship name="PLAYER2_has_many_FIGHT" type="rel1n" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="PLAYER2_{st}_fk"
+	 custom-color="#5aa578"
+	 src-table="public.&quot;USER&quot;"
+	 dst-table="public.&quot;FIGHT&quot;"
+	 src-required="true" dst-required="false">
+	<label ref-type="name-label">
+		<position x="-3.93144" y="-8.9857"/>
+	</label>
+</relationship>
+
+<relationship name="FIGHT_has_WINNER_PLAYER" type="rel1n" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="WINNER_{st}_fk"
+	 custom-color="#4b3e56"
+	 src-table="public.&quot;USER&quot;"
+	 dst-table="public.&quot;FIGHT&quot;"
+	 src-required="false" dst-required="false"/>
+
+<table name="TOKEN" layer="0" alias="TKN" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="40" y="400"/>
+	<column name="TKN_ID" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="EXPIRY_DATE" default-value="current_timestamp+ '10 days'::INTERVAL">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="TOKEN">
+		<type name="varchar" length="255"/>
+	</column>
+	<constraint name="TKN_PK" type="pk-constr" table="public.&quot;TOKEN&quot;">
+		<columns names="TKN_ID" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="TKN_UK1" type="uq-constr" table="public.&quot;TOKEN&quot;">
+		<columns names="TOKEN" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="USER_has_many_TOKEN" type="rel1n" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="public.&quot;USER&quot;"
+	 dst-table="public.&quot;TOKEN&quot;"
+	 src-required="true" dst-required="false"/>
 
 </dbmodel>
