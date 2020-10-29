@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3-beta1" use-changelog="false" last-position="0,189" last-zoom="1" max-obj-count="9"
+<dbmodel pgmodeler-ver="0.9.3-beta1" use-changelog="false" last-position="0,0" last-zoom="0.95" max-obj-count="10"
 	 default-schema="public" default-owner="postgres">
 <database name="geoFighter" is-template="false" allow-conns="true">
 	<role name="postgres"/>
@@ -12,10 +12,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
 </schema>
 
-<table name="USER" layer="0" alias="USR" collapse-mode="2" max-obj-count="12" z-value="0">
+<table name="USER" layer="0" alias="USR" collapse-mode="2" max-obj-count="16" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="500" y="360"/>
+	<position x="520" y="280"/>
 	<column name="USR_ID" not-null="true">
 		<type name="bigint" length="0"/>
 	</column>
@@ -40,8 +40,20 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="IBAN">
 		<type name="varchar" length="39"/>
 	</column>
-	<column name="CARTOGRAPHER_CONFIRMED">
+	<column name="CONFIRMED_CARD">
 		<type name="varchar" length="1"/>
+	</column>
+	<column name="ELO_SCORE">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="WINS">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="LOSSES">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="TIMEOUT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
 	</column>
 	<constraint name="USR_PK" type="pk-constr" table="public.&quot;USER&quot;">
 		<columns names="USR_ID" ref-type="src-columns"/>
@@ -95,7 +107,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</label>
 </relationship>
 
-<table name="LOCATION_CARD" layer="0" alias="LCD" collapse-mode="2" max-obj-count="9" z-value="0">
+<table name="LOCATION_CARD" layer="0" alias="LCD" collapse-mode="2" max-obj-count="13" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="360" y="960"/>
@@ -105,16 +117,25 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="NAME" not-null="true">
 		<type name="varchar" length="255"/>
 	</column>
-	<column name="DESCRIPTION">
+	<column name="DESCRIPTION" not-null="true">
 		<type name="varchar" length="4000"/>
 	</column>
 	<column name="PHOTO">
 		<type name="bytea" length="0"/>
 	</column>
+	<column name="CREATED_DATE" not-null="true" default-value="current_timestamp">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="LOCATION" not-null="true">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="FIELD_CHECK">
+		<type name="varchar" length="1"/>
+	</column>
 	<column name="ENABLED" not-null="true">
 		<type name="varchar" length="1"/>
 	</column>
-	<column name="CREATED_DATE" not-null="true">
+	<column name="ENABLED_DATE">
 		<type name="date" length="0"/>
 	</column>
 	<constraint name="LCD_PK" type="pk-constr" table="public.&quot;LOCATION_CARD&quot;">
@@ -122,8 +143,8 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 
 	<customidxs object-type="column">
-		<object name="USR_ID_USER" index="6"/>
-		<object name="USR_ID_USER1" index="7"/>
+		<object name="USR_ID_CREATED_BY" index="10"/>
+		<object name="USR_ID_ENABLED_BY" index="9"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
@@ -133,7 +154,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </table>
 
 <relationship name="USER_created_many_LOCATION_CARD" type="rel1n" layer="0"
-	 src-col-pattern="{sc}_{st}"
+	 src-col-pattern="{sc}_CREATED_BY"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
 	 src-fk-pattern="CREATED_BY_{st}_fk"
 	 custom-color="#5aa578"
@@ -141,12 +162,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 dst-table="public.&quot;LOCATION_CARD&quot;"
 	 src-required="true" dst-required="false">
 	<label ref-type="name-label">
-		<position x="66.2773" y="-127.332"/>
+		<position x="63.4231" y="-136.132"/>
 	</label>
 </relationship>
 
 <relationship name="USER_cartographer_confirmed_many_LOCATION_CARD" type="rel1n" layer="0"
-	 src-col-pattern="{sc}_{st}"
+	 src-col-pattern="{sc}_ENABLED_BY"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
 	 src-fk-pattern="CONFIRMED_BY_{st}_fk"
 	 custom-color="#4b3e56"
@@ -154,7 +175,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 dst-table="public.&quot;LOCATION_CARD&quot;"
 	 src-required="true" dst-required="false">
 	<label ref-type="name-label">
-		<position x="207.564" y="-107.332"/>
+		<position x="39.0533" y="17.4677"/>
 	</label>
 </relationship>
 
@@ -169,46 +190,38 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 src-required="false" dst-required="false"
 	 table-name="USER_owns_LOCATION_CARD">
 	<label ref-type="name-label">
-		<position x="12.0868" y="47.6677"/>
+		<position x="65.3088" y="72.4677"/>
 	</label>
+	<column name="COOLDOWN_MULTIPLIER">
+		<type name="float" length="0"/>
+	</column>
+	<column name="COOLDOWN_END">
+		<type name="timestamp" length="0"/>
+	</column>
 </relationship>
 
-<table name="FIGHT" layer="0" alias="FGT" collapse-mode="2" max-obj-count="6" z-value="0">
+<table name="FIGHT" layer="0" alias="FGT" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1320" y="920"/>
+	<position x="1300" y="660"/>
 	<column name="FGT_ID" not-null="true">
 		<type name="bigint" length="0"/>
 	</column>
-	<column name="STARTED_AT" default-value="current_timestamp">
+	<column name="STARTED_DATETIME" default-value="current_timestamp">
 		<type name="timestamp" length="0"/>
 	</column>
 	<constraint name="FGT_PK" type="pk-constr" table="public.&quot;FIGHT&quot;">
 		<columns names="FGT_ID" ref-type="src-columns"/>
 	</constraint>
+
+	<customidxs object-type="column">
+		<object name="USR_ID_USER" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="WINNER_USER_fk" index="1"/>
+	</customidxs>
 </table>
-
-<relationship name="PLAYER1_has_many_FIGHT" type="rel1n" layer="0"
-	 src-col-pattern="{sc}_{st}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="PLAYER1_{st}_fk"
-	 custom-color="#9ac721"
-	 src-table="public.&quot;USER&quot;"
-	 dst-table="public.&quot;FIGHT&quot;"
-	 src-required="true" dst-required="false"/>
-
-<relationship name="PLAYER2_has_many_FIGHT" type="rel1n" layer="0"
-	 src-col-pattern="{sc}_{st}"
-	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
-	 src-fk-pattern="PLAYER2_{st}_fk"
-	 custom-color="#5aa578"
-	 src-table="public.&quot;USER&quot;"
-	 dst-table="public.&quot;FIGHT&quot;"
-	 src-required="true" dst-required="false">
-	<label ref-type="name-label">
-		<position x="-3.93144" y="-8.9857"/>
-	</label>
-</relationship>
 
 <relationship name="FIGHT_has_WINNER_PLAYER" type="rel1n" layer="0"
 	 src-col-pattern="{sc}_{st}"
@@ -217,7 +230,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 custom-color="#4b3e56"
 	 src-table="public.&quot;USER&quot;"
 	 dst-table="public.&quot;FIGHT&quot;"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="5.21074" y="0.973501"/>
+	</label>
+</relationship>
 
 <table name="TOKEN" layer="0" alias="TKN" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="public"/>
@@ -248,5 +265,69 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 src-table="public.&quot;USER&quot;"
 	 dst-table="public.&quot;TOKEN&quot;"
 	 src-required="true" dst-required="false"/>
+
+<table name="USER_CARD_FIGHT" layer="0" alias="UCF" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="940" y="1060"/>
+
+	<customidxs object-type="column">
+		<object name="FGT_ID_FIGHT" index="1"/>
+		<object name="LCD_ID_LOCATION_CARD" index="2"/>
+		<object name="USR_ID_USER" index="0"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="FIGHT_fk" index="2"/>
+		<object name="LOCATION_CARD_fk" index="3"/>
+		<object name="USER_CARD_FIGHT_pk" index="0"/>
+		<object name="USER_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="USER_has_many_FIGHTS" type="rel1n" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#aa55ff"
+	 src-table="public.&quot;USER&quot;"
+	 dst-table="public.&quot;USER_CARD_FIGHT&quot;"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="name-label">
+		<position x="-1.45948" y="3.86774"/>
+	</label>
+</relationship>
+
+<relationship name="FIGHT_has_many_USER_CARD_FIGHT" type="rel1n" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#aaff00"
+	 src-table="public.&quot;FIGHT&quot;"
+	 dst-table="public.&quot;USER_CARD_FIGHT&quot;"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="name-label">
+		<position x="-5.12676" y="9.71223"/>
+	</label>
+</relationship>
+
+<relationship name="LOCATION_CARD_has_many_USER_CARD_FIGHT" type="rel1n" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ff00ff"
+	 src-table="public.&quot;LOCATION_CARD&quot;"
+	 dst-table="public.&quot;USER_CARD_FIGHT&quot;"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="name-label">
+		<position x="1.44004" y="-0.446591"/>
+	</label>
+</relationship>
 
 </dbmodel>
