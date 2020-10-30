@@ -12,7 +12,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
 </schema>
 
-<table name="USER" layer="0" alias="USR" collapse-mode="2" max-obj-count="16" z-value="0">
+<table name="USER" layer="0" alias="USR" collapse-mode="2" max-obj-count="20" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="520" y="280"/>
@@ -50,10 +50,19 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="integer" length="0"/>
 	</column>
 	<column name="LOSSES">
-		<type name="smallint" length="0"/>
+		<type name="integer" length="0"/>
 	</column>
-	<column name="TIMEOUT_TIMESTAMP">
+	<column name="FORCEDTIMEOUT_END">
 		<type name="timestamp" length="0"/>
+	</column>
+	<column name="CURRENT_LOCATION">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="ONLINE">
+		<type name="varchar" length="1"/>
+	</column>
+	<column name="ID_CARD_PHOTO">
+		<type name="bytea" length="0"/>
 	</column>
 	<constraint name="USR_PK" type="pk-constr" table="public.&quot;USER&quot;">
 		<columns names="USR_ID" ref-type="src-columns"/>

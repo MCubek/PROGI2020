@@ -29,8 +29,11 @@ CREATE TABLE public."USER" (
 	"CONFIRMED_CARD" varchar(1),
 	"ELO_SCORE" integer,
 	"WINS" integer,
-	"LOSSES" smallint,
-	"TIMEOUT_TIMESTAMP" timestamp,
+	"LOSSES" integer,
+	"FORCEDTIMEOUT_END" timestamp,
+	"CURRENT_LOCATION" varchar(255),
+	"ONLINE" varchar(1),
+	"ID_CARD_PHOTO" bytea,
 	CONSTRAINT "USR_PK" PRIMARY KEY ("USR_ID"),
 	CONSTRAINT "USR_UK1" UNIQUE ("EMAIL"),
 	CONSTRAINT "USR_UK2" UNIQUE ("USERNAME")
