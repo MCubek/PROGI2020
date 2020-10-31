@@ -34,6 +34,7 @@ public class LocationCard {
     private String description;
 
     @Lob
+    @Basic(fetch = FetchType.LAZY)
     private byte[] photo;
 
     @Column(name = "created_at")

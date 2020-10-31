@@ -46,9 +46,10 @@ public class User {
     private boolean enabled = false;
 
     @Lob
+    @Basic(fetch = FetchType.LAZY)
     private byte[] photo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     private Role role;
 
@@ -56,6 +57,7 @@ public class User {
     private boolean cartographerConfirmed;
 
     @Lob
+    @Basic(fetch = FetchType.LAZY)
     private byte[] idCardPhoto;
 
     @Nullable
