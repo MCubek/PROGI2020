@@ -32,6 +32,7 @@ public class LocationCard {
 
     @NotBlank
     @Lob
+    @Size(max = 4000)
     private String description;
 
     @Lob

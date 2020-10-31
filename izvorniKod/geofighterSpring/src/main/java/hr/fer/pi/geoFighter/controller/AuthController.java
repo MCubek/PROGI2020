@@ -1,5 +1,7 @@
 package hr.fer.pi.geoFighter.controller;
 
+import hr.fer.pi.geoFighter.dto.AuthenticationResponse;
+import hr.fer.pi.geoFighter.dto.LoginRequest;
 import hr.fer.pi.geoFighter.dto.RegisterRequest;
 import hr.fer.pi.geoFighter.service.AuthService;
 import lombok.AllArgsConstructor;
@@ -25,5 +27,10 @@ public class AuthController {
     public ResponseEntity<String> verifyAccount(@PathVariable String token) {
         authService.verifyAccount(token);
         return new ResponseEntity<>("Account activated Successfully", OK);
+    }
+
+    @PostMapping("/login")
+    public AuthenticationResponse login(@RequestBody LoginRequest loginRequest) {
+        return authService.login(loginRequest);
     }
 }
