@@ -6,6 +6,7 @@ import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Fight {
     private Long fightId;
 
     @Column(name = "start_time")
-    private LocalDateTime startTime = LocalDateTime.now();
+    private Instant startTime =Instant.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "winner_user_id", referencedColumnName = "user_id")

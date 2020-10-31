@@ -12,6 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class LocationCard {
     private String name;
 
     @NotBlank
-    @Size(max = 4000)
+    @Lob
     private String description;
 
     @Lob
@@ -38,7 +39,7 @@ public class LocationCard {
     private byte[] photo;
 
     @Column(name = "created_at")
-    private final LocalDateTime createdDate = LocalDateTime.now();
+    private final Instant createdDate = Instant.now();
 
     @NotNull
     private Point location;
@@ -50,7 +51,7 @@ public class LocationCard {
     private boolean needsToBeChecked;
 
     @Column(name = "enabled_date")
-    private LocalDateTime enabledDate;
+    private Instant enabledDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by_user_id", referencedColumnName = "user_id")

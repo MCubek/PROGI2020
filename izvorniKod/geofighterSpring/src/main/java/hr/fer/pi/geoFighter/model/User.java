@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import java.nio.file.Path;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -40,7 +41,7 @@ public class User {
     @NotBlank(message = "Password is required")
     private String password;
 
-    private final LocalDateTime createdTime = LocalDateTime.now();
+    private final Instant createdTime = Instant.now();
 
     @NotNull
     private boolean enabled = false;
