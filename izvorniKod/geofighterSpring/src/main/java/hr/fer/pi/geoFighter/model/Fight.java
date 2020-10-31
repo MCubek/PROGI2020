@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,4 +26,7 @@ public class Fight {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "winner_user_id", referencedColumnName = "user_id")
     private User winner;
+
+    @OneToMany(mappedBy = "fight")
+    private List<UserCardFight> userCardAssoc;
 }

@@ -23,7 +23,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "\"USERS\"",uniqueConstraints = {@UniqueConstraint(columnNames = "username"),@UniqueConstraint(columnNames = "email")})
+@Table(name = "\"USERS\"", uniqueConstraints = {@UniqueConstraint(columnNames = "username"), @UniqueConstraint(columnNames = "email")})
 public class User {
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -86,4 +86,10 @@ public class User {
 
     @OneToMany(mappedBy = "acceptedBy")
     private Set<LocationCard> acceptedCards;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserCardFight> cardFightAssoc;
+
+    @OneToMany(mappedBy = "winner")
+    private Set<Fight> fightsWon;
 }

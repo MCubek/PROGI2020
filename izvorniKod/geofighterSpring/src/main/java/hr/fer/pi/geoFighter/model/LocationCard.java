@@ -62,5 +62,8 @@ public class LocationCard {
     private User acceptedBy;
 
     @OneToMany(mappedBy = "locationCard")
-    private List<UserCard>  userAssoc;
+    private List<UserCard> userAssoc;
+
+    @OneToMany(mappedBy = "locationCard")
+    private List<UserCardFight> userFightAssoc;
 }
