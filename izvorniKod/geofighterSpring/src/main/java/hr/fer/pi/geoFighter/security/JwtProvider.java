@@ -1,6 +1,7 @@
 package hr.fer.pi.geoFighter.security;
 
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -25,7 +26,7 @@ public class JwtProvider {
     private Long jwtExpirationInMillis;
 
     @PostConstruct
-    public void init(){
+    public void init() {
         try {
             keyStore = KeyStore.getInstance("JKS");
             InputStream resourceAsStream = getClass().getResourceAsStream("/springblog.jks");
@@ -51,5 +52,25 @@ public class JwtProvider {
         } catch (KeyStoreException | NoSuchAlgorithmException | UnrecoverableKeyException exception) {
             throw new SpringGeoFighterException("Exception occurred while retrieving public key from keystore.");
         }
+    }
+
+    public boolean validateToken(String jwt) {
+        Jwts.parserBuilder().setSigningKey(getPublicKey()).build().parseClaimsJws(jwt);
+        return true;
+    }
+
+    private PublicKey getPublicKey() {
+        try {
+            return keyStore.getCertificate("springblog").getPublicKey();
+        } catch (KeyStoreException e) {
+            throw new SpringGeoFighterException("Exception occured while retrieving public key.");
+        }
+    }
+
+    public String getUsernameFromJwt(String token) {
+        Claims claims = Jwts.parserBuilder().setSigningKey(getPublicKey())
+                .build().parseClaimsJws(token).getBody();
+
+        return claims.getSubject();
     }
 }
