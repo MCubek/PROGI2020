@@ -1,7 +1,6 @@
 package hr.fer.pi.geoFighter.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.locationtech.jts.geom.Point;
@@ -11,8 +10,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import java.nio.file.Path;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -81,18 +78,21 @@ public class User {
 
     private Boolean online;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<UserCard> locationCardAssoc;
 
-    @OneToMany(mappedBy = "createdBy")
+    @OneToMany(mappedBy = "createdBy", fetch = FetchType.LAZY)
     private Set<LocationCard> createdCards;
 
-    @OneToMany(mappedBy = "acceptedBy")
+    @OneToMany(mappedBy = "acceptedBy", fetch = FetchType.LAZY)
     private Set<LocationCard> acceptedCards;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<UserCardFight> cardFightAssoc;
 
-    @OneToMany(mappedBy = "winner")
+    @OneToMany(mappedBy = "winner", fetch = FetchType.LAZY)
     private Set<Fight> fightsWon;
+
+    @OneToOne(mappedBy = "user", orphanRemoval = true)
+    private VerificationToken token;
 }
