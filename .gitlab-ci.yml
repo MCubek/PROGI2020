@@ -15,6 +15,7 @@ on-merge-request-build-backend:
     #- gradle clean build --stacktrace
     - gradle build --stacktrace
   only:
+    - develop
     - merge_request
 
 on-merge-request-build-frontend:
@@ -30,6 +31,7 @@ on-merge-request-build-frontend:
 #    paths:
 #      - izvorniKod/angular-geofighter/dist/
   only:
+    - develop
     - merge_request
 
 deploy-on-develop:
