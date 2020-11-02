@@ -313,11 +313,14 @@
 					
 					\item[] \begin{packed_enum}
 						
-						\item Korisnik odabire opciju za pronalazak suparnika.
-						\item Sustav uparuje korisnika s nekim od igrača.
+						\item Korisnik odabire opciju za pronalazak suparnika, sustav uparuje.
+						\item Prikaže se kolekcija karata.
 						\item Korisnik izabire karte s kojima će igrati.
-						\item Igrači su naizmjence na potezu, na vlastitom potezu odabiru atribut koji se koristi u borbi i kartu koju žele.
-						\item Nakon što su kartice potrošene, igra završava.
+						\item Korisnik odabire opciju "Potvrdi karte", prikazuje se prozor za borbu.
+						\item Baca se novčić da se vidi koji će igrač imati prvi potez.
+						\item Igrači su naizmjence na potezu, na vlastitom potezu odabiru kartu koju žele odigrati i atribut koji se koristi u borbi.
+						\item Kada su obje karte bačene ona s jačim atributom pobjeđuje rundu
+						\item Nakon što su kartice potrošene(5), igra završava.
 					\end{packed_enum}
 					
 					\item  \textbf{Opis mogućih odstupanja:}
@@ -955,6 +958,20 @@
 				
 				\textit{Nacrtati sekvencijske dijagrame koji modeliraju najvažnije dijelove sustava (max. 4 dijagrama). Ukoliko postoji nedoumica oko odabira, razjasniti s asistentom. Uz svaki dijagram napisati detaljni opis dijagrama.}
 				\eject
+				
+				\begin{figure}[H]
+					\centering
+					\includegraphics[scale=0.42]{dijagrami/UC 8_ Borba} \\
+					\caption{Sekvencijski dijagram za UC8}
+					\label{fig:funkcionalnosti_korisnika}
+				\end{figure}
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.6]{dijagrami/UC12.1} \\
+				\caption{Sekvencijski dijagram za UC12.1}
+				\label{fig:funkcionalnosti_korisnika}
+			\end{figure}
+		\eject
 	
 		\section{Ostali zahtjevi}
 		
