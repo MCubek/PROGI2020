@@ -23,7 +23,7 @@ on-merge-request-build-frontend:
   image: trion/ng-cli
   before_script:
     - cd izvorniKod/angular-geofighter
-    - npm ci
+    - npm install
   script:
     #- cd izvorniKod/angular-geofighter
     - ng build --prod
