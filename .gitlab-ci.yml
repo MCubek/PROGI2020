@@ -22,9 +22,10 @@ on-merge-request-build-frontend:
   stage: on-merge-request-build-frontend
   image: trion/ng-cli
   before_script:
+    - cd izvorniKod/angular-geofighter
     - npm ci
   script:
-    - cd izvorniKod/angular-geofighter
+    #- cd izvorniKod/angular-geofighter
     - ng build --prod
 #  artifacts:
 #    expire_in: 1 day
