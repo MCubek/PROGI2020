@@ -959,25 +959,58 @@
 				\textit{Nacrtati sekvencijske dijagrame koji modeliraju najvažnije dijelove sustava (max. 4 dijagrama). Ukoliko postoji nedoumica oko odabira, razjasniti s asistentom. Uz svaki dijagram napisati detaljni opis dijagrama.}
 				\eject
 				
+				\subsubsection{Obrazac uporabe UC8 - Borba}
+				\textnormal{Igrač šalje zahtjev za borbom. Web aplikacija potom dohvaća suparnika. U bazi podataka se provjerava ima li igrač barem 5 karata za borbu dostupnih. Ukoliko igrač nema dovoljno karata za borbu ne može pokrenuti "Traži borbu", web aplikacija izbacuje poruku. Iz baze podataka dohvaća se vlastita kolekcija karata igrača te se prikazuje ekran za odabir 5 karata za borbu. Nakon odabira igrač potvrđuje izabranih (označenih) pet karata i borba započinje bacanjem novčića kako bi se odlučilo kreće li igrač prvi ili ne koje vrši web aplikacija. Nakon odluke, igra se 5 rundi. Igrač koji započinje potez u rundi bira kartu i jedan od tri atributa za tu rundu dok igrač koji kreće drugi izabire samo kartu, a odabir atributa je isti kao od igrača koji je započeo rundu. Nakon što su karta i njen atribut odabrani, gleda se čiji atribut je veći te taj pobjednik pobjeđuje rundu. Poslije 5 odigranih rundi proglašuje se pobjednik i u bazu podataka se spremaju podaci te borbe.}\\
 				\begin{figure}[H]
 					\centering
 					\includegraphics[scale=0.42]{dijagrami/UC 8_ Borba} \\
 					\caption{Sekvencijski dijagram za UC8}
-					\label{fig:funkcionalnosti_korisnika}
+					\label{fig:UC8_sekvencijski}
 				\end{figure}
+			\eject
+			
+			\subsubsection{Obrazac uporabe UC12.1}
+			\textnormal{textRequired}\\
 			\begin{figure}[H]
 				\centering
 				\includegraphics[scale=0.6]{dijagrami/UC12.1} \\
 				\caption{Sekvencijski dijagram za UC12.1}
-				\label{fig:funkcionalnosti_korisnika}
+				\label{fig:UC12.1_sekvencijski}
 			\end{figure}
 		\eject
+			
+				\subsubsection{Obrazac uporabe UC14.3 - Uređivanje prijave lokacije}
+					\textnormal{Kartograf šalje zahtjev za prikaz prijava novih lokacija. Web aplikacija potom dohvaća sve prijave iz baze podataka
+						nakon čega ih prikazuje na karti. Kartograf ima opciju kliknuti na lokaciju te vidjeti opis lokacije zatim urediti
+						podatke o prijavi lokacije i odabrati opciju za spremanje. Ako je prijava u međuvremenu potvrđena ili odbijena, kartografu se ispisuje
+						poruka da prijava nije više valjana. U drugom slučaju prijava lokacije se ažurira u bazi podataka a potom na web aplikaciji.}\\
+				\begin{figure}[H]
+					\centering
+					\includegraphics[scale=0.47]{dijagrami/UC14.3_sekvencijski} \\
+					\caption{ Sekvencijski dijagram za UC14.3 - Uređivanje prijave lokacije}
+					\label{fig:UC14.3_sekvencijski}
+				\end{figure}
+
 	
 		\section{Ostali zahtjevi}
 		
 			\textbf{\textit{dio 1. revizije}}\\
 		 
 			 \textit{Nefunkcionalni zahtjevi i zahtjevi domene primjene dopunjuju funkcionalne zahtjeve. Oni opisuju \textbf{kako se sustav treba ponašati} i koja \textbf{ograničenja} treba poštivati (performanse, korisničko iskustvo, pouzdanost, standardi kvalitete, sigurnost...). Primjeri takvih zahtjeva u Vašem projektu mogu biti: podržani jezici korisničkog sučelja, vrijeme odziva, najveći mogući podržani broj korisnika, podržane web/mobilne platforme, razina zaštite (protokoli komunikacije, kriptiranje...)... Svaki takav zahtjev potrebno je navesti u jednoj ili dvije rečenice.}
+			 
+			 \begin{packed_item}
+			 	\item  \textbf{Sustav treba omogućiti rad više korisnika u stvarnom vremenu}
+			 	\item  \textbf{Korisničko sučelje i sustav moraju podržavati hrvatsku abecedu (dijakritičke znakove) pri unosu i prikazu tekstualnog sadržaja}
+			 	\item  \textbf{Sustav mora imati kroz igranje pasivno poticati igrača na kretanje i sakupljanje drugih lokacija (karata)}
+			 	\item  \textbf{Dijelovi sustava gdje se koristi baza podataka trebaju biti fluidni i brzi (manje od 1 sekunde)}
+			 	\item  \textbf{Sustav treba biti implementiran koristeći Angular za frontend i Spring Boot za backend, dok se za bazu podataka koristi Posgresql}
+			 	\item  \textbf{Svi vizuali aplikacije moraju biti jednostavni i ugodni oku}
+			 	\item  \textbf{Sustav treba biti intuitivan i jednostavan}
+			 	\item  \textbf{Pristup sustavu mora biti omogućen iz javne mreže pomoću HTTPS}
+			 	\item  \textbf{Veza s bazom podataka mora biti kvalitetno zaštićene, brza i otporna na vanjske greške}
+			 	\item  \textbf{Sustav kao valutu za isplatu kartografa koristi EUR}
+			 	
+			 \end{packed_item}
 			 
 			 
 			 
