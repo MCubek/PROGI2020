@@ -20,7 +20,9 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "player")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "user_type")
 @Table(name = "\"USERS\"", uniqueConstraints = {@UniqueConstraint(columnNames = "username"), @UniqueConstraint(columnNames = "email")})
 public class User {
     @Id
@@ -47,20 +49,6 @@ public class User {
     @Basic(fetch = FetchType.LAZY)
     private byte[] photo;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
-    private Role role;
-
-    @Column(name = "cartographer_Confirmed")
-    private boolean cartographerConfirmed;
-
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    private byte[] idCardPhoto;
-
-    @Nullable
-    private String iban;
-
     @NotNull
     private Integer eloScore = 0;
 
@@ -84,8 +72,7 @@ public class User {
     @OneToMany(mappedBy = "createdBy", fetch = FetchType.LAZY)
     private Set<LocationCard> createdCards;
 
-    @OneToMany(mappedBy = "acceptedBy", fetch = FetchType.LAZY)
-    private Set<LocationCard> acceptedCards;
+
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<UserCardFight> cardFightAssoc;

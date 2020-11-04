@@ -3,17 +3,13 @@ package hr.fer.pi.geoFighter.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.spatial.Spatial;
-import org.locationtech.jts.geom.Coordinates;
 import org.locationtech.jts.geom.Point;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -62,7 +58,7 @@ public class LocationCard {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accepted_by_user_id", referencedColumnName = "user_id")
     @NotNull
-    private User acceptedBy;
+    private Cartographer acceptedBy;
 
     @OneToMany(mappedBy = "locationCard")
     private List<UserCard> userAssoc;
