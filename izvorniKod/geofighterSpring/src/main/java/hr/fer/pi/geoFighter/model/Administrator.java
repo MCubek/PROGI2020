@@ -20,7 +20,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity(name = "administrator")
-public class Administrator extends User {
+public class Administrator extends Cartographer {
     @OneToMany(mappedBy = "confirmedBy")
     Set<Cartographer> approvedCartographers;
 }

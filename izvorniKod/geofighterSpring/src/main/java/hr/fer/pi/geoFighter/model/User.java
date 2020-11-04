@@ -72,8 +72,6 @@ public class User {
     @OneToMany(mappedBy = "createdBy", fetch = FetchType.LAZY)
     private Set<LocationCard> createdCards;
 
-
-
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<UserCardFight> cardFightAssoc;
 
