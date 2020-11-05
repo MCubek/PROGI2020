@@ -80,9 +80,7 @@ public class User {
     @OneToOne(mappedBy = "user", orphanRemoval = true)
     private VerificationToken token;
 
-    @ManyToMany
-    @JoinTable(
-            name = "users_roles"
-    )
-    private Collection<Role> roles;
+    @ManyToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
+    private Role role;
 }
