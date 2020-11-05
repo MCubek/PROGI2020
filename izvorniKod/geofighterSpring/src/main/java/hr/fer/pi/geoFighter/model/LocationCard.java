@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.Instant;
-import java.util.List;
+import java.util.Collection;
 
 @Data
 @AllArgsConstructor
@@ -61,8 +61,8 @@ public class LocationCard {
     private Cartographer acceptedBy;
 
     @OneToMany(mappedBy = "locationCard")
-    private List<UserCard> userAssoc;
+    private Collection<UserCard> userAssoc;
 
     @OneToMany(mappedBy = "locationCard")
-    private List<UserCardFight> userFightAssoc;
+    private Collection<UserCardFight> userFightAssoc;
 }

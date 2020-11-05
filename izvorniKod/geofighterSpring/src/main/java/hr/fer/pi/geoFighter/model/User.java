@@ -12,8 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Set;
+import java.util.Collection;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -67,17 +66,23 @@ public class User {
     private Boolean online;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<UserCard> locationCardAssoc;
+    private Collection<UserCard> locationCardAssoc;
 
     @OneToMany(mappedBy = "createdBy", fetch = FetchType.LAZY)
-    private Set<LocationCard> createdCards;
+    private Collection<LocationCard> createdCards;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<UserCardFight> cardFightAssoc;
+    private Collection<UserCardFight> cardFightAssoc;
 
     @OneToMany(mappedBy = "winner", fetch = FetchType.LAZY)
-    private Set<Fight> fightsWon;
+    private Collection<Fight> fightsWon;
 
     @OneToOne(mappedBy = "user", orphanRemoval = true)
     private VerificationToken token;
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles"
+    )
+    private Collection<Role> roles;
 }
