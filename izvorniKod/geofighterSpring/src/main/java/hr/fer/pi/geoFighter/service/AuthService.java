@@ -7,6 +7,7 @@ import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.NotificationEmail;
 import hr.fer.pi.geoFighter.model.User;
 import hr.fer.pi.geoFighter.model.VerificationToken;
+import hr.fer.pi.geoFighter.repository.RoleRepository;
 import hr.fer.pi.geoFighter.repository.UserRepository;
 import hr.fer.pi.geoFighter.repository.VerificationTokenRepository;
 import hr.fer.pi.geoFighter.security.JwtProvider;
@@ -30,6 +31,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final VerificationTokenRepository verificationTokenRepository;
+    private final RoleRepository roleRepository;
     private final MailService mailService;
     private final AuthenticationManager authenticationManager;
     private JwtProvider jwtProvider;
@@ -40,6 +42,7 @@ public class AuthService {
         user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("USER_ROLE not in database")));
         user.setEnabled(false);
         //TODO Photo
         userRepository.save(user);
