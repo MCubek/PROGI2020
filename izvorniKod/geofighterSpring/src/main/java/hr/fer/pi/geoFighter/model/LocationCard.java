@@ -58,7 +58,7 @@ public class LocationCard {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accepted_by_user_id", referencedColumnName = "user_id")
     @NotNull
-    private Cartographer acceptedBy;
+    private User acceptedBy;
 
     @OneToMany(mappedBy = "locationCard")
     private Collection<UserCard> userAssoc;

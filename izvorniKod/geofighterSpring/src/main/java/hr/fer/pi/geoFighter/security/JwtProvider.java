@@ -68,9 +68,24 @@ public class JwtProvider {
     }
 
     public String getUsernameFromJwt(String token) {
-        Claims claims = Jwts.parserBuilder().setSigningKey(getPublicKey())
-                .build().parseClaimsJws(token).getBody();
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(getPublicKey())
+                .build()
+                .parseClaimsJws(token).getBody();
 
         return claims.getSubject();
+    }
+
+    public Long getJwtExpirationInMillis() {
+        return jwtExpirationInMillis;
+    }
+
+    public String generateTokenWithUsername(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(from(Instant.now()))
+                .signWith(getPrivateKey())
+                .setExpiration(Date.from(Instant.now().minusMillis(jwtExpirationInMillis)))
+                .compact();
     }
 }

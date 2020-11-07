@@ -11,4 +11,5 @@ public class RegisterRequest {
     private String email;
     private String username;
     private String password;
+    // TODO: 7.11.2020. Photo
 }

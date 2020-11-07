@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -83,4 +84,17 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     private Role role;
+
+    @Column(name = "cartographer_status")
+    private CartographerStatus cartographerStatus = CartographerStatus.NOT_REQUESTED;
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] idCardPhoto;
+
+    @Nullable
+    private String iban;
+
+    @OneToMany(mappedBy = "acceptedBy", fetch = FetchType.LAZY)
+    private Set<LocationCard> acceptedCards;
 }

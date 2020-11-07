@@ -1,19 +1,21 @@
 package hr.fer.pi.geoFighter.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
+import javax.validation.constraints.NotBlank;
 
+/**
+ * @author MatejCubek
+ * @project pi
+ * @created 07/11/2020
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class AuthenticationResponse {
-    private String authorizationToken;
+public class RefreshTokenRequest {
+    @NotBlank
     private String refreshToken;
-    private Instant expiresAt;
     private String username;
 }
