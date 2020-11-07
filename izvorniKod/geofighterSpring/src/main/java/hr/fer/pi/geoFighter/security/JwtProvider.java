@@ -54,6 +54,7 @@ public class JwtProvider {
         }
     }
 
+    @SuppressWarnings("SameReturnValue")
     public boolean validateToken(String jwt) {
         Jwts.parserBuilder().setSigningKey(getPublicKey()).build().parseClaimsJws(jwt);
         return true;
@@ -63,7 +64,7 @@ public class JwtProvider {
         try {
             return keyStore.getCertificate("springblog").getPublicKey();
         } catch (KeyStoreException e) {
-            throw new SpringGeoFighterException("Exception occured while retrieving public key.");
+            throw new SpringGeoFighterException("Exception occurred while retrieving public key.");
         }
     }
 

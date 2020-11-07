@@ -18,8 +18,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.Collections.singletonList;
-
 @Service
 @AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
