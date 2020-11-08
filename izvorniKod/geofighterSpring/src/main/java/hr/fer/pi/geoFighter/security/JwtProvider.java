@@ -22,7 +22,7 @@ import static java.util.Date.from;
 public class JwtProvider {
 
     private KeyStore keyStore;
-    @Value("90000")
+    @Value("900000")
     private Long jwtExpirationInMillis;
 
     @PostConstruct
