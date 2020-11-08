@@ -2,6 +2,7 @@ package hr.fer.pi.geoFighter.service;
 
 import hr.fer.pi.geoFighter.dto.*;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
+import hr.fer.pi.geoFighter.exceptions.UserInfoInvalidException;
 import hr.fer.pi.geoFighter.model.CartographerStatus;
 import hr.fer.pi.geoFighter.model.NotificationEmail;
 import hr.fer.pi.geoFighter.model.User;
@@ -40,6 +41,11 @@ public class AuthService {
     private final RefreshTokenService refreshingTokenService;
 
     public void signup(RegisterRequest registerRequest) {
+        if(userRepository.findByUsername(registerRequest.getUsername()).isEmpty()||
+        userRepository.findByEmail(registerRequest.getEmail()).isEmpty()){
+            throw new UserInfoInvalidException("Username or email already used.");
+        }
+
         User user = new User();
         user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());
