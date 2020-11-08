@@ -27,7 +27,7 @@ public class Image {
     @OneToOne
     private User user;
 
-    @Column(name = "type")
+    @Column
     private String type;
 
     @Lob
