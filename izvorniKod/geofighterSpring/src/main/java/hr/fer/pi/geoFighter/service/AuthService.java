@@ -52,7 +52,7 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("USER_ROLE not in database")));
         user.setEnabled(false);
-        //TODO Photo
+        user.setPhoto(registerRequest.getPhoto());
         userRepository.save(user);
 
         String token = generateVerificationToken(user);
@@ -73,7 +73,7 @@ public class AuthService {
         User user = getCurrentUser();
         user.setCartographerStatus(CartographerStatus.APPLIED);
         user.setIban(registerRequest.getIban());
-        //TODO idPhoto
+        user.setIdCardPhoto(registerRequest.getIdPhoto());
     }
 
     private String generateVerificationToken(User user) {

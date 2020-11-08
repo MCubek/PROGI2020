@@ -18,6 +18,5 @@ import javax.validation.constraints.NotBlank;
 public class CartographerRegisterRequest {
     @NotBlank
     private String iban;
-
-    // TODO: 7.11.2020. id Photo
+    private byte[] idPhoto;
 }
