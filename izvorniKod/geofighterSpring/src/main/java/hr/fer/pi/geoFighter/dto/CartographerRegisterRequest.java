@@ -1,8 +1,10 @@
 package hr.fer.pi.geoFighter.dto;
 
+import hr.fer.pi.geoFighter.model.Image;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 
@@ -18,5 +20,5 @@ import javax.validation.constraints.NotBlank;
 public class CartographerRegisterRequest {
     @NotBlank
     private String iban;
-    private byte[] idPhoto;
+    private MultipartFile idPhoto;
 }
