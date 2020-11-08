@@ -3,10 +3,7 @@ package hr.fer.pi.geoFighter.service;
 import hr.fer.pi.geoFighter.dto.*;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.exceptions.UserInfoInvalidException;
-import hr.fer.pi.geoFighter.model.CartographerStatus;
-import hr.fer.pi.geoFighter.model.NotificationEmail;
-import hr.fer.pi.geoFighter.model.User;
-import hr.fer.pi.geoFighter.model.VerificationToken;
+import hr.fer.pi.geoFighter.model.*;
 import hr.fer.pi.geoFighter.repository.RoleRepository;
 import hr.fer.pi.geoFighter.repository.UserRepository;
 import hr.fer.pi.geoFighter.repository.VerificationTokenRepository;
@@ -22,9 +19,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.zip.Deflater;
 
 @Service
 @AllArgsConstructor
@@ -41,8 +41,8 @@ public class AuthService {
     private final RefreshTokenService refreshingTokenService;
 
     public void signup(RegisterRequest registerRequest) {
-        if(userRepository.findByUsername(registerRequest.getUsername()).isEmpty()||
-        userRepository.findByEmail(registerRequest.getEmail()).isEmpty()){
+        if(userRepository.findByUsername(registerRequest.getUsername()).isPresent() ||
+        userRepository.findByEmail(registerRequest.getEmail()).isPresent()){
             throw new UserInfoInvalidException("Username or email already used.");
         }
 
@@ -52,7 +52,14 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("USER_ROLE not in database")));
         user.setEnabled(false);
-        user.setPhoto(registerRequest.getPhoto());
+
+        Image photo = new Image();
+        photo.setType(registerRequest.getPhoto().getContentType());
+        try {
+            photo.setPicByte(registerRequest.getPhoto().getBytes());
+        } catch (IOException e) {throw new SpringGeoFighterException("Error while loading photo");}
+
+        user.setPhoto(photo);
         userRepository.save(user);
 
         String token = generateVerificationToken(user);
@@ -73,7 +80,14 @@ public class AuthService {
         User user = getCurrentUser();
         user.setCartographerStatus(CartographerStatus.APPLIED);
         user.setIban(registerRequest.getIban());
-        user.setIdCardPhoto(registerRequest.getIdPhoto());
+
+        Image idPhoto = new Image();
+        idPhoto.setType(registerRequest.getIdPhoto().getContentType());
+        try {
+            idPhoto.setPicByte(registerRequest.getIdPhoto().getBytes());
+        } catch (IOException e) {throw new SpringGeoFighterException("Error while loading ID photo");}
+
+        user.setIdCardPhoto(idPhoto);
     }
 
     private String generateVerificationToken(User user) {

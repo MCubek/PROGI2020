@@ -43,9 +43,8 @@ public class User {
     @NotNull
     private boolean enabled = false;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    private byte[] photo;
+    @OneToOne(mappedBy = "user", orphanRemoval = true)
+    private Image photo;
 
     @NotNull
     private Integer eloScore = 0;
@@ -86,9 +85,8 @@ public class User {
     @Column(name = "cartographer_status")
     private CartographerStatus cartographerStatus = CartographerStatus.NOT_REQUESTED;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    private byte[] idCardPhoto;
+    @OneToOne(mappedBy = "user", orphanRemoval = true)
+    private Image idCardPhoto;
 
     @Nullable
     private String iban;
