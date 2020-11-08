@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Data

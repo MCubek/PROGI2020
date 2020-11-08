@@ -18,20 +18,15 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Roles", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
-public class Role {
+@Table(name = "Privileges")
+public class Privilege {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "role_id")
-    private Long roleId;
+    private Long privilegeId;
 
     @NotBlank
     private String name;
 
-    @OneToMany(mappedBy = "role")
-    private Collection<User> users;
-
-    @ManyToMany
-    @JoinTable(name = "roles_privileges")
-    private Collection<Privilege> privileges;
+    @ManyToMany(mappedBy = "privileges")
+    private Collection<Role> roles;
 }

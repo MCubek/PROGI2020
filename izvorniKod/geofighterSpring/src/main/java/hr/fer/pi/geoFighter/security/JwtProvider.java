@@ -2,11 +2,14 @@ package hr.fer.pi.geoFighter.security;
 
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -22,7 +25,7 @@ import static java.util.Date.from;
 public class JwtProvider {
 
     private KeyStore keyStore;
-    @Value("90000")
+    @Value("900000")
     private Long jwtExpirationInMillis;
 
     @PostConstruct
@@ -54,8 +57,13 @@ public class JwtProvider {
         }
     }
 
+    @SuppressWarnings("SameReturnValue")
     public boolean validateToken(String jwt) {
-        Jwts.parserBuilder().setSigningKey(getPublicKey()).build().parseClaimsJws(jwt);
+        try {
+            Jwts.parserBuilder().setSigningKey(getPublicKey()).build().parseClaimsJws(jwt);
+        } catch (ExpiredJwtException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "JwtToken expired.");
+        }
         return true;
     }
 
@@ -63,14 +71,33 @@ public class JwtProvider {
         try {
             return keyStore.getCertificate("springblog").getPublicKey();
         } catch (KeyStoreException e) {
-            throw new SpringGeoFighterException("Exception occured while retrieving public key.");
+            throw new SpringGeoFighterException("Exception occurred while retrieving public key.");
         }
     }
 
     public String getUsernameFromJwt(String token) {
-        Claims claims = Jwts.parserBuilder().setSigningKey(getPublicKey())
-                .build().parseClaimsJws(token).getBody();
+        try {
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(getPublicKey())
+                    .build()
+                    .parseClaimsJws(token).getBody();
 
-        return claims.getSubject();
+            return claims.getSubject();
+        } catch (ExpiredJwtException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "JwtToken expired.");
+        }
+    }
+
+    public Long getJwtExpirationInMillis() {
+        return jwtExpirationInMillis;
+    }
+
+    public String generateTokenWithUsername(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(from(Instant.now()))
+                .signWith(getPrivateKey())
+                .setExpiration(Date.from(Instant.now().minusMillis(jwtExpirationInMillis)))
+                .compact();
     }
 }

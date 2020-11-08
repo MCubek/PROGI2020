@@ -1,6 +1,5 @@
 package hr.fer.pi.geoFighter.repository;
 
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import hr.fer.pi.geoFighter.model.User;
 import org.springframework.stereotype.Repository;

@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Collection;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -20,7 +20,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "player")
 @Table(name = "\"USERS\"", uniqueConstraints = {@UniqueConstraint(columnNames = "username"), @UniqueConstraint(columnNames = "email")})
 public class User {
     @Id
@@ -43,23 +43,8 @@ public class User {
     @NotNull
     private boolean enabled = false;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    private byte[] photo;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
-    private Role role;
-
-    @Column(name = "cartographer_Confirmed")
-    private boolean cartographerConfirmed;
-
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    private byte[] idCardPhoto;
-
-    @Nullable
-    private String iban;
+    @OneToOne(mappedBy = "user", orphanRemoval = true)
+    private Image photo;
 
     @NotNull
     private Integer eloScore = 0;
@@ -79,20 +64,33 @@ public class User {
     private Boolean online;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<UserCard> locationCardAssoc;
+    private Collection<UserCard> locationCardAssoc;
 
     @OneToMany(mappedBy = "createdBy", fetch = FetchType.LAZY)
-    private Set<LocationCard> createdCards;
-
-    @OneToMany(mappedBy = "acceptedBy", fetch = FetchType.LAZY)
-    private Set<LocationCard> acceptedCards;
+    private Collection<LocationCard> createdCards;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<UserCardFight> cardFightAssoc;
+    private Collection<UserCardFight> cardFightAssoc;
 
     @OneToMany(mappedBy = "winner", fetch = FetchType.LAZY)
-    private Set<Fight> fightsWon;
+    private Collection<Fight> fightsWon;
 
     @OneToOne(mappedBy = "user", orphanRemoval = true)
     private VerificationToken token;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
+    private Role role;
+
+    @Column(name = "cartographer_status")
+    private CartographerStatus cartographerStatus = CartographerStatus.NOT_REQUESTED;
+
+    @OneToOne(mappedBy = "user", orphanRemoval = true)
+    private Image idCardPhoto;
+
+    @Nullable
+    private String iban;
+
+    @OneToMany(mappedBy = "acceptedBy", fetch = FetchType.LAZY)
+    private Set<LocationCard> acceptedCards;
 }

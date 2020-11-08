@@ -6,12 +6,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotBlank;
+
+/**
+ * @author MatejCubek
+ * @project pi
+ * @created 07/11/2020
+ */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterRequest {
-    private String email;
-    private String username;
-    private String password;
-    private MultipartFile photo;
+public class CartographerRegisterRequest {
+    @NotBlank
+    private String iban;
+    private MultipartFile idPhoto;
 }
