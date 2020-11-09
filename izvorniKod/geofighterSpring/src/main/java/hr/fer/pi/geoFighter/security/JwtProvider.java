@@ -84,7 +84,7 @@ public class JwtProvider {
 
             return claims.getSubject();
         } catch (ExpiredJwtException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "JwtToken expired.");
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "JwtToken expired.");
         }
     }
 
