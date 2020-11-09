@@ -62,7 +62,7 @@ public class JwtProvider {
         try {
             Jwts.parserBuilder().setSigningKey(getPublicKey()).build().parseClaimsJws(jwt);
         } catch (ExpiredJwtException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "JwtToken expired.");
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "JwtToken expired.");
         }
         return true;
     }
