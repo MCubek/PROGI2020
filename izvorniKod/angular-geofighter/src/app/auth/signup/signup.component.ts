@@ -40,7 +40,7 @@ export class SignupComponent implements OnInit {
     this.authService.signup(this.signupRequestPayload)
       .subscribe(data => {
         this.router.navigate(['/login'],
-          { queryParams: { registered: 'true' } });
+          { queryParams: { registered: true } });
       }, error => {
         console.log(error);
         this.toastr.error('Registration Failed! Please try again');
