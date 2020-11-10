@@ -12,9 +12,9 @@ public class MailContentBuilder {
 
     private final TemplateEngine templateEngine;
 
-    String build(String message) {
+    String build(String verificationURL) {
         Context context = new Context();
-        context.setVariable("message", message);
+        context.setVariable("verificationURL", verificationURL);
         return templateEngine.process("mailTemplate", context);
     }
 }

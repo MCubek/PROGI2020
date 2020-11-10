@@ -67,8 +67,7 @@ public class AuthService {
 
         String token = generateVerificationToken(user);
         mailService.sendMail(new NotificationEmail("Please activate your account.", user.getEmail(),
-                "Thank you for signing up for GeoFighter. Please click on the url below to finish your registration process:\n" +
-                        "http://localhost:8080/api/auth/accountVerification/" + token));
+                "http://localhost:8080/api/auth/accountVerification/" + token));
     }
 
     @Transactional(readOnly = true)
