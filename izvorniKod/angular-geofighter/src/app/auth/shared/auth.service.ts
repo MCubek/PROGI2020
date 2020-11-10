@@ -6,8 +6,9 @@ import {LoginRequestPayload} from '../login/login-request.payload';
 import {map, tap} from 'rxjs/operators';
 import {LocalStorageService} from 'ngx-webstorage';
 import {LoginResponsePayload} from '../login/login-response.payload';
-import { environment } from '../../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {SignupCartographerRequestPayload} from '../../cartographer/signup-cartographer/signup-cartographer-request-payload';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class AuthService {
     username: this.getUsername()
   };
 
-  constructor(private httpClient: HttpClient, private localStorage: LocalStorageService) {
+  constructor(private httpClient: HttpClient, private localStorage: LocalStorageService, private toastr: ToastrService) {
   }
 
   signup(signupRequestPayload: SignupRequestPayload): Observable<any> {
@@ -70,13 +71,14 @@ export class AuthService {
       }, error => {
         throwError(error);
       });
+    this.toastr.success('Logged out!');
     this.localStorage.clear('authorizationToken');
     this.localStorage.clear('username');
     this.localStorage.clear('refreshToken');
     this.localStorage.clear('expiresAt');
   }
 
-  cartographerSignup(signupCartographerRequestPayload: SignupCartographerRequestPayload): Observable<any>{
+  cartographerSignup(signupCartographerRequestPayload: SignupCartographerRequestPayload): Observable<any> {
     return this.httpClient.post(`${environment.apiUrl}api/auth/cartographer/apply`
       , signupCartographerRequestPayload, {responseType: 'text'});
   }
