@@ -37,7 +37,8 @@ export class SignupCartographerComponent implements OnInit {
 
     // Dodati provjeru signup?
     this.authService.cartographerSignup(this.signupCartographerRequestPayload).subscribe(data => {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
+      this.toastr.success('Successfully applied!');
     }, error => {
       console.log(error);
       this.toastr.error('Cartographer Signup Failed! Please try again');
