@@ -42,6 +42,17 @@
               </div>
             </div>
 
+            <div class="form-group row">
+              <label for="photoURL" class="col-md-4 col-form-label text-md-right">Photo URL</label>
+              <div class="col-md-6">
+                <input type="url" [formControlName]="'photoURL'" id="photoURL" class="form-control" name="photoURL"
+                       required>
+                <span *ngIf="!signupForm.get('photoURL').valid && signupForm.get('photoURL').touched">
+                  Please provide a valid URL
+                </span>
+              </div>
+            </div>
+
             <span class="col-md-6 offset-md-4">
                             <button type="submit" class="sign-up">
                                 Sign Up
