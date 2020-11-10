@@ -5,7 +5,7 @@ stages:
   - on-merge-request-build-frontend
   - deploy-on-develop
   - compile_pdf
-#  - deploy-on-production
+  - deploy-on-production
 
 on-merge-request-build-backend:
   stage: on-merge-request-build-backend
@@ -61,17 +61,17 @@ compile_pdf:
     - devdoc
     - master
 
-#deploy-on-production:
-#  stage: master
-#  image: ruby:latest
-#  script:
-#    - apt-get update -qy
-#    - apt-get install -y ruby-dev
-#    - gem install dpl
-#    - cd backend
-#    - dpl --provider=heroku --app=$HEROKU_BACKEND_APP --api-key=$HEROKU_API_KEY
-#    - cd ..
-#    - cd frontend
-#    - dpl --provider=heroku --app=$HEROKU_FRONTEND_APP --api-key=$HEROKU_API_KEY
-#  only:
-#    - master
+deploy-on-production:
+  stage: master
+  image: ruby:latest
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - cd backend
+    - dpl --provider=heroku --app=$HEROKU_BACKEND_APP --api-key=$HEROKU_API_KEY
+    - cd ..
+    - cd frontend
+    - dpl --provider=heroku --app=$HEROKU_FRONTEND_APP --api-key=$HEROKU_API_KEY
+  only:
+    - master
