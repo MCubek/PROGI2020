@@ -13,6 +13,7 @@ import hr.fer.pi.geoFighter.repository.VerificationTokenRepository;
 import hr.fer.pi.geoFighter.security.JwtProvider;
 import lombok.AllArgsConstructor;
 import org.apache.commons.validator.routines.UrlValidator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,7 +24,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Instant;
@@ -34,6 +34,9 @@ import java.util.UUID;
 @AllArgsConstructor
 @org.springframework.transaction.annotation.Transactional
 public class AuthService {
+
+    @Value("${server.developer.address}")
+    private final String address;
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
@@ -70,14 +73,8 @@ public class AuthService {
 
         String token = generateVerificationToken(user);
 
-        String address;
-        if (InetAddress.getLoopbackAddress().getHostAddress().equals("127.0.0.1")) {
-            address = "http://localhost:8080";
-        }else{
-            address = "https://dev-springbackend.herokuapp.com";
-        }
         mailService.sendMail(new NotificationEmail("Please activate your account.", user.getEmail(),
-                address + "/api/auth/accountVerification/" + token));
+                address + "api/auth/accountVerification/" + token));
     }
 
     @Transactional(readOnly = true)
