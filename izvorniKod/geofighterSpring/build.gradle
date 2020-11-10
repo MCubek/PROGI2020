@@ -52,6 +52,8 @@ dependencies {
 	compile group: 'io.springfox', name: 'springfox-data-rest', version: '3.0.0'
 	compile group: 'io.springfox', name: 'springfox-bean-validators', version: '3.0.0'
 	compile group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
+
+	compile group: 'commons-validator', name: 'commons-validator', version: '1.7'
 }
 
 test {

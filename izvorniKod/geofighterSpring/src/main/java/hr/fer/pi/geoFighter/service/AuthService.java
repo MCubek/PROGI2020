@@ -9,6 +9,7 @@ import hr.fer.pi.geoFighter.repository.UserRepository;
 import hr.fer.pi.geoFighter.repository.VerificationTokenRepository;
 import hr.fer.pi.geoFighter.security.JwtProvider;
 import lombok.AllArgsConstructor;
+import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,6 +39,7 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtProvider jwtProvider;
     private final RefreshTokenService refreshingTokenService;
+    private final UrlValidator urlValidator = new UrlValidator(new String[]{"http", "https"});
 
     public void signup(RegisterRequest registerRequest) {
         if (userRepository.findByUsername(registerRequest.getUsername()).isPresent() ||
@@ -51,6 +53,10 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("USER_ROLE not in database")));
         user.setEnabled(false);
+
+        if(!urlValidator.isValid(registerRequest.getPhotoURL()))
+            throw new UserInfoInvalidException("Invalid photo URL");
+
         try {
             user.setPhotoURL(new URL(registerRequest.getPhotoURL()));
         } catch (MalformedURLException e) {
@@ -76,10 +82,14 @@ public class AuthService {
         User user = getCurrentUser();
         user.setCartographerStatus(CartographerStatus.APPLIED);
         user.setIban(registerRequest.getIban());
+
+        if(!urlValidator.isValid(registerRequest.getIdPhotoURL()))
+            throw new UserInfoInvalidException("Invalid photo URL");
+
         try {
             user.setIdCardPhotoURL(new URL(registerRequest.getIdPhotoURL()));
         } catch (MalformedURLException e) {
-            new SpringGeoFighterException("Image URL error");
+            throw new SpringGeoFighterException("Image URL error");
         }
     }
 
