@@ -13,7 +13,6 @@ import hr.fer.pi.geoFighter.repository.VerificationTokenRepository;
 import hr.fer.pi.geoFighter.security.JwtProvider;
 import lombok.AllArgsConstructor;
 import org.apache.commons.validator.routines.UrlValidator;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,9 +33,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @org.springframework.transaction.annotation.Transactional
 public class AuthService {
-
-    @Value("${server.developer.address}")
-    private final String address;
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
@@ -74,7 +70,7 @@ public class AuthService {
         String token = generateVerificationToken(user);
 
         mailService.sendMail(new NotificationEmail("Please activate your account.", user.getEmail(),
-                address + "api/auth/accountVerification/" + token));
+                new UrlBuilder().appendHost("api/auth/accountVerification/" + token)));
     }
 
     @Transactional(readOnly = true)
