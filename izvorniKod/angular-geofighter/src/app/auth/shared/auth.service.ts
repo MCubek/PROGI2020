@@ -6,6 +6,7 @@ import {LoginRequestPayload} from '../login/login-request.payload';
 import {map, tap} from 'rxjs/operators';
 import {LocalStorageService} from 'ngx-webstorage';
 import {LoginResponsePayload} from '../login/login-response.payload';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +25,11 @@ export class AuthService {
   }
 
   signup(signupRequestPayload: SignupRequestPayload): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/api/auth/signup', signupRequestPayload, {responseType: 'text'});
+    return this.httpClient.post(`${environment.apiUrl}api/auth/signup`, signupRequestPayload, {responseType: 'text'});
   }
 
   login(loginRequestPayload: LoginRequestPayload): Observable<boolean> {
-    return this.httpClient.post<LoginResponsePayload>('http://localhost:8080/api/auth/login', loginRequestPayload)
+    return this.httpClient.post<LoginResponsePayload>(`${environment.apiUrl}api/auth/login`, loginRequestPayload)
       .pipe(map(data => {
         this.localStorage.store('authenticationToken', data.authenticationToken);
         this.localStorage.store('username', data.username);
@@ -48,7 +49,7 @@ export class AuthService {
 
   // tslint:disable-next-line:typedef
   refreshToken() {
-    return this.httpClient.post<LoginResponsePayload>('http://localhost:8080/api/auth/refresh/token', this.refreshTokenPayload)
+    return this.httpClient.post<LoginResponsePayload>(`${environment.apiUrl}api/auth/refresh/token`, this.refreshTokenPayload)
       .pipe(tap(response => {
         this.localStorage.clear('authenticationToken');
         this.localStorage.clear('expiresAt');
@@ -61,7 +62,7 @@ export class AuthService {
 
   // tslint:disable-next-line:typedef
   logout() {
-    this.httpClient.post('http://localhost:8080/api/auth/logout', this.refreshTokenPayload,
+    this.httpClient.post(`${environment.apiUrl}api/auth/logout`, this.refreshTokenPayload,
       {responseType: 'text'})
       .subscribe(data => {
         console.log(data);
