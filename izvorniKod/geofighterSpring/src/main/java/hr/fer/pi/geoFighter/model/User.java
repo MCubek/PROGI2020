@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -43,8 +44,7 @@ public class User {
     @NotNull
     private boolean enabled = false;
 
-    @OneToOne(mappedBy = "user", orphanRemoval = true)
-    private Image photo;
+    private URL photoURL;
 
     @NotNull
     private Integer eloScore = 0;
@@ -85,8 +85,7 @@ public class User {
     @Column(name = "cartographer_status")
     private CartographerStatus cartographerStatus = CartographerStatus.NOT_REQUESTED;
 
-    @OneToOne(mappedBy = "user", orphanRemoval = true)
-    private Image idCardPhoto;
+    private URL idCardPhotoURL;
 
     @Nullable
     private String iban;

@@ -20,7 +20,7 @@ public class AuthController {
     private final RefreshTokenService refreshTokenService;
 
     @PostMapping("/signup")
-    public ResponseEntity<String> signup(@ModelAttribute RegisterRequest registerRequest) {
+    public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest) {
         authService.signup(registerRequest);
         return new ResponseEntity<>("User registration successful.", OK);
     }
@@ -37,7 +37,7 @@ public class AuthController {
     }
 
     @PostMapping("/cartographer/apply")
-    public ResponseEntity<String> cartographerApply(@ModelAttribute CartographerRegisterRequest registerRequest) {
+    public ResponseEntity<String> cartographerApply(@RequestBody CartographerRegisterRequest registerRequest) {
         authService.cartographerApply(registerRequest);
         return new ResponseEntity<>("Cartographer apply successful.", OK);
     }
