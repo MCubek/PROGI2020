@@ -1,18 +1,18 @@
 <div class="login-section">
   <div class="row justify-content-center">
     <div class="col-md-3"></div>
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header" style="text-align: center"><h4>Login</h4></div>
+    <div class="col-md-6 font">
+      <div class="card card-radius">
+        <div class="card-header card-header-radius" style="text-align: center"><h4>Login</h4></div>
         <div class="card-body">
           <form [formGroup]="loginForm" (ngSubmit)="login()">
             <div class="form-group row">
               <label for="user_name" class="col-md-4 col-form-label text-md-right">Username</label>
               <div class="col-md-6">
-                <input type="text" id="user_name" class="form-control" [formControlName]="'username'" name="user_name"
+                <input type="text" id="user_name" class="form-control input-radius" [formControlName]="'username'" name="user_name"
                        required
                        autofocus>
-                <span *ngIf="!loginForm.get('username').valid && loginForm.get('username').touched">
+                <span *ngIf="!loginForm.get('username').valid && loginForm.get('username').touched" class="small_font">
                   Please provide a valid username
                 </span>
               </div>
@@ -21,7 +21,7 @@
             <div class="form-group row">
               <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
               <div class="col-md-6">
-                <input type="password" id="password" class="form-control" [formControlName]="'password'" name="password"
+                <input type="password" id="password" class="form-control input-radius" [formControlName]="'password'" name="password"
                        required>
                 <span *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">
                   Please cannot be empty
@@ -30,7 +30,7 @@
             </div>
 
             <span class="col-md-6 offset-md-4">
-                            <button type="submit" class="login">
+                            <button type="submit" class="login btn-login">
                                 Login
                             </button>
                             <span style="padding-left: 15px">New user? <a routerLink="/signup">Sign Up</a></span>
