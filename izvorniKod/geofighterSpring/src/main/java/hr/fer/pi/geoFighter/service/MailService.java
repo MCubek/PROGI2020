@@ -26,7 +26,7 @@ public class MailService {
             messageHelper.setFrom("geofighterapp@gmail.com");
             messageHelper.setTo(notificationEmail.getRecipient());
             messageHelper.setSubject(notificationEmail.getSubject());
-            messageHelper.setText(mailContentBuilder.build(notificationEmail.getVerificationURL()));
+            messageHelper.setText(mailContentBuilder.build(notificationEmail.getVerificationURL()), true);
         };
 
         try {
