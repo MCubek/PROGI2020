@@ -54,7 +54,7 @@ compile_pdf:
     - cd dokumentacija
     - latexmk -pdf PROGI_ProjektnaDokumentacija_v6.tex
   artifacts:
-    expire_in: 2 days
+    expire_in: 20 days
     paths:
       - dokumentacija/PROGI_ProjektnaDokumentacija_v6.pdf
   only:
@@ -68,10 +68,10 @@ deploy-on-production:
     - apt-get update -qy
     - apt-get install -y ruby-dev
     - gem install dpl
-    - cd backend
+    - cd izvorniKod/geofighterSpring
     - dpl --provider=heroku --app=$HEROKU_BACKEND_APP --api-key=$HEROKU_API_KEY
     - cd ..
-    - cd frontend
+    - cd angular-geofighter
     - dpl --provider=heroku --app=$HEROKU_FRONTEND_APP --api-key=$HEROKU_API_KEY
   only:
     - master
