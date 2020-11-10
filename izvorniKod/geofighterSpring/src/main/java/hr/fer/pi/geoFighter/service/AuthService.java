@@ -34,6 +34,7 @@ import java.util.UUID;
 @org.springframework.transaction.annotation.Transactional
 public class AuthService {
 
+    private final UrlBuilder urlBuilder;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final VerificationTokenRepository verificationTokenRepository;
@@ -70,7 +71,7 @@ public class AuthService {
         String token = generateVerificationToken(user);
 
         mailService.sendMail(new NotificationEmail("Please activate your account.", user.getEmail(),
-                new UrlBuilder().appendHost("api/auth/accountVerification/" + token)));
+                urlBuilder.appendHost("api/auth/accountVerification/" + token)));
     }
 
     @Transactional(readOnly = true)
@@ -114,6 +115,7 @@ public class AuthService {
         Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
         verificationToken.orElseThrow(() -> new SpringGeoFighterException("Invalid token."));
         fetchUserAndEnable(verificationToken.get());
+        verificationTokenRepository.delete(verificationToken.get());
     }
 
     private void fetchUserAndEnable(VerificationToken verificationToken) {
