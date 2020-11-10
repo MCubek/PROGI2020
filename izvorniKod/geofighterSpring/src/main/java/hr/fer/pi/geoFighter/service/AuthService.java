@@ -4,12 +4,12 @@ import hr.fer.pi.geoFighter.dto.*;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.exceptions.UserInfoInvalidException;
 import hr.fer.pi.geoFighter.model.*;
-import hr.fer.pi.geoFighter.repository.ImageRepository;
 import hr.fer.pi.geoFighter.repository.RoleRepository;
 import hr.fer.pi.geoFighter.repository.UserRepository;
 import hr.fer.pi.geoFighter.repository.VerificationTokenRepository;
 import hr.fer.pi.geoFighter.security.JwtProvider;
 import lombok.AllArgsConstructor;
+import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,7 +20,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
@@ -32,13 +33,13 @@ public class AuthService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
-    private final ImageRepository imageRepository;
     private final VerificationTokenRepository verificationTokenRepository;
     private final RoleRepository roleRepository;
     private final MailService mailService;
     private final AuthenticationManager authenticationManager;
     private final JwtProvider jwtProvider;
     private final RefreshTokenService refreshingTokenService;
+    private final UrlValidator urlValidator = new UrlValidator(new String[]{"http", "https"});
 
     public void signup(RegisterRequest registerRequest) {
         if (userRepository.findByUsername(registerRequest.getUsername()).isPresent() ||
@@ -53,16 +54,14 @@ public class AuthService {
         user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("USER_ROLE not in database")));
         user.setEnabled(false);
 
-        Image photo = new Image();
-        photo.setType(registerRequest.getPhoto().getContentType());
-        try {
-            photo.setPicByte(registerRequest.getPhoto().getBytes());
-            imageRepository.save(photo);
-        } catch (IOException e) {
-            throw new SpringGeoFighterException("Error while loading photo");
-        }
+        if(!urlValidator.isValid(registerRequest.getPhotoURL()))
+            throw new UserInfoInvalidException("Invalid photo URL");
 
-        user.setPhoto(photo);
+        try {
+            user.setPhotoURL(new URL(registerRequest.getPhotoURL()));
+        } catch (MalformedURLException e) {
+            throw new SpringGeoFighterException("Image URL error");
+        }
         userRepository.save(user);
 
         String token = generateVerificationToken(user);
@@ -73,10 +72,14 @@ public class AuthService {
 
     @Transactional(readOnly = true)
     public User getCurrentUser() {
-        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        /*org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.
                 getContext().getAuthentication().getPrincipal();
         return userRepository.findByUsername(principal.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException("User name not found - " + principal.getUsername()));
+                .orElseThrow(() -> new UsernameNotFoundException("User name not found - " + principal.getUsername()));*/
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User name not found - " + username));
     }
 
     public void cartographerApply(CartographerRegisterRequest registerRequest) {
@@ -84,15 +87,14 @@ public class AuthService {
         user.setCartographerStatus(CartographerStatus.APPLIED);
         user.setIban(registerRequest.getIban());
 
-        Image idPhoto = new Image();
-        idPhoto.setType(registerRequest.getIdPhoto().getContentType());
-        try {
-            idPhoto.setPicByte(registerRequest.getIdPhoto().getBytes());
-        } catch (IOException e) {
-            throw new SpringGeoFighterException("Error while loading ID photo");
-        }
+        if(!urlValidator.isValid(registerRequest.getIdPhotoURL()))
+            throw new UserInfoInvalidException("Invalid photo URL");
 
-        user.setIdCardPhoto(idPhoto);
+        try {
+            user.setIdCardPhotoURL(new URL(registerRequest.getIdPhotoURL()));
+        } catch (MalformedURLException e) {
+            throw new SpringGeoFighterException("Image URL error");
+        }
     }
 
     private String generateVerificationToken(User user) {
