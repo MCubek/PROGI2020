@@ -7,10 +7,11 @@ header{
   width: 50px;
 }
 
-.reddit-text{
+.header-text{
   font-weight: 700;
   height: 50px;
   width: 50px;
+  color: green;
 }
 .logo{
   text-decoration: none;
@@ -18,9 +19,9 @@ header{
 
 .login, .sign-up{
   background-color: transparent;
-  border-color: #0079D3;
-  color: #0079D3;
-  fill: #0079D3;
+  border-color: green;
+  color: green;
+  fill: green;
   border: 1px solid;
   border-radius: 4px;
   box-sizing: border-box;
@@ -34,11 +35,14 @@ header{
   text-transform: uppercase;
   padding: 3px 16px;
   opacity: 1;
+  letter-spacing: 0.05rem;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
 }
 
 .sign-up{
-  background-color: #0079D3;
-  border-color: #0079D3;
+  background-color: green;
+  border-color: green;
   color: aliceblue;
 }
 

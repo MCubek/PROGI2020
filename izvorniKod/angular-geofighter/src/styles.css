@@ -14,10 +14,10 @@ input.ng-invalid.ng-touched {
 
 .login,
 .sign-up {
-  background-color: #0079D3;
-  border-color: #0079D3;
+  background-color: green;
+  border-color: green;
   color: aliceblue;
-  fill: #0079D3;
+  fill: green;
   border: 1px solid;
   border-radius: 4px;
   text-align: center;
@@ -31,3 +31,9 @@ input.ng-invalid.ng-touched {
   padding: 3px 16px;
   opacity: 1;
 }
+
+.font{
+  font-family: Verdana, Geneva, Tahoma, sans-serif; 
+}
+
+
