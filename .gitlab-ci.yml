@@ -5,7 +5,7 @@ stages:
   - on-merge-request-build-frontend
   - deploy-on-develop
   - compile_pdf
-  - deploy-on-production
+  - production-deploy
 
 on-merge-request-build-backend:
   stage: on-merge-request-build-backend
@@ -61,8 +61,8 @@ compile_pdf:
     - devdoc
     - master
 
-deploy-on-production:
-  stage: master
+production-deploy:
+  stage: production-deploy
   image: ruby:latest
   script:
     - apt-get update -qy
