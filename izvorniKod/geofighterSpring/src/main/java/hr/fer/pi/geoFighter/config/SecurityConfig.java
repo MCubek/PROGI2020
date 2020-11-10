@@ -4,7 +4,6 @@ import hr.fer.pi.geoFighter.security.JwtAuthenticationFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -36,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/api/auth/login","/api/auth/signup","/api/auth/accountVerification/*")
+                .antMatchers("/api/auth/login","/api/auth/signup","/api/auth/accountVerification/*")
                 .permitAll()
                 .antMatchers("/v2/api-docs",
                         "/configuration/ui",
