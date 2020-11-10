@@ -25,3 +25,13 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## Building for Heroku dev environmnent
+
+In order to build for Heroku dev environment following command has to be executed `ng build --configuration dev` 
+
+## Building for Heroku release environmnent
+
+In order to build for Heroku release environment following command has to be executed `ng build --configuration production`.
+Shortcut for this command is `ng build --prod`
