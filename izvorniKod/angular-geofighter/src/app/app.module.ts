@@ -12,6 +12,7 @@ import {NgxWebstorageModule} from 'ngx-webstorage';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import { HomeComponent } from './home/home.component';
+import { SignupCartographerComponent } from './cartographer/signup-cartographer/signup-cartographer.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HomeComponent } from './home/home.component';
     HeaderComponent,
     SignupComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    SignupCartographerComponent
   ],
   imports: [
     BrowserModule,

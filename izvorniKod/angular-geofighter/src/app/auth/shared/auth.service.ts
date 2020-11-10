@@ -7,6 +7,7 @@ import {map, tap} from 'rxjs/operators';
 import {LocalStorageService} from 'ngx-webstorage';
 import {LoginResponsePayload} from '../login/login-response.payload';
 import { environment } from '../../../environments/environment';
+import {SignupCartographerRequestPayload} from "../../cartographer/signup-cartographer/signup-cartographer-request-payload";
 
 @Injectable({
   providedIn: 'root'
@@ -73,6 +74,10 @@ export class AuthService {
     this.localStorage.clear('username');
     this.localStorage.clear('refreshToken');
     this.localStorage.clear('expiresAt');
+  }
+
+  cartographerSignup(signupCartographerRequestPayload: SignupCartographerRequestPayload): Observable<any>{
+    return this.httpClient.post(`${environment.apiUrl}api/auth/cartographer/apply`, signupCartographerRequestPayload);
   }
 
   getUsername(): string {
