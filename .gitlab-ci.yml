@@ -15,7 +15,6 @@ on-merge-request-build-backend:
     #- gradle clean build --stacktrace
     - gradle build --stacktrace
   only:
-    - develop
     - merge_request
 
 on-merge-request-build-frontend:
@@ -25,14 +24,12 @@ on-merge-request-build-frontend:
     - cd izvorniKod/angular-geofighter
     - npm install
   script:
-    #- cd izvorniKod/angular-geofighter
     - ng build --prod
 #  artifacts:
 #    expire_in: 1 day
 #    paths:
 #      - izvorniKod/angular-geofighter/dist/
   only:
-    - develop
     - merge_request
 
 deploy-on-develop:

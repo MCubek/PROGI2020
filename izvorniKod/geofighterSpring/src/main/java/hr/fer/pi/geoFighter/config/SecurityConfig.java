@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/api/auth/login","/api/auth/signup","/api/auth/accountVerification/*")
+                .antMatchers("/api/auth/login", "/api/auth/signup", "/api/auth/accountVerification/*")
                 .permitAll()
                 .antMatchers("/v2/api-docs",
                         "/configuration/ui",
@@ -45,6 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-ui/*",
                         "/swagger-ui.html",
                         "/webjars/**")
+                .permitAll()
+                .antMatchers(HttpMethod.OPTIONS)
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -75,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .allowedHeaders("*")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD")
                         .exposedHeaders("Authorization")
-                        .maxAge(-1)   // add maxAge
+                        .maxAge(- 1)   // add maxAge
                         .allowCredentials(true);
             }
         };
