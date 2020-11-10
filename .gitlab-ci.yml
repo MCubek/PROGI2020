@@ -3,7 +3,6 @@ image: node:latest
 stages:
   - on-merge-request-build-backend
   - on-merge-request-build-frontend
-  - on-develop-DEV-build-frontend
   - deploy-on-develop
   - compile_pdf
 #  - deploy-on-production
@@ -16,7 +15,6 @@ on-merge-request-build-backend:
     #- gradle clean build --stacktrace
     - gradle build --stacktrace
   only:
-    - develop
     - merge_request
 
 on-merge-request-build-frontend:
@@ -33,17 +31,6 @@ on-merge-request-build-frontend:
 #      - izvorniKod/angular-geofighter/dist/
   only:
     - merge_request
-
-on-develop-build-frontend:
-  stage: on-merge-request-build-frontend
-  image: trion/ng-cli
-  before_script:
-    - cd izvorniKod/angular-geofighter
-    - npm install
-  script:
-    - ng build --configuration dev
-  only:
-    - develop
 
 deploy-on-develop:
   stage: deploy-on-develop
