@@ -3,7 +3,10 @@ package hr.fer.pi.geoFighter.service;
 import hr.fer.pi.geoFighter.dto.*;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.exceptions.UserInfoInvalidException;
-import hr.fer.pi.geoFighter.model.*;
+import hr.fer.pi.geoFighter.model.CartographerStatus;
+import hr.fer.pi.geoFighter.model.NotificationEmail;
+import hr.fer.pi.geoFighter.model.User;
+import hr.fer.pi.geoFighter.model.VerificationToken;
 import hr.fer.pi.geoFighter.repository.RoleRepository;
 import hr.fer.pi.geoFighter.repository.UserRepository;
 import hr.fer.pi.geoFighter.repository.VerificationTokenRepository;
@@ -20,6 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Instant;
@@ -54,7 +58,7 @@ public class AuthService {
         user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("USER_ROLE not in database")));
         user.setEnabled(false);
 
-        if(!urlValidator.isValid(registerRequest.getPhotoURL()))
+        if (! urlValidator.isValid(registerRequest.getPhotoURL()))
             throw new UserInfoInvalidException("Invalid photo URL");
 
         try {
@@ -65,8 +69,15 @@ public class AuthService {
         userRepository.save(user);
 
         String token = generateVerificationToken(user);
+
+        String address;
+        if (InetAddress.getLoopbackAddress().getHostAddress().equals("127.0.0.1")) {
+            address = "http://localhost:8080";
+        }else{
+            address = "https://dev-springbackend.herokuapp.com";
+        }
         mailService.sendMail(new NotificationEmail("Please activate your account.", user.getEmail(),
-                "http://localhost:8080/api/auth/accountVerification/" + token));
+                address + "/api/auth/accountVerification/" + token));
     }
 
     @Transactional(readOnly = true)
@@ -86,7 +97,7 @@ public class AuthService {
         user.setCartographerStatus(CartographerStatus.APPLIED);
         user.setIban(registerRequest.getIban());
 
-        if(!urlValidator.isValid(registerRequest.getIdPhotoURL()))
+        if (! urlValidator.isValid(registerRequest.getIdPhotoURL()))
             throw new UserInfoInvalidException("Invalid photo URL");
 
         try {
