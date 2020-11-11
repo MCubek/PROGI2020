@@ -78,7 +78,7 @@ export class AuthService {
     this.localStorage.clear('username');
     this.localStorage.clear('refreshToken');
     this.localStorage.clear('expiresAt');
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('');
   }
 
   cartographerSignup(signupCartographerRequestPayload: SignupCartographerRequestPayload): Observable<any> {
