@@ -13,7 +13,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import { HomeComponent } from './home/home.component';
 import { SignupCartographerComponent } from './cartographer/signup-cartographer/signup-cartographer.component';
-import {TokenInterceptor} from "./token-interceptor";
+import {TokenInterceptor} from './token-interceptor';
 
 @NgModule({
   declarations: [

@@ -7,10 +7,10 @@ import {AuthGuard} from './auth/auth.guard';
 import {SignupCartographerComponent} from './cartographer/signup-cartographer/signup-cartographer.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'signup', component: SignupComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'cartographerApply', component: SignupCartographerComponent}
+  {path: 'cartographerApply', component: SignupCartographerComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
