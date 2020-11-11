@@ -25,7 +25,7 @@ export class AuthService {
   };
 
   constructor(private httpClient: HttpClient, private localStorage: LocalStorageService,
-              private toastr: ToastrService, private router: Router) {
+              private toastr: ToastrService) {
   }
 
   signup(signupRequestPayload: SignupRequestPayload): Observable<any> {
@@ -78,7 +78,6 @@ export class AuthService {
     this.localStorage.clear('username');
     this.localStorage.clear('refreshToken');
     this.localStorage.clear('expiresAt');
-    this.router.navigateByUrl('');
   }
 
   cartographerSignup(signupCartographerRequestPayload: SignupCartographerRequestPayload): Observable<any> {
