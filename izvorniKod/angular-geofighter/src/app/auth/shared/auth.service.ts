@@ -9,6 +9,7 @@ import {LoginResponsePayload} from '../login/login-response.payload';
 import {environment} from '../../../environments/environment';
 import {SignupCartographerRequestPayload} from '../../cartographer/signup-cartographer/signup-cartographer-request-payload';
 import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,8 @@ export class AuthService {
     username: this.getUsername()
   };
 
-  constructor(private httpClient: HttpClient, private localStorage: LocalStorageService, private toastr: ToastrService) {
+  constructor(private httpClient: HttpClient, private localStorage: LocalStorageService,
+              private toastr: ToastrService, private router: Router) {
   }
 
   signup(signupRequestPayload: SignupRequestPayload): Observable<any> {
@@ -76,6 +78,7 @@ export class AuthService {
     this.localStorage.clear('username');
     this.localStorage.clear('refreshToken');
     this.localStorage.clear('expiresAt');
+    this.router.navigateByUrl('/login');
   }
 
   cartographerSignup(signupCartographerRequestPayload: SignupCartographerRequestPayload): Observable<any> {
