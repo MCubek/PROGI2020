@@ -47,7 +47,6 @@
 			\item \textnormal{Users}
 			\item \textnormal{Tokens}
 			\item \textnormal{Refresh\textunderscore token}
-			\item \textnormal{Images}
 			\item \textnormal{Roles}
 			\item \textnormal{Privileges}
 			\item \textnormal{Roles\textunderscore privileges}
@@ -60,7 +59,7 @@
 			\subsection{Opis tablica}
 			
 
-				\textnormal{\textbf{Users} \quad Ovaj entitet sadržava sve važne informacije o korisniku aplikacije koje bilježi atributima navedenim u tablici. U vezi je \textit{One-to-Many} s entitetima Images, Tokens, Fights, Location\textunderscore cards i User\textunderscore card preko atributa user\textunderscore id. Također je u vezi \textit{Many-to-One} s entitetom Roles preko atributa role\textunderscore id.}
+				\textnormal{\textbf{Users} \quad Ovaj entitet sadržava sve važne informacije o korisniku aplikacije koje bilježi atributima navedenim u tablici. U vezi je \textit{One-to-Many} s entitetima Tokens, Fights, Location\textunderscore cards i User\textunderscore card preko atributa user\textunderscore id. Također je u vezi \textit{Many-to-One} s entitetom Roles preko atributa role\textunderscore id.} \\
 				
 				\begin{longtabu} to \textwidth {|X[6, 3]|X[6, l]|X[20, l]|}
 					
@@ -73,28 +72,30 @@
 					\hline 
 					\endlastfoot
 					
-					\cellcolor{LightGreen}user\textunderscore id & BIGSERIAL	&  	jedinstveni identifikator korisnika	\\ \hline
+					\textbf{user\textunderscore id} & BIGSERIAL	&  	jedinstveni identifikator korisnika	\\ \hline
 					email & VARCHAR & email adresa korisnika \\ \hline
 					username & VARCHAR & korisničko ime \\ \hline
 					password & VARCHAR & lozinka korisnika \\ \hline
+					photourl & VARCHAR & poveznica na fotografiju profila \\ \hline
 					created\textunderscore time & TIMESTAMP & trenutak stvaranja korisničkog računa  \\ \hline 
 					current\textunderscore location & BYTEA	&  	trenutna lokacija korisnika	\\ \hline 
 					elo\textunderscore score & INT4 & rang korisnika prema elo sustavu \\ \hline
-					enabled & BOOLEAN & \\ \hline
+					enabled & BOOLEAN & zastavica potvrde email adrese\\ \hline
 					losses & INT4 & broj izgubljenih igara \\ \hline
 					wins & INT4 & broj pobijeđenih igara \\ \hline
 					online & BOOLEAN & zastavica prisutnosti korisnika \\ \hline
 					forced\textunderscore timeout\textunderscore end & TIMESTAMP & trenutak mogućeg povratka u igru u slučaju privremenog isključenja \\ \hline
-					cartographer\textunderscore status	& INT4 &   	\\ \hline 
+					cartographer\textunderscore status	& INT4 &   oznaka statusa pri prijavi za kartografa 	\\ \hline 
 					iban & VARCHAR & IBAN bankovnog računa kartografa \\ \hline			
-					
-					\cellcolor{LightBlue} role\textunderscore id	& INT8 &  jedinstveni identifikator uloge (roles.role\textunderscore id)	\\ \hline 
+					id\textunderscore card\textunderscore photourl & VARCHAR & poveznica na fotografiju osobne iskaznice \\ \hline
+					\textit{role\textunderscore id} & INT8 &  jedinstveni identifikator uloge (roles.role\textunderscore id)	\\ \hline 
 					
 					
 				\end{longtabu}
 			
+				\textnormal{} \\
 				
-				\textnormal{\textbf{Tokens} \quad Ovaj entitet sadržava sve važne informacije o tokenima koji se koriste za autentifikaciju korisnika. Atributi koje posjeduje su jedinstveni identifikator tokena, njegova vrijednost, datum isticanja te oznaku korisnika kojem pripada. U vezi je \textit{Many-to-One} s entitetom Users preko atributa "user\textunderscore user\textunderscore id". Također je u vezi \textit{One-to-One} s entitetom Refresh\textunderscore token preko atributa id.}
+				\textnormal{\textbf{Tokens} \quad Ovaj entitet sadržava sve važne informacije o tokenima koji se koriste za autentifikaciju korisnika. Atributi koje posjeduje su jedinstveni identifikator tokena, njegova vrijednost, datum isticanja te oznaku korisnika kojem pripada. U vezi je \textit{Many-to-One} s entitetom Users preko atributa "user\textunderscore user\textunderscore id".} \\
 			
 			
 			
@@ -109,15 +110,17 @@
 					\hline 
 					\endlastfoot
 					
-					\cellcolor{LightGreen}id & BIGSERIAL	&  	jedinstveni identifikator tokena 	\\ \hline
+					\textbf{id} & BIGSERIAL	&  	jedinstveni identifikator tokena 	\\ \hline
 					expiry\textunderscore date	& TIMESTAMP &   datum isticanja tokena	\\ \hline 
 					token & VARCHAR &  vrijednost tokena \\ \hline  
-					\cellcolor{LightBlue} "user\textunderscore user\textunderscore id"	& INT8 &  jedinstvena oznaka korisnika (users.user\textunderscore id) 	\\ \hline 
+					\textit{"user\textunderscore user\textunderscore id"} & INT8 &  jedinstvena oznaka korisnika (users.user\textunderscore id) 	\\ \hline 
 					
 					
 				\end{longtabu}
 			
-				\textnormal{\textbf{Refresh\textunderscore token} \quad Ovaj entitet sadržava sve važne informacije o obnavljanju tokena koji služe za autentifikaciju korisnika. Atributi koje posjeduje su jedinstveni identifikator tokena, njegova nova vrijednost te datum stvaranja. U vezi je \textit{One-to-One} s entitetom Tokens preko atributa id.}
+				\textnormal{}
+			
+				\textnormal{\textbf{Refresh\textunderscore token} \quad Ovaj entitet sadržava sve važne informacije o obnavljanju tokena koji služe za autentifikaciju korisnika. Atributi koje posjeduje su jedinstveni identifikator tokena, njegova nova vrijednost te datum stvaranja.} \\
 				
 			\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 				
@@ -130,7 +133,7 @@
 				\hline 
 				\endlastfoot
 				
-				\cellcolor{LightGreen}id & BIGSERIAL &  	jedinstveni identifikator tokena (tokens.id) 	\\ \hline
+				\textbf{id} & BIGSERIAL &  	jedinstveni identifikator tokena (tokens.id) 	\\ \hline
 				created\textunderscore date	& TIMESTAMP &   datum stvaranja tokena	\\ \hline 
 				token & VARCHAR & vrijednost tokena  \\ \hline 
 				
@@ -138,28 +141,9 @@
 				
 			\end{longtabu}
 		
-			\textnormal{\textbf{Images} \quad Ovaj entitet sadržava sve informacije o fotografijama koje je potrebno priložiti pri registraciji korisnika. Atributi koje posjeduje su jedinstveni identifikator fotografije, njen digitalni zapis, vrstu fotografije koja se odnosi na fotgrafiju korisnika ili fotografiju osobne iskaznice te jedinstvenu oznaku korisnika kojem pripada. U vezi je \textit{Many-to-One} s entitetom Users preko atributa "user\textunderscore user\textunderscore id". }
+			\textnormal{}
 		
-			\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
-				
-				\hline \multicolumn{3}{|c|}{\textbf{images}}	 \\[3pt] \hline
-				\endfirsthead
-				
-				\hline \multicolumn{3}{|c|}{\textbf{images}}	 \\[3pt] \hline
-				\endhead
-				
-				\hline 
-				\endlastfoot
-				
-				\cellcolor{LightGreen}id & BIGSERIAL	&  	jedinstveni identifikator fotografije 	\\ \hline
-				pic\textunderscore byte	& OID &  digitalni zapis fotografije 	\\ \hline 
-				type & VARCHAR & vrsta fotografije  \\ \hline  
-				\cellcolor{LightBlue} "user\textunderscore user\textunderscore id"	& INT8 &  jedinstvena oznaka korisnika (users.user\textunderscore id)   	\\ \hline 
-				
-				
-			\end{longtabu}
-		
-			\textnormal{\textbf{Roles} \quad Ovaj entitet sadržava sve važne informacije vezane uz ulogu koju određeni korisnik može imati, a one su administrator, kartograf ili igrač. Atributi koje posjeduje su jedinstveni identifikator uloge i njezin naziv. U vezi je \textit{One-to-Many} s entitetom Users preko atributa role\textunderscore id. Također je u vezi \textit{Many-to-Many} s entitetom Privileges preko spojne tablice roles\textunderscore privileges.}
+			\textnormal{\textbf{Roles} \quad Ovaj entitet sadržava sve važne informacije vezane uz ulogu koju određeni korisnik može imati, a one su administrator, kartograf ili igrač. Atributi koje posjeduje su jedinstveni identifikator uloge i njezin naziv. U vezi je \textit{One-to-Many} s entitetom Users preko atributa role\textunderscore id. Također je u vezi \textit{Many-to-Many} s entitetom Privileges preko spojne tablice roles\textunderscore privileges.} \\
 		
 			\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 				
@@ -172,13 +156,15 @@
 				\hline 
 				\endlastfoot
 				
-				\cellcolor{LightGreen}role\textunderscore id & INT8	&  	jedinstveni identifikator uloge 	\\ \hline
+				\textbf{role\textunderscore id} & INT8	&  	jedinstveni identifikator uloge 	\\ \hline
 				name	& VARCHAR &   naziv uloge	\\ \hline 
 							
 				
 			\end{longtabu}
 		
-			\textnormal{\textbf{Privileges} \quad Ovaj entitet sadržava sve važne informacije o povlasticama koje uloge mogu imati. Atributi koje posjeduje su jedinstveni identifikator povlastice i njen naziv. U vezi je \textit{Many-to-Many} s entitetom Roles preko spojne tablice roles\textunderscore privileges.}
+			\eject
+		
+			\textnormal{\textbf{Privileges} \quad Ovaj entitet sadržava sve važne informacije o povlasticama koje uloge mogu imati. Atributi koje posjeduje su jedinstveni identifikator povlastice i njen naziv. U vezi je \textit{Many-to-Many} s entitetom Roles preko spojne tablice roles\textunderscore privileges.} \\
 		
 			\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 				
@@ -191,13 +177,15 @@
 				\hline 
 				\endlastfoot
 				
-				\cellcolor{LightGreen}privilege\textunderscore id & INT8	&  	jedinstveni identifikator povlastice 	\\ \hline
+				\textbf{privilege\textunderscore id} & INT8	&  	jedinstveni identifikator povlastice 	\\ \hline
 				name	& VARCHAR &   naziv povlastice	\\ \hline 
 								
 				
 			\end{longtabu}
 		
-			\textnormal{\textbf{Roles\textunderscore privileges} \quad Ova tablica nastaje zbog \textit{Many-to-Many} veze između entiteta Roles i Privileges. Sadrži njihove primarne ključeve te je time povezana s njima. Prikazuje koje uloge imaju koje povlastice.}
+			\textnormal{}
+		
+			\textnormal{\textbf{Roles\textunderscore privileges} \quad Ova tablica nastaje zbog \textit{Many-to-Many} veze između entiteta Roles i Privileges. Sadrži njihove primarne ključeve te je time povezana s njima. Prikazuje koje uloge imaju koje povlastice.} \\
 			
 			\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 				
@@ -210,14 +198,16 @@
 				\hline 
 				\endlastfoot
 				
-				\cellcolor{LightGreen} role\textunderscore id & INT8 & jedinstveni identifikator uloge (roles.role\textunderscore id) \\ \hline
-				\cellcolor{LightGreen}privilege\textunderscore id & INT8	&  	jedinstveni identifikator povlastice (privileges.privilege\textunderscore id) 	\\ \hline
+				\textbf{\textit{role\textunderscore id}} & INT8 & jedinstveni identifikator uloge (roles.role\textunderscore id) \\ \hline
+				\textbf{\textit{privilege\textunderscore id}} & INT8	&  	jedinstveni identifikator povlastice (privileges.privilege\textunderscore id) 	\\ \hline
 				
 						
 				
 			\end{longtabu}
 		
-			\textnormal{\textbf{Location\textunderscore cards} \quad Ovaj entitet sadržava sve važne informacije o karticama lokacije. Atributi koje posjeduje su navedeni u tablici. U vezi je \textit{Many-to-Many-to-Many} s entitetima Fights i Users preko spojne tablice User\textunderscore card\textunderscore fight. Također je u vezi \textit{Many-to-One} s entitetom Users preko atributa accepted\textunderscore by\textunderscore user \textunderscore id i atributa created\textunderscore by\textunderscore user \textunderscore id.}
+			\textnormal{}
+		
+			\textnormal{\textbf{Location\textunderscore cards} \quad Ovaj entitet sadržava sve važne informacije o karticama lokacije. Atributi koje posjeduje su navedeni u tablici. U vezi je \textit{Many-to-Many-to-Many} s entitetima Fights i Users preko spojne tablice User\textunderscore card\textunderscore fight. Također je u vezi \textit{Many-to-One} s entitetom Users preko atributa accepted\textunderscore by\textunderscore user \textunderscore id i atributa created\textunderscore by\textunderscore user \textunderscore id.} \\
 		
 			\begin{longtabu} to \textwidth {|X[6, 4]|X[6, l]|X[20, l]|}
 				
@@ -230,7 +220,7 @@
 				\hline 
 				\endlastfoot
 				
-				\cellcolor{LightGreen}lcd\textunderscore id & INT8	&  	jedinstveni identifikator kartice lokacije 	\\ \hline
+				\textbf{lcd\textunderscore id} & INT8	&  	jedinstveni identifikator kartice lokacije 	\\ \hline
 				name	& VARCHAR &   naziv lokacije	\\ \hline 
 				accepted & BOOLEAN & zastavica koja označava je li lokacija odobrena \\ \hline
 				created\textunderscore at & TIMESTAMP & trenutak stvaranja kartice lokacije \\ \hline
@@ -238,14 +228,16 @@
 				enabled\textunderscore date & TIMESTAMP & trenutak odobravanja kartice lokacije \\ \hline
 				location & BYTEA & stvarna lokacija koju označava kartica lokacije \\ \hline
 				check\textunderscore needed & BOOLEAN & zastavica koja označava potrebu za dodatnom potvrdom kartice lokacije \\ \hline
-				photo & OID & digitalni zapis fotografije lokacije \\ \hline
-				\cellcolor{LightBlue}accepted\textunderscore by\textunderscore user \textunderscore id & INT8 & jedinstveni identifikator kartografa koji je odobrio karticu lokacije (users.user\textunderscore id) \\ \hline
-				\cellcolor{LightBlue}created\textunderscore by\textunderscore user \textunderscore id & INT8 & jedinstveni identifikator igrača koji je prijavio karticu lokacije (users.user\textunderscore id) \\ \hline				
+				photo & VARCHAR & digitalni zapis fotografije lokacije \\ \hline
+				\textit{accepted\textunderscore by\textunderscore user \textunderscore id} & INT8 & jedinstveni identifikator kartografa koji je odobrio karticu lokacije (users.user\textunderscore id) \\ \hline
+				\textit{created\textunderscore by\textunderscore user \textunderscore id} & INT8 & jedinstveni identifikator igrača koji je prijavio karticu lokacije (users.user\textunderscore id) \\ \hline				
 				
 				
 			\end{longtabu}
 		
-			\textnormal{\textbf{User\textunderscore card} \quad Ovaj entitet sadržava sve informacije o kartici koju posjeduje neki igrač. Atributi koje posjeduje su jedinstveni identifikator korisnika i kartice koju posjeduje, trenutak kada se kartica može ponovo koristit u borbi te koeficijent koji utječe na smanjenje broja bodova kartice. U vezi je \textit{Many-to-One} s entitetom Users preko atributa user\textunderscore id te s entitetom Location\textunderscore cards preko atribut lcd\textunderscore id.}
+			\textnormal{}
+		
+			\textnormal{\textbf{User\textunderscore card} \quad Ovaj entitet sadržava sve informacije o kartici koju posjeduje neki igrač. Atributi koje posjeduje su jedinstveni identifikator korisnika i kartice koju posjeduje, trenutak kada se kartica može ponovo koristit u borbi te koeficijent koji utječe na smanjenje broja bodova kartice. U vezi je \textit{Many-to-One} s entitetom Users preko atributa user\textunderscore id te s entitetom Location\textunderscore cards preko atribut lcd\textunderscore id.} \\
 		
 			\begin{longtabu} to \textwidth {|X[6, 4]|X[6, l]|X[20, l]|}
 				
@@ -258,13 +250,15 @@
 				\hline 
 				\endlastfoot
 				
-				\cellcolor{LightGreen}user\textunderscore id & INT8	&  	jedinstveni identifikator korisnika koji posjeduje karticu lokacije (users.user\textunderscore id) 	\\ \hline
-				\cellcolor{LightGreen}lcd\textunderscore id & INT8	&  	jedinstveni identifikator kartice lokacije koju korisnik posjeduje (location\textunderscore cards.lcd\textunderscore id) 	\\ \hline
+				\textbf{user\textunderscore id} & INT8	&  	jedinstveni identifikator korisnika koji posjeduje karticu lokacije (users.user\textunderscore id) 	\\ \hline
+				\textbf{lcd\textunderscore id} & INT8	&  	jedinstveni identifikator kartice lokacije koju korisnik posjeduje (location\textunderscore cards.lcd\textunderscore id) 	\\ \hline
 				cooldown\textunderscore end	& TIMESTAMP &   trenutak kada se kartica lokacije može ponovo koristiti u borbi	\\ \hline 
 				cooldown\textunderscore multiplier & FLOAT8 & koeficijent prema kojem kartica lokacije gubi bodove \\ \hline
 				
 				
 			\end{longtabu}
+		
+			\textnormal{}
 		
 			\textnormal{\textbf{Fights\textunderscore cards} \quad Ovaj entitet sadržava sve važne informacije o borbama koje su se odvile. Atributi koje posjeduje su jedinstveni identifikator borbe, vrijeme početka borbe te igrača koji je pobijedio. navedeni u tablici. U vezi je \textit{Many-to-Many-to-Many} s entitetima Location\textunderscore cards i Users preko spojne tablice User\textunderscore card\textunderscore fight. Također je u vezi \textit{Many-to-One} s entitetom Users preko atributa winner\textunderscore user \textunderscore id.}
 		
@@ -279,14 +273,16 @@
 				\hline 
 				\endlastfoot
 				
-				\cellcolor{LightGreen}fight\textunderscore id & INT8	&  	jedinstveni identifikator borbe 	\\ \hline
+				\textbf{fight\textunderscore id} & INT8	&  	jedinstveni identifikator borbe 	\\ \hline
 				start\textunderscore time	& TIMESTAMP &   trenutak početka borbe	\\ \hline 
-				\cellcolor{LightBlue}winner\textunderscore user\textunderscore id & INT8 & jedinstveni identifikator korisnika koji je pobijedio u borbi (users.user\textunderscore id) \\ \hline
+				\textit{winner\textunderscore user\textunderscore id} & INT8 & jedinstveni identifikator korisnika koji je pobijedio u borbi (users.user\textunderscore id) \\ \hline
 				
 				
 			\end{longtabu}
 		
-			\textnormal{\textbf{User\textunderscore card\textunderscore fight} \quad Ova tablica nastaje zbog \textit{Many-to-Many-to-Many} veze između entiteta Users, Fight i Location\textunderscore cards. Sadrži njihove primarne ključeve te je time i povezana s njima, a prikazuje borbu u kojoj je korisnik sudjelovao s određenom karticom.}
+			\textnormal{}
+		
+			\textnormal{\textbf{User\textunderscore card\textunderscore fight} \quad Ova tablica nastaje zbog \textit{Many-to-Many-to-Many} veze između entiteta Users, Fight i Location\textunderscore cards. Sadrži njihove primarne ključeve te je time i povezana s njima, a prikazuje borbu u kojoj je korisnik sudjelovao s određenom karticom.} \\
 		
 			\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 				
@@ -299,15 +295,15 @@
 				\hline 
 				\endlastfoot
 				
-				\cellcolor{LightGreen}fight\textunderscore id & INT8	&  	jedinstveni identifikator borbe (fights.fight\textunderscore id) 	\\ \hline
+				\textbf{\textit{fight\textunderscore id}} & INT8	&  	jedinstveni identifikator borbe (fights.fight\textunderscore id) 	\\ \hline
 				
-				\cellcolor{LightGreen}user\textunderscore id & INT8	&  	jedinstveni identifikator igrača (users.user\textunderscore id) 	\\ \hline
+				\textbf{\textit{user\textunderscore id}} & INT8	&  	jedinstveni identifikator igrača (users.user\textunderscore id) 	\\ \hline
 				
-				\cellcolor{LightGreen}lcd\textunderscore id & INT8	&  	jedinstveni identifikator kartice lokacije (location\textunderscore cards.lcd\textunderscore id) 	\\ \hline
+				\textbf{\textit{lcd\textunderscore id}} & INT8	&  	jedinstveni identifikator kartice lokacije (location\textunderscore cards.lcd\textunderscore id) 	\\ \hline
 				
 				
 			\end{longtabu}
-			
+			\eject
 			\subsection{Dijagram baze podataka}
 				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
 				
