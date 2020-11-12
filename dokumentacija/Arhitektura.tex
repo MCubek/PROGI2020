@@ -313,7 +313,7 @@
 				
 				\begin{figure}[H]
 					\centering
-					\includegraphics[scale=0.4]{slike/ERModel} 
+					\includegraphics[scale=0.41]{slike/ERModel} 
 					\caption{ER dijagram baze podataka}
 					\label{fig:ER}
 				\end{figure}
@@ -323,17 +323,44 @@
 			
 		\section{Dijagram razreda}
 		
-			\textit{Potrebno je priložiti dijagram razreda s pripadajućim opisom. Zbog preglednosti je moguće dijagram razlomiti na više njih, ali moraju biti grupirani prema sličnim razinama apstrakcije i srodnim funkcionalnostima.}\\
 			
-			\textbf{\textit{dio 1. revizije}}\\
+			\textnormal{Na slikama 4.5, 4.6, 4.7 i 4.8 su prikazani razredi i sučelja koji pripadaju \textit{back-end} servisu izrađenom koristeći programski okvir SpringBoot i programski jezik Java. Svi razredi imaju implementirane get i set metode za vlastite atribute iako se to eksplicitno ne navodi na dijagramima.} \\
 			
-			\textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\\
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.75]{slike/modelCD} \\
+				\caption{ Model razredi}
+				\label{fig:modelCD}
+			\end{figure}
+		
+			\textnormal{Model razredi prikazani na slici 4.5 preslikavaju strukturu baze podataka u aplikaciji. Implementirane metode direktno komuniciraju s bazom podataka te vraćaju tražene podatke. Razred User predstavlja korisnika koji se može registrirati u sustav koristeći osnovne informacije. Razred LocationCard predstavlja karticu lokacije, dok razred UserCard predstavlja posjedovanje same kartice od strane nekog korisnika.} \\
 			
-			\textbf{\textit{dio 2. revizije}}\\			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.7]{slike/suceljaCD} \\
+				\caption{ Dijagram sučelja sustava i razreda koji ih implementiraju}
+				\label{fig:suceljaCD}
+			\end{figure}
+		
+				\textnormal{Na slici 4.6 prikazana su sučelja i razredi koji ih implemenentiraju. Zbog bolje preglednosti dijagrama razredi su navedeni isključivo imenom, a njihov detaljan opis nalazi se na slici 4.7.} \\
+						
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.6]{slike/ostaloCD} \\
+				\caption{ Dijagram razreda za upravljanje registracijom i prijavom}
+				\label{fig:ostaloCD}
+			\end{figure}
+		
+			\textnormal{Na slici 4.7 nalaze se preostali razredi sustava. Razred AuthController uz razrede AuthService, RefreshTokenService i UserDetailServiceImpl upravlja procesom registracije i prijave.} \\
 			
-			\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
+			\textnormal{Na slici 4.8 prikazani su DTO (Data transfer object) razredi te razredi stvorenih iznimki. DTO klase služe sa prijenos podataka prilikom registracije, prijave i odjave iz sustava. }
 			
-			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.75]{slike/dtoCD} \\
+				\caption{ DTO razredi i razredi iznimki}
+				\label{fig:dtoCD}
+			\end{figure}
 			
 			\eject
 		
