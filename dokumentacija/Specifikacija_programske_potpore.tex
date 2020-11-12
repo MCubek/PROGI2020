@@ -100,7 +100,7 @@
 	\end{packed_enum}
 \item  \underbar{OSRM (sudionik) :}
 		\begin{packed_enum}
-			\item omogućava pronalazak najkraćeg puta obilaska svih lokacija za koje je zatražena potvrda s terena
+			\item omogućava pronalazak puta obilaska svih lokacija (pomoću problema trgovačkog putnika)  za koje je zatražena potvrda s terena
 		\end{packed_enum}
 			\end{packed_enum}
 			
@@ -159,7 +159,7 @@
 						\item[2.a] Odbijenica od strane administratora
 						\item[] \begin{packed_enum}
 							
-							\item Prihvatiti odbijenicu i pokusati se prijaviti drugi put
+							\item Pokusati se prijaviti drugi put
 							
 						\end{packed_enum}
 						
@@ -306,13 +306,12 @@
 					\item[] \begin{packed_enum}
 						
 						\item Korisnik odabire opciju za pronalazak suparnika, sustav uparuje.
-						\item Prikaže se kolekcija karata.
-						\item Korisnik izabire karte s kojima će igrati.
-						\item Korisnik odabire opciju "Potvrdi karte", prikazuje se prozor za borbu.
-						\item Baca se novčić da se vidi koji će igrač imati prvi potez.
-						\item Igrači su naizmjence na potezu, na vlastitom potezu odabiru kartu koju žele odigrati i atribut koji se koristi u borbi.
-						\item Kada su obje karte bačene ona s jačim atributom pobjeđuje rundu
-						\item Nakon što su kartice potrošene(5), igra završava.
+						\item Baca se novčić kako bi se odredilo koji će igrač imati prvi potez, igrači su naizmjence na potezu
+						\item Igrač koji je prvi na potezu u rundi, odabire jednu od svojih karata te atribut, nakon odabira "baca" kartu na igraču ploču
+						\item Igrač koji je drugi na potezu, primoran je "poštovati" atribut, tj. na svim njegovim kartama pojačano je označen (highlightan) atribut kojeg je izabrao prvi igrač. Igrač odabire kartu dok je atribut izabran sam. (atribut kojeg je u prvom potezu izabrao drugi igrač)
+						\item Kada su obje karte bačene ona s jačim atributom pobjeđuje rundu, te je grafički naznačeno koji igrač je pobjedio rundu
+						\item Obje karte nakon određivanja pobjednika runde idu u "smeće" te se ne mogu koristiti opet do kraja borbe
+						\item Borba traje sve dok se sve kartice ne potroše(5).
 					\end{packed_enum}
 					
 					\item  \textbf{Opis mogućih odstupanja:}
@@ -331,6 +330,12 @@
 							\item  Prilikom pritiska na gumb "Traži borbu" sustav igraču javlja kako nema dovoljno karata za početak borbe (ili ih nema dovoljno ili su na cooldownu pa nisu trenutno dostupne). Sustav mu predlaže da pođe u istraživanje kako bi sakupio više karata i uvijek bio spreman na borbu.
 							
 						\end{packed_enum}
+					\item[5.a] Atributi karti su jednaki
+					\item[] \begin{packed_enum}
+						
+						\item  Ako su atributi karata jednaki gledaju se druga dva atributa zbrojena te karta koja ima veći zbroj druga dva tributa pobjeđuje. Ukoliko se desi rijedak slučaj da su sva tri atributa ista oba igrača dobivaju bod za rundu, tj. runda je neriješena
+						
+					\end{packed_enum}
 						
 					\end{packed_item}
 				\end{packed_item}
@@ -346,23 +351,12 @@
 					
 					\item[] \begin{packed_enum}
 						
-						\item Aplikacija prikazuje sve sakupljene karte korisnika.
+						\item Aplikacija prikazuje sve sakupljene karte korisnika koje su dostupne za borbu.
 						\item Korisnik odabire 5 karata za borbu. 
-						\item Korisnik odabire opciju za početak borbe.
+						\item Korisnik potvrđuje odabir karata
 					\end{packed_enum}
 					
-					\item  \textbf{Opis mogućih odstupanja:}
 					
-					\item[] \begin{packed_item}
-						
-						\item[2.a] Pokušaj odabira karte koja je na cooldownu
-						\item[] \begin{packed_enum}
-							
-							\item  sustav javlja da je karta na cooldownu te da je potrebno odabrati drugu kartu za borbu.
-							
-						\end{packed_enum}
-						
-					\end{packed_item}
 				\end{packed_item}
 				
 				\noindent \underbar{\textbf{UC8.2 -Kraj borbe}}
@@ -376,9 +370,9 @@
 					
 					\item[] \begin{packed_enum}
 						
-						\item Aplikacija prikaže poruku ovisno o pobjedi ili porazu.
+						\item Aplikacija prikaže poruku koja sadrži statistiku odigranih rundi te pobjednika
 						\item Statistika oba suigrača se osvježi u bazi podataka.
-						\item Kartama koje su korištene smanjuju se 	bodovi.
+						\item Kartama koje su korištene dodjeljuje se cooldown.
 						\item Sustav vraća korisnika na početnu stranicu.
 					\end{packed_enum}
 				\end{packed_item}
