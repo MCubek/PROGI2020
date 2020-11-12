@@ -2,12 +2,6 @@
 		
 	\section{Funkcionalni zahtjevi}
 			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-			\textit{Navesti \textbf{dionike} koji imaju \textbf{interes u ovom sustavu} ili  \textbf{su nositelji odgovornosti}. To su prije svega korisnici, ali i administratori sustava, naručitelji, razvojni tim.}\\
-				
-			\textit{Navesti \textbf{aktore} koji izravno \textbf{koriste} ili \textbf{komuniciraju sa sustavom}. Oni mogu imati inicijatorsku ulogu, tj. započinju određene procese u sustavu ili samo sudioničku ulogu, tj. obavljaju određeni posao. Za svakog aktora navesti funkcionalne zahtjeve koji se na njega odnose.}\\
-			
 			
 			\noindent \textbf{Dionici:}
 			
@@ -115,11 +109,8 @@
 			
 				
 			\subsection{Obrasci uporabe}
-				
-				\textbf{\textit{dio 1. revizije}}
-				
+
 				\subsubsection{Opis obrazaca uporabe}
-					\textit{Funkcionalne zahtjeve razraditi u obliku obrazaca uporabe. Svaki obrazac je potrebno razraditi prema donjem predlošku. Ukoliko u nekom koraku može doći do odstupanja, potrebno je to odstupanje opisati i po mogućnosti ponuditi rješenje kojim bi se tijek obrasca vratio na osnovni tijek.}\\
 				
 				\noindent \underbar{\textbf{UC1 -Registracija}}
 				\begin{packed_item}
@@ -302,6 +293,7 @@
 					\end{packed_enum}
 				\end{packed_item}
 				
+				\newpage
 				\noindent \underbar{\textbf{UC8 -Borba}}
 				\begin{packed_item}
 					
@@ -928,11 +920,10 @@
 					\end{packed_item}
 				\end{packed_item}
 					
+				\newpage
 				\subsubsection{Dijagrami obrazaca uporabe}
-					
-					\textit{Prikazati odnos aktora i obrazaca uporabe odgovarajućim UML dijagramom. Nije nužno nacrtati sve na jednom dijagramu. Modelirati po razinama apstrakcije i skupovima srodnih funkcionalnosti.}
-				\eject		
-					\begin{figure}[H]
+							
+				\begin{figure}[H]
 					\centering
 					\includegraphics[scale=0.42]{dijagrami/funkcionalnosti_korisnika} \\
 					\caption{Dijagram obrasca uporabe, funkcionalnosti neregistriranog i registriranog korisnika}
@@ -953,11 +944,6 @@
 			\label{fig:funkcionalnosti_kartografa} 
 		\end{figure}
 			\subsection{Sekvencijski dijagrami}
-				
-				\textbf{\textit{dio 1. revizije}}\\
-				
-				\textit{Nacrtati sekvencijske dijagrame koji modeliraju najvažnije dijelove sustava (max. 4 dijagrama). Ukoliko postoji nedoumica oko odabira, razjasniti s asistentom. Uz svaki dijagram napisati detaljni opis dijagrama.}
-				\eject
 				
 				\subsubsection{Obrazac uporabe UC8 - Borba}
 				\textnormal{Igrač šalje zahtjev za borbom. Web aplikacija potom dohvaća suparnika. U bazi podataka se provjerava ima li igrač barem 5 karata za borbu dostupnih. Ukoliko igrač nema dovoljno karata za borbu ne može pokrenuti "Traži borbu", web aplikacija izbacuje poruku. Iz baze podataka dohvaća se vlastita kolekcija karata igrača te se prikazuje ekran za odabir 5 karata za borbu. Nakon odabira igrač potvrđuje izabranih (označenih) pet karata i borba započinje bacanjem novčića kako bi se odlučilo kreće li igrač prvi ili ne koje vrši web aplikacija. Nakon odluke, igra se 5 rundi. Igrač koji započinje potez u rundi bira kartu i jedan od tri atributa za tu rundu dok igrač koji kreće drugi izabire samo kartu, a odabir atributa je isti kao od igrača koji je započeo rundu. Nakon što su karta i njen atribut odabrani, gleda se čiji atribut je veći te taj pobjednik pobjeđuje rundu. Poslije 5 odigranih rundi proglašuje se pobjednik i u bazu podataka se spremaju podaci te borbe.}\\
@@ -993,22 +979,18 @@
 
 	
 		\section{Ostali zahtjevi}
-		
-			\textbf{\textit{dio 1. revizije}}\\
-		 
-			 \textit{Nefunkcionalni zahtjevi i zahtjevi domene primjene dopunjuju funkcionalne zahtjeve. Oni opisuju \textbf{kako se sustav treba ponašati} i koja \textbf{ograničenja} treba poštivati (performanse, korisničko iskustvo, pouzdanost, standardi kvalitete, sigurnost...). Primjeri takvih zahtjeva u Vašem projektu mogu biti: podržani jezici korisničkog sučelja, vrijeme odziva, najveći mogući podržani broj korisnika, podržane web/mobilne platforme, razina zaštite (protokoli komunikacije, kriptiranje...)... Svaki takav zahtjev potrebno je navesti u jednoj ili dvije rečenice.}
 			 
 			 \begin{packed_item}
-			 	\item  \textbf{Sustav treba omogućiti rad više korisnika u stvarnom vremenu}
-			 	\item  \textbf{Korisničko sučelje i sustav moraju podržavati hrvatsku abecedu (dijakritičke znakove) pri unosu i prikazu tekstualnog sadržaja}
-			 	\item  \textbf{Sustav mora imati kroz igranje pasivno poticati igrača na kretanje i sakupljanje drugih lokacija (karata)}
-			 	\item  \textbf{Dijelovi sustava gdje se koristi baza podataka trebaju biti fluidni i brzi (manje od 1 sekunde)}
-			 	\item  \textbf{Sustav treba biti implementiran koristeći Angular za frontend i Spring Boot za backend, dok se za bazu podataka koristi Posgresql}
-			 	\item  \textbf{Svi vizuali aplikacije moraju biti jednostavni i ugodni oku}
-			 	\item  \textbf{Sustav treba biti intuitivan i jednostavan}
-			 	\item  \textbf{Pristup sustavu mora biti omogućen iz javne mreže pomoću HTTPS}
-			 	\item  \textbf{Veza s bazom podataka mora biti kvalitetno zaštićene, brza i otporna na vanjske greške}
-			 	\item  \textbf{Sustav kao valutu za isplatu kartografa koristi EUR}
+			 	\item Sustav treba omogućiti rad više korisnika u stvarnom vremenu
+			 	\item Korisničko sučelje i sustav moraju podržavati hrvatsku abecedu (dijakritičke znakove) pri unosu i prikazu tekstualnog sadržaja
+			 	\item Sustav mora imati kroz igranje pasivno poticati igrača na kretanje i sakupljanje drugih lokacija (karata)
+			 	\item Dijelovi sustava gdje se koristi baza podataka trebaju biti fluidni i brzi (manje od 1 sekunde)
+			 	\item Sustav treba biti implementiran koristeći Angular za frontend i Spring Boot za backend, dok se za bazu podataka koristi Posgresql
+			 	\item Svi vizuali aplikacije moraju biti jednostavni i ugodni oku
+			 	\item Sustav treba biti intuitivan i jednostavan
+			 	\item Pristup sustavu mora biti omogućen iz javne mreže pomoću HTTPS
+			 	\item Veza s bazom podataka mora biti kvalitetno zaštićene, brza i otporna na vanjske greške
+			 	\item Sustav kao valutu za isplatu kartografa koristi EUR
 			 	
 			 \end{packed_item}
 			 
