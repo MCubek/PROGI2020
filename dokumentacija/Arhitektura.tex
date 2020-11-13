@@ -12,7 +12,7 @@
 
 	\textnormal{Na temelju navedenih glavnih značajki i nadalje razrađenih obilježja odlučili smo se arhitekturu sustava bazirati na arhitekturnom stilu model-pogled-upravitelj (\textit{engl. Model-View-Controller, MVC}). Kod MVC stila, korisničko sučelje je odvojeno od ostatka sustava što nam omogućuje raspodjelu u odvojene timove tijekom rada na projektu. Mnogi programski okviri su izrađeni s MVC arhitekturom na umu, što omogućuje brži i jednostavniji razvoj aplikacije. Razinska kohezija elemenata postiže se kroz tri sloja, jednog na strani klijenta koji se naziva pogled (\textit{engl. view}) i dva na poslužiteljskoj strani, koji se nazivaju upravitelj (\textit{engl. controller}) i model (\textit{engl. model}), što nam uz povećanu koheziju i smanjivanje međuovisnosti omogućuje i fleksibilnost. Također smo izabrali ovaj arhitekturni stil zbog njegove mogućnosti jednostavne ponovne uporabe i nadogradnje pojedinačnih dijelova sustava, pošto se dodavanjem novih modela ili pogleda može brzo i jednostavno promijeniti aplikaciju. Time se pozitivno utječe i na planiranje zastare aplikacije, uz korištenje dobro poznatih tehnologija i jezika koji će biti detaljnije razrađeni u nastavku. Podjelom na navedene podsustave pojednostavili smo i testiranje tijekom izrade aplikacije jer se razni dijelovi sustava mogu neovisno testirati. Izborom web aplikacije pobrinuli smo se i za prenosivost, pošto se aplikaciji može pristupiti s velikog broja uređaja putem različitih web preglednika.}\\
 	
-	\textnormal{Negativna karakteristika MVC arhitekture može biti njegova glomaznost u pogledu velike količine datoteka što može usporavati sustav, no to ne smatramo problemom za ovaj projekt pošto je manjeg opsega.}\\
+	\textnormal{Negativna karakteristika MVC arhitekture može biti njezina glomaznost u pogledu velike količine datoteka što može usporiti sustav, no to ne smatramo problemom za ovaj projekt pošto je manjeg opsega.}\\
 	
 	\begin{figure}[H]
 		\centering
@@ -93,7 +93,6 @@
 					
 				\end{longtabu}
 			
-				\textnormal{} \\
 				
 				\textnormal{\textbf{Tokens} \quad Ovaj entitet sadržava sve važne informacije o tokenima koji se koriste za autentifikaciju korisnika. Atributi koje posjeduje su jedinstveni identifikator tokena, njegova vrijednost, datum isticanja te oznaku korisnika kojem pripada. U vezi je \textit{Many-to-One} s entitetom Users preko atributa "user\textunderscore user\textunderscore id".} \\
 			
@@ -309,7 +308,7 @@
 				
 				\begin{figure}[H]
 					\centering
-					\includegraphics[scale=0.41]{slike/ERModel} 
+					\includegraphics[scale=0.45]{slike/ERModel} 
 					\caption{ER dijagram baze podataka}
 					\label{fig:ER}
 				\end{figure}
@@ -356,6 +355,22 @@
 				\includegraphics[scale=0.75]{slike/dtoCD} \\
 				\caption{ DTO razredi i razredi iznimki}
 				\label{fig:dtoCD}
+			\end{figure}
+			
+			\textnormal{Na slijedećim slikama nalaze se razredi koje ćemo tek implementirati. Na slici 4.9 nalaze se budući DTO razredi, dok se na slici 4.10 nalaze budući Service i Controller razredi.}
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.75]{slike/buduciDTO} \\
+				\caption{ Budući DTO razredi}
+				\label{fig:dtoBuduci}
+			\end{figure}
+		
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.75]{slike/buduciControllerService} \\
+				\caption{ Budući Controller i Service razredi}
+				\label{fig:dtoCiS}
 			\end{figure}
 			
 			\eject
