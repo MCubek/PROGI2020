@@ -943,7 +943,7 @@
 				\textnormal{Igrač šalje zahtjev za borbom. Web aplikacija potom dohvaća suparnika. U bazi podataka se provjerava ima li igrač barem 5 karata za borbu dostupnih. Ukoliko igrač nema dovoljno karata za borbu ne može pokrenuti "Traži borbu", web aplikacija izbacuje poruku. Iz baze podataka dohvaća se vlastita kolekcija karata igrača te se prikazuje ekran za odabir 5 karata za borbu. Nakon odabira igrač potvrđuje izabranih (označenih) pet karata i borba započinje bacanjem novčića kako bi se odlučilo kreće li igrač prvi ili ne koje vrši web aplikacija. Nakon odluke, igra se 5 rundi. Igrač koji započinje potez u rundi bira kartu i jedan od tri atributa za tu rundu dok igrač koji kreće drugi izabire samo kartu, a odabir atributa je isti kao od igrača koji je započeo rundu. Nakon što su karta i njen atribut odabrani, gleda se čiji atribut je veći te taj pobjednik pobjeđuje rundu. Poslije 5 odigranih rundi proglašuje se pobjednik i u bazu podataka se spremaju podaci te borbe.}\\
 				\begin{figure}[H]
 					\centering
-					\includegraphics[scale=0.42]{dijagrami/UC 8_ Borba} \\
+					\includegraphics[scale=0.52]{dijagrami/UC8 - Borbaa} \\
 					\caption{Sekvencijski dijagram za UC8}
 					\label{fig:UC8_sekvencijski}
 				\end{figure}
@@ -981,10 +981,11 @@
 			 	\item Dijelovi sustava gdje se koristi baza podataka trebaju biti fluidni i brzi (manje od 1 sekunde)
 			 	\item Sustav treba biti implementiran koristeći Angular za frontend i Spring Boot za backend, dok se za bazu podataka koristi Posgresql
 			 	\item Svi vizuali aplikacije moraju biti jednostavni i ugodni oku
-			 	\item Sustav treba biti intuitivan i jednostavan
+			 	\item Sustav treba biti intuitivan i jednostavan za korištenenje
 			 	\item Pristup sustavu mora biti omogućen iz javne mreže pomoću HTTPS
 			 	\item Veza s bazom podataka mora biti kvalitetno zaštićene, brza i otporna na vanjske greške
 			 	\item Sustav kao valutu za isplatu kartografa koristi EUR
+			 	\item Sustav treba biti siguran, zahtjevati od korisnika da za registraciju koristi određene parametre lozinke
 			 	
 			 \end{packed_item}
 			 
