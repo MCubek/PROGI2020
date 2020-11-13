@@ -940,10 +940,10 @@
 			\subsection{Sekvencijski dijagrami}
 				
 				\subsubsection{Obrazac uporabe UC8 - Borba}
-				\textnormal{Igrač šalje zahtjev za borbom. Web aplikacija potom dohvaća suparnika. U bazi podataka se provjerava ima li igrač barem 5 karata za borbu dostupnih. Ukoliko igrač nema dovoljno karata za borbu ne može pokrenuti "Traži borbu", web aplikacija izbacuje poruku. Iz baze podataka dohvaća se vlastita kolekcija karata igrača te se prikazuje ekran za odabir 5 karata za borbu. Nakon odabira igrač potvrđuje izabranih (označenih) pet karata i borba započinje bacanjem novčića kako bi se odlučilo kreće li igrač prvi ili ne koje vrši web aplikacija. Nakon odluke, igra se 5 rundi. Igrač koji započinje potez u rundi bira kartu i jedan od tri atributa za tu rundu dok igrač koji kreće drugi izabire samo kartu, a odabir atributa je isti kao od igrača koji je započeo rundu. Nakon što su karta i njen atribut odabrani, gleda se čiji atribut je veći te taj pobjednik pobjeđuje rundu. Poslije 5 odigranih rundi proglašuje se pobjednik i u bazu podataka se spremaju podaci te borbe.}\\
+				\textnormal{Igrač šalje zahtjev za borbom. Web aplikacija potom dohvaća suparnika. Borba započinje bacanjem novčića kako bi se odlučilo kreće li igrač prvi. Nakon odluke, igra se 5 rundi. Igrač koji započinje potez u rundi bira kartu i jedan od tri atributa za tu rundu te baca kartu na igraču ploču. Igrač koji kreće drugi izabire samo kartu, a atribut se poštuje te je isti kao od igrača koji je započeo rundu. Nakon što se obje karte nalaze na igračem polju dolazi do odluke koji igrač je pobijedio rundu. Gleda se koja od dvije karte ima veći odabrani atribut. Ukoliko su odabrani atributi jednaki gleda se zbroj drugih dvaju atributa. Karta s većim atributom pobjeđuje rundu. Ukoliko dođe do rijetkog slučaja da su sva tri atributa jednaka dolazi do neriješene runde. Poslije 5 odigranih rundi proglašuje se pobjednik i u bazu podataka se spremaju podaci te borbe.}\\
 				\begin{figure}[H]
 					\centering
-					\includegraphics[scale=0.52]{dijagrami/UC8 - Borbaa} \\
+					\includegraphics[scale=0.52]{dijagrami/UC8 - Borba} \\
 					\caption{Sekvencijski dijagram za UC8}
 					\label{fig:UC8_sekvencijski}
 				\end{figure}
@@ -977,9 +977,7 @@
 			 \begin{packed_item}
 			 	\item Sustav treba omogućiti rad više korisnika u stvarnom vremenu
 			 	\item Korisničko sučelje i sustav moraju podržavati hrvatsku abecedu (dijakritičke znakove) pri unosu i prikazu tekstualnog sadržaja
-			 	\item Sustav mora imati kroz igranje pasivno poticati igrača na kretanje i sakupljanje drugih lokacija (karata)
-			 	\item Dijelovi sustava gdje se koristi baza podataka trebaju biti fluidni i brzi (manje od 1 sekunde)
-			 	\item Sustav treba biti implementiran koristeći Angular za frontend i Spring Boot za backend, dok se za bazu podataka koristi Posgresql
+			 	\item Dijelovi sustava gdje se koristi baza podataka trebaju biti fluidni i brzi
 			 	\item Svi vizuali aplikacije moraju biti jednostavni i ugodni oku
 			 	\item Sustav treba biti intuitivan i jednostavan za korištenenje
 			 	\item Pristup sustavu mora biti omogućen iz javne mreže pomoću HTTPS
