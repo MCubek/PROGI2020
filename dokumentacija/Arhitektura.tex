@@ -206,7 +206,7 @@
 		
 			\textnormal{}
 		
-			\textnormal{\textbf{Location\textunderscore cards} \quad Ovaj entitet sadržava sve važne informacije o karticama lokacije. Atributi koje posjeduje su navedeni u tablici. U vezi je \textit{Many-to-Many-to-Many} s entitetima Fights i Users preko spojne tablice User\textunderscore card\textunderscore fight. Također je u vezi \textit{Many-to-One} s entitetom Users preko atributa accepted\textunderscore by\textunderscore user \textunderscore id i atributa created\textunderscore by\textunderscore user \textunderscore id.} \\
+			\textnormal{\textbf{Location\textunderscore cards} \quad Ovaj entitet sadržava sve važne informacije o karticama lokacije. Atributi koje posjeduje su navedeni u tablici. Važno je istaknuti atribute uncommonness, difficulty i population. Oni će određivati jačinu kartice tijekom borbe. Njihovim izborom postignuta je ravnoteža pri dodjeljivanju jačine kartice jer će lokacije koje su teže dostupne obično imati manju naseljenost. U vezi je \textit{Many-to-Many-to-Many} s entitetima Fights i Users preko spojne tablice User\textunderscore card\textunderscore fight. Također je u vezi \textit{Many-to-One} s entitetom Users preko atributa accepted\textunderscore by\textunderscore user \textunderscore id i atributa created\textunderscore by\textunderscore user \textunderscore id.} \\
 		
 			\begin{longtabu} to \textwidth {|X[6, 4]|X[6, l]|X[20, l]|}
 				
@@ -228,6 +228,9 @@
 				location & BYTEA & stvarna lokacija koju označava kartica lokacije \\ \hline
 				check\textunderscore needed & BOOLEAN & zastavica koja označava potrebu za dodatnom potvrdom kartice lokacije \\ \hline
 				photo & VARCHAR & digitalni zapis fotografije lokacije \\ \hline
+				uncommonness & INT & atribut koji označava rijetkost kartice \\ \hline
+				difficulty & INT & atribut koji označava težinu dostupnosti lokacije \\ \hline
+				population & INT & atribut koji označava naseljenost lokacije \\ \hline
 				\textit{accepted\textunderscore by\textunderscore user \textunderscore id} & INT8 & jedinstveni identifikator kartografa koji je odobrio karticu lokacije (users.user\textunderscore id) \\ \hline
 				\textit{created\textunderscore by\textunderscore user \textunderscore id} & INT8 & jedinstveni identifikator igrača koji je prijavio karticu lokacije (users.user\textunderscore id) \\ \hline				
 				
@@ -307,7 +310,7 @@
 								
 				\begin{figure}[H]
 					\centering
-					\includegraphics[scale=0.6]{slike/GeoFighterModel} 
+					\includegraphics[scale=0.55]{slike/GeoFighterModel} 
 					\caption{ER dijagram baze podataka}
 					\label{fig:ERmodel}
 				\end{figure}				
