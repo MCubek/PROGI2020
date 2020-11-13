@@ -944,17 +944,17 @@
 				\begin{figure}[H]
 					\centering
 					\includegraphics[scale=0.52]{dijagrami/UC8 - Borba} \\
-					\caption{Sekvencijski dijagram za UC8}
+					\caption{Sekvencijski dijagram za UC8 - Borba}
 					\label{fig:UC8_sekvencijski}
 				\end{figure}
 			\eject
 			
-			\subsubsection{Obrazac uporabe UC12.1}
+			\subsubsection{Obrazac uporabe UC12.1 - Uređivanje podataka lokacije}
 			\textnormal{Dijagram prikazuje uređivanje podataka lokacije koje izvodi administrator. On preko web sučelja šalje bazi upit za pregled popisa svih lokacija, a zatim odabire jednu i šalje upit o njenim podacima. Baza vraća podatke o lokaciji i web aplikacija ih prikazuje administratoru u slučaju da netko drugi u međuvremenu nije obrisao lokaciju iz baze. Ako je lokacija izbrisana, web aplikacija ispisuje poruku "Lokacija više ne postoji". Nakon željenih izmjena administrator šalje zahtjev za spremanjem promjena te ako lokacija nije u međuvremenu izbrisana, baza sprema promjene. U suprotnom web aplikacija ispisuje poruku "Lokacija više ne postoji".}\\
 			\begin{figure}[H]
 				\centering
 				\includegraphics[scale=0.52]{dijagrami/UC12.1} \\
-				\caption{Sekvencijski dijagram za UC12.1}
+				\caption{Sekvencijski dijagram za UC12.1 - Uređivanje podataka lokacije}
 				\label{fig:UC12.1_sekvencijski}
 			\end{figure}
 		\eject
@@ -979,12 +979,10 @@
 			 	\item Korisničko sučelje i sustav moraju podržavati hrvatsku abecedu (dijakritičke znakove) pri unosu i prikazu tekstualnog sadržaja
 			 	\item Dijelovi sustava gdje se koristi baza podataka trebaju biti fluidni i brzi
 			 	\item Svi vizuali aplikacije moraju biti jednostavni i ugodni oku
-			 	\item Sustav treba biti intuitivan i jednostavan za korištenenje
+			 	\item Sustav treba biti intuitivan i jednostavan
 			 	\item Pristup sustavu mora biti omogućen iz javne mreže pomoću HTTPS
-			 	\item Veza s bazom podataka mora biti kvalitetno zaštićene, brza i otporna na vanjske greške
-			 	\item Sustav kao valutu za isplatu kartografa koristi EUR
-			 	\item Sustav treba biti siguran, zahtjevati od korisnika da za registraciju koristi određene parametre lozinke
-			 	
+			 	\item Veza s bazom podataka mora biti kvalitetno zaštićena, brza i otporna na vanjske greške
+
 			 \end{packed_item}
 			 
 			 
