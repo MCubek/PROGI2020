@@ -18,7 +18,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Privileges")
+@Table(name = "Privileges", uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
 public class Privilege {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
