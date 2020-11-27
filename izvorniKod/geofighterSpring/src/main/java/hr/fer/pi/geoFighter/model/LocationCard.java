@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.net.URL;
 import java.time.Instant;
 import java.util.Collection;
 
@@ -31,9 +32,7 @@ public class LocationCard {
     @Size(max = 4000)
     private String description;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    private byte[] photo;
+    private URL photoURL;
 
     @Column(name = "created_at")
     private final Instant createdDate = Instant.now();
@@ -65,4 +64,8 @@ public class LocationCard {
 
     @OneToMany(mappedBy = "locationCard")
     private Collection<UserCardFight> userFightAssoc;
+
+    private Integer uncommonness;
+    private Integer difficulty;
+    private Integer population;
 }
