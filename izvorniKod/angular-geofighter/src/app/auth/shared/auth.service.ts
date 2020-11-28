@@ -9,7 +9,6 @@ import {LoginResponsePayload} from '../login/login-response.payload';
 import {environment} from '../../../environments/environment';
 import {SignupCartographerRequestPayload} from '../../cartographer/signup-cartographer/signup-cartographer-request-payload';
 import {ToastrService} from 'ngx-toastr';
-import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -56,14 +55,16 @@ export class AuthService {
 
   // tslint:disable-next-line:typedef
   refreshToken() {
-    return this.httpClient.post<LoginResponsePayload>(`${environment.apiUrl}api/auth/refresh/token`, this.refreshTokenPayload)
+    return this.httpClient.post<LoginResponsePayload>(`${environment.apiUrl}api/auth/refresh`, this.refreshTokenPayload)
       .pipe(tap(response => {
         this.localStorage.clear('authorizationToken');
         this.localStorage.clear('expiresAt');
+        this.localStorage.clear('role');
 
         this.localStorage.store('authorizationToken',
           response.authorizationToken);
         this.localStorage.store('expiresAt', response.expiresAt);
+        this.localStorage.store('role', response.role);
       }));
   }
 

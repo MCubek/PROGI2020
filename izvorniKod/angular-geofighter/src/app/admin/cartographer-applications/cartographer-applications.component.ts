@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CartographerApplicantModel} from './cartographer-applicant.model';
+import {AdminService} from '../admin.service';
+import {throwError} from 'rxjs';
 
 @Component({
   selector: 'app-cartographer-applications',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartographerApplicationsComponent implements OnInit {
 
-  constructor() { }
+  applicants: Array<CartographerApplicantModel>;
+
+  constructor(private adminService: AdminService) {
+  }
 
   ngOnInit(): void {
+    this.adminService.getAllCartographerApplications().subscribe(data => {
+      this.applicants = data;
+    }, error => {
+      throwError(error);
+    });
+  }
+
+  accept(username: string): void {
+    this.adminService.acceptCartographer(username).subscribe(data => {
+    }, error => {
+      throwError(error);
+    });
+    window.location.reload();
   }
 
 }
