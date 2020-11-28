@@ -18,6 +18,7 @@ export class AuthService {
 
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
   @Output() username: EventEmitter<string> = new EventEmitter();
+  @Output() role: EventEmitter<string> = new EventEmitter();
 
   refreshTokenPayload = {
     refreshToken: this.getRefreshToken(),
@@ -39,9 +40,11 @@ export class AuthService {
         this.localStorage.store('username', data.username);
         this.localStorage.store('refreshToken', data.refreshToken);
         this.localStorage.store('expiresAt', data.expiresAt);
+        this.localStorage.store('role', data.role);
 
         this.loggedIn.emit(true);
         this.username.emit(data.username);
+        this.role.emit(data.role);
 
         return true;
       }));
@@ -78,6 +81,7 @@ export class AuthService {
     this.localStorage.clear('username');
     this.localStorage.clear('refreshToken');
     this.localStorage.clear('expiresAt');
+    this.localStorage.clear('role');
   }
 
   cartographerSignup(signupCartographerRequestPayload: SignupCartographerRequestPayload): Observable<any> {
@@ -95,5 +99,9 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return this.getJwtToken() != null;
+  }
+
+  getRole(): string {
+    return this.localStorage.retrieve('role');
   }
 }

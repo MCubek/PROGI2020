@@ -3,4 +3,5 @@ export interface LoginResponsePayload {
   refreshToken: string;
   expiresAt: Date;
   username: string;
+  role: string;
 }
