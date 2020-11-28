@@ -8,6 +8,7 @@ import hr.fer.pi.geoFighter.repository.PrivilegeRepository;
 import hr.fer.pi.geoFighter.repository.RoleRepository;
 import hr.fer.pi.geoFighter.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +23,9 @@ import java.util.Collections;
 @Component
 @RequiredArgsConstructor
 public class SetupDataLoader implements ApplicationListener<ContextRefreshedEvent> {
+
+    @Value("${server.developer.address}")
+    private String address;
 
     boolean alreadySetup;
 
@@ -47,7 +51,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         createRoleIfNotFound("ROLE_CARTOGRAPHER", Arrays.asList(userPrivilege, cartographerPrivilege));
         createRoleIfNotFound("ROLE_ADMIN", Arrays.asList(userPrivilege, cartographerPrivilege, adminPrivilege));
 
-        createTestAdminIfNotFound();
+        if (address.equals("http://localhost:8080/")) {
+            createDefaultUsersIfNotFound();
+        }
 
         alreadySetup = true;
     }
@@ -78,16 +84,39 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     }
 
     @Transactional
-    void createTestAdminIfNotFound() {
-        if (userRepository.findByUsername("admin").isPresent()) return;
-
+    void createDefaultUsersIfNotFound() {
         User user = new User();
-        user.setUsername("admin");
-        user.setEmail("admin@admin.com");
-        user.setPassword(passwordEncoder.encode("admin"));
-        user.setRole(roleRepository.findByName("ROLE_ADMIN").orElseThrow(() -> new SpringGeoFighterException("ADMIN role not in database")));
-        user.setEnabled(true);
+        if (userRepository.findByUsername("admin").isEmpty()) {
+            user.setUsername("admin");
+            user.setEmail("admin@admin.com");
+            user.setPassword(passwordEncoder.encode("admin"));
+            user.setRole(roleRepository.findByName("ROLE_ADMIN").orElseThrow(() -> new SpringGeoFighterException("ADMIN role not in database")));
+            user.setEnabled(true);
 
-        userRepository.save(user);
+            userRepository.save(user);
+        }
+
+        if (userRepository.findByUsername("user").isEmpty()) {
+            user = new User();
+            user.setUsername("user");
+            user.setEmail("user@user.com");
+            user.setPassword(passwordEncoder.encode("user"));
+            user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("ADMIN role not in database")));
+            user.setEnabled(true);
+
+            userRepository.save(user);
+        }
+
+
+        if (userRepository.findByUsername("card").isEmpty()) {
+            user = new User();
+            user.setUsername("card");
+            user.setEmail("card@card.com");
+            user.setPassword(passwordEncoder.encode("card"));
+            user.setRole(roleRepository.findByName("ROLE_CARTOGRAPHER").orElseThrow(() -> new SpringGeoFighterException("ADMIN role not in database")));
+            user.setEnabled(true);
+
+            userRepository.save(user);
+        }
     }
 }
