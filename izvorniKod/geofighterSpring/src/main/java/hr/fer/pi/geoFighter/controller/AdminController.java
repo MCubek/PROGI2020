@@ -22,7 +22,7 @@ public class AdminController {
         return new ResponseEntity<>(adminService.getCartographerApplications(), OK);
     }
 
-    @PostMapping("/cartographerApplications/accept/{username}")
+    @PutMapping("/cartographerApplications/accept/{username}")
     public ResponseEntity<String> acceptCartographerApplication(@PathVariable String username) {
         adminService.acceptCartographerApplication(username);
         return new ResponseEntity<>("Cartographer application accepted", OK);
