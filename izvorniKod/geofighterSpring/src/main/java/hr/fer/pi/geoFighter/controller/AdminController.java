@@ -3,11 +3,11 @@ package hr.fer.pi.geoFighter.controller;
 import hr.fer.pi.geoFighter.service.AdminService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import static org.springframework.http.HttpStatus.OK;
 
 import java.util.Collection;
+
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -16,14 +16,14 @@ public class AdminController {
 
     private final AdminService adminService;
 
-    @GetMapping("/cartographerApplies")
-    public Collection<String> getCartographerApplies() {
-        return adminService.getCartographerApplies();
+    @GetMapping("/cartographerApplications")
+    public Collection<String> getCartographerApplications() {
+        return adminService.getCartographerApplications();
     }
 
-    @PostMapping("/cartographerApplies/accept/{username}")
-    public ResponseEntity<String> acceptCartographerApply(@PathVariable String username) {
-        adminService.acceptCartographerApply(username);
-        return new ResponseEntity("Cartographer apply accepted", OK);
+    @PostMapping("/cartographerApplications/accept/{username}")
+    public ResponseEntity<String> acceptCartographerApplication(@PathVariable String username) {
+        adminService.acceptCartographerApplication(username);
+        return new ResponseEntity<>("Cartographer application accepted", OK);
     }
 }
