@@ -19,7 +19,7 @@
             {{username}}
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Cartographer Applications</a>
+            <a *ngIf="role==='ROLE_ADMIN'" class="dropdown-item" href="#">Cartographer Applications</a>
             <a class="dropdown-item" href="/login" (click)="logout()">Logout</a>
           </div>
         </li>
