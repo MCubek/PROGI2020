@@ -1,5 +1,6 @@
 package hr.fer.pi.geoFighter.controller;
 
+import hr.fer.pi.geoFighter.dto.CartographerUserDTO;
 import hr.fer.pi.geoFighter.service.AdminService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class AdminController {
     private final AdminService adminService;
 
     @GetMapping("/cartographerApplications")
-    public ResponseEntity<List<String>> getCartographerApplications() {
+    public ResponseEntity<List<CartographerUserDTO>> getCartographerApplications() {
         return new ResponseEntity<>(adminService.getCartographerApplications(), OK);
     }
 
