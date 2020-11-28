@@ -1,5 +1,6 @@
 package hr.fer.pi.geoFighter.repository;
 
+import hr.fer.pi.geoFighter.model.CartographerStatus;
 import hr.fer.pi.geoFighter.model.Role;
 import hr.fer.pi.geoFighter.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,4 +18,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Collection<User> findUsersByRole(Role role);
 
     Collection<User> findUsersByCurrentLocationIsNotNull();
+
+    Collection<User> findUsersByCartographerStatus(CartographerStatus status);
 }

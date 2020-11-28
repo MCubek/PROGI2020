@@ -136,6 +136,7 @@ public class AuthService {
                 .refreshToken(refreshingTokenService.generateRefreshToken().getToken())
                 .expiresAt(Instant.now().plusMillis(jwtProvider.getJwtExpirationInMillis()))
                 .username(loginRequest.getUsername())
+                .role(getCurrentUser().getRole().getName())
                 .build();
     }
 
