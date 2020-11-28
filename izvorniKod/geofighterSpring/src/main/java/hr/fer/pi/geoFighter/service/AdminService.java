@@ -38,6 +38,9 @@ public class AdminService {
         User user = userRepository.findByUsername(username).orElseThrow(
                 () -> new SpringGeoFighterException("User does not exist"));
 
+        if(user.getCartographerStatus()!=CartographerStatus.APPLIED)
+            throw new SpringGeoFighterException("User has not applied!");
+
         user.setCartographerStatus(CartographerStatus.APPROVED);
 
         Role userRole = roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("Can't find role!"));
