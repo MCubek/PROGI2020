@@ -80,22 +80,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-/*    @Bean
-    public WebMvcConfigurer CORSConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins("*")
-                        .allowedHeaders("*")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD")
-                        .exposedHeaders("Authorization")
-                        .maxAge(- 1)   // add maxAge
-                        .allowCredentials(true);
-            }
-        };
-    }*/
-
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source =
