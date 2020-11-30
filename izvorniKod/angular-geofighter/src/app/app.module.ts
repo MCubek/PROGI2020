@@ -14,6 +14,7 @@ import {ToastrModule} from 'ngx-toastr';
 import { HomeComponent } from './home/home.component';
 import { SignupCartographerComponent } from './cartographer/signup-cartographer/signup-cartographer.component';
 import {TokenInterceptor} from './token-interceptor';
+import { CartographerApplicationsComponent } from './admin/cartographer-applications/cartographer-applications.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {TokenInterceptor} from './token-interceptor';
     SignupComponent,
     LoginComponent,
     HomeComponent,
-    SignupCartographerComponent
+    SignupCartographerComponent,
+    CartographerApplicationsComponent
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,6 @@ import {LoginResponsePayload} from '../login/login-response.payload';
 import {environment} from '../../../environments/environment';
 import {SignupCartographerRequestPayload} from '../../cartographer/signup-cartographer/signup-cartographer-request-payload';
 import {ToastrService} from 'ngx-toastr';
-import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +17,7 @@ export class AuthService {
 
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
   @Output() username: EventEmitter<string> = new EventEmitter();
+  @Output() role: EventEmitter<string> = new EventEmitter();
 
   refreshTokenPayload = {
     refreshToken: this.getRefreshToken(),
@@ -39,9 +39,11 @@ export class AuthService {
         this.localStorage.store('username', data.username);
         this.localStorage.store('refreshToken', data.refreshToken);
         this.localStorage.store('expiresAt', data.expiresAt);
+        this.localStorage.store('role', data.role);
 
         this.loggedIn.emit(true);
         this.username.emit(data.username);
+        this.role.emit(data.role);
 
         return true;
       }));
@@ -53,14 +55,16 @@ export class AuthService {
 
   // tslint:disable-next-line:typedef
   refreshToken() {
-    return this.httpClient.post<LoginResponsePayload>(`${environment.apiUrl}api/auth/refresh/token`, this.refreshTokenPayload)
+    return this.httpClient.post<LoginResponsePayload>(`${environment.apiUrl}api/auth/refresh`, this.refreshTokenPayload)
       .pipe(tap(response => {
         this.localStorage.clear('authorizationToken');
         this.localStorage.clear('expiresAt');
+        this.localStorage.clear('role');
 
         this.localStorage.store('authorizationToken',
           response.authorizationToken);
         this.localStorage.store('expiresAt', response.expiresAt);
+        this.localStorage.store('role', response.role);
       }));
   }
 
@@ -78,6 +82,7 @@ export class AuthService {
     this.localStorage.clear('username');
     this.localStorage.clear('refreshToken');
     this.localStorage.clear('expiresAt');
+    this.localStorage.clear('role');
   }
 
   cartographerSignup(signupCartographerRequestPayload: SignupCartographerRequestPayload): Observable<any> {
@@ -95,5 +100,9 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return this.getJwtToken() != null;
+  }
+
+  getRole(): string {
+    return this.localStorage.retrieve('role');
   }
 }
