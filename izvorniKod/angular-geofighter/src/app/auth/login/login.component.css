@@ -1,0 +1,41 @@
+ .login-section{
+  margin: 100px;
+}
+
+.login-failed, .register-success{
+  text-align: center;
+  margin: auto;
+  margin-top: 10px;
+  border: 2px solid black;
+  width: 65%;
+  background-color: red;
+}
+
+.login-failed-text, .register-success-text{
+  text-align: center;
+  margin-top: 5px;
+  font-weight: bold;
+  color: aliceblue;
+} 
+
+.btn-login{
+  font-size: 0.8rem;
+    letter-spacing: 0.05rem;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+}
+
+.card-radius{
+  border-radius: 1.3rem;
+}
+
+.card-header-radius{
+  border-top-left-radius: 1.3rem;
+  border-top-right-radius: 1.3rem;
+}
+
+.input-radius{
+  border-radius: 0.9rem;
+}
+
+
