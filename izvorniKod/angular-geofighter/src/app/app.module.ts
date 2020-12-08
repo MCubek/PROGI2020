@@ -15,6 +15,8 @@ import { HomeComponent } from './home/home.component';
 import { SignupCartographerComponent } from './cartographer/signup-cartographer/signup-cartographer.component';
 import {TokenInterceptor} from './token-interceptor';
 import { CartographerApplicationsComponent } from './admin/cartographer-applications/cartographer-applications.component';
+import { TestMapComponent } from './test-map/test-map.component';
+import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { CartographerApplicationsComponent } from './admin/cartographer-applicat
     LoginComponent,
     HomeComponent,
     SignupCartographerComponent,
-    CartographerApplicationsComponent
+    CartographerApplicationsComponent,
+    TestMapComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,8 @@ import { CartographerApplicationsComponent } from './admin/cartographer-applicat
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    LeafletModule
   ],
   providers: [
     {
