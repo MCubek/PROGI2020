@@ -16,7 +16,6 @@ import { SignupCartographerComponent } from './cartographer/signup-cartographer/
 import {TokenInterceptor} from './token-interceptor';
 import { CartographerApplicationsComponent } from './admin/cartographer-applications/cartographer-applications.component';
 import { TestMapComponent } from './test-map/test-map.component';
-import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   declarations: [
@@ -37,7 +36,6 @@ import {LeafletModule} from '@asymmetrik/ngx-leaflet';
     NgxWebstorageModule.forRoot(),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    LeafletModule
   ],
   providers: [
     {
