@@ -1,10 +1,12 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 
-import { icon } from 'leaflet';
+import {icon} from 'leaflet';
+
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
 import 'leaflet-routing-machine';
+import 'leaflet.locatecontrol';
 
 declare const L;
 
@@ -35,6 +37,8 @@ export class TestMapComponent implements OnInit, AfterViewInit {
     });
 
     L.Marker.prototype.options.icon = iconDefault;
+
+    L.control.locate().addTo(this.map);
   }
 
   drawPath(): void {
