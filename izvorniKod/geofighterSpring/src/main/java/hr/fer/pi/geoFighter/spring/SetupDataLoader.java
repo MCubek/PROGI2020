@@ -1,6 +1,7 @@
 package hr.fer.pi.geoFighter.spring;
 
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
+import hr.fer.pi.geoFighter.model.CartographerStatus;
 import hr.fer.pi.geoFighter.model.Privilege;
 import hr.fer.pi.geoFighter.model.Role;
 import hr.fer.pi.geoFighter.model.User;
@@ -85,8 +86,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     @Transactional
     void createDefaultUsersIfNotFound() {
-        User user = new User();
+        User user;
         if (userRepository.findByUsername("admin").isEmpty()) {
+            user = new User();
             user.setUsername("admin");
             user.setEmail("admin@admin.com");
             user.setPassword(passwordEncoder.encode("admin"));
@@ -101,7 +103,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             user.setUsername("user");
             user.setEmail("user@user.com");
             user.setPassword(passwordEncoder.encode("user"));
-            user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("ADMIN role not in database")));
+            user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("USER role not in database")));
             user.setEnabled(true);
 
             userRepository.save(user);
@@ -113,8 +115,73 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             user.setUsername("card");
             user.setEmail("card@card.com");
             user.setPassword(passwordEncoder.encode("card"));
-            user.setRole(roleRepository.findByName("ROLE_CARTOGRAPHER").orElseThrow(() -> new SpringGeoFighterException("ADMIN role not in database")));
+            user.setRole(roleRepository.findByName("ROLE_CARTOGRAPHER").orElseThrow(() -> new SpringGeoFighterException("CARTOGRAPHER role not in database")));
             user.setEnabled(true);
+
+            userRepository.save(user);
+        }
+
+        if (userRepository.findByUsername("userA").isEmpty()) {
+            user = new User();
+            user.setUsername("userA");
+            user.setEmail("usera@usera.com");
+            user.setPassword(passwordEncoder.encode("userA"));
+            user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("USER role not in database")));
+            user.setEloScore(1234);
+            user.setWins(32);
+            user.setLosses(24);
+            user.setEnabled(true);
+
+            userRepository.save(user);
+        }
+
+        if (userRepository.findByUsername("userB").isEmpty()) {
+            user = new User();
+            user.setUsername("userB");
+            user.setEmail("userb@userb.com");
+            user.setPassword(passwordEncoder.encode("userB"));
+            user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("USER role not in database")));
+            user.setEloScore(123);
+            user.setWins(15);
+            user.setLosses(16);
+            user.setEnabled(true);
+
+            userRepository.save(user);
+        }
+
+        if (userRepository.findByUsername("userC").isEmpty()) {
+            user = new User();
+            user.setUsername("userC");
+            user.setEmail("userc@userc.com");
+            user.setPassword(passwordEncoder.encode("userC"));
+            user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("USER role not in database")));
+            user.setEloScore(132);
+            user.setWins(17);
+            user.setLosses(15);
+            user.setEnabled(true);
+
+            userRepository.save(user);
+        }
+
+        if (userRepository.findByUsername("nepotvrdeni").isEmpty()) {
+            user = new User();
+            user.setUsername("nepotvrdeni");
+            user.setEmail("nepotvrdeni@nepotvrdeni.com");
+            user.setPassword(passwordEncoder.encode("nepotvrdeni"));
+            user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("USER role not in database")));
+            user.setEnabled(false);
+
+            userRepository.save(user);
+        }
+
+        if (userRepository.findByUsername("applied").isEmpty()) {
+            user = new User();
+            user.setUsername("applied");
+            user.setEmail("applied@applied.com");
+            user.setPassword(passwordEncoder.encode("applied"));
+            user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("USER role not in database")));
+            user.setEnabled(true);
+            user.setCartographerStatus(CartographerStatus.APPLIED);
 
             userRepository.save(user);
         }
