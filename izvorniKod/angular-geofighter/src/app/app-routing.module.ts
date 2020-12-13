@@ -7,6 +7,7 @@ import {AuthGuard} from './auth/auth.guard';
 import {SignupCartographerComponent} from './cartographer/signup-cartographer/signup-cartographer.component';
 import {CartographerApplicationsComponent} from './admin/cartographer-applications/cartographer-applications.component';
 import {AdminGuard} from './admin/admin.guard';
+import {UserListComponent} from './admin/user-list/user-list.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'cartographerApply', component: SignupCartographerComponent, canActivate: [AuthGuard]},
   {path: 'cartographerApplications', component: CartographerApplicationsComponent, canActivate: [AuthGuard, AdminGuard]},
+  {path: 'userList', component: UserListComponent, canActivate: [AuthGuard, AdminGuard]},
   {path: '**', redirectTo: ''}
 ];
 
