@@ -11,6 +11,7 @@ import hr.fer.pi.geoFighter.repository.RoleRepository;
 import hr.fer.pi.geoFighter.repository.UserRepository;
 import hr.fer.pi.geoFighter.repository.VerificationTokenRepository;
 import hr.fer.pi.geoFighter.security.JwtProvider;
+import hr.fer.pi.geoFighter.util.ImageValidateUtility;
 import lombok.AllArgsConstructor;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -61,6 +62,15 @@ public class AuthService {
         if (! urlValidator.isValid(registerRequest.getPhotoURL()))
             throw new UserInfoInvalidException("Invalid photo URL");
 
+        URL url;
+        try {
+            url = new URL(registerRequest.getPhotoURL());
+        } catch (MalformedURLException e) {
+            throw new SpringGeoFighterException("Image URL error");
+        }
+
+        ImageValidateUtility.validateImage(url);
+
         try {
             user.setPhotoURL(new URL(registerRequest.getPhotoURL()));
         } catch (MalformedURLException e) {
@@ -94,11 +104,17 @@ public class AuthService {
         if (! urlValidator.isValid(registerRequest.getIdPhotoURL()))
             throw new UserInfoInvalidException("Invalid photo URL");
 
+        URL url;
         try {
-            user.setIdCardPhotoURL(new URL(registerRequest.getIdPhotoURL()));
+            url = new URL(registerRequest.getIdPhotoURL());
         } catch (MalformedURLException e) {
             throw new SpringGeoFighterException("Image URL error");
         }
+
+        ImageValidateUtility.validateImage(url);
+
+        user.setIdCardPhotoURL(url);
+
     }
 
     private String generateVerificationToken(User user) {
