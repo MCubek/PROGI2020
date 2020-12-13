@@ -71,11 +71,8 @@ public class AuthService {
 
         ImageValidateUtility.validateImage(url);
 
-        try {
-            user.setPhotoURL(new URL(registerRequest.getPhotoURL()));
-        } catch (MalformedURLException e) {
-            throw new SpringGeoFighterException("Image URL error");
-        }
+        user.setPhotoURL(url);
+
         userRepository.save(user);
 
         String token = generateVerificationToken(user);
