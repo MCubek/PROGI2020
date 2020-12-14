@@ -3,6 +3,7 @@ package hr.fer.pi.geoFighter.service;
 import hr.fer.pi.geoFighter.dto.CardDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.exceptions.UserInfoInvalidException;
+import hr.fer.pi.geoFighter.model.CartographerStatus;
 import hr.fer.pi.geoFighter.model.LocationCard;
 import hr.fer.pi.geoFighter.model.User;
 import hr.fer.pi.geoFighter.model.UserCard;
@@ -25,6 +26,27 @@ public class CardService {
     private final UrlValidator urlValidator = new UrlValidator(new String[]{"http", "https"});
     private final LocationCardRepository locationCardRepository;
     private final UserRepository userRepository;
+
+
+    public List<CardDTO> getAllCards() {
+        List<CardDTO> cardCollection = new ArrayList<>();
+
+        for (User user : userRepository.findUsersByCartographerStatus(CartographerStatus.APPROVED)) {
+            for (LocationCard locationCard : locationCardRepository.getLocationCardsByAcceptedBy(user)) {
+                CardDTO cardDTO = new CardDTO();
+                cardDTO.setId(locationCard.getId());
+                cardDTO.setName(locationCard.getName());
+                cardDTO.setDescription(locationCard.getDescription());
+                cardDTO.setPhotoUrl(locationCard.getPhotoURL());
+                cardDTO.setLocation(locationCard.getLocation());
+                cardDTO.setCreatedBy(locationCard.getCreatedBy());
+                cardCollection.add(cardDTO);
+            }
+        }
+        //locationCardRepository.findAll() ??
+
+        return cardCollection;
+    }
 
     public List<CardDTO> getCardCollection(String username) {
         List<CardDTO> cardCollection = new ArrayList<>();
