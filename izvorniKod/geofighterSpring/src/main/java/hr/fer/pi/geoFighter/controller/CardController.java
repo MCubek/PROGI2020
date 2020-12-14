@@ -29,9 +29,9 @@ public class CardController {
     }
 
     //PRIJAVA KARTE
-    @PutMapping("/{username}/apply/{name}")
-    public ResponseEntity<String> applyNewLocationCard(@PathVariable String username, @PathVariable String name) {
-        cardService.applyNewLocationCard(username, name);
+    @PostMapping("/applyCard")
+    public ResponseEntity<String> applyLocationCard(@RequestBody CardDTO cardDTO) {
+        cardService.applyLocationCard(cardDTO);
         return new ResponseEntity<>("Card applied for review", OK);
     }
 
