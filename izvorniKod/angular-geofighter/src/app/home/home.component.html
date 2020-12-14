@@ -1,5 +1,53 @@
 <div class="geofighter-body">
-  <div class="container">
-    HOMEPAGE HERE
-  </div>
+    <div class="wrapper d-flex align-items-stretch">
+      <nav id="sidebar" class="active">
+        <ul class="list-unstyled components mb-5">
+          <li class="active">
+            <a href="#">
+              <img  class="logo-icon" src="assets/images/user.png">
+              <span></span> User
+            </a>
+          </li>
+          <li >
+            <a href="#">
+              <img  class="logo-icon" src="assets/images/battle.png">
+              <span></span> Battle
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img  class="logo-icon" src="assets/images/leaderboard.png">
+              <span></span> Leaderboard
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img  class="logo-icon" src="assets/images/add_location.png">
+              <span></span> Add new location
+            </a>
+          </li>
+          <li *ngIf="role==='ROLE_CARTOGRAPHER'">
+            <a href="#">
+              <img  class="logo-icon" src="assets/images/card_applications.png">
+              <span></span> Card applications
+            </a>
+          </li>
+          <li *ngIf="role==='ROLE_ADMIN'">
+            <a href="#">
+              <img  class="logo-icon" src="assets/images/people.png">
+              <span></span> All users
+            </a>
+          </li>
+          <li *ngIf="role==='ROLE_ADMIN'">
+            <a href="#">
+              <img  class="logo-icon" src="assets/images/cards.png">
+              <span></span> All cards
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div id="content" class="p-4 p-md-5">
+        <h3>Welcome to Geofighter, {{username}}!</h3>
+      </div>
+    </div>
 </div>
