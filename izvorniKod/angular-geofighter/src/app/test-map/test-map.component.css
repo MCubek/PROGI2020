@@ -11,15 +11,3 @@
 #map {
   height: 60vh;
 }
-
-.leaflet-control-locate a {
-  background-image: url("../../assets/images/locate.png");
-}
-
-.leaflet-control-locate.requesting a {
-  background-image: url("../../assets/images/spinner.gif");
-}
-
-.leaflet-control-locate.active a {
-  background-image: url("../../assets/images/locate_active.png");
-}

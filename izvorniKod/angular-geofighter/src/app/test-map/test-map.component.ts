@@ -38,7 +38,8 @@ export class TestMapComponent implements OnInit, AfterViewInit {
 
     L.Marker.prototype.options.icon = iconDefault;
 
-    L.control.locate().addTo(this.map);
+    L.control.locate(
+    ).addTo(this.map);
   }
 
   drawPath(): void {
