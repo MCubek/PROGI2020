@@ -5,6 +5,7 @@ import hr.fer.pi.geoFighter.model.Role;
 import hr.fer.pi.geoFighter.model.User;
 import hr.fer.pi.geoFighter.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -59,5 +61,36 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority(privilege));
         }
         return authorities;
+    }
+
+    @Transactional
+    public void calculateEloScore(Long winnerId, Long loserId, int draw){
+        //flag za draw
+        User winner = getUser(winnerId);
+        User loser = getUser(loserId);
+
+        float score1;
+        float score2;
+        int K = 40;
+        float expectancyA = 1 / (1 + (float) Math.pow(10.0, (winner.getEloScore() - loser.getEloScore()) / 400f));
+        float expectancyB = 1 - expectancyA;
+
+        if (draw == 0) {
+            //calculating score in case of draw
+            score1 = winner.getEloScore() + K * (0.5f - expectancyA);
+            score2 = winner.getEloScore() + K * (0.5f - expectancyB);
+        } else {
+            //calculating score in case of win/lose
+            score1 = winner.getEloScore() + K * (1 - expectancyA);
+            score2 = loser.getEloScore() - K * expectancyB;
+        }
+
+        winner.setEloScore(Math.round(score1));
+        loser.setEloScore(Math.round(score2));
+    }
+
+    private User getUser(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("User with id %s not found", userId)));
     }
 }
