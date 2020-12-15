@@ -16,6 +16,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -96,5 +97,22 @@ public class CardService {
 
         //?
         locationCardRepository.save(locationCard);
+    }
+
+    public List<CardDTO> getCardCollection() {
+        return locationCardRepository.findAll().stream()
+                .map(lc -> CardDTO.builder()
+                        .id(lc.getId())
+                        .name(lc.getName())
+                        .description(lc.getDescription())
+                        .photoUrl(lc.getPhotoURL())
+                        .location(lc.getLocation())
+                        .createdBy(lc.getCreatedBy())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    public void deleteLocationCard(long locationCardId) {
+        locationCardRepository.deleteById(locationCardId);
     }
 }

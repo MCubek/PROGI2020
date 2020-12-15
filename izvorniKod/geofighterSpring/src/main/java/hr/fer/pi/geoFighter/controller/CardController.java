@@ -22,10 +22,21 @@ public class CardController {
         return new ResponseEntity<>(cardService.getCardCollection(username), OK);
     }
 
+    @GetMapping("/cardCollection")
+    public ResponseEntity<List<CardDTO>> getCardCollection() {
+        return new ResponseEntity<>(cardService.getCardCollection(), OK);
+    }
+
     @GetMapping("/{locationCardId}")
     public ResponseEntity<CardDTO> getLocationCard(@PathVariable long locationCardId) {
         cardService.getLocationCard(locationCardId);
         return new ResponseEntity<>(cardService.getLocationCard(locationCardId), OK);
+    }
+
+    @DeleteMapping("/{locationCardId}")
+    public ResponseEntity<Void> deleteLocationCard(@PathVariable long locationCardId) {
+        cardService.deleteLocationCard(locationCardId);
+        return ResponseEntity.noContent().build();
     }
 
     //PRIJAVA KARTE
