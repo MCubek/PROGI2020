@@ -1,0 +1,96 @@
+<div class="register-section">
+  <div class="row justify-content-center">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <div class="card font card-radius">
+        <div class="card-header card-header-radius" style="text-align: center">
+          <h4>Apply card for review</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="applyCardForm" (ngSubmit)="applyCard()">
+            <div class="form-group row">
+              <label for="name" class="col-md-4 col-form-label text-md-right"
+                >Name</label
+              >
+              <div class="col-md-6">
+                <input
+                  type="text"
+                  [formControlName]="'name'"
+                  id="name"
+                  class="form-control input-radius"
+                  name="name"
+                  required
+                  autofocus
+                />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right"
+                >Description</label
+              >
+              <div class="col-md-6">
+                <input
+                  type="text"
+                  [formControlName]="'description'"
+                  class="form-control input-radius"
+                  required
+                  autofocus
+                />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label
+                for="photoUrl"
+                class="col-md-4 col-form-label text-md-right"
+                >Photo URL</label
+              >
+              <div class="col-md-6">
+                <input
+                  type="url"
+                  [formControlName]="'photoUrl'"
+                  id="photoUrl"
+                  class="form-control input-radius"
+                  name="photoUrl"
+                  required
+                />
+                <span
+                  *ngIf="
+                    !applyCardForm.get('photoUrl').valid &&
+                    applyCardForm.get('photoUrl').touched
+                  "
+                >
+                  Please provide a valid URL
+                </span>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label
+                for="location"
+                class="col-md-4 col-form-label text-md-right"
+                >Location</label
+              >
+              <div class="col-md-6">
+                <input
+                  type="text"
+                  [formControlName]="'location'"
+                  id="location"
+                  class="form-control input-radius"
+                  name="location"
+                  required
+                />
+              </div>
+            </div>
+
+            <span class="col-md-6 offset-md-4">
+              <button type="submit" class="apply-card btn">Apply</button>
+            </span>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>

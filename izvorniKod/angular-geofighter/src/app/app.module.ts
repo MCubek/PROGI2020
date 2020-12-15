@@ -5,16 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SignupComponent } from './auth/signup/signup.component';
-import {ReactiveFormsModule} from '@angular/forms';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './auth/login/login.component';
-import {NgxWebstorageModule} from 'ngx-webstorage';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ToastrModule} from 'ngx-toastr';
+import { NgxWebstorageModule } from 'ngx-webstorage';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { HomeComponent } from './home/home.component';
 import { SignupCartographerComponent } from './cartographer/signup-cartographer/signup-cartographer.component';
-import {TokenInterceptor} from './token-interceptor';
+import { TokenInterceptor } from './token-interceptor';
 import { CartographerApplicationsComponent } from './admin/cartographer-applications/cartographer-applications.component';
+import { CollectionComponent } from './card/collection/collection.component';
+import { SingleCardComponent } from './card/single-card/single-card.component';
+import { ApplyCardComponent } from './card/apply-card/apply-card.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { CartographerApplicationsComponent } from './admin/cartographer-applicat
     LoginComponent,
     HomeComponent,
     SignupCartographerComponent,
-    CartographerApplicationsComponent
+    CartographerApplicationsComponent,
+    CollectionComponent,
+    SingleCardComponent,
+    ApplyCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,15 +39,15 @@ import { CartographerApplicationsComponent } from './admin/cartographer-applicat
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

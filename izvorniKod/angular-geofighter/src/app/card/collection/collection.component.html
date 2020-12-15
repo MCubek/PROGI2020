@@ -1,0 +1,20 @@
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Photo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let card of allCards">
+          <td>{{ card.name }}</td>
+          <td>{{ card.description }}</td>
+          <td>{{ card.photoUrl }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

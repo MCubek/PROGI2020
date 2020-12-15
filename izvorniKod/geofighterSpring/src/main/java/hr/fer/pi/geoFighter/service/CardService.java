@@ -31,6 +31,7 @@ public class CardService {
     public List<CardDTO> getAllCards() {
         List<CardDTO> cardCollection = new ArrayList<>();
 
+        /*
         for (User user : userRepository.findUsersByCartographerStatus(CartographerStatus.APPROVED)) {
             for (LocationCard locationCard : locationCardRepository.getLocationCardsByAcceptedBy(user)) {
                 CardDTO cardDTO = new CardDTO();
@@ -43,7 +44,20 @@ public class CardService {
                 cardCollection.add(cardDTO);
             }
         }
-        //locationCardRepository.findAll() ??
+
+         */
+        for (LocationCard locationCard : locationCardRepository.findAll()) {
+          //  if (locationCard.isNeedsToBeChecked() == false) {
+                CardDTO cardDTO = new CardDTO();
+                cardDTO.setId(locationCard.getId());
+                cardDTO.setName(locationCard.getName());
+                cardDTO.setDescription(locationCard.getDescription());
+                cardDTO.setPhotoUrl(locationCard.getPhotoURL());
+                cardDTO.setLocation(locationCard.getLocation());
+                cardDTO.setCreatedBy(locationCard.getCreatedBy());
+                cardCollection.add(cardDTO);
+           // }
+        }
 
         return cardCollection;
     }
