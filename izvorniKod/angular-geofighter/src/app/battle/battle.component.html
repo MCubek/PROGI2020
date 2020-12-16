@@ -1,6 +1,6 @@
 <div class="geofighter-body">
     <div class="wrapper d-flex align-items-stretch">
-      <nav id="sidebar" class="active">
+      <nav id="sidebar" class="active"> 
         <ul class="list-unstyled components mb-5">
           <li class="active">
             <a href="#">
@@ -26,26 +26,26 @@
               <span></span> Add new location
             </a>
           </li>
-          <li>
+          <li *ngIf="role==='ROLE_CARTOGRAPHER'">
             <a href="#">
               <img  class="logo-icon" src="assets/images/card_applications.png">
               <span></span> Card applications
             </a>
           </li>
-          <li>
+          <li *ngIf="role==='ROLE_ADMIN'">
             <a href="#">
               <img  class="logo-icon" src="assets/images/people.png">
               <span></span> All users
             </a>
           </li>
-          <li>
+          <li *ngIf="role==='ROLE_ADMIN'">
             <a href="#">
               <img  class="logo-icon" src="assets/images/cards.png">
               <span></span> All cards
             </a>
           </li>
         </ul>
-      </nav>
+      </nav> 
       <div class="battle-container">
           <div id="content" class="p-4 p-md-5 bottom">
             <h3>Battle time!</h3>
@@ -95,7 +95,19 @@
           </div>
           <div id="content" class="p-4 p-md-5 ">
             <p class="p">Pick your opponent:<a href="#" class="btn btn-primary btn-players">See players around you</a></p>
-            
+            <p class="p">Pick your cards:</p>
+              <ul *ngIf="userCards!==undefined" class="list-group">
+                <li *ngFor="let userCard of userCards" class="list-group-item">
+                  <img src={{userCard.photoURL}} class="card-img-top">
+                    <div class="card-body">
+                      <h6 class="card-title">{{userCard.name}}</h6>
+                      <p class="card-text">{{userCard.description}}</p>
+                      <a href="#" class="btn btn-primary btn-font">See more</a>
+                      <a href="#" class="btn btn-primary btn-font">Pick card</a>
+                    </div>
+                </li>
+              </ul>
+              <p *ngIf="userCards===undefined || userCards.length==0"> No cards yet</p>
           </div>
           <hr>
       </div>

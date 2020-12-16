@@ -17,8 +17,7 @@ export class BattleComponent implements OnInit {
   role: string;
   userCards: Array<CardModel>;
 
-  //constructor(private fightService: FightService) { }
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private fightService: FightService) {
   }
 
   ngOnInit(): void {
@@ -30,11 +29,11 @@ export class BattleComponent implements OnInit {
     this.username = this.authService.getUsername();
     this.role = this.authService.getRole();
 
-    //this.fightService.getUserCardList(this.authService.getUsername()).subscribe(data => {
-      //this.userCards = data;
-    //}, error => {
-      //throwError(error);
-    //});
+    this.fightService.getUserCardList(this.username).subscribe(data => {
+      this.userCards = data;
+    }, error => {
+      throwError(error);
+    });
   }
 
 }
