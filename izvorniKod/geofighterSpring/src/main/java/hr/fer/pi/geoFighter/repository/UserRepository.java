@@ -4,6 +4,7 @@ import hr.fer.pi.geoFighter.model.CartographerStatus;
 import hr.fer.pi.geoFighter.model.Role;
 import hr.fer.pi.geoFighter.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -20,4 +21,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Collection<User> findUsersByCurrentLocationIsNotNull();
 
     Collection<User> findUsersByCartographerStatus(CartographerStatus status);
+
+    @Query("SELECT u.username FROM hr.fer.pi.geoFighter.model.User u WHERE u.enabled = true ORDER BY u.username")
+    Collection<String> findEnabledUsernames();
+
 }
