@@ -15,15 +15,6 @@ import { HomeComponent } from './home/home.component';
 import { SignupCartographerComponent } from './cartographer/signup-cartographer/signup-cartographer.component';
 import {TokenInterceptor} from './token-interceptor';
 import { CartographerApplicationsComponent } from './admin/cartographer-applications/cartographer-applications.component';
-import { UserListComponent } from './admin/user-list/user-list.component';
-import { DateTimePickerDialog } from './admin/user-list/user-list.component'
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatDialogModule } from '@angular/material/dialog';
-import {FormsModule} from '@angular/forms';
-import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
-
 
 @NgModule({
   declarations: [
@@ -33,9 +24,7 @@ import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
     LoginComponent,
     HomeComponent,
     SignupCartographerComponent,
-    CartographerApplicationsComponent,
-    UserListComponent,
-    DateTimePickerDialog
+    CartographerApplicationsComponent
   ],
   imports: [
     BrowserModule,
@@ -44,14 +33,7 @@ import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    MatInputModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatDialogModule,
-    FormsModule,
-    OwlDateTimeModule,
-    OwlNativeDateTimeModule
+    ToastrModule.forRoot()
   ],
   providers: [
     {

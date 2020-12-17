@@ -1,7 +1,6 @@
 package hr.fer.pi.geoFighter.service;
 
 import hr.fer.pi.geoFighter.dto.CartographerUserDTO;
-import hr.fer.pi.geoFighter.dto.DisableUserDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.CartographerStatus;
 import hr.fer.pi.geoFighter.model.Role;
@@ -9,11 +8,8 @@ import hr.fer.pi.geoFighter.model.User;
 import hr.fer.pi.geoFighter.repository.RoleRepository;
 import hr.fer.pi.geoFighter.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -54,37 +50,5 @@ public class AdminService {
         if (user.getRole().getRoleId().equals(userRole.getRoleId())) {
             user.setRole(cartographerRole);
         }
-    }
-
-
-    public List<String> getEnabledUsernames() {
-        return new ArrayList<>(userRepository.findEnabledUsernames());
-    }
-
-    public void promoteToAdmin(String username) {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new SpringGeoFighterException("User does not exist"));
-
-        Role adminRole = roleRepository.findByName("ROLE_ADMIN").orElseThrow(() -> new SpringGeoFighterException("Can't find role!"));
-
-        user.setRole(adminRole);
-    }
-
-    public void deleteUser(String username) {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new SpringGeoFighterException("User does not exist"));
-
-        userRepository.delete(user);
-    }
-
-    public void disableUser(DisableUserDTO disableUserDTO) {
-        User user = userRepository.findByUsername(disableUserDTO.getUsername()).orElseThrow(() -> new SpringGeoFighterException("User does not exist"));
-
-        LocalDateTime timeoutEnd = LocalDateTime.parse(
-                disableUserDTO.getTimeoutEnd(),
-                DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
-        );
-        if(timeoutEnd.isBefore(LocalDateTime.now()))
-            throw new SpringGeoFighterException("Timeout end cannot be a past date");
-
-        user.setForcedTimeoutEnd(timeoutEnd);
     }
 }
