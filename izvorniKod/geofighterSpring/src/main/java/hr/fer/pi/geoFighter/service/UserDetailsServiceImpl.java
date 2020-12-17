@@ -1,5 +1,6 @@
 package hr.fer.pi.geoFighter.service;
 
+import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.Privilege;
 import hr.fer.pi.geoFighter.model.Role;
 import hr.fer.pi.geoFighter.model.User;
@@ -91,6 +92,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private User getUser(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("User with id %s not found", userId)));
+                .orElseThrow(() -> new SpringGeoFighterException( String.format("User with id %s not found", userId)));
     }
 }
