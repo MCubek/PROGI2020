@@ -16,6 +16,14 @@ import { SignupCartographerComponent } from './cartographer/signup-cartographer/
 import {TokenInterceptor} from './token-interceptor';
 import { CartographerApplicationsComponent } from './admin/cartographer-applications/cartographer-applications.component';
 import { LeaderboardComponent } from './user/leaderboard/leaderboard.component';
+import { UserListComponent } from './admin/user-list/user-list.component';
+import { DateTimePickerDialog } from './admin/user-list/user-list.component'
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDialogModule } from '@angular/material/dialog';
+import {FormsModule} from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +34,9 @@ import { LeaderboardComponent } from './user/leaderboard/leaderboard.component';
     HomeComponent,
     SignupCartographerComponent,
     CartographerApplicationsComponent,
-    LeaderboardComponent
+    LeaderboardComponent,
+    UserListComponent,
+    DateTimePickerDialog
   ],
   imports: [
     BrowserModule,
@@ -35,7 +45,12 @@ import { LeaderboardComponent } from './user/leaderboard/leaderboard.component';
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    FormsModule
   ],
   providers: [
     {

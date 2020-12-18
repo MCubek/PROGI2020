@@ -25,4 +25,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT new hr.fer.pi.geoFighter.dto.UserEloDTO(u.username, u.wins, u.losses, u.eloScore) FROM hr.fer.pi.geoFighter.model.User u WHERE u.enabled = true ORDER BY u.eloScore DESC")
     Collection<UserEloDTO> getUserEloInfo();
+
+    @Query("SELECT u.username FROM hr.fer.pi.geoFighter.model.User u WHERE u.enabled = true ORDER BY u.username")
+    Collection<String> findEnabledUsernames();
+
 }
