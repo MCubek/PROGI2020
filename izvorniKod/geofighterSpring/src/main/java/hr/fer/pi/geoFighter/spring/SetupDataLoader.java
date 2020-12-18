@@ -190,15 +190,13 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     @Transactional
     void createDefaultCardsIfNotFound() {
         User cart = userRepository.findByUsername("card").get();
+        User user = userRepository.findByUsername("user").get();
 
         LocationCard l;
         UserCard uc;
 
-        User user = userRepository.findByUsername("user").get();
-
-        if(locationCardRepository.findById(1L).isEmpty()){
+        if(locationCardRepository.findByName("Sljeme").isEmpty()){
             l = new LocationCard();
-            l.setId(1L);
             l.setName("Sljeme");
             try {
                 l.setPhotoURL(new URL("https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Sljeme.jpg/435px-Sljeme.jpg"));
@@ -213,9 +211,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setAccepted(true);
             l.setAcceptedBy(cart);
 
-            locationCardRepository.save(l);
+            l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(1L).isEmpty()) {
+            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(user);
                 uc.setLocationCard(l);
@@ -225,9 +223,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             }
         }
 
-        if(locationCardRepository.findById(2L).isEmpty()){
+        if(locationCardRepository.findByName("Trg Bana Jelačića").isEmpty()){
             l = new LocationCard();
-            l.setId(2L);
             l.setName("Trg Bana Jelačića");
             try {
                 l.setPhotoURL(new URL("https://hr.wikipedia.org/wiki/Datoteka:Trg_bana_Jelacica_Zagreb_30102012_2_roberta_f.jpg"));
@@ -242,9 +239,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setAccepted(true);
             l.setAcceptedBy(cart);
 
-            locationCardRepository.save(l);
+            l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(1L).isEmpty()) {
+            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(user);
                 uc.setLocationCard(l);
@@ -254,9 +251,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             }
         }
 
-        if(locationCardRepository.findById(3L).isEmpty()){
+        if(locationCardRepository.findByName("Zagrebačka katedrala").isEmpty()){
             l = new LocationCard();
-            l.setId(3L);
             l.setName("Zagrebačka katedrala");
             try {
                 l.setPhotoURL(new URL("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Zagreb_Cathedral_2020.jpg/390px-Zagreb_Cathedral_2020.jpg"));
@@ -271,9 +267,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setAccepted(true);
             l.setAcceptedBy(cart);
 
-            locationCardRepository.save(l);
+            l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(1L).isEmpty()) {
+            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(user);
                 uc.setLocationCard(l);
@@ -283,9 +279,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             }
         }
 
-        if(locationCardRepository.findById(4L).isEmpty()){
+        if(locationCardRepository.findByName("Crkva sv. Marka").isEmpty()){
             l = new LocationCard();
-            l.setId(4L);
             l.setName("Crkva sv. Marka");
             try {
                 l.setPhotoURL(new URL("https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/St_Marks_Church_Zagreb.jpg/450px-St_Marks_Church_Zagreb.jpg"));
@@ -300,9 +295,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setAccepted(true);
             l.setAcceptedBy(cart);
 
-            locationCardRepository.save(l);
+            l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(1L).isEmpty()) {
+            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(user);
                 uc.setLocationCard(l);
@@ -312,9 +307,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             }
         }
 
-        if(locationCardRepository.findById(5L).isEmpty()){
+        if(locationCardRepository.findByName("Hrvatsko Narodno Kazalište").isEmpty()){
             l = new LocationCard();
-            l.setId(5L);
             l.setName("Hrvatsko Narodno Kazalište");
             try {
                 l.setPhotoURL(new URL("https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Hrvatsko_narodno_kazaliste_u_Zagrebu_090609.jpg/330px-Hrvatsko_narodno_kazaliste_u_Zagrebu_090609.jpg"));
@@ -329,9 +323,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setAccepted(true);
             l.setAcceptedBy(cart);
 
-            locationCardRepository.save(l);
+            l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(1L).isEmpty()) {
+            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(user);
                 uc.setLocationCard(l);
