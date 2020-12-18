@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Set timeout end for user {{data.username}}</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput type="datetime-local" placeholder="Timeout end" (change)="datetime=$event.target.value" [value]="datetime">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="dialogRef.close(this.datetime)" cdkFocusInitial>Ok</button>
+</div>
