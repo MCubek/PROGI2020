@@ -48,13 +48,17 @@ public class CardService {
          */
         for (LocationCard locationCard : locationCardRepository.findAll()) {
           //  if (locationCard.isNeedsToBeChecked() == false) {
+
                 CardDTO cardDTO = new CardDTO();
+
+                
                 cardDTO.setId(locationCard.getId());
                 cardDTO.setName(locationCard.getName());
                 cardDTO.setDescription(locationCard.getDescription());
                 cardDTO.setPhotoUrl(locationCard.getPhotoURL());
-                cardDTO.setLocation(locationCard.getLocation());
-                cardDTO.setCreatedBy(locationCard.getCreatedBy());
+                cardDTO.setUncommonness(locationCard.getUncommonness());
+                cardDTO.setDifficulty(locationCard.getDifficulty());
+                cardDTO.setPopulation(locationCard.getPopulation());
                 cardCollection.add(cardDTO);
            // }
         }
@@ -80,8 +84,6 @@ public class CardService {
             cardDTO.setName(locationCard.getName());
             cardDTO.setDescription(locationCard.getDescription());
             cardDTO.setPhotoUrl(locationCard.getPhotoURL());
-            cardDTO.setLocation(locationCard.getLocation());
-            cardDTO.setCreatedBy(locationCard.getCreatedBy());
 
             cardCollection.add(cardDTO);
         }
@@ -99,8 +101,6 @@ public class CardService {
         cardDTO.setName(locationCard.getName());
         cardDTO.setDescription(locationCard.getDescription());
         cardDTO.setPhotoUrl(locationCard.getPhotoURL());
-        cardDTO.setLocation(locationCard.getLocation());
-        cardDTO.setCreatedBy(locationCard.getCreatedBy());
 
         return cardDTO;
     }
@@ -117,9 +117,7 @@ public class CardService {
         locationCard.setId(cardDTO.getId());
         locationCard.setDescription(cardDTO.getDescription());
         locationCard.setPhotoURL(cardDTO.getPhotoUrl());
-        locationCard.setLocation(cardDTO.getLocation());
         locationCard.setNeedsToBeChecked(true);
-        locationCard.setCreatedBy(cardDTO.getCreatedBy());
 
         if (!urlValidator.isValid(cardDTO.getPhotoUrl().toString()))
             throw new UserInfoInvalidException("Invalid photo URL");

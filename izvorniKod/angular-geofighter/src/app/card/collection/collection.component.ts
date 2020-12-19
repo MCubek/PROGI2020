@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+
 import { throwError } from 'rxjs';
-import { AuthService } from 'src/app/auth/shared/auth.service';
+
 import { CardService } from '../shared/card.service';
 import { SingleCardModel } from '../single-card/single-card-model';
 
@@ -15,13 +15,41 @@ export class CollectionComponent implements OnInit {
   username: string;
   role: string;
   allCards: Array<SingleCardModel>;
+  id: string;
+  card: SingleCardModel;
 
-  constructor(private cardService: CardService) {}
+  constructor(private cardService: CardService) {
+    this.card = {
+      id: '',
+      name: '',
+      description: '',
+      photoUrl: '',
+      location: '',
+      createdBy: '',
+      uncommonness: '',
+      difficulty: '',
+      population: '',
+    };
+  }
 
   ngOnInit(): void {
     this.cardService.getAllCards().subscribe(
       (data) => {
         this.allCards = data;
+        console.log(data);
+      },
+      (error) => {
+        throwError(error);
+        console.log(error);
+      }
+    );
+  }
+
+  onClick(event): void {
+    alert('clicked');
+    this.cardService.getLocationCard(this.id).subscribe(
+      (data) => {
+        this.card = data;
       },
       (error) => {
         throwError(error);

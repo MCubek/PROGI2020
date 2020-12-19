@@ -6,13 +6,23 @@
           <th scope="col">Name</th>
           <th scope="col">Description</th>
           <th scope="col">Photo</th>
+          <th scope="col">Uncommonness</th>
+          <th scope="col">Difficulty</th>
+          <th scope="col">Population</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let card of allCards">
-          <td>{{ card.name }}</td>
+          <td (click)="onClick($event)">{{ card.name }}</td>
           <td>{{ card.description }}</td>
-          <td>{{ card.photoUrl }}</td>
+          <td>
+            <div class="card" style="width: 16rem">
+              <img src="{{ card.photoUrl }}" alt="" />
+            </div>
+          </td>
+          <td>{{ card.uncommonness }}</td>
+          <td>{{ card.difficulty }}</td>
+          <td>{{ card.population }}</td>
         </tr>
       </tbody>
     </table>

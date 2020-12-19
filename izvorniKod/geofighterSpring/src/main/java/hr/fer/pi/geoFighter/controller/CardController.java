@@ -18,8 +18,8 @@ public class CardController {
     private final CardService cardService;
 
     @GetMapping("/allCards")
-    public ResponseEntity<List<CardDTO>> getAllCards() {
-        return new ResponseEntity<>(cardService.getAllCards(), OK);
+    public List<CardDTO> getAllCards() {
+        return cardService.getAllCards();
     }
 
     @GetMapping("/cardCollection/{username}")

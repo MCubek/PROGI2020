@@ -25,9 +25,9 @@ const routes: Routes = [
     component: CartographerApplicationsComponent,
     canActivate: [AuthGuard, AdminGuard],
   },
-  { path: 'allCards', component: CollectionComponent },
-  { path: 'card/info', component: SingleCardComponent },
-  { path: 'applyCard', component: ApplyCardComponent },
+  { path: 'card/allCards', component: CollectionComponent },
+  { path: 'card/:id', component: SingleCardComponent },
+  { path: 'card/applyCard', component: ApplyCardComponent },
   { path: '**', redirectTo: '' },
 ];
 

@@ -39,7 +39,7 @@ export class ApplyCardComponent implements OnInit {
           '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'
         ),
       ]),
-      location: new FormControl('', Validators.required),
+      // location: new FormControl('', Validators.required),
     });
   }
 
@@ -52,9 +52,9 @@ export class ApplyCardComponent implements OnInit {
     this.applyCardRequestPayload.photoUrl = this.applyCardForm.get(
       'photoUrl'
     ).value;
-    this.applyCardRequestPayload.location = this.applyCardForm.get(
-      'location'
-    ).value;
+    //this.applyCardRequestPayload.location = this.applyCardForm.get(
+    //  'location'
+    // ).value;
 
     this.cardService.applyCard(this.applyCardRequestPayload).subscribe(
       (data) => {

@@ -18,8 +18,6 @@ public class CardDTO {
     private String name;
     private String description;
     private URL photoUrl;
-    private Point location;
-    private User createdBy;
     private Integer uncommonness;
     private Integer difficulty;
     private Integer population;

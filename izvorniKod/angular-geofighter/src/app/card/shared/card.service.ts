@@ -28,9 +28,6 @@ export class CardService {
   }
 
   getLocationCard(id: string): Observable<any> {
-    return this.httpClient.get(
-      `${environment.apiUrl}api/card/card/` + id,
-      null
-    );
+    return this.httpClient.get(`${environment.apiUrl}api/card/` + id, null);
   }
 }
