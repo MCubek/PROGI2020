@@ -1,4 +1,5 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {LoginComponent} from '../auth/login/login.component';
 
 import {icon} from 'leaflet';
 
@@ -17,6 +18,8 @@ declare const L;
 })
 export class TestMapComponent implements OnInit, AfterViewInit {
   private map;
+
+  @Input() coordinatesList: Coordinates[];
 
   ngOnInit(): void {
     this.map = L.map('map', {
@@ -44,7 +47,7 @@ export class TestMapComponent implements OnInit, AfterViewInit {
 
   drawPath(): void {
     L.Routing.control({
-      waypoints: [L.latLng(45.8150, 15.9819), L.latLng(45.6150, 15.9819)],
+      waypoints: this.getWaypoints(),
       routeWhileDragging: false,
       showAlternatives: false,
       addWaypoints: false,
@@ -63,7 +66,20 @@ export class TestMapComponent implements OnInit, AfterViewInit {
 
     tiles.addTo(this.map);
 
+    this.centerMap();
     this.drawPath();
+  }
+
+  getWaypoints(): any {
+    const list = [];
+    this.coordinatesList.forEach(value => {
+      list.push(L.latLng(value.latitude, value.longitude));
+    });
+    return list;
+  }
+
+  centerMap(): void {
+    this.map.setView(L.latLng(this.coordinatesList[0].latitude, this.coordinatesList[0].longitude));
   }
 
 }
