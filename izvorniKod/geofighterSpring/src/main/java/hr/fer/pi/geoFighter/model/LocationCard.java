@@ -28,7 +28,6 @@ public class LocationCard {
     private String name;
 
     @NotBlank
-    @Lob
     @Size(max = 4000)
     private String description;
 
