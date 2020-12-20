@@ -23,7 +23,7 @@
   padding: 5%;
 }
 .card-container {
-  display: flex;
+  display: inline-flex;
   flex-flow: row;
   flex-wrap: wrap;
   width: 100%;
@@ -48,6 +48,54 @@
   border-color: grey;
   margin: 10px;
 }
+.card-img-size {
+  height: 200px;
+  width: 300px;
+}
+.card-body {
+  position: relative;
+}
+.btn-bottom {
+  padding: 10px;
+  display: flex;
+  flex-flow: row; 
+  align-self: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+}
+#card-geo.card {
+  display:inline;
+  width: 16rem; 
+  height: 400px; 
+  margin: 10px;
+}
+#card-geo.card-body {
+  width: 16rem; 
+  height: 13rem;
+}
+#card-geo.list-group {
+  display: inline;
+  width: 100%;
+  width: 16rem; 
+  height: 400px;
+}
+#card-geo.list-group-item {
+  display:inline;
+  width: 16rem; 
+  height: 400px; 
+  padding: 0;
+}
+#card-geo.card-img-top {
+  width: 16rem; 
+  height: 12rem;
+}
+
+#btn-card-geo {
+  width: 6rem; 
+  height: 2rem;
+}
+
 #content {
     width: 100%;
     padding: 0;

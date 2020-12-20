@@ -51,63 +51,24 @@
             <h3>Battle time!</h3>
             <p class="p">Pick your cards:</p>
             <div class="card-container">
-              <div class="card" style="width: 16rem; height: 400px; margin: 10px;">
-                <img src="assets/images/sunset.jpeg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h6 class="card-title">Card title</h6>
-                  <p>Score</p>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary btn-font">See more</a>
-                  <a href="#" class="btn btn-primary btn-font">Pick card</a>
-                </div>
-              </div>
-              <div class="card" style="width: 16rem; height: 400px; margin: 10px;">
-                <img src="assets/images/flower.JPG" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h6 class="card-title">Card title</h6>
-                  <p>Score</p>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary btn-font">See more</a>
-                  <a href="#" class="btn btn-primary btn-font">Pick card</a>
-                </div>
-              </div>
-              <div class="card" style="width: 16rem; height: 400px; margin: 10px;">
-                <img src="assets/images/sun.JPG" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h6 class="card-title">Card title</h6>
-                  <p>Score</p>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary btn-font">See more</a>
-                  <a href="#" class="btn btn-primary btn-font">Pick card</a>
-                </div>
-              </div>
-              <div class="card" style="width: 16rem; height: 400px; margin: 10px;">
-                <img src="assets/images/moon.JPG" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h6 class="card-title">Card title</h6>
-                  <p>Score</p>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary btn-font">See more</a>
-                  <a href="#" class="btn btn-primary btn-font">Pick card</a>
-                </div>
+              <div id="card-geo" class="card">
+                <ul *ngIf="userCards!==undefined" id="card-geo" class="list-group">
+                  <li *ngFor="let userCard of userCards" id="card-geo" class="list-group-item card">
+                      <img src={{userCard.photoURL}} id="card-geo" class="card-img-top">
+                        <div class="card-body" id="card-geo">
+                          <h6 class="card-title">{{userCard.name}}</h6>
+                          <p class="card-text card-description">{{userCard.description}}</p>
+                          <span class="btn-bottom">
+                            <a href="#" id="btn-card-geo" class="btn btn-primary btn-font">See more</a>
+                            <a href="#" id="btn-card-geo" class="btn btn-primary btn-font">Pick card</a>
+                          </span>
+                        </div>
+                  </li>
+                </ul>
               </div>
             </div>
-          </div>
-          <div id="content" class="p-4 p-md-5 ">
+            <p *ngIf="userCards===undefined || userCards.length==0"> No cards yet</p>
             <p class="p">Pick your opponent:<a href="#" class="btn btn-primary btn-players">See players around you</a></p>
-            <p class="p">Pick your cards:</p>
-              <ul *ngIf="userCards!==undefined" class="list-group">
-                <li *ngFor="let userCard of userCards" class="list-group-item">
-                  <img src={{userCard.photoURL}} class="card-img-top">
-                    <div class="card-body">
-                      <h6 class="card-title">{{userCard.name}}</h6>
-                      <p class="card-text">{{userCard.description}}</p>
-                      <a href="#" class="btn btn-primary btn-font">See more</a>
-                      <a href="#" class="btn btn-primary btn-font">Pick card</a>
-                    </div>
-                </li>
-              </ul>
-              <p *ngIf="userCards===undefined || userCards.length==0"> No cards yet</p>
           </div>
           <hr>
       </div>
