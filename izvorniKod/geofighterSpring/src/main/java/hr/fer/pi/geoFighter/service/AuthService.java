@@ -178,6 +178,5 @@ public class AuthService {
         Point2D.Double point = new Point2D.Double(userLocationDTO.getLatitude(),userLocationDTO.getLongitude());
         user.setCurrentLocation(point);
         userRepository.save(user);
-        System.out.println("Location saved: "+point);
     }
 }
