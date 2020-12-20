@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.awt.geom.Point2D;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -59,7 +60,7 @@ public class User {
     private LocalDateTime forcedTimeoutEnd = null;
 
     @Nullable
-    private Point currentLocation;
+    private Point2D.Double currentLocation;
 
     private Boolean online;
 

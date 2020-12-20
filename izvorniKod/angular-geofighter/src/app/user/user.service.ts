@@ -15,4 +15,8 @@ export class UserService {
   getLeaderboardUserInfo(): Observable<LeaderboardUserModel[]> {
       return this.httpClient.get<LeaderboardUserModel[]>(`${environment.apiUrl}api/user/leaderboard`);
   }
+
+  getNearbyUsers(username: string): Observable<string[]>{
+    return this.httpClient.get<string[]>(`${environment.apiUrl}api/user/nearbyUsers`+username);
+  }
 }
