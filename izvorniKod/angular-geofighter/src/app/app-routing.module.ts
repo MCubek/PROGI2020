@@ -9,6 +9,8 @@ import {CartographerApplicationsComponent} from './admin/cartographer-applicatio
 import {AdminGuard} from './admin/admin.guard';
 import {UserListComponent} from './admin/user-list/user-list.component';
 import {LeaderboardComponent} from './user/leaderboard/leaderboard.component';
+import {AllUsersComponent} from './user/all-users/all-users.component';
+import {UserProfileComponent} from "./user/user-profile/user-profile.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
@@ -18,6 +20,8 @@ const routes: Routes = [
   {path: 'cartographerApplications', component: CartographerApplicationsComponent, canActivate: [AuthGuard, AdminGuard]},
   {path: 'leaderboard', component: LeaderboardComponent, canActivate: [AuthGuard]},
   {path: 'userList', component: UserListComponent, canActivate: [AuthGuard, AdminGuard]},
+  {path: 'users', component: AllUsersComponent, canActivate: [AuthGuard]},
+  {path: 'users/:username', component: UserProfileComponent, canActivate:[AuthGuard]},
   {path: '**', redirectTo: ''}
 ];
 

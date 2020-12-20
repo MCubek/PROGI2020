@@ -23,7 +23,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule } from '@angular/material/dialog';
 import {FormsModule} from '@angular/forms';
-
+import { UserProfileComponent } from './user/user-profile/user-profile.component';
+import { AllUsersComponent } from './user/all-users/all-users.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,9 @@ import {FormsModule} from '@angular/forms';
     CartographerApplicationsComponent,
     LeaderboardComponent,
     UserListComponent,
-    DateTimePickerDialog
+    DateTimePickerDialog,
+    UserProfileComponent,
+    AllUsersComponent
   ],
   imports: [
     BrowserModule,

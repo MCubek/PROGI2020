@@ -15,4 +15,12 @@ export class UserService {
   getLeaderboardUserInfo(): Observable<LeaderboardUserModel[]> {
       return this.httpClient.get<LeaderboardUserModel[]>(`${environment.apiUrl}api/user/leaderboard`);
   }
+
+  getEnabledUsers(): Observable<string[]> {
+    return this.httpClient.get<string[]>(`${environment.apiUrl}api/user/userList`);
+  }
+
+  viewProfile(username: string): Observable<string[]> {
+    return this.httpClient.get<string[]>(`${environment.apiUrl}api/user/userProfile/`+username);
+  }
 }
