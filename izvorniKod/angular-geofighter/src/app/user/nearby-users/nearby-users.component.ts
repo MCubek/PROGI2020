@@ -26,8 +26,6 @@ export class NearbyUsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.authService.getUsername());
-
     this.userService.getNearbyUsers(this.authService.getUsername()).subscribe(data => {
       this.usernames = data;
     }, error => {

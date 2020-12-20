@@ -52,10 +52,4 @@ public class AuthController {
         refreshTokenService.deleteRefreshToken(logoutRequest.getRefreshToken());
         return ResponseEntity.status(OK).body("Refresh token deleted!");
     }
-
-    @PostMapping("/storeLocation")
-    public ResponseEntity<String> storeLocation(@RequestBody UserLocationDTO userLocationDTO){
-        authService.storeLocation(userLocationDTO);
-        return ResponseEntity.status(OK).body("Location saved!");
-    }
 }

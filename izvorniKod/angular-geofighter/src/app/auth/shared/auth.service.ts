@@ -108,6 +108,6 @@ export class AuthService {
   }
 
   saveLocation(userLocationPayload : UserLocationPayload) : Observable<any>{
-    return this.httpClient.post(`${environment.apiUrl}api/auth/storeLocation`, userLocationPayload,{responseType: 'text'});
+    return this.httpClient.post(`${environment.apiUrl}api/user/storeLocation`, userLocationPayload,{responseType: 'text'});
   }
 }
