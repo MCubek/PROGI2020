@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import {CardApplicationModel} from '../card-applications/card-application.model';
+import {CardCheckedCoordinates} from '../card-applications/card-to-be-checked.model';
 
 @Injectable({
   providedIn: 'root',
@@ -46,6 +47,12 @@ export class CardApplicationService {
       `${environment.apiUrl}api/cardApplications/confirm/` + id,
       null,
       {responseType: 'text'}
+    );
+  }
+
+  getAllCardToBeCheckedCoordinates(): Observable<CardCheckedCoordinates[]> {
+    return this.httpClient.get<CardCheckedCoordinates[]>(
+      `${environment.apiUrl}api/cardApplications/checked`
     );
   }
 

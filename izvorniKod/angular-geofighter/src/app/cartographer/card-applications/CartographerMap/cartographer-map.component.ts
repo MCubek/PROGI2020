@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
-import {LoginComponent} from '../auth/login/login.component';
+import {LoginComponent} from '../../../auth/login/login.component';
 
 import {icon} from 'leaflet';
 
@@ -12,11 +12,11 @@ import 'leaflet.locatecontrol';
 declare const L;
 
 @Component({
-  selector: 'app-test-map',
-  templateUrl: './test-map.component.html',
-  styleUrls: ['./test-map.component.css']
+  selector: 'app-cartographer-map',
+  templateUrl: './cartographer-map.component.html',
+  styleUrls: ['./cartographer-map.component.css']
 })
-export class TestMapComponent implements OnInit, AfterViewInit {
+export class CartographerMapComponent implements OnInit, AfterViewInit {
   private map;
 
   @Input() coordinatesList: Coordinates[];
