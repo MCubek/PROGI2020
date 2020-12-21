@@ -1,5 +1,6 @@
 package hr.fer.pi.geoFighter.service;
 
+import hr.fer.pi.geoFighter.dto.CardApplicationDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.LocationCard;
 import hr.fer.pi.geoFighter.repository.LocationCardRepository;
@@ -19,17 +20,18 @@ public class CardApplicationService {
     private final LocationCardRepository locationCardRepository;
     private final AuthService authService;
 
-    public List<LocationCard> getAllCardApplications() {
-        List<LocationCard> cardCollection = new ArrayList<>();
+    public List<CardApplicationDTO> getAllCardApplications() {
+        List<CardApplicationDTO> cardCollection = new ArrayList<>();
 
         for (LocationCard locationCard : locationCardRepository.getLocationCardsByAccepted(false)) {
-            LocationCard card = new LocationCard();
+            CardApplicationDTO card = new CardApplicationDTO();
             card.setId(locationCard.getId());
             card.setName(locationCard.getName());
             card.setDescription(locationCard.getDescription());
-            card.setPhotoURL(locationCard.getPhotoURL());
+            card.setPhotoUrl(locationCard.getPhotoURL());
             card.setLocation(locationCard.getLocation());
             card.setCreatedBy(locationCard.getCreatedBy());
+            card.setNeedsToBeChecked(locationCard.isNeedsToBeChecked());
             cardCollection.add(card);
         }
 
@@ -64,6 +66,6 @@ public class CardApplicationService {
         LocationCard card = locationCardRepository.getLocationCardById(id).orElseThrow(
                 () -> new SpringGeoFighterException("Card does not exist"));
 
-        card.setNeedsToBeChecked(true);
+        card.setNeedsToBeChecked(!card.isNeedsToBeChecked());
     }
 }

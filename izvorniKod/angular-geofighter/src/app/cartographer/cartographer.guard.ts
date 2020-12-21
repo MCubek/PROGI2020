@@ -15,7 +15,7 @@ export class CartographerGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    const isCartographer = this.authService.getRole() === 'ROLE_CARTOGRAPHER';
+    const isCartographer = this.authService.getRole() === 'ROLE_CARTOGRAPHER' || this.authService.getRole() === 'ROLE_ADMIN';
 
     if (!isCartographer) { this.router.navigateByUrl('/'); }
 

@@ -1,5 +1,6 @@
 package hr.fer.pi.geoFighter.controller;
 
+import hr.fer.pi.geoFighter.dto.CardApplicationDTO;
 import hr.fer.pi.geoFighter.model.LocationCard;
 import hr.fer.pi.geoFighter.service.CardApplicationService;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ public class CardApplicationController {
     private final CardApplicationService cardApplicationService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<LocationCard>> getAllCardApplications() {
+    public ResponseEntity<List<CardApplicationDTO>> getAllCardApplications() {
         return new ResponseEntity<>(cardApplicationService.getAllCardApplications(), OK);
     }
 

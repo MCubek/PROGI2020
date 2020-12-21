@@ -9,7 +9,6 @@
           <p>Location: {{card.location}}</p>
           <p>Created by: {{card.createdBy}}</p>
           <p>Description: {{card.description}}</p>
-          <p>Needs to be checked: {{card.needsToBeChecked}}</p>
           <button class="btn btn-success mr-2" (click)="accept(card.id)">Accept</button>
           <button class="btn btn-danger mr-2" (click)="decline(card.id)">Decline</button>
           <button class="btn btn-primary" (click)="editForm(card)" data-toggle="modal" data-target="#editWindow">Edit</button>
