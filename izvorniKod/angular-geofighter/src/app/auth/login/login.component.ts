@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
       password: ''
     };
     this.userLocationPayload = {
-      username: '',
       latitude: 0.0,
       longitude: 0.0
     };
@@ -57,7 +56,6 @@ export class LoginComponent implements OnInit {
   login() {
     this.loginRequestPayload.username = this.loginForm.get('username').value;
     this.loginRequestPayload.password = this.loginForm.get('password').value;
-    this.userLocationPayload.username = this.loginRequestPayload.username;
 
     this.authService.login(this.loginRequestPayload).subscribe(data => {
       this.isError = false;
