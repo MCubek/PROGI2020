@@ -27,7 +27,7 @@ public class UserCard {
 
     @Column(name = "cooldown_multiplier")
     @Nullable
-    private Double cooldownMultiplier;
+    private Double cooldownMultiplier = 0.;
 
     @Column(name = "cooldown_end")
     @Nullable
