@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { element } from 'protractor';
 import { throwError } from 'rxjs';
 import { AuthService } from 'src/app/auth/shared/auth.service';
 import { CardService } from '../shared/card.service';
@@ -50,17 +51,35 @@ export class SingleCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.loggedIn.subscribe(
-      (data: boolean) => (this.isLoggedIn = data)
+    this.cardService.getAllCards().subscribe(
+      (data) => {
+        this.allCards = data;
+        console.log(data);
+        this.allCards.forEach((item: SingleCardModel) => {
+          if (item.id == this.router.url.replace('/card/', '')) {
+            this.imagePath = item.photoUrl;
+            this.difficulty = item.difficulty;
+            this.uncommonness = item.uncommonness;
+            this.population = item.population;
+            this.name = item.name;
+            this.id = item.id;
+          } else {
+            this.imagePath = null;
+            this.difficulty = null;
+            this.uncommonness = null;
+            this.population = null;
+            this.name = null;
+            this.id = null;
+          }
+        });
+      },
+      (error) => {
+        throwError(error);
+        console.log(error);
+      }
     );
-    this.authService.username.subscribe(
-      (data: string) => (this.username = data)
-    );
-    this.authService.role.subscribe((data: string) => (this.role = data));
-    this.isLoggedIn = this.authService.isLoggedIn();
-    this.username = this.authService.getUsername();
-    this.role = this.authService.getRole();
 
+    /*
     this.cardService.getLocationCard(this.id).subscribe(
       (data) => {
         this.card = data;
@@ -69,5 +88,7 @@ export class SingleCardComponent implements OnInit {
         throwError(error);
       }
     );
+    */
+    console.log(this.router.url);
   }
 }

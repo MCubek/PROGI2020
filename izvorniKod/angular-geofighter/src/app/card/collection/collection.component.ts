@@ -44,16 +44,4 @@ export class CollectionComponent implements OnInit {
       }
     );
   }
-
-  onClick(event): void {
-    alert('clicked');
-    this.cardService.getLocationCard(this.id).subscribe(
-      (data) => {
-        this.card = data;
-      },
-      (error) => {
-        throwError(error);
-      }
-    );
-  }
 }
