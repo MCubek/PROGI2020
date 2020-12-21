@@ -41,13 +41,6 @@ export class SingleCardComponent implements OnInit {
       difficulty: '',
       population: '',
     };
-    this.imagePath =
-      'https://vlada.gov.hr/userdocsimages//Vijesti/2020/05%20svibanj/19%20svibnja/HN20200427551306.jpg?width=750&height=500&mode=crop';
-    this.difficulty = '20';
-    this.uncommonness = '50';
-    this.population = '35';
-    this.name = 'Berlin';
-    this.id = '1';
   }
 
   ngOnInit(): void {
@@ -78,17 +71,6 @@ export class SingleCardComponent implements OnInit {
         console.log(error);
       }
     );
-
-    /*
-    this.cardService.getLocationCard(this.id).subscribe(
-      (data) => {
-        this.card = data;
-      },
-      (error) => {
-        throwError(error);
-      }
-    );
-    */
     console.log(this.router.url);
   }
 }

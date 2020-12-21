@@ -15,7 +15,6 @@ export class CollectionComponent implements OnInit {
   username: string;
   role: string;
   allCards: Array<SingleCardModel>;
-  id: string;
   card: SingleCardModel;
 
   constructor(private cardService: CardService) {
