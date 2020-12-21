@@ -9,6 +9,7 @@ import hr.fer.pi.geoFighter.repository.UserCardRepository;
 import hr.fer.pi.geoFighter.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,14 +17,13 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-@org.springframework.transaction.annotation.Transactional
+@Transactional
 public class FightService {
 
     private final UserRepository userRepository;
     private final LocationCardRepository locationCardRepository;
     private final UserCardRepository userCardRepository;
     private final FightRepository fightRepository;
-    private final UserDetailsServiceImpl userDetailsService;
 
     /**
      * Računa pobjednika na temelju primljenih karata
@@ -132,7 +132,7 @@ public class FightService {
             winner.setWins(winner.getWins() + 1);
             winner.getFightsWon().add(fight);
             loser.setLosses(loser.getLosses() + 1);
-            userDetailsService.calculateEloScore(winner.getUserId(), loser.getUserId());
+            calculateEloScore(winner, loser);
         }
 
         return draw ? "" : winner.getUsername();
@@ -142,6 +142,22 @@ public class FightService {
         LocationCard lc = uc.getLocationCard();
         return (lc.getDifficulty() + lc.getUncommonness() + lc.getPopulation())
                 /(1 + 0.1*uc.getCooldownMultiplier());
+    }
+
+    public void calculateEloScore(User winner, User loser){
+
+        float score1;
+        float score2;
+        int K = 40;
+        float expectancyA = 1 / (1 + (float) Math.pow(10.0, (winner.getEloScore() - loser.getEloScore()) / 400f));
+        float expectancyB = 1 - expectancyA;
+
+        //calculating score in case of win/lose
+        score1 = winner.getEloScore() + K * (1 - expectancyA);
+        score2 = loser.getEloScore() - K * expectancyB;
+
+        winner.setEloScore(Math.round(score1));
+        loser.setEloScore(Math.round(score2));
     }
 
 }

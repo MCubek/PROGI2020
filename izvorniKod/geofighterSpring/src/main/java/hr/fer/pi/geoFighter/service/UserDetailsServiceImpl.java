@@ -69,29 +69,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         return authorities;
     }
-
-    @Transactional
-    public void calculateEloScore(Long winnerId, Long loserId){
-
-        User winner = getUser(winnerId);
-        User loser = getUser(loserId);
-
-        float score1;
-        float score2;
-        int K = 40;
-        float expectancyA = 1 / (1 + (float) Math.pow(10.0, (winner.getEloScore() - loser.getEloScore()) / 400f));
-        float expectancyB = 1 - expectancyA;
-
-        //calculating score in case of win/lose
-        score1 = winner.getEloScore() + K * (1 - expectancyA);
-        score2 = loser.getEloScore() - K * expectancyB;
-
-        winner.setEloScore(Math.round(score1));
-        loser.setEloScore(Math.round(score2));
-    }
-
-    private User getUser(Long userId) {
-        return userRepository.findById(userId)
-                .orElseThrow(() -> new SpringGeoFighterException( String.format("User with id %s not found", userId)));
-    }
 }
