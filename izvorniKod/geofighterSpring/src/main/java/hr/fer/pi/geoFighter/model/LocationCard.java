@@ -3,6 +3,7 @@ package hr.fer.pi.geoFighter.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 import org.locationtech.jts.geom.Point;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import javax.validation.constraints.Size;
 import java.net.URL;
 import java.time.Instant;
 import java.util.Collection;
+
 
 @Data
 @AllArgsConstructor
@@ -30,6 +32,8 @@ public class LocationCard {
     @NotBlank
     @Lob
     @Size(max = 4000)
+    @Type(type = "org.hibernate.type.TextType")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
     private URL photoURL;
