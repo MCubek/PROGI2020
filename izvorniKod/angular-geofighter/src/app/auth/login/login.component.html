@@ -9,7 +9,8 @@
             <div class="form-group row">
               <label for="user_name" class="col-md-4 col-form-label text-md-right">Username</label>
               <div class="col-md-6">
-                <input type="text" id="user_name" class="form-control input-radius" [formControlName]="'username'" name="user_name"
+                <input type="text" id="user_name" class="form-control input-radius" [formControlName]="'username'"
+                       name="user_name"
                        required
                        autofocus>
                 <span *ngIf="!loginForm.get('username').valid && loginForm.get('username').touched" class="small_font">
@@ -21,7 +22,8 @@
             <div class="form-group row">
               <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
               <div class="col-md-6">
-                <input type="password" id="password" class="form-control input-radius" [formControlName]="'password'" name="password"
+                <input type="password" id="password" class="form-control input-radius" [formControlName]="'password'"
+                       name="password"
                        required>
                 <span *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">
                   Please provide a password
@@ -38,7 +40,8 @@
             <div class="login-failed" *ngIf='this.isError'>
               <p class="login-failed-text">Login Failed. Please check your credentials and try again.</p>
             </div>
-            <div class="login-failed" [ngStyle]="{'background-color': 'green'}" *ngIf="registerSuccessMessage!= undefined && this.registerSuccessMessage.length > 0">
+            <div class="login-failed" [ngStyle]="{'background-color': 'green'}"
+                 *ngIf="registerSuccessMessage!= undefined && this.registerSuccessMessage.length > 0">
               <p class="register-success-text">{{registerSuccessMessage}}</p>
             </div>
           </form>

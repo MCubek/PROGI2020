@@ -1,12 +1,8 @@
 package hr.fer.pi.geoFighter.spring;
 
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
-import hr.fer.pi.geoFighter.model.Privilege;
-import hr.fer.pi.geoFighter.model.Role;
-import hr.fer.pi.geoFighter.model.User;
-import hr.fer.pi.geoFighter.repository.PrivilegeRepository;
-import hr.fer.pi.geoFighter.repository.RoleRepository;
-import hr.fer.pi.geoFighter.repository.UserRepository;
+import hr.fer.pi.geoFighter.model.*;
+import hr.fer.pi.geoFighter.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
@@ -16,6 +12,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
+import java.awt.geom.Point2D;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -32,6 +31,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     private final RoleRepository roleRepository;
     private final PrivilegeRepository privilegeRepository;
     private final UserRepository userRepository;
+    private final LocationCardRepository locationCardRepository;
+    private final UserCardRepository userCardRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -53,6 +54,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
         if (address.equals("http://localhost:8080/")) {
             createDefaultUsersIfNotFound();
+            createDefaultCardsIfNotFound();
         }
 
         alreadySetup = true;
@@ -85,8 +87,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     @Transactional
     void createDefaultUsersIfNotFound() {
-        User user = new User();
+        User user;
         if (userRepository.findByUsername("admin").isEmpty()) {
+            user = new User();
             user.setUsername("admin");
             user.setEmail("admin@admin.com");
             user.setPassword(passwordEncoder.encode("admin"));
@@ -101,7 +104,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             user.setUsername("user");
             user.setEmail("user@user.com");
             user.setPassword(passwordEncoder.encode("user"));
-            user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("ADMIN role not in database")));
+            user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("USER role not in database")));
             user.setEnabled(true);
 
             userRepository.save(user);
@@ -113,10 +116,262 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             user.setUsername("card");
             user.setEmail("card@card.com");
             user.setPassword(passwordEncoder.encode("card"));
-            user.setRole(roleRepository.findByName("ROLE_CARTOGRAPHER").orElseThrow(() -> new SpringGeoFighterException("ADMIN role not in database")));
+            user.setRole(roleRepository.findByName("ROLE_CARTOGRAPHER").orElseThrow(() -> new SpringGeoFighterException("CARTOGRAPHER role not in database")));
             user.setEnabled(true);
 
             userRepository.save(user);
+        }
+
+        if (userRepository.findByUsername("userA").isEmpty()) {
+            user = new User();
+            user.setUsername("userA");
+            user.setEmail("usera@usera.com");
+            user.setPassword(passwordEncoder.encode("userA"));
+            user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("USER role not in database")));
+            user.setEloScore(1234);
+            user.setWins(32);
+            user.setLosses(24);
+            user.setEnabled(true);
+
+            userRepository.save(user);
+        }
+
+        if (userRepository.findByUsername("userB").isEmpty()) {
+            user = new User();
+            user.setUsername("userB");
+            user.setEmail("userb@userb.com");
+            user.setPassword(passwordEncoder.encode("userB"));
+            user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("USER role not in database")));
+            user.setEloScore(123);
+            user.setWins(15);
+            user.setLosses(16);
+            user.setEnabled(true);
+
+            userRepository.save(user);
+        }
+
+        if (userRepository.findByUsername("userC").isEmpty()) {
+            user = new User();
+            user.setUsername("userC");
+            user.setEmail("userc@userc.com");
+            user.setPassword(passwordEncoder.encode("userC"));
+            user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("USER role not in database")));
+            user.setEloScore(132);
+            user.setWins(17);
+            user.setLosses(15);
+            user.setEnabled(true);
+
+            userRepository.save(user);
+        }
+
+        if (userRepository.findByUsername("nepotvrdeni").isEmpty()) {
+            user = new User();
+            user.setUsername("nepotvrdeni");
+            user.setEmail("nepotvrdeni@nepotvrdeni.com");
+            user.setPassword(passwordEncoder.encode("nepotvrdeni"));
+            user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("USER role not in database")));
+            user.setEnabled(false);
+
+            userRepository.save(user);
+        }
+
+        if (userRepository.findByUsername("applied").isEmpty()) {
+            user = new User();
+            user.setUsername("applied");
+            user.setEmail("applied@applied.com");
+            user.setPassword(passwordEncoder.encode("applied"));
+            user.setRole(roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("USER role not in database")));
+            user.setEnabled(true);
+            user.setCartographerStatus(CartographerStatus.APPLIED);
+
+            userRepository.save(user);
+        }
+    }
+
+    @Transactional
+    void createDefaultCardsIfNotFound() {
+        User cart = userRepository.findByUsername("card").get();
+        User user = userRepository.findByUsername("user").get();
+
+        LocationCard l;
+        UserCard uc;
+
+        if (locationCardRepository.findByName("Sljeme").isEmpty()) {
+            l = new LocationCard();
+            l.setName("Sljeme");
+            try {
+                l.setPhotoURL(new URL("https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Sljeme.jpg/435px-Sljeme.jpg"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            l.setDescription("Sljeme je vrh Medvednice, planine iznad Zagreba. Nalazi se na 1033 metara nadmorske visine. Do Sljemena vodi asfaltirana cesta, mnogobrojne pješačke staze, a od 1963. do 2007. u pogonu je bila i sljemenska žičara. Sljeme je jedno od najdražih izletišta Zagrepčana.Na Sljemenu se nalazi i skijaška staza koja je jedna od lokacija za utrke svjetskog skijaškog kupa (Snježna kraljica). Na samom vrhu nalazi se RTV toranj, visok 169 metara koji je izgrađen 1973.");
+            l.setNeedsToBeChecked(false);
+            l.setPopulation(0);
+            l.setUncommonness(5);
+            l.setDifficulty(5);
+            l.setAccepted(true);
+            l.setAcceptedBy(cart);
+
+            l = locationCardRepository.save(l);
+
+            if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+                uc = new UserCard();
+                uc.setUser(user);
+                uc.setLocationCard(l);
+                uc.setCooldownMultiplier(1.1);
+                userCardRepository.save(uc);
+                user.getLocationCardAssoc().add(uc);
+            }
+        }
+
+        if (locationCardRepository.findByName("Trg Bana Jelačića").isEmpty()) {
+            l = new LocationCard();
+            l.setName("Trg Bana Jelačića");
+            try {
+                l.setPhotoURL(new URL("https://hr.wikipedia.org/wiki/Datoteka:Trg_bana_Jelacica_Zagreb_30102012_2_roberta_f.jpg"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            l.setDescription("Trg bana Josipa Jelačića glavni je zagrebački trg. Njime dominira kip bana Josipa Jelačića kipara Dominika Fernkorna, danas okrenut prema jugu. Od nakon Drugoga svjetskoga rata do 1990. godine, kada mu je vraćeno staro ime, trg je nosio ime Trg Republike.");
+            l.setNeedsToBeChecked(false);
+            l.setPopulation(0);
+            l.setUncommonness(6);
+            l.setDifficulty(6);
+            l.setAccepted(true);
+            l.setAcceptedBy(cart);
+
+            l = locationCardRepository.save(l);
+
+            if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+                uc = new UserCard();
+                uc.setUser(user);
+                uc.setLocationCard(l);
+                uc.setCooldownMultiplier(1.1);
+                userCardRepository.save(uc);
+                user.getLocationCardAssoc().add(uc);
+            }
+        }
+
+        if (locationCardRepository.findByName("Zagrebačka katedrala").isEmpty()) {
+            l = new LocationCard();
+            l.setName("Zagrebačka katedrala");
+            try {
+                l.setPhotoURL(new URL("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Zagreb_Cathedral_2020.jpg/390px-Zagreb_Cathedral_2020.jpg"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            l.setDescription("Katedrala Uznesenja Blažene Djevice Marije i svetih Stjepana i Ladislava ili Zagrebačka katedrala, najveća je hrvatska sakralna građevina i jedan od najvrjednijih spomenika hrvatske kulturne baštine. Prva je i najznačajnija gotička građevina Hrvatske. Najmonumentalija je gotička sakralna građevina jugoistočno od Alpa.");
+            l.setNeedsToBeChecked(false);
+            l.setPopulation(0);
+            l.setUncommonness(7);
+            l.setDifficulty(7);
+            l.setAccepted(true);
+            l.setAcceptedBy(cart);
+
+            l = locationCardRepository.save(l);
+
+            if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+                uc = new UserCard();
+                uc.setUser(user);
+                uc.setLocationCard(l);
+                uc.setCooldownMultiplier(1.1);
+                userCardRepository.save(uc);
+                user.getLocationCardAssoc().add(uc);
+            }
+        }
+
+        if (locationCardRepository.findByName("Crkva sv. Marka").isEmpty()) {
+            l = new LocationCard();
+            l.setName("Crkva sv. Marka");
+            try {
+                l.setPhotoURL(new URL("https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/St_Marks_Church_Zagreb.jpg/450px-St_Marks_Church_Zagreb.jpg"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            l.setDescription("Crkva svetoga Marka jedan je od najstarijih građevnih spomenika grada Zagreba. Smještena je na Trgu svetoga Marka, kao i Hrvatski sabor. Crkva sv. Marka Evanđelista zaštićeno je kulturno dobro Republike Hrvatske.");
+            l.setNeedsToBeChecked(false);
+            l.setPopulation(0);
+            l.setUncommonness(4);
+            l.setDifficulty(4);
+            l.setAccepted(true);
+            l.setAcceptedBy(cart);
+
+            l = locationCardRepository.save(l);
+
+            if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+                uc = new UserCard();
+                uc.setUser(user);
+                uc.setLocationCard(l);
+                uc.setCooldownMultiplier(1.1);
+                userCardRepository.save(uc);
+                user.getLocationCardAssoc().add(uc);
+            }
+        }
+
+        if (locationCardRepository.findByName("Hrvatsko Narodno Kazalište").isEmpty()) {
+            l = new LocationCard();
+            l.setName("Hrvatsko Narodno Kazalište");
+            try {
+                l.setPhotoURL(new URL("https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Hrvatsko_narodno_kazaliste_u_Zagrebu_090609.jpg/330px-Hrvatsko_narodno_kazaliste_u_Zagrebu_090609.jpg"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            l.setDescription("Dana 14. listopada 1895. u Zagrebu svečano je otvorena kazališna zgrada za oko 750 gledatelja u kojoj danas djeluje Hrvatsko narodno kazalište. Neobarokna zgrada HNK je remek-djelo kasnog historizma austrijskog arhitekta Ferdinanda Fellnera i njemačkog arhitekta Hermanna Helmera.");
+            l.setNeedsToBeChecked(false);
+            l.setPopulation(0);
+            l.setUncommonness(8);
+            l.setDifficulty(8);
+            l.setAccepted(true);
+            l.setAcceptedBy(cart);
+
+            l = locationCardRepository.save(l);
+
+            if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+                uc = new UserCard();
+                uc.setUser(user);
+                uc.setLocationCard(l);
+                uc.setCooldownMultiplier(1.1);
+                userCardRepository.save(uc);
+                user.getLocationCardAssoc().add(uc);
+            }
+        }
+
+        if (locationCardRepository.getLocationCardsByName("Jarun").isEmpty()) {
+            l = new LocationCard();
+            l.setName("Jarun");
+            try {
+                l.setPhotoURL(new URL("https://upload.wikimedia.org/wikipedia/commons/1/1b/Jarun_Lake_aerial_view.jpg"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            l.setDescription("Bla bla jarun.");
+            l.setNeedsToBeChecked(true);
+            l.setPopulation(0);
+            l.setUncommonness(8);
+            l.setDifficulty(8);
+            l.setAccepted(false);
+            l.setLocation(new Point2D.Double(45.783333, 15.916667));
+
+            locationCardRepository.save(l);
+        }
+
+        if (locationCardRepository.getLocationCardsByName("Jakuševec").isEmpty()) {
+            l = new LocationCard();
+            l.setName("Jakuševec");
+            try {
+                l.setPhotoURL(new URL("https://www.kronikevg.com/wp-content/uploads/2014/01/jakusevec.jpg"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            l.setDescription("Bla bla skijalište.");
+            l.setNeedsToBeChecked(true);
+            l.setPopulation(0);
+            l.setUncommonness(8);
+            l.setDifficulty(10);
+            l.setAccepted(false);
+            l.setLocation(new Point2D.Double(45.766667, 16.016667));
+
+            locationCardRepository.save(l);
         }
     }
 }
