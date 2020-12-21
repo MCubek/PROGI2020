@@ -1,5 +1,4 @@
-export interface UserLocationPayload{
-  username : string;
-  longitude : number;
-  latitude : number;
+export interface UserLocationPayload {
+  longitude: number;
+  latitude: number;
 }
