@@ -25,6 +25,7 @@ import {MatDialogModule } from '@angular/material/dialog';
 import {FormsModule} from '@angular/forms';
 import { NearbyUsersComponent } from './user/nearby-users/nearby-users.component';
 import { CardApplicationsComponent } from './cartographer/card-applications/card-applications.component';
+import { TestMapComponent } from './test-map/test-map.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,8 @@ import { CardApplicationsComponent } from './cartographer/card-applications/card
     DateTimePickerDialog,
     NearbyUsersComponent,
     CardApplicationsComponent
+    CartographerApplicationsComponent,
+    TestMapComponent
   ],
   imports: [
     BrowserModule,
