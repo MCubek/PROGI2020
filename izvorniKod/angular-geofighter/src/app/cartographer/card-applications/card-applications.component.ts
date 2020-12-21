@@ -110,8 +110,9 @@ export class CardApplicationsComponent implements OnInit {
   toggleMapShowed(): void {
     if (!this.mapShowed) {
       this.populateCoordinatesList();
+    } else {
+      this.mapShowed = false;
     }
-    this.mapShowed = !this.mapShowed;
   }
 
   populateCoordinatesList(): void {
@@ -121,6 +122,7 @@ export class CardApplicationsComponent implements OnInit {
       data.forEach(value => {
         const myCord = new MyCoordinate(value.latitude, value.longitude);
         this.coordinatesList.push(myCord);
+        this.mapShowed = true;
       });
     }, error => {
       this.toastr.error('Error while getting coordinates!');
