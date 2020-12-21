@@ -188,9 +188,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     @Transactional
     void createDefaultCardsIfNotFound() {
-        User cart = userRepository.findByUsername("card").get();
-        User userA = userRepository.findByUsername("userA").get();
-        User userB = userRepository.findByUsername("userB").get();
+        User cart = userRepository.findByUsername("card").orElseThrow(() -> new SpringGeoFighterException("No card user in database"));
+        User userA = userRepository.findByUsername("userA").orElseThrow(() -> new SpringGeoFighterException("No userA in database"));
+        User userB = userRepository.findByUsername("userB").orElseThrow(() -> new SpringGeoFighterException("No userB in database"));
 
         LocationCard l;
         UserCard uc;
