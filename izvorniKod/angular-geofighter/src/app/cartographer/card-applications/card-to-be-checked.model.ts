@@ -1,4 +1,5 @@
 export interface CardCheckedCoordinates {
-  latitude: string;
-  longitude: string;
+  cardId: bigint;
+  latitude: number;
+  longitude: number;
 }
