@@ -28,8 +28,7 @@ public class LocationCard {
     private String name;
 
     @NotBlank
-    @Lob
-    @Size(max = 4000)
+    @Column(name = "description", length = 4000)
     private String description;
 
     private URL photoURL;

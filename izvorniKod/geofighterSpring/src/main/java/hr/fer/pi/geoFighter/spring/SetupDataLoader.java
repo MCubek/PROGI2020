@@ -218,14 +218,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                 uc.setUser(userA);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
-                userA.getLocationCardAssoc().add(uc);
             }
             if(userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(userB);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
-                userA.getLocationCardAssoc().add(uc);
             }
         }
 
@@ -252,14 +250,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                 uc.setUser(userA);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
-                userA.getLocationCardAssoc().add(uc);
             }
             if(userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(userB);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
-                userA.getLocationCardAssoc().add(uc);
             }
         }
 
@@ -286,14 +282,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                 uc.setUser(userA);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
-                userA.getLocationCardAssoc().add(uc);
             }
             if(userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(userB);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
-                userA.getLocationCardAssoc().add(uc);
             }
         }
 
@@ -320,14 +314,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                 uc.setUser(userA);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
-                userA.getLocationCardAssoc().add(uc);
             }
             if(userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(userB);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
-                userA.getLocationCardAssoc().add(uc);
             }
         }
 
@@ -354,14 +346,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                 uc.setUser(userA);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
-                userA.getLocationCardAssoc().add(uc);
             }
             if(userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(userB);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
-                userA.getLocationCardAssoc().add(uc);
             }
         }
     }
