@@ -9,6 +9,7 @@ import {LoginResponsePayload} from '../login/login-response.payload';
 import {environment} from '../../../environments/environment';
 import {SignupCartographerRequestPayload} from '../../cartographer/signup-cartographer/signup-cartographer-request-payload';
 import {ToastrService} from 'ngx-toastr';
+import {UserLocationPayload} from "../login/user-location.payload";
 
 @Injectable({
   providedIn: 'root'
@@ -104,5 +105,9 @@ export class AuthService {
 
   getRole(): string {
     return this.localStorage.retrieve('role');
+  }
+
+  saveLocation(userLocationPayload : UserLocationPayload) : Observable<any>{
+    return this.httpClient.post(`${environment.apiUrl}api/user/storeLocation`, userLocationPayload,{responseType: 'text'});
   }
 }

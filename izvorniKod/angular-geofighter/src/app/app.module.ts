@@ -23,6 +23,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule } from '@angular/material/dialog';
 import {FormsModule} from '@angular/forms';
+import { NearbyUsersComponent } from './user/nearby-users/nearby-users.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import {FormsModule} from '@angular/forms';
     CartographerApplicationsComponent,
     LeaderboardComponent,
     UserListComponent,
-    DateTimePickerDialog
+    DateTimePickerDialog,
+    NearbyUsersComponent
   ],
   imports: [
     BrowserModule,

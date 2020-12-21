@@ -91,7 +91,6 @@
                 }
               ]
             }
-
           }
         },
         "serve": {
@@ -157,5 +156,8 @@
       }
     }
   },
-  "defaultProject": "angular-geofighter"
+  "defaultProject": "angular-geofighter",
+  "cli": {
+    "analytics": false
+  }
 }
