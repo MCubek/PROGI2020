@@ -1,14 +1,14 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { SignupRequestPayload } from '../signup/signup-request.payload';
-import { Observable, throwError } from 'rxjs';
-import { LoginRequestPayload } from '../login/login-request.payload';
-import { map, tap } from 'rxjs/operators';
-import { LocalStorageService } from 'ngx-webstorage';
-import { LoginResponsePayload } from '../login/login-response.payload';
-import { environment } from '../../../environments/environment';
-import { SignupCartographerRequestPayload } from '../../cartographer/signup-cartographer/signup-cartographer-request-payload';
-import { ToastrService } from 'ngx-toastr';
+import {EventEmitter, Injectable, Output} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {SignupRequestPayload} from '../signup/signup-request.payload';
+import {Observable, throwError} from 'rxjs';
+import {LoginRequestPayload} from '../login/login-request.payload';
+import {map, tap} from 'rxjs/operators';
+import {LocalStorageService} from 'ngx-webstorage';
+import {LoginResponsePayload} from '../login/login-response.payload';
+import {environment} from '../../../environments/environment';
+import {SignupCartographerRequestPayload} from '../../cartographer/signup-cartographer/signup-cartographer-request-payload';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -27,13 +27,14 @@ export class AuthService {
     private httpClient: HttpClient,
     private localStorage: LocalStorageService,
     private toastr: ToastrService
-  ) {}
+  ) {
+  }
 
   signup(signupRequestPayload: SignupRequestPayload): Observable<any> {
     return this.httpClient.post(
       `${environment.apiUrl}api/auth/signup`,
       signupRequestPayload,
-      { responseType: 'text' }
+      {responseType: 'text'}
     );
   }
 
@@ -118,7 +119,7 @@ export class AuthService {
     return this.httpClient.post(
       `${environment.apiUrl}api/auth/cartographer/apply`,
       signupCartographerRequestPayload,
-      { responseType: 'text' }
+      {responseType: 'text'}
     );
   }
 
