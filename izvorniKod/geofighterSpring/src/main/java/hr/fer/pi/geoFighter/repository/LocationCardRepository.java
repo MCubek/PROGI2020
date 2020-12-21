@@ -20,4 +20,6 @@ public interface LocationCardRepository extends JpaRepository<LocationCard, Long
     Collection<LocationCard> findByName(String name);
 
     List<LocationCard> getLocationCardByNeedsToBeCheckedIsTrue();
+
+    List<LocationCard> getLocationCardsByAccepted(boolean accepted);
 }
