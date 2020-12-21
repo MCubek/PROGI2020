@@ -1,0 +1,22 @@
+<h1 style="text-align: center;">Leaderboard</h1>
+<table *ngIf="users!==undefined" class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Number of wins</th>
+        <th scope="col">Number of losses</th>
+        <th scope="col">ELO score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{user.username}}</td>
+        <td>{{user.wins}}</td>
+        <td>{{user.losses}}</td>
+        <td>{{user.eloScore}}</td>
+      </tr>
+    </tbody>
+</table>
+<h3 *ngIf="users===undefined || users.length==0" style="text-align: center;"> No users. Server may be down.</h3>

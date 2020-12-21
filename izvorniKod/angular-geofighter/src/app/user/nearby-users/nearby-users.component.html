@@ -1,0 +1,13 @@
+<table *ngIf="usernames!==undefined" class="table table-hover" style="margin:0 auto; width:50%;">
+  <thead>
+  <tr>
+    <th scope="col">Nearby users</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of usernames">
+    <td>{{user}}</td>
+  </tr>
+  </tbody>
+</table>
+<h3 *ngIf="usernames===undefined || usernames.length==0" style="text-align: center;"> No users. Server may be down.</h3>

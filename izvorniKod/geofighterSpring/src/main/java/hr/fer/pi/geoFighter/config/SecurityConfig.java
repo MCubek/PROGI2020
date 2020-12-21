@@ -43,17 +43,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and();
         http = http.exceptionHandling()
                 .authenticationEntryPoint(
-                        (request, response, authException) -> {
-                            response.sendError(
-                                    HttpServletResponse.SC_FORBIDDEN,
-                                    authException.getMessage()
-                            );
-                        }
+                        (request, response, authException) -> response.sendError(
+                                HttpServletResponse.SC_FORBIDDEN,
+                                authException.getMessage()
+                        )
                 )
                 .and();
         http.authorizeRequests()
                 .antMatchers("/api/auth/login", "/api/auth/signup", "/api/auth/accountVerification/*", "/api/auth/refresh")
                 .permitAll()
+
                 .antMatchers("/v2/api-docs",
                         "/configuration/ui",
                         "/swagger-resources/**",
@@ -62,8 +61,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-ui.html",
                         "/webjars/**")
                 .permitAll()
-                .antMatchers("/api/admin/**", "/api/fight/**")
+
+                .antMatchers("/api/user/**", "/api/fight/**")
+                .hasAuthority("USER_PRIVILEGE")
+
+                .antMatchers("/api/cartographer/**")
+                .hasAuthority("CARTOGRAPHER_PRIVILEGE")
+
+                .antMatchers("/api/admin/**")
                 .hasAuthority("ADMIN_PRIVILEGE")
+
                 .anyRequest()
                 .authenticated();
 
