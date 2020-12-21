@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { SignupCartographerComponent } from './cartographer/signup-cartographer/signup-cartographer.component';
 import {TokenInterceptor} from './token-interceptor';
 import { CartographerApplicationsComponent } from './admin/cartographer-applications/cartographer-applications.component';
+import { BattleComponent } from './battle/battle.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CartographerApplicationsComponent } from './admin/cartographer-applicat
     LoginComponent,
     HomeComponent,
     SignupCartographerComponent,
-    CartographerApplicationsComponent
+    CartographerApplicationsComponent,
+    BattleComponent
   ],
   imports: [
     BrowserModule,
