@@ -4,41 +4,20 @@
     height: 100%;
     margin-right: 0%;
 }
-.logo-icon {
-    max-width: 35px;
-    max-height: 35px;
-}
-.geofighter-body {
-    margin: 0%;
-    padding: 0%;
-    height: 100%;
-    margin-right: 0%;
-}
 .p {
     text-align: left;
     font-size: 20px;
     padding: 20px;
 }
-.card1 {
-  padding: 5%;
+.p2 {
+  text-align: left;
+  padding: 20px;
 }
-.card-container {
-  display: inline-flex;
-  flex-flow: row;
-  flex-wrap: wrap;
-  width: 100%;
+.h3 {
+  text-align: left;
+  padding: 20px;
 }
-.battle-container {
-  -ms-flex-item-align: center;
-  display: flex;
-  flex-flow: column;
-  width: 100%;
-}
-.bottom {
-  text-align: center;
-  font-size: 12px;
-  width: 100%;
-}
+
 .btn-font {
   font-size: 12px;
   margin: 3%;
@@ -48,61 +27,72 @@
   border-color: grey;
   margin: 10px;
 }
-.card-img-size {
-  height: 200px;
-  width: 300px;
+
+.list-group {
+  /*display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  overflow: hidden;*/
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-row: auto;
+  padding: 20px;
 }
+
+.list-group-item {
+  height: 50vh;
+  border: none;
+  padding: 10px;
+  overflow: auto;
+}
+
+.card {
+  height: 45vh;
+  width: 15vw;
+  /*height: 400px;
+  width: 250px;*/
+  
+}
+
+.card-img-top {
+  height: 20vh;
+  width: 15vw;
+  /*height: 170px;*/
+}
+
 .card-body {
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
+
+.card-title {
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.card-text {
+  font-size: 0.8rem;
+  text-align: justify;
+  text-justify: inter-word;
+  overflow: auto;
+}
+
+.btn {
+  font-size: 1rem;
+}
+
 .btn-bottom {
   padding: 10px;
   display: flex;
   flex-flow: row; 
+  justify-content: space-around;
   align-self: center;
   align-items: center;
-  position: absolute;
-  bottom: 0;
+  height: 0.5vh;
+  width: 15vw;
 }
-#card-geo.card {
-  display:inline;
-  width: 16rem; 
-  height: 400px; 
-  margin: 10px;
-}
-#card-geo.card-body {
-  width: 16rem; 
-  height: 13rem;
-}
-#card-geo.list-group {
-  display: inline;
-  width: 100%;
-  width: 16rem; 
-  height: 400px;
-}
-#card-geo.list-group-item {
-  display:inline;
-  width: 16rem; 
-  height: 400px; 
-  padding: 0;
-}
-#card-geo.card-img-top {
-  width: 16rem; 
-  height: 12rem;
-}
-
-#btn-card-geo {
-  width: 6rem; 
-  height: 2rem;
-}
-
-#content {
-    width: 100%;
-    padding: 0;
-    text-align: center;
-    -webkit-transition: all 0.3s;
-    -o-transition: all 0.3s;
-    transition: all 0.3s; }
 
 #sidebar {
     min-width: 270px;
