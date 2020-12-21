@@ -52,8 +52,7 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  // tslint:disable-next-line:typedef
-  login() {
+  login(): void {
     this.loginRequestPayload.username = this.loginForm.get('username').value;
     this.loginRequestPayload.password = this.loginForm.get('password').value;
 
@@ -70,8 +69,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // tslint:disable-next-line:typedef
-  setLocation() {
+  setLocation(): void {
     this.geoLocation.pipe(take(1)).subscribe(position => {
       this.position = position;
       this.userLocationPayload.latitude = this.position.coords.longitude;

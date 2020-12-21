@@ -19,6 +19,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final AuthService authService;
 
     public List<UserEloDTO> getUserEloInfo() {
         return new ArrayList<>(userRepository.getUserEloInfo());
@@ -67,8 +68,7 @@ public class UserService {
     }
 
     public void storeLocation(UserLocationDTO userLocationDTO){
-        String username = userLocationDTO.getUsername();
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new SpringGeoFighterException("User " + username + " not found."));
+        User user = authService.getCurrentUser();
         Point2D.Double point = new Point2D.Double(userLocationDTO.getLatitude(),userLocationDTO.getLongitude());
         user.setCurrentLocation(point);
         userRepository.save(user);
