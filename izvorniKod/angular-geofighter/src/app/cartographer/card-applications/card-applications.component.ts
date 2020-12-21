@@ -4,6 +4,8 @@ import {CardApplicationModel} from './card-application.model';
 import {throwError} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {MyCoordinate} from './CartographerMap/MyComponent';
+import {CardCheckedCoordinates} from './card-to-be-checked.model';
 
 @Component({
   selector: 'app-card-applications',
@@ -15,11 +17,14 @@ export class CardApplicationsComponent implements OnInit {
   cardApplications: Array<CardApplicationModel>;
   editCardForm: FormGroup;
 
+  coordinatesList: Coordinates[] = [];
+  mapShowed = false;
+
   constructor(private cardApplicationService: CardApplicationService, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
-    const { search } = window.location;
+    const {search} = window.location;
     if ((new URLSearchParams(search)).get('acceptSuccess') === '1') {
       this.toastr.success('Card application accepted!');
     }
@@ -82,7 +87,7 @@ export class CardApplicationsComponent implements OnInit {
     });
   }
 
-  edit(): void{
+  edit(): void {
     this.cardApplicationService.editCard(this.editCardForm.getRawValue()).subscribe(data => {
       window.location.href = window.location.pathname + '?editSuccess=1';
     }, error => {
@@ -100,6 +105,29 @@ export class CardApplicationsComponent implements OnInit {
         throwError(error);
       });
     }
+  }
+
+  toggleMapShowed(): void {
+    if (!this.mapShowed) {
+      this.populateCoordinatesList();
+    } else {
+      this.mapShowed = false;
+    }
+  }
+
+  populateCoordinatesList(): void {
+    this.coordinatesList = [];
+
+    this.cardApplicationService.getAllCardToBeCheckedCoordinates().subscribe(data => {
+      data.forEach(value => {
+        const myCord = new MyCoordinate(value.latitude, value.longitude);
+        this.coordinatesList.push(myCord);
+        this.mapShowed = true;
+      });
+    }, error => {
+      this.toastr.error('Error while getting coordinates!');
+      throwError(error);
+    });
   }
 
 }

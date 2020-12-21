@@ -8,6 +8,7 @@ import {throwError} from 'rxjs';
 import {UserLocationPayload} from './user-location.payload';
 import {GeolocationService} from '@ng-web-apis/geolocation';
 import {take} from 'rxjs/operators';
+import {MyCoordinate} from '../../cartographer/card-applications/CartographerMap/MyComponent';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
   userLocationPayload: UserLocationPayload;
 
   constructor(private authService: AuthService, private router: Router, private toastr: ToastrService,
-              private activatedRoute: ActivatedRoute, private geoLocation: GeolocationService) {
+              private activatedRoute: ActivatedRoute, private readonly geoLocation: GeolocationService) {
     this.loginRequestPayload = {
       username: '',
       password: ''
@@ -59,11 +60,13 @@ export class LoginComponent implements OnInit {
       this.isError = false;
       this.router.navigateByUrl('');
       this.toastr.success('Login Successful');
+
+      this.setLocation();
+
     }, error => {
       this.isError = true;
       throwError(error);
     });
-    this.setLocation();
   }
 
   setLocation(): void {
@@ -71,8 +74,7 @@ export class LoginComponent implements OnInit {
       this.position = position;
       this.userLocationPayload.latitude = this.position.coords.longitude;
       this.userLocationPayload.longitude = this.position.coords.latitude;
-      console.log((this.position.coords.longitude), this.position.coords.latitude);
-      console.log(this.position.coords.accuracy);
+
       this.authService.saveLocation(this.userLocationPayload).subscribe(
         response => console.log(response),
         err => console.log(err));

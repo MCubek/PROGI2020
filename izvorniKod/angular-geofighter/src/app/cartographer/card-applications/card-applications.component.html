@@ -2,6 +2,12 @@
   <div class="row">
     <hr/>
     <div class="col-md-11">
+      <div *ngIf="cardApplications!==undefined && cardApplications.length!=0">
+        <button class="btn btn-primary" (click)="toggleMapShowed()">Toggle Locations Map</button>
+        <div *ngIf="mapShowed">
+          <app-cartographer-map [coordinatesList]="coordinatesList"></app-cartographer-map>
+        </div>
+      </div>
       <h2>List of Card Applications</h2>
       <ul *ngIf="cardApplications!==undefined" class="list-group">
         <li *ngFor="let card of cardApplications" class="list-group-item">
@@ -11,8 +17,10 @@
           <p>Description: {{card.description}}</p>
           <button class="btn btn-success mr-2" (click)="accept(card.id)">Accept</button>
           <button class="btn btn-danger mr-2" (click)="decline(card.id)">Decline</button>
-          <button class="btn btn-primary" (click)="editForm(card)" data-toggle="modal" data-target="#editWindow">Edit</button>
-          <button class="btn btn-primary float-right" (click)="requestConfirmation(card.id)">{{card.needsToBeChecked ? 'Remove confirmation request' : 'Request confirmation'}}</button>
+          <button class="btn btn-primary" (click)="editForm(card)" data-toggle="modal" data-target="#editWindow">Edit
+          </button>
+          <button class="btn btn-primary float-right"
+                  (click)="requestConfirmation(card.id)">{{card.needsToBeChecked ? 'Remove confirmation request' : 'Request confirmation'}}</button>
         </li>
       </ul>
       <p *ngIf="cardApplications===undefined || cardApplications.length==0"> No Card Applications</p>

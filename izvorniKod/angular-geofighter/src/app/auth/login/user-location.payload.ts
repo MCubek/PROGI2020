@@ -1,4 +1,4 @@
-export interface UserLocationPayload {
+export interface UserLocationPayload{
   longitude: number;
   latitude: number;
 }

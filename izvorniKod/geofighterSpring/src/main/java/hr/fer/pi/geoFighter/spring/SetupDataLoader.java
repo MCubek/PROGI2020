@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
+import java.awt.geom.Point2D;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -195,7 +196,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         LocationCard l;
         UserCard uc;
 
-        if(locationCardRepository.findByName("Sljeme").isEmpty()){
+        if (locationCardRepository.findByName("Sljeme").isEmpty()) {
             l = new LocationCard();
             l.setName("Sljeme");
             try {
@@ -213,7 +214,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
             l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(user);
                 uc.setLocationCard(l);
@@ -223,7 +224,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             }
         }
 
-        if(locationCardRepository.findByName("Trg Bana Jelačića").isEmpty()){
+        if (locationCardRepository.findByName("Trg Bana Jelačića").isEmpty()) {
             l = new LocationCard();
             l.setName("Trg Bana Jelačića");
             try {
@@ -241,7 +242,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
             l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(user);
                 uc.setLocationCard(l);
@@ -251,7 +252,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             }
         }
 
-        if(locationCardRepository.findByName("Zagrebačka katedrala").isEmpty()){
+        if (locationCardRepository.findByName("Zagrebačka katedrala").isEmpty()) {
             l = new LocationCard();
             l.setName("Zagrebačka katedrala");
             try {
@@ -269,7 +270,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
             l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(user);
                 uc.setLocationCard(l);
@@ -279,7 +280,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             }
         }
 
-        if(locationCardRepository.findByName("Crkva sv. Marka").isEmpty()){
+        if (locationCardRepository.findByName("Crkva sv. Marka").isEmpty()) {
             l = new LocationCard();
             l.setName("Crkva sv. Marka");
             try {
@@ -297,7 +298,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
             l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(user);
                 uc.setLocationCard(l);
@@ -307,7 +308,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             }
         }
 
-        if(locationCardRepository.findByName("Hrvatsko Narodno Kazalište").isEmpty()){
+        if (locationCardRepository.findByName("Hrvatsko Narodno Kazalište").isEmpty()) {
             l = new LocationCard();
             l.setName("Hrvatsko Narodno Kazalište");
             try {
@@ -325,7 +326,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
             l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(user);
                 uc.setLocationCard(l);
@@ -333,6 +334,44 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                 userCardRepository.save(uc);
                 user.getLocationCardAssoc().add(uc);
             }
+        }
+
+        if (locationCardRepository.getLocationCardsByName("Jarun").isEmpty()) {
+            l = new LocationCard();
+            l.setName("Jarun");
+            try {
+                l.setPhotoURL(new URL("https://upload.wikimedia.org/wikipedia/commons/1/1b/Jarun_Lake_aerial_view.jpg"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            l.setDescription("Bla bla jarun.");
+            l.setNeedsToBeChecked(true);
+            l.setPopulation(0);
+            l.setUncommonness(8);
+            l.setDifficulty(8);
+            l.setAccepted(false);
+            l.setLocation(new Point2D.Double(45.783333, 15.916667));
+
+            locationCardRepository.save(l);
+        }
+
+        if (locationCardRepository.getLocationCardsByName("Jakuševec").isEmpty()) {
+            l = new LocationCard();
+            l.setName("Jakuševec");
+            try {
+                l.setPhotoURL(new URL("https://www.kronikevg.com/wp-content/uploads/2014/01/jakusevec.jpg"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            l.setDescription("Bla bla skijalište.");
+            l.setNeedsToBeChecked(true);
+            l.setPopulation(0);
+            l.setUncommonness(8);
+            l.setDifficulty(10);
+            l.setAccepted(false);
+            l.setLocation(new Point2D.Double(45.766667, 16.016667));
+
+            locationCardRepository.save(l);
         }
     }
 }

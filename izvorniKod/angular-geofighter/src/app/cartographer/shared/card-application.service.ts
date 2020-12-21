@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import {CardApplicationModel} from '../card-applications/card-application.model';
+import {CardCheckedCoordinates} from '../card-applications/card-to-be-checked.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,13 +14,13 @@ export class CardApplicationService {
 
   getAllCardApplications(): Observable<CardApplicationModel[]> {
     return this.httpClient.get<CardApplicationModel[]>(
-      `${environment.apiUrl}api/cardApplications/all`
+      `${environment.apiUrl}api/cartographer/all`
     );
   }
 
   acceptCard(id: string): Observable<any> {
     return this.httpClient.put(
-      `${environment.apiUrl}api/cardApplications/accept/` + id,
+      `${environment.apiUrl}api/cartographer/accept/` + id,
       null,
       {responseType: 'text'}
     );
@@ -27,7 +28,7 @@ export class CardApplicationService {
 
   declineCard(id: string): Observable<any> {
     return this.httpClient.put(
-      `${environment.apiUrl}api/cardApplications/decline/` + id,
+      `${environment.apiUrl}api/cartographer/decline/` + id,
       null,
       {responseType: 'text'}
     );
@@ -35,7 +36,7 @@ export class CardApplicationService {
 
   editCard(cardApplicationModel: CardApplicationModel): Observable<any> {
     return this.httpClient.post(
-      `${environment.apiUrl}api/cardApplications/edit`,
+      `${environment.apiUrl}api/cartographer/edit`,
       cardApplicationModel,
       {responseType: 'text'}
     );
@@ -43,9 +44,15 @@ export class CardApplicationService {
 
   requestConfirmation(id: string): Observable<any> {
     return this.httpClient.put(
-      `${environment.apiUrl}api/cardApplications/confirm/` + id,
+      `${environment.apiUrl}api/cartographer/confirm/` + id,
       null,
       {responseType: 'text'}
+    );
+  }
+
+  getAllCardToBeCheckedCoordinates(): Observable<CardCheckedCoordinates[]> {
+    return this.httpClient.get<CardCheckedCoordinates[]>(
+      `${environment.apiUrl}api/cartographer/checked`
     );
   }
 
