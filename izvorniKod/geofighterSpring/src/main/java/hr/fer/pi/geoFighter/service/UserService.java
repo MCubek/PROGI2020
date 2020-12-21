@@ -1,6 +1,7 @@
 package hr.fer.pi.geoFighter.service;
 
 import hr.fer.pi.geoFighter.dto.UserEloDTO;
+import hr.fer.pi.geoFighter.dto.UserLocationDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.User;
 import hr.fer.pi.geoFighter.repository.UserRepository;
@@ -26,6 +27,10 @@ public class UserService {
     public List<String> getNearbyUsers(String username) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new SpringGeoFighterException("User does not exist"));
         Point2D.Double userLocation = user.getCurrentLocation();
+
+        if (userLocation == null) userLocation = new Point2D.Double(0, 0);
+
+
         double userLongitude = userLocation.getX();
         double userLatitude = userLocation.getY();
 
@@ -33,6 +38,9 @@ public class UserService {
         ArrayList<String> nearbyUsers = new ArrayList<>();
         for (User u : allUsers) {
             Point2D.Double location = u.getCurrentLocation();
+
+            if (location == null) location = new Point2D.Double(0, 0);
+
             double uLongitude = location.getX();
             double uLatitude = location.getY();
             double distance = calculateDistance(userLatitude, uLatitude, userLongitude, uLongitude);
@@ -56,5 +64,13 @@ public class UserService {
 
         distance = Math.pow(distance, 2);
         return Math.sqrt(distance);
+    }
+
+    public void storeLocation(UserLocationDTO userLocationDTO){
+        String username = userLocationDTO.getUsername();
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new SpringGeoFighterException("User " + username + " not found."));
+        Point2D.Double point = new Point2D.Double(userLocationDTO.getLatitude(),userLocationDTO.getLongitude());
+        user.setCurrentLocation(point);
+        userRepository.save(user);
     }
 }

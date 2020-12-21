@@ -24,7 +24,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.geom.Point2D;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Instant;
@@ -170,13 +169,5 @@ public class AuthService {
     public boolean isLoggedIn() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return ! (authentication instanceof AnonymousAuthenticationToken) && authentication.isAuthenticated();
-    }
-
-    public void storeLocation(UserLocationDTO userLocationDTO){
-        String username = userLocationDTO.getUsername();
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new SpringGeoFighterException("User " + username + " not found."));
-        Point2D.Double point = new Point2D.Double(userLocationDTO.getLatitude(),userLocationDTO.getLongitude());
-        user.setCurrentLocation(point);
-        userRepository.save(user);
     }
 }
