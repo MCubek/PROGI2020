@@ -33,7 +33,6 @@ const routes: Routes = [
   {path: 'card/allCards', component: CollectionComponent},
   {path: 'card/applyCard', component: ApplyCardComponent},
   {path: 'card/:id', component: SingleCardComponent},
-  {path: '**', redirectTo: ''},
   {path: 'cartographerApply', component: SignupCartographerComponent, canActivate: [AuthGuard]},
   {path: 'cartographerApplications', component: CartographerApplicationsComponent, canActivate: [AuthGuard, AdminGuard]},
   {path: 'leaderboard', component: LeaderboardComponent, canActivate: [AuthGuard]},
