@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   userLocationPayload: UserLocationPayload;
 
   constructor(private authService: AuthService, private router: Router, private toastr: ToastrService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute, private readonly geoLocation: GeolocationService) {
     this.loginRequestPayload = {
       username: '',
       password: ''
@@ -63,22 +63,22 @@ export class LoginComponent implements OnInit {
       this.isError = false;
       this.router.navigateByUrl('');
       this.toastr.success('Login Successful');
+
+      this.setLocation();
+
     }, error => {
       this.isError = true;
       throwError(error);
     });
-    this.setLocation();
   }
 
   // tslint:disable-next-line:typedef
-  setLocation(){
-    // @ts-ignore
+  setLocation() {
     this.geoLocation.pipe(take(1)).subscribe(position => {
       this.position = position;
       this.userLocationPayload.latitude = this.position.coords.longitude;
       this.userLocationPayload.longitude = this.position.coords.latitude;
-      console.log((this.position.coords.longitude), this.position.coords.latitude);
-      console.log(this.position.coords.accuracy);
+
       this.authService.saveLocation(this.userLocationPayload).subscribe(
         response => console.log(response),
         err => console.log(err));
