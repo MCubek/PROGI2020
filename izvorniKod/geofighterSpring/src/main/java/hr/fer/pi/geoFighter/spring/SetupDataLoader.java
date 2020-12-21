@@ -54,7 +54,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
         if (address.equals("http://localhost:8080/")) {
             createDefaultUsersIfNotFound();
-            createDefaultCardsIfNotFound();
+            //createDefaultCardsIfNotFound();
+            createTestMapCards();
         }
 
         alreadySetup = true;
@@ -293,8 +294,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setPopulation(0);
             l.setUncommonness(4);
             l.setDifficulty(4);
-            l.setAccepted(false);
-            l.setLocation(new Point2D.Double(45.8150,16.1819));
+            l.setAccepted(true);
+            l.setAcceptedBy(cart);
 
             l = locationCardRepository.save(l);
 
@@ -321,8 +322,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setPopulation(0);
             l.setUncommonness(8);
             l.setDifficulty(8);
-            l.setAccepted(false);
-            l.setLocation(new Point2D.Double(45.8150,15.9819));
+            l.setAccepted(true);
+            l.setAcceptedBy(cart);
 
             l = locationCardRepository.save(l);
 
@@ -334,6 +335,48 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                 userCardRepository.save(uc);
                 user.getLocationCardAssoc().add(uc);
             }
+        }
+    }
+
+    @Transactional
+    void createTestMapCards() {
+        LocationCard l;
+        if(locationCardRepository.getLocationCardsByName("Jarun").isEmpty()){
+            l = new LocationCard();
+            l.setName("Jarun");
+            try {
+                l.setPhotoURL(new URL("https://upload.wikimedia.org/wikipedia/commons/1/1b/Jarun_Lake_aerial_view.jpg"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            l.setDescription("Bla bla jarun.");
+            l.setNeedsToBeChecked(true);
+            l.setPopulation(0);
+            l.setUncommonness(8);
+            l.setDifficulty(8);
+            l.setAccepted(false);
+            l.setLocation(new Point2D.Double(45.783333,15.916667));
+
+            locationCardRepository.save(l);
+        }
+
+        if(locationCardRepository.getLocationCardsByName("Jakuševec").isEmpty()){
+            l = new LocationCard();
+            l.setName("Jakuševec");
+            try {
+                l.setPhotoURL(new URL("https://www.kronikevg.com/wp-content/uploads/2014/01/jakusevec.jpg"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            l.setDescription("Bla bla skijalište.");
+            l.setNeedsToBeChecked(true);
+            l.setPopulation(0);
+            l.setUncommonness(8);
+            l.setDifficulty(10);
+            l.setAccepted(false);
+            l.setLocation(new Point2D.Double(45.766667,16.016667));
+
+            locationCardRepository.save(l);
         }
     }
 }
