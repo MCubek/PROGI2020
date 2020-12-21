@@ -1,6 +1,7 @@
 package hr.fer.pi.geoFighter.controller;
 
 import hr.fer.pi.geoFighter.dto.CardApplicationDTO;
+import hr.fer.pi.geoFighter.dto.CardLocationDTO;
 import hr.fer.pi.geoFighter.model.LocationCard;
 import hr.fer.pi.geoFighter.service.CardApplicationService;
 import lombok.AllArgsConstructor;
@@ -12,9 +13,9 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping("/api/cardApplications")
+@RequestMapping("/api/cartographer")
 @AllArgsConstructor
-public class CardApplicationController {
+public class CartographerController {
 
     private final CardApplicationService cardApplicationService;
 
@@ -45,5 +46,10 @@ public class CardApplicationController {
     public ResponseEntity<String> requestCardApplicationConfirmation(@PathVariable Long id) {
         cardApplicationService.requestCardApplicationConfirmation(id);
         return new ResponseEntity<>("Requested confirmation for card application", OK);
+    }
+
+    @GetMapping("/checked")
+    public ResponseEntity<List<CardLocationDTO>> getAllToBeCheckedCoordinates() {
+        return new ResponseEntity<>(cardApplicationService.getAllCardsThatNeedToBeChecked(), OK);
     }
 }

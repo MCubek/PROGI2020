@@ -3,12 +3,12 @@ package hr.fer.pi.geoFighter.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.locationtech.jts.geom.Point;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.awt.geom.Point2D;
 import java.net.URL;
 import java.time.Instant;
 import java.util.Collection;
@@ -36,8 +36,7 @@ public class LocationCard {
     @Column(name = "created_at")
     private final Instant createdDate = Instant.now();
 
-    @NotNull
-    private Point location;
+    private Point2D.Double location;
 
     @NotNull
     private boolean accepted = false;

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
+import java.awt.geom.Point2D;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -292,8 +293,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setPopulation(0);
             l.setUncommonness(4);
             l.setDifficulty(4);
-            l.setAccepted(true);
-            l.setAcceptedBy(cart);
+            l.setAccepted(false);
+            l.setLocation(new Point2D.Double(45.8150,16.1819));
 
             l = locationCardRepository.save(l);
 
@@ -320,8 +321,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setPopulation(0);
             l.setUncommonness(8);
             l.setDifficulty(8);
-            l.setAccepted(true);
-            l.setAcceptedBy(cart);
+            l.setAccepted(false);
+            l.setLocation(new Point2D.Double(45.8150,15.9819));
 
             l = locationCardRepository.save(l);
 
