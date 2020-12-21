@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.awt.geom.Point2D;
 import java.net.URL;
 import java.time.Instant;
@@ -28,8 +27,7 @@ public class LocationCard {
     private String name;
 
     @NotBlank
-    @Lob
-    @Size(max = 4000)
+    @Column(name = "description", length = 4000)
     private String description;
 
     private URL photoURL;
