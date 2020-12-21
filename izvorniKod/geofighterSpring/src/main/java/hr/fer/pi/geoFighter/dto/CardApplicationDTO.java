@@ -1,6 +1,5 @@
 package hr.fer.pi.geoFighter.dto;
 
-import hr.fer.pi.geoFighter.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +17,6 @@ public class CardApplicationDTO {
     private String description;
     private URL photoUrl;
     private String location;
-    private User createdBy;
+    private String createdBy;
     private boolean needsToBeChecked;
 }

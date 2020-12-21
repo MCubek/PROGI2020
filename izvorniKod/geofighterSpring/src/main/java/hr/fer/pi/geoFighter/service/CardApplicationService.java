@@ -31,8 +31,8 @@ public class CardApplicationService {
             card.setName(locationCard.getName());
             card.setDescription(locationCard.getDescription());
             card.setPhotoUrl(locationCard.getPhotoURL());
-            card.setLocation(locationCard.getLocation().toString());
-            card.setCreatedBy(locationCard.getCreatedBy());
+            card.setLocation(locationCard.getLocation().x + ", " + locationCard.getLocation().y);
+            card.setCreatedBy(locationCard.getCreatedBy() != null ? "locationCard.getCreatedBy().getUsername()" : "unknown");
             card.setNeedsToBeChecked(locationCard.isNeedsToBeChecked());
             cardCollection.add(card);
         }
