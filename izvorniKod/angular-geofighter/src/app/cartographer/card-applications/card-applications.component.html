@@ -14,6 +14,7 @@
           <p>Name: {{card.name}}</p>
           <p>Location: {{card.location}}</p>
           <p>Created by: {{card.createdBy}}</p>
+          <p>Created time: {{card.createdTime}}</p>
           <p>Description: {{card.description}}</p>
           <button class="btn btn-success mr-2" (click)="accept(card.id)">Accept</button>
           <button class="btn btn-danger mr-2" (click)="decline(card.id)">Decline</button>
@@ -66,6 +67,19 @@
             </div>
           </div>
           <div class="form-group row">
+            <label class="col-md-4 col-form-label text-md-right"
+            >Location</label>
+            <div class="col-md-6">
+              <input
+                type="text"
+                [formControlName]="'location'"
+                class="form-control input-radius"
+                required
+                autofocus
+              />
+            </div>
+          </div>
+          <div class="form-group row">
             <label
               for="photoUrl"
               class="col-md-4 col-form-label text-md-right"
@@ -87,6 +101,45 @@
               >
                   Please provide a valid URL
                 </span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-form-label text-md-right"
+            >Uncommonness</label>
+            <div class="col-md-6">
+              <input
+                type="number"
+                [formControlName]="'uncommonness'"
+                class="form-control input-radius"
+                required
+                autofocus
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-form-label text-md-right"
+            >Difficulty</label>
+            <div class="col-md-6">
+              <input
+                type="number"
+                [formControlName]="'difficulty'"
+                class="form-control input-radius"
+                required
+                autofocus
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-form-label text-md-right"
+            >Population</label>
+            <div class="col-md-6">
+              <input
+                type="number"
+                [formControlName]="'population'"
+                class="form-control input-radius"
+                required
+                autofocus
+              />
             </div>
           </div>
         </form>

@@ -49,7 +49,10 @@ export class CardApplicationsComponent implements OnInit {
       photoUrl: new FormControl('', Validators.required),
       location: new FormControl('', Validators.required),
       createdBy: new FormControl('', Validators.required),
-      needsToBeChecked: new FormControl(false)
+      needsToBeChecked: new FormControl(false),
+      uncommonness: new FormControl('0', [Validators.required, Validators.min(0), Validators.max(10)]),
+      difficulty: new FormControl('0', [Validators.required, Validators.min(0), Validators.max(10)]),
+      population: new FormControl('0', [Validators.required, Validators.min(0), Validators.max(10)])
     });
   }
 
@@ -83,7 +86,10 @@ export class CardApplicationsComponent implements OnInit {
       photoUrl: cardApplicationModel.photoUrl,
       location: cardApplicationModel.location,
       createdBy: cardApplicationModel.createdBy,
-      needsToBeChecked: cardApplicationModel.needsToBeChecked
+      needsToBeChecked: cardApplicationModel.needsToBeChecked,
+      uncommonness: cardApplicationModel.uncommonness,
+      difficulty: cardApplicationModel.difficulty,
+      population: cardApplicationModel.population
     });
   }
 
