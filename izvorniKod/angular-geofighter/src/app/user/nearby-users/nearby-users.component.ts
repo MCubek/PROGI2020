@@ -41,8 +41,9 @@ export class NearbyUsersComponent implements OnInit {
 
     interval(1000).pipe(startWith(0),switchMap(() => this.userService.getMatches(this.authService.getUsername()))
     ).subscribe(data => {
-      this.partner = data
-      if(data.length!=null){
+      //this.partner = data
+      //if(data.length!=null){
+      if(data){
         this.router.navigateByUrl("/battle");
       }
     });

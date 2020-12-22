@@ -42,7 +42,7 @@ export class UserService {
     return this.httpClient.post(`${environment.apiUrl}api/user/receiveAnswer`, sendRequestPayload, {responseType: 'text'});
   }
 
-  getMatches(username: string): Observable<string> {
-    return this.httpClient.get<string>(`${environment.apiUrl}api/user/getMatches`+username);
+  getMatches(username: string): Observable<boolean> {
+    return this.httpClient.get<boolean>(`${environment.apiUrl}api/user/getMatches`+username);
   }
 }

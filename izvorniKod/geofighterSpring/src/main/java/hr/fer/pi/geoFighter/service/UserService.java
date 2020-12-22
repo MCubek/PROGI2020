@@ -130,16 +130,19 @@ public class UserService {
         }
     }
 
-    public String getMatches(String username){
-        String partner = "";
+    public Boolean getMatches(String username){
+        //String partner = "";
         for (SendRequestDTO matches:startPlaying){
             if (matches.getUsernameSender().equals(username)){
-               partner = matches.getUsernameReceiver();
+                return true;
+               //partner = matches.getUsernameReceiver();
             }
             else if(matches.getUsernameReceiver().equals(username)){
-               partner = matches.getUsernameSender();
+                return true;
+               //partner = matches.getUsernameSender();
             }
         }
-        return partner;
+        return false;
+        //return partner;
     }
 }

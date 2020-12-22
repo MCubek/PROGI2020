@@ -63,7 +63,7 @@ public class UserController {
     }
 
     @GetMapping("/getMatches{username}")
-    public ResponseEntity<String> getMatches(@PathVariable String username){
+    public ResponseEntity<Boolean> getMatches(@PathVariable String username){
         return new ResponseEntity<>(userService.getMatches(username),OK);
     }
 
