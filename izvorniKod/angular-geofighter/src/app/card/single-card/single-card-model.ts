@@ -8,4 +8,5 @@ export interface SingleCardModel {
   uncommonness?: string;
   difficulty?: string;
   population?: string;
+  createdTime?: string;
 }

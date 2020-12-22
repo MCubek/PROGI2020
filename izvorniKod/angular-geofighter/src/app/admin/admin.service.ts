@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {CartographerApplicantModel} from './cartographer-applications/cartographer-applicant.model';
-import {UserTimeoutPayload} from './user-list/user-timeout.payload'
+import {UserTimeoutPayload} from './user-list/user-timeout.payload';
 import {environment} from '../../environments/environment';
 import {LocationCardModel} from './cards-page/location-card.model';
 
@@ -28,7 +28,7 @@ export class AdminService {
   }
 
   getCardCollection(): Observable<LocationCardModel[]> {
-    return this.httpClient.get<LocationCardModel[]>(`${environment.apiUrl}api/card/cardCollection`);
+    return this.httpClient.get<LocationCardModel[]>(`${environment.apiUrl}api/admin/allCards`);
   }
 
   deleteCard(cardId: number): Observable<any> {

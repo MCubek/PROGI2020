@@ -1,10 +1,16 @@
 <div class="card" style="width: 48rem; height: 400px; margin: 0 auto">
-  <img src="{{ imagePath }}" class="card-img-top" alt="..." />
-  <div class="card-body">
-    <h1 class="card-title">{{ name }}</h1>
+  <img src="{{ imageURL }}" class="card-img-top" alt="..."/>
+  <div *ngIf="cardName!==undefined" class="card-body">
+    <h1 class="card-title">{{ cardName }}</h1>
+    <p>Description {{ description }}</p>
     <p>Difficulty {{ difficulty }}</p>
     <p>Uncommonness {{ uncommonness }}</p>
     <p>Population {{ population }}</p>
+    <p>Created by {{ creator }}</p>
+    <p>Created at {{ createdTime }}</p>
+    <p>Location {{ location }}</p>
+  </div>
+  <div *ngIf="cardName===undefined">
     <p class="card-text">NO CARD FOUND. CARD ID DOES NOT EXIST</p>
   </div>
 </div>
