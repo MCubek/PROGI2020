@@ -19,6 +19,7 @@ export class NearbyUsersComponent implements OnInit {
   requests: Array<String>;
   partner: string;
 
+
   constructor(private userService: UserService, private router: Router, private toastr: ToastrService,
               private authService: AuthService) {
     this.sendRequestPayload = {
@@ -41,10 +42,10 @@ export class NearbyUsersComponent implements OnInit {
 
     interval(1000).pipe(startWith(0),switchMap(() => this.userService.getMatches(this.authService.getUsername()))
     ).subscribe(data => {
-      //this.partner = data
-      //if(data.length!=null){
-      if(data){
-        this.router.navigateByUrl("/battle");
+      if(data.answer){
+        this.sendRequestPayload.usernameSender = data.usernameSender;
+        this.sendRequestPayload.usernameReceiver = data.usernameReceiver;
+        this.router.navigate(["/battle"], {state: {data:this.sendRequestPayload }});
       }
     });
 

@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 import {LeaderboardUserModel} from './leaderboard/leaderboard-user.model';
 import {environment} from '../../environments/environment';
 import {SendRequestPayload} from "./nearby-users/send-request-payload";
-import {UserLocationPayload} from "../auth/login/user-location.payload";
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +41,8 @@ export class UserService {
     return this.httpClient.post(`${environment.apiUrl}api/user/receiveAnswer`, sendRequestPayload, {responseType: 'text'});
   }
 
-  getMatches(username: string): Observable<boolean> {
-    return this.httpClient.get<boolean>(`${environment.apiUrl}api/user/getMatches`+username);
+  getMatches(username: string): Observable<SendRequestPayload> {
+    return this.httpClient.get<SendRequestPayload>(`${environment.apiUrl}api/user/getMatches`+username);
   }
+
 }

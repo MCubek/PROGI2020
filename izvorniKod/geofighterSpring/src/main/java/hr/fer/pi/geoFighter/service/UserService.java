@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -130,19 +129,15 @@ public class UserService {
         }
     }
 
-    public Boolean getMatches(String username){
-        //String partner = "";
-        for (SendRequestDTO matches:startPlaying){
-            if (matches.getUsernameSender().equals(username)){
-                return true;
-               //partner = matches.getUsernameReceiver();
+    public SendRequestDTO getMatches(String username){
+        for (SendRequestDTO match:startPlaying){
+            if (match.getUsernameSender().equals(username)){
+                return match;
             }
-            else if(matches.getUsernameReceiver().equals(username)){
-                return true;
-               //partner = matches.getUsernameSender();
+            else if(match.getUsernameReceiver().equals(username)){
+                return match;
             }
         }
-        return false;
-        //return partner;
+        return new SendRequestDTO("","",false);
     }
 }

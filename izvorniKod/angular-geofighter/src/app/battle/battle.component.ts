@@ -4,6 +4,7 @@ import {FightService} from './fight.service';
 import { CardModel } from './card.model';
 import { AuthService } from '../auth/shared/auth.service';
 import {Router} from '@angular/router';
+import {SendRequestPayload} from "../user/nearby-users/send-request-payload";
 
 @Component({
   selector: 'app-battle',
@@ -16,6 +17,7 @@ export class BattleComponent implements OnInit {
   username: string;
   role: string;
   userCards: Array<CardModel>;
+  match: SendRequestPayload;
 
   constructor(private authService: AuthService, private router: Router, private fightService: FightService) {
   }
@@ -28,6 +30,9 @@ export class BattleComponent implements OnInit {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.username = this.authService.getUsername();
     this.role = this.authService.getRole();
+
+    this.match = history.state.data;
+    console.log(this.match.usernameSender+', '+this.match.usernameReceiver);
 
     this.fightService.getUserCardList(this.username).subscribe(data => {
       this.userCards = data;
