@@ -37,7 +37,7 @@ import {CardsPageComponent} from './admin/cards-page/cards-page.component';
     HomeComponent,
     SignupCartographerComponent,
     CartographerApplicationsComponent,
-    CardsPageComponent
+    CardsPageComponent,
     LeaderboardComponent,
     UserListComponent,
     DateTimePickerDialog,
