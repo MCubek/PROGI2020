@@ -1,8 +1,10 @@
 package hr.fer.pi.geoFighter.service;
 
 import hr.fer.pi.geoFighter.dto.CardDTO;
+import hr.fer.pi.geoFighter.dto.CardApplicationDTO;
 import hr.fer.pi.geoFighter.dto.CartographerUserDTO;
 import hr.fer.pi.geoFighter.dto.DisableUserDTO;
+import hr.fer.pi.geoFighter.dto.UserDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.CartographerStatus;
 import hr.fer.pi.geoFighter.model.LocationCard;
@@ -117,6 +119,29 @@ public class AdminService {
 
     public void deleteLocationCard(long locationCardId) {
         locationCardRepository.deleteById(locationCardId);
+    }
+
+    public void editUser(UserDTO userDTO) {
+
+        User user = userRepository.findById(userDTO.getId()).orElseThrow(
+                () -> new SpringGeoFighterException("User does not exist"));
+
+        user.setUsername(userDTO.getUsername());
+        user.setEmail(userDTO.getEmail());
+    }
+
+    public List<UserDTO> getAllUserModels() {
+        List<UserDTO> userCollection = new ArrayList<>();
+
+        for(User user : userRepository.findAll()){
+            UserDTO userDTO = new UserDTO();
+            userDTO.setId(user.getUserId());
+            userDTO.setUsername(user.getUsername());
+            userDTO.setEmail(user.getEmail());
+            userCollection.add(userDTO);
+        }
+
+        return userCollection;
     }
 
 }

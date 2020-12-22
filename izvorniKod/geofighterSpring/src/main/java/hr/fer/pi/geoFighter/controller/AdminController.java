@@ -1,8 +1,6 @@
 package hr.fer.pi.geoFighter.controller;
 
-import hr.fer.pi.geoFighter.dto.CardDTO;
-import hr.fer.pi.geoFighter.dto.CartographerUserDTO;
-import hr.fer.pi.geoFighter.dto.DisableUserDTO;
+import hr.fer.pi.geoFighter.dto.*;
 import hr.fer.pi.geoFighter.service.AdminService;
 import hr.fer.pi.geoFighter.service.CardService;
 import lombok.AllArgsConstructor;
@@ -70,6 +68,17 @@ public class AdminController {
     public ResponseEntity<Void> deleteLocationCard(@PathVariable long locationCardId) {
         adminService.deleteLocationCard(locationCardId);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/edit")
+    public ResponseEntity<String> editUser(@RequestBody UserDTO userDTO) {
+        adminService.editUser(userDTO);
+        return new ResponseEntity<>("User edited", OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<UserDTO>> getAllUserModels() {
+        return new ResponseEntity<>(adminService.getAllUserModels(), OK);
     }
 
 }

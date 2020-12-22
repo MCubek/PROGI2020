@@ -1,16 +1,93 @@
-<table *ngIf="usernames!==undefined" class="table table-hover" style="margin:0 auto; width:50%;">
-    <thead>
-      <tr>
-        <th scope="col">Username</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of usernames">
-        <td>{{user}}</td>
-        <td><button class="btn btn-outline-primary" (click)="promoteToAdmin(user)">Promote User to Admin</button></td>
-        <td><button class="btn btn-danger" (click)="deleteUser(user)">Delete User</button></td>
-        <td><button class="btn btn-warning" (click)="disableUser(user)">Set User Timeout</button></td>
-      </tr>
-    </tbody>
+<table
+  *ngIf="usernames !== undefined"
+  class="table table-hover"
+  style="margin: 0 auto; width: 50%"
+>
+  <thead>
+    <tr>
+      <th scope="col">Username</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of usernames">
+      <td>{{ user }}</td>
+      <td>
+        <button class="btn btn-outline-primary" (click)="promoteToAdmin(user)">
+          Promote User to Admin
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="deleteUser(user)">
+          Delete User
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-warning" (click)="disableUser(user)">
+          Set User Timeout
+        </button>
+      </td>
+      <td>
+        <button
+          class="btn btn-primary"
+          (click)="editForm(user)"
+          data-toggle="modal"
+          data-target="#editWindow"
+        >
+          Edit user
+        </button>
+      </td>
+    </tr>
+  </tbody>
 </table>
-<h3 *ngIf="usernames===undefined || usernames.length==0" style="text-align: center;"> No users. Server may be down.</h3>
+<h3
+  *ngIf="usernames === undefined || usernames.length == 0"
+  style="text-align: center"
+>
+  No users. Server may be down.
+</h3>
+
+<div id="editWindow" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit user</h4>
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editUserForm">
+          <div class="form-group row">
+            <label for="username" class="col-md-4 col-form-label text-md-right"
+              >Username</label
+            >
+            <div class="col-md-6">
+              <input
+                type="text"
+                [formControlName]="'username'"
+                id="username"
+                class="form-control input-radius"
+                name="username"
+                required
+                autofocus
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-success"
+          data-dismiss="modal"
+          (click)="edit()"
+        >
+          Accept
+        </button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
