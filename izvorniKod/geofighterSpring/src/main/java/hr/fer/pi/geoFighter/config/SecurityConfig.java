@@ -62,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webjars/**")
                 .permitAll()
 
-                .antMatchers("/api/user/**","/api/card/**")
+                .antMatchers("/api/user/**", "/api/card/**")
                 .hasAuthority("USER_PRIVILEGE")
 
                 .antMatchers("/api/cartographer/**")

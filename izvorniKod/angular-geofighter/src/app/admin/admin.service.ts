@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {CartographerApplicantModel} from './cartographer-applications/cartographer-applicant.model';
 import {UserTimeoutPayload} from './user-list/user-timeout.payload'
 import {environment} from '../../environments/environment';
+import {LocationCardModel} from './cards-page/location-card.model';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,14 @@ export class AdminService {
       username,
       null
     );
+  }
+
+  getCardCollection(): Observable<LocationCardModel[]> {
+    return this.httpClient.get<LocationCardModel[]>(`${environment.apiUrl}api/card/cardCollection`);
+  }
+
+  deleteCard(cardId: number): Observable<any> {
+    return this.httpClient.delete(`${environment.apiUrl}api/card/` + cardId);
   }
 
   getEnabledUsernames(): Observable<string[]> {

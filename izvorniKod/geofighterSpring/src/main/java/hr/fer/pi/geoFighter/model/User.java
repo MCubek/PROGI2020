@@ -3,7 +3,6 @@ package hr.fer.pi.geoFighter.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.locationtech.jts.geom.Point;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -22,7 +21,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "player")
+@Entity
 @Table(name = "\"USERS\"", uniqueConstraints = {@UniqueConstraint(columnNames = "username"), @UniqueConstraint(columnNames = "email")})
 public class User {
     @Id
