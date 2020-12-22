@@ -1,13 +1,12 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
-import {LoginComponent} from '../../../auth/login/login.component';
 
 import {icon} from 'leaflet';
+import 'leaflet-routing-machine';
+import 'leaflet.locatecontrol';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
-import 'leaflet-routing-machine';
-import 'leaflet.locatecontrol';
 
 declare const L;
 
@@ -28,7 +27,7 @@ export class CartographerMapComponent implements OnInit, AfterViewInit {
     });
 
 
-    const iconDefault = icon({
+    L.Marker.prototype.options.icon = icon({
       iconRetinaUrl,
       iconUrl,
       shadowUrl,
@@ -38,8 +37,6 @@ export class CartographerMapComponent implements OnInit, AfterViewInit {
       tooltipAnchor: [16, -28],
       shadowSize: [41, 41]
     });
-
-    L.Marker.prototype.options.icon = iconDefault;
 
     L.control.locate(
     ).addTo(this.map);

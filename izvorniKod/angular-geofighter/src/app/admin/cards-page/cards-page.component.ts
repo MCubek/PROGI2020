@@ -13,14 +13,14 @@ import {LocationCardModel} from './location-card.model';
 export class CardsPageComponent implements OnInit {
 
   cards: Array<LocationCardModel>;
-  
+
 
   constructor(private adminService: AdminService) { }
 
 
   // Dohvati sve dostupne i odobrene karte
   ngOnInit(): void {
-    this.adminService.getCardCollection().subscribe(data =>{
+    this.adminService.getCardCollection().subscribe(data => {
       this.cards = data;
     }, error => {
       throwError(error);
@@ -29,10 +29,10 @@ export class CardsPageComponent implements OnInit {
 
   // Brisanje karte po id-u
 
-  delete(cardId : number): void{
+  delete(cardId: number): void{
     this.adminService.deleteCard(cardId).
     subscribe(data => {
-    }, error =>{
+    }, error => {
       throwError(error);
     });
     window.location.reload();
