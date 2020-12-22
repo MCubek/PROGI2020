@@ -26,6 +26,9 @@ import {FormsModule} from '@angular/forms';
 import {NearbyUsersComponent} from './user/nearby-users/nearby-users.component';
 import {CardApplicationsComponent} from './cartographer/card-applications/card-applications.component';
 import {CartographerMapComponent} from './cartographer/card-applications/CartographerMap/cartographer-map.component';
+import {UserProfileComponent} from './user/user-profile/user-profile.component';
+import {AllUsersComponent} from './user/all-users/all-users.component';
+import {BattleComponent} from './battle/battle.component';
 import {CardsPageComponent} from './admin/cards-page/cards-page.component';
 import {CollectionComponent} from './card/collection/collection.component';
 import {SingleCardComponent} from './card/single-card/single-card.component';
@@ -49,7 +52,10 @@ import {ApplyCardComponent} from './card/apply-card/apply-card.component';
     DateTimePickerDialog,
     NearbyUsersComponent,
     CardApplicationsComponent,
-    CartographerMapComponent
+    CartographerMapComponent,
+    UserProfileComponent,
+    AllUsersComponent,
+    BattleComponent
   ],
   imports: [
     BrowserModule,

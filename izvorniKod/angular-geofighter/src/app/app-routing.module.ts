@@ -13,6 +13,8 @@ import {ApplyCardComponent} from './card/apply-card/apply-card.component';
 import {CardsPageComponent} from './admin/cards-page/cards-page.component';
 import {UserListComponent} from './admin/user-list/user-list.component';
 import {LeaderboardComponent} from './user/leaderboard/leaderboard.component';
+import {AllUsersComponent} from './user/all-users/all-users.component';
+import {UserProfileComponent} from "./user/user-profile/user-profile.component";
 import {NearbyUsersComponent} from './user/nearby-users/nearby-users.component';
 import {CardApplicationsComponent} from './cartographer/card-applications/card-applications.component';
 import {CartographerGuard} from './cartographer/cartographer.guard';
@@ -35,6 +37,8 @@ const routes: Routes = [
   {path: 'admin/users', component: UserListComponent, canActivate: [AuthGuard, AdminGuard]},
   {path: 'nearbyUsers', component: NearbyUsersComponent, canActivate: [AuthGuard]},
   {path: 'cartographer/cardApplications', component: CardApplicationsComponent, canActivate: [AuthGuard, CartographerGuard]},
+  {path: 'users', component: AllUsersComponent, canActivate: [AuthGuard]},
+  {path: 'users/:username', component: UserProfileComponent, canActivate:[AuthGuard]},
   {path: '**', redirectTo: ''}
 ];
 
