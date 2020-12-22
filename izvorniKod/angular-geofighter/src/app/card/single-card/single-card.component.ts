@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {element} from 'protractor';
 import {throwError} from 'rxjs';
 import {AuthService} from 'src/app/auth/shared/auth.service';
 import {CardService} from '../shared/card.service';
-import {SingleCardModel} from '../single-card/single-card-model';
 
 @Component({
   selector: 'app-single-card',

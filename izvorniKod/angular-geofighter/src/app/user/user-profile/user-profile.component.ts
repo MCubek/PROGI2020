@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../user.service';
-import {ToastrService} from "ngx-toastr";
-import {throwError} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
-import {LeaderboardUserModel} from "../leaderboard/leaderboard-user.model";
-import index from "@angular/cli";
-import {CardModel} from "../../battle/card.model";
-import {FightService} from "../../battle/fight.service";
+import {ToastrService} from 'ngx-toastr';
+import {throwError} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
+import {LeaderboardUserModel} from '../leaderboard/leaderboard-user.model';
+import {CardModel} from '../../battle/card.model';
+import {FightService} from '../../battle/fight.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -17,7 +16,7 @@ export class UserProfileComponent implements OnInit {
 
   username: string;
   profile: Array <string>;
-  users : Array<LeaderboardUserModel>;
+  users: Array<LeaderboardUserModel>;
   userCards: Array<CardModel>;
 
   constructor(private userService: UserService, private route: ActivatedRoute,
@@ -27,13 +26,13 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.username = params['username'];
-    })
+      this.username = params.username;
+    });
     this.userService.viewProfile(this.username).subscribe(data => {
 
       this.profile = data;
     }, error => {
-      this.toastr.error("Internal server error");
+      this.toastr.error('Internal server error');
       throwError(error);
     });
     this.userService.getLeaderboardUserInfo().subscribe(data => {

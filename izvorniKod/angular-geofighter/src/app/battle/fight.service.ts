@@ -13,7 +13,7 @@ export class FightService {
   }
 
   getUserCardList(username: string): Observable<CardModel[]> {
-    return this.httpClient.get<CardModel[]>(`${environment.apiUrl}api/fight/userCardList/`+ username);
+    return this.httpClient.get<CardModel[]>(`${environment.apiUrl}api/fight/userCardList/` + username);
   }
 
 }
