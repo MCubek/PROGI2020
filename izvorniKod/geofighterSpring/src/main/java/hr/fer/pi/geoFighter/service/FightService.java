@@ -1,6 +1,7 @@
 package hr.fer.pi.geoFighter.service;
 
 import hr.fer.pi.geoFighter.dto.FightDTO;
+import hr.fer.pi.geoFighter.dto.SendRequestDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.*;
 import hr.fer.pi.geoFighter.repository.FightRepository;
@@ -14,9 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 
 import hr.fer.pi.geoFighter.dto.UserCardDTO;
-
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -32,6 +30,8 @@ public class FightService {
     private final LocationCardRepository locationCardRepository;
     private final UserCardRepository userCardRepository;
     private final FightRepository fightRepository;
+    private final List<SendRequestDTO> requests;
+    private final List<SendRequestDTO> startPlaying;
 
     @Transactional
     public List<UserCardDTO> getUserCardList(String username) throws MalformedURLException {
@@ -180,6 +180,50 @@ public class FightService {
 
         winner.setEloScore(Math.round(score1));
         loser.setEloScore(Math.round(score2));
+    }
+
+
+
+
+    public void sendRequest(SendRequestDTO sendRequestDTO){
+        requests.add(sendRequestDTO);
+    }
+
+    public List<String> getRequests(String username){
+        List<String> yourRequests = new ArrayList<>();
+        for (SendRequestDTO u:requests) {
+            if(u.getUsernameReceiver().equals(username)){
+                yourRequests.add(u.getUsernameSender());
+            }
+        }
+        return yourRequests;
+    }
+
+    public void processAnswer(SendRequestDTO answer){
+        List<SendRequestDTO> copy = List.copyOf(requests);
+        if(answer.isAnswer()){
+            startPlaying.add(answer);
+            for (SendRequestDTO request: copy) {
+                if(request.getUsernameSender().equals(answer.getUsernameSender())){
+                    requests.remove(request);
+                }
+            }
+        }
+        else{
+            requests.remove(answer);
+        }
+    }
+
+    public SendRequestDTO getMatches(String username){
+        for (SendRequestDTO match:startPlaying){
+            if (match.getUsernameSender().equals(username)){
+                return match;
+            }
+            else if(match.getUsernameReceiver().equals(username)){
+                return match;
+            }
+        }
+        return new SendRequestDTO("","",false);
     }
 
 }

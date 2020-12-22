@@ -30,19 +30,19 @@ export class UserService {
   }
 
   sendRequest(sendRequestPayload: SendRequestPayload): Observable<any> {
-    return this.httpClient.post(`${environment.apiUrl}api/user/sendRequest`, sendRequestPayload, {responseType: 'text'});
+    return this.httpClient.post(`${environment.apiUrl}api/fight/sendRequest`, sendRequestPayload, {responseType: 'text'});
   }
 
   getRequests(username: string): Observable<string[]> {
-    return this.httpClient.get<string[]>(`${environment.apiUrl}api/user/getRequests`+username);
+    return this.httpClient.get<string[]>(`${environment.apiUrl}api/fight/getRequests`+username);
   }
 
   sendAnswer(sendRequestPayload: SendRequestPayload): Observable<any>{
-    return this.httpClient.post(`${environment.apiUrl}api/user/receiveAnswer`, sendRequestPayload, {responseType: 'text'});
+    return this.httpClient.post(`${environment.apiUrl}api/fight/receiveAnswer`, sendRequestPayload, {responseType: 'text'});
   }
 
   getMatches(username: string): Observable<SendRequestPayload> {
-    return this.httpClient.get<SendRequestPayload>(`${environment.apiUrl}api/user/getMatches`+username);
+    return this.httpClient.get<SendRequestPayload>(`${environment.apiUrl}api/fight/getMatches`+username);
   }
 
 }

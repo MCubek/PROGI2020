@@ -1,6 +1,5 @@
 package hr.fer.pi.geoFighter.service;
 
-import hr.fer.pi.geoFighter.dto.SendRequestDTO;
 import hr.fer.pi.geoFighter.dto.UserEloDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.User;
@@ -21,8 +20,6 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final AuthService authService;
-    private final List<SendRequestDTO> requests;
-    private final List<SendRequestDTO> startPlaying;
 
     public List<UserEloDTO> getUserEloInfo() {
         return new ArrayList<>(userRepository.getUserEloInfo());
@@ -100,44 +97,5 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void sendRequest(SendRequestDTO sendRequestDTO){
-        requests.add(sendRequestDTO);
-    }
 
-    public List<String> getRequests(String username){
-        List<String> yourRequests = new ArrayList<>();
-        for (SendRequestDTO u:requests) {
-            if(u.getUsernameReceiver().equals(username)){
-                yourRequests.add(u.getUsernameSender());
-            }
-        }
-        return yourRequests;
-    }
-
-    public void processAnswer(SendRequestDTO answer){
-        List<SendRequestDTO> copy = List.copyOf(requests);
-        if(answer.isAnswer()){
-            startPlaying.add(answer);
-            for (SendRequestDTO request: copy) {
-                if(request.getUsernameSender().equals(answer.getUsernameSender())){
-                    requests.remove(request);
-                }
-            }
-        }
-        else{
-            requests.remove(answer);
-        }
-    }
-
-    public SendRequestDTO getMatches(String username){
-        for (SendRequestDTO match:startPlaying){
-            if (match.getUsernameSender().equals(username)){
-                return match;
-            }
-            else if(match.getUsernameReceiver().equals(username)){
-                return match;
-            }
-        }
-        return new SendRequestDTO("","",false);
-    }
 }
