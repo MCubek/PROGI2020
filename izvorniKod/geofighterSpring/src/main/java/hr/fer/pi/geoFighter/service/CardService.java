@@ -12,8 +12,6 @@ import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.stereotype.Service;
 
 import java.awt.geom.Point2D;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -87,9 +85,9 @@ public class CardService {
         cardDTO.setPhotoUrl(locationCard.getPhotoURL());
         cardDTO.setLocation(getLocationString(locationCard.getLocation()));
         cardDTO.setCreatedBy(getCreatedBy(locationCard.getCreatedBy()));
-        cardDTO.setUncommonness(locationCard.getUncommonness());
-        cardDTO.setDifficulty(locationCard.getDifficulty());
-        cardDTO.setPopulation(locationCard.getPopulation());
+        cardDTO.setUncommonness(locationCard.getUncommonness() % 11);
+        cardDTO.setDifficulty(locationCard.getDifficulty() % 11);
+        cardDTO.setPopulation(locationCard.getPopulation() % 11);
         cardDTO.setCreatedTime(getTime(locationCard.getCreatedDate()));
 
         return cardDTO;
