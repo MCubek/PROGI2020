@@ -1,8 +1,10 @@
 package hr.fer.pi.geoFighter.controller;
 
+import hr.fer.pi.geoFighter.dto.CardDTO;
 import hr.fer.pi.geoFighter.dto.CartographerUserDTO;
 import hr.fer.pi.geoFighter.dto.DisableUserDTO;
 import hr.fer.pi.geoFighter.service.AdminService;
+import hr.fer.pi.geoFighter.service.CardService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,7 @@ import static org.springframework.http.HttpStatus.OK;
 public class AdminController {
 
     private final AdminService adminService;
+    private final CardService cardService;
 
     @GetMapping("/cartographerApplications")
     public ResponseEntity<List<CartographerUserDTO>> getCartographerApplications() {
@@ -50,6 +53,11 @@ public class AdminController {
     public ResponseEntity<String> disableUser(@RequestBody DisableUserDTO disableUserDTO) {
         adminService.disableUser(disableUserDTO);
         return new ResponseEntity<>("User disabled until "+disableUserDTO.getTimeoutEnd(), OK);
+    }
+
+    @GetMapping("/allCards")
+    public ResponseEntity<List<CardDTO>> getCardCollection() {
+        return new ResponseEntity<>(cardService.getCardCollection(), OK);
     }
 
 }

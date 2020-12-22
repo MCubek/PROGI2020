@@ -18,13 +18,8 @@ public class CardController {
     private final CardService cardService;
 
     @GetMapping("/allCards")
-    public List<CardDTO> getAllCards() {
-        return cardService.getAllCards();
-    }
-
-    @GetMapping("/cardCollection")
-    public ResponseEntity<List<CardDTO>> getCardCollection() {
-        return new ResponseEntity<>(cardService.getCardCollection(), OK);
+    public ResponseEntity<List<CardDTO>> getAllCards() {
+        return new ResponseEntity<>(cardService.getAllCards(), OK);
     }
 
     @GetMapping("/{locationCardId}")
