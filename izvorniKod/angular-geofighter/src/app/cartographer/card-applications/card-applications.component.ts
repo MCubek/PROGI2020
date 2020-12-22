@@ -24,19 +24,6 @@ export class CardApplicationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const {search} = window.location;
-    if ((new URLSearchParams(search)).get('acceptSuccess') === '1') {
-      this.toastr.success('Card application accepted!');
-    }
-    if ((new URLSearchParams(search)).get('declineSuccess') === '1') {
-      this.toastr.error('Card application declined!');
-    }
-    if ((new URLSearchParams(search)).get('editSuccess') === '1') {
-      this.toastr.success('Card edited!');
-    }
-    if ((new URLSearchParams(search)).get('confirmationSuccess') === '1') {
-      this.toastr.info('Card confirmation requested!');
-    }
     this.cardApplicationService.getAllCardApplications().subscribe(data => {
       this.cardApplications = data;
     }, error => {
@@ -59,7 +46,8 @@ export class CardApplicationsComponent implements OnInit {
   accept(id: string): void {
     if (confirm('Are you sure you want to accept this card?')) {
       this.cardApplicationService.acceptCard(id).subscribe(data => {
-        window.location.href = window.location.pathname + '?acceptSuccess=1';
+        this.ngOnInit();
+        this.toastr.success('Card application accepted!');
       }, error => {
         this.toastr.error('Internal server error!');
         throwError(error);
@@ -70,7 +58,8 @@ export class CardApplicationsComponent implements OnInit {
   decline(id: string): void {
     if (confirm('Are you sure you want to decline this card?')) {
       this.cardApplicationService.declineCard(id).subscribe(data => {
-        window.location.href = window.location.pathname + '?declineSuccess=1';
+        this.ngOnInit();
+        this.toastr.error('Card application declined!');
       }, error => {
         this.toastr.error('Internal server error!');
         throwError(error);
@@ -95,7 +84,8 @@ export class CardApplicationsComponent implements OnInit {
 
   edit(): void {
     this.cardApplicationService.editCard(this.editCardForm.getRawValue()).subscribe(data => {
-      window.location.href = window.location.pathname + '?editSuccess=1';
+      this.ngOnInit();
+      this.toastr.success('Card edited!');
     }, error => {
       this.toastr.error('Internal server error!');
       throwError(error);
@@ -105,7 +95,8 @@ export class CardApplicationsComponent implements OnInit {
   requestConfirmation(id: string): void {
     if (confirm('Are you sure you want to request confirmation for this card?')) {
       this.cardApplicationService.requestConfirmation(id).subscribe(data => {
-        window.location.href = window.location.pathname + '?confirmationSuccess=1';
+        this.ngOnInit();
+        this.toastr.info('Card confirmation requested!');
       }, error => {
         this.toastr.error('Internal server error!');
         throwError(error);
