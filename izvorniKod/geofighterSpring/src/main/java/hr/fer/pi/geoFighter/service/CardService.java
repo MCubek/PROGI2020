@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.stereotype.Service;
 
+import java.awt.geom.Point2D;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class CardService {
             cardDTO.setName(locationCard.getName());
             cardDTO.setDescription(locationCard.getDescription());
             cardDTO.setPhotoUrl(locationCard.getPhotoURL());
-            cardDTO.setLocation(locationCard.getLocation());
+            cardDTO.setLocation(getLocationString(locationCard.getLocation()));
             cardDTO.setCreatedBy(locationCard.getCreatedBy());
 
             cardCollection.add(cardDTO);
@@ -64,7 +65,7 @@ public class CardService {
         cardDTO.setName(locationCard.getName());
         cardDTO.setDescription(locationCard.getDescription());
         cardDTO.setPhotoUrl(locationCard.getPhotoURL());
-        cardDTO.setLocation(locationCard.getLocation());
+        cardDTO.setLocation(getLocationString(locationCard.getLocation()));
         cardDTO.setCreatedBy(locationCard.getCreatedBy());
 
         return cardDTO;
@@ -82,11 +83,11 @@ public class CardService {
         locationCard.setId(cardDTO.getId());
         locationCard.setDescription(cardDTO.getDescription());
         locationCard.setPhotoURL(cardDTO.getPhotoUrl());
-        locationCard.setLocation(cardDTO.getLocation());
+        locationCard.setLocation(parseLocationString(cardDTO.getLocation()));
         locationCard.setNeedsToBeChecked(true);
         locationCard.setCreatedBy(cardDTO.getCreatedBy());
 
-        if (!urlValidator.isValid(cardDTO.getPhotoUrl().toString()))
+        if (! urlValidator.isValid(cardDTO.getPhotoUrl().toString()))
             throw new UserInfoInvalidException("Invalid photo URL");
 
         try {
@@ -106,7 +107,7 @@ public class CardService {
                         .name(lc.getName())
                         .description(lc.getDescription())
                         .photoUrl(lc.getPhotoURL())
-                        .location(lc.getLocation())
+                        .location(getLocationString(lc.getLocation()))
                         .createdBy(lc.getCreatedBy())
                         .build())
                 .collect(Collectors.toList());
@@ -114,5 +115,17 @@ public class CardService {
 
     public void deleteLocationCard(long locationCardId) {
         locationCardRepository.deleteById(locationCardId);
+    }
+
+    private static String getLocationString(Point2D.Double point) {
+        return point.getX() + ", " + point.getY();
+    }
+
+    private static Point2D.Double parseLocationString(String locationString) {
+        var array = locationString.split("\\b+");
+
+        if (array.length != 2) throw new IllegalArgumentException("2 coordinates missing!");
+
+        return new Point2D.Double(Double.parseDouble(array[0]), Double.parseDouble(array[1]));
     }
 }
