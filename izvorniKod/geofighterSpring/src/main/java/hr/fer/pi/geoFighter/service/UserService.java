@@ -1,5 +1,6 @@
 package hr.fer.pi.geoFighter.service;
 
+import hr.fer.pi.geoFighter.dto.SendRequestDTO;
 import hr.fer.pi.geoFighter.dto.UserEloDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.LocationCard;
@@ -21,6 +22,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final AuthService authService;
+    private final List<SendRequestDTO> requests;
 
     public List<UserEloDTO> getUserEloInfo() {
         return new ArrayList<>(userRepository.getUserEloInfo());
@@ -96,5 +98,19 @@ public class UserService {
         Point2D.Double point = new Point2D.Double(userLocationDTO.getLatitude(),userLocationDTO.getLongitude());
         user.setCurrentLocation(point);
         userRepository.save(user);
+    }
+
+    public void sendRequest(SendRequestDTO sendRequestDTO){
+        requests.add(sendRequestDTO);
+    }
+
+    public List<String> getRequests(String username){
+        List<String> yourRequests = new ArrayList<>();
+        for (SendRequestDTO u:requests) {
+            if(u.getUsernameReceiver().equals(username)){
+                yourRequests.add(u.getUsernameSender());
+            }
+        }
+        return yourRequests;
     }
 }

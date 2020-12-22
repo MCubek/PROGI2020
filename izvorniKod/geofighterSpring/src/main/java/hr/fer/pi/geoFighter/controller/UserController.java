@@ -1,5 +1,6 @@
 package hr.fer.pi.geoFighter.controller;
 
+import hr.fer.pi.geoFighter.dto.SendRequestDTO;
 import hr.fer.pi.geoFighter.dto.UserEloDTO;
 import hr.fer.pi.geoFighter.dto.UserLocationDTO;
 import hr.fer.pi.geoFighter.service.UserService;
@@ -43,4 +44,16 @@ public class UserController {
     public ResponseEntity<List<String>> getNearbyUsers(@PathVariable String username) {
         return new ResponseEntity<>(userService.getNearbyUsers(username), OK);
     }
+
+    @PostMapping("/sendRequest")
+    public ResponseEntity<String> sendRequest(@RequestBody SendRequestDTO sendRequestDTO){
+        userService.sendRequest(sendRequestDTO);
+        return ResponseEntity.status(OK).body("Request sent!");
+    }
+
+    @GetMapping("/getRequests{username}")
+    public ResponseEntity<List<String>> getRequests(@PathVariable String username){
+        return new ResponseEntity<>(userService.getRequests(username),OK);
+    }
+
 }

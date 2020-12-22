@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from '../user.service';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {throwError} from 'rxjs';
+import {interval, throwError} from 'rxjs';
 import {AuthService} from '../../auth/shared/auth.service';
+import {SendRequestPayload} from "./send-request-payload";
+import {startWith, switchMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-nearby-users',
@@ -13,10 +15,15 @@ import {AuthService} from '../../auth/shared/auth.service';
 export class NearbyUsersComponent implements OnInit {
 
   usernames: Array<string>;
+  sendRequestPayload: SendRequestPayload;
+  requests: Array<String>;
 
   constructor(private userService: UserService, private router: Router, private toastr: ToastrService,
               private authService: AuthService) {
-
+    this.sendRequestPayload = {
+      usernameReceiver: '',
+      usernameSender: ''
+    };
   }
 
   ngOnInit(): void {
@@ -26,5 +33,16 @@ export class NearbyUsersComponent implements OnInit {
       this.toastr.error('Internal server error');
       throwError(error);
     });
+    interval(1000).pipe(startWith(0),switchMap(() => this.userService.getRequests(this.authService.getUsername()))
+    ).subscribe(data => this.requests = data);
+
+  }
+
+  sendRequest(usernameReceive: string){
+    this.sendRequestPayload.usernameSender = this.authService.getUsername();
+    this.sendRequestPayload.usernameReceiver = usernameReceive;
+    this.userService.sendRequest(this.sendRequestPayload).subscribe(
+      response => console.log(response),
+      err => console.log(err));
   }
 }
