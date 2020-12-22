@@ -1,21 +1,27 @@
 <div class="wrapper">
   <h3 class="h3">Battle time!</h3>
-  <p class="p">Pick your cards:</p>
-  <div *ngIf="userCards!==undefined" class="list-group">
-    <div *ngFor="let userCard of userCards" class="list-group-item">
-      <div class="card">
-        <img src={{userCard.photoURL}} class="card-img-top"/>
-        <div class="card-body">
-          <h5 class="card-title">{{userCard.name}}</h5>
-          <p class="card-text">{{userCard.description}}</p>
-          <div class="btn-bottom">
-            <a [href]="'card/' + userCard.id" id="btn-card-geo1" class="btn btn-primary btn-font">See more</a>
-            <a href="#" id="btn-card-geo2" class="btn btn-primary btn-font">Pick card</a>
+  <div *ngIf="cardsPicked===false">
+    <p class="p">Pick your cards:</p>
+    <a id="btn-card-submit" class="btn btn-primary btn-font" (click)="submitCards()">Submit cards</a>
+    <div *ngIf="userCards!==undefined && !cardsPicked" class="list-group">
+      <div *ngFor="let userCard of userCards" class="list-group-item">
+        <div class="card">
+          <img src={{userCard.photoURL}} class="card-img-top"/>
+          <div class="card-body">
+            <h5 class="card-title">{{userCard.name}}</h5>
+            <p class="card-text">{{userCard.description}}</p>
+            <div class="btn-bottom">
+              <a [href]="'card/' + userCard.id" id="btn-card-geo" class="btn btn-primary btn-font">See more</a>
+              <a [id]="'btn-card-geo'+userCard.id" class="btn btn-primary btn-font"
+                 (click)="clickCard($event,userCard.id)">Pick card</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <p *ngIf="userCards===undefined || userCards.length==0" class="p2"> No cards yet</p>
   </div>
-  <p *ngIf="userCards===undefined || userCards.length==0" class="p2"> No cards yet</p>
+  <p *ngIf="cardsPicked===true" class="p">Cards picked!s</p>
+
   <p class="p">Pick your opponent:<a href="#" class="btn btn-primary btn-players">See players around you</a></p>
 </div>
