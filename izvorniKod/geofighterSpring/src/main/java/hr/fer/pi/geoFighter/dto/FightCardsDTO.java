@@ -9,10 +9,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FightDTO {
-    String username1;
-    String username2;
-
-    List<Long> user1selectedCardIds;
-    List<Long> user2selectedCardIds;
+public class FightCardsDTO {
+    List<Long> selectedCardIds;
 }

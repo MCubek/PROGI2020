@@ -18,9 +18,21 @@ public class FightController {
 
     private final FightService fightService;
 
-    @PostMapping("/startFight")
-    public ResponseEntity<String> fight(@RequestBody FightDTO fightDTO) {
-        return new ResponseEntity<>(fightService.fight(fightDTO), OK);
+    @PutMapping("/submitCards")
+    public ResponseEntity<Void> submitCards(@RequestBody FightCardsDTO fightCardsDTO) {
+        fightService.submitCards(fightCardsDTO);
+        return new ResponseEntity<>(OK);
+    }
+
+    @PutMapping("/startFight")
+    public ResponseEntity<Void> startFight() {
+        fightService.startFight();
+        return new ResponseEntity<>(OK);
+    }
+
+    @GetMapping("/getWinner/{fightId}")
+    public ResponseEntity<String> getWinner(@PathVariable Long fightId) {
+        return new ResponseEntity<>(fightService.getWinnerOfFight(fightId), OK);
     }
 
     @GetMapping("/userCardList/{username}")
