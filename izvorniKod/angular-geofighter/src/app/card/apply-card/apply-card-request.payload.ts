@@ -5,7 +5,6 @@ export interface ApplyCardRequestPayload {
   description: string;
   photoUrl: string;
   location: string;
-  createdBy: string;
   difficulty: number;
   population: number;
   uncommonness: number;
