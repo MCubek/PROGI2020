@@ -1,6 +1,5 @@
 package hr.fer.pi.geoFighter.service;
 
-import hr.fer.pi.geoFighter.dto.FightCardsDTO;
 import hr.fer.pi.geoFighter.dto.UserCardDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.*;
@@ -16,10 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -51,12 +47,12 @@ public class FightService {
         return fightIdWinnerMap.getOrDefault(fightId, null);
     }
 
-    public void submitCards(FightCardsDTO fightCardsDTO) {
-        playerUsernameListCardsMap.put(authService.getCurrentUser().getUsername(), fightCardsDTO.getSelectedCardIds());
+    public void submitCards(Long[] fightCards) {
+        playerUsernameListCardsMap.put(authService.getCurrentUser().getUsername(), Arrays.asList(fightCards));
     }
 
     public void deleteFight(Long fightId) {
-        // TODO: 22.12.2020. Obrisati mapu gdje se sperma par igraca 
+        // TODO: 22.12.2020. Obrisati mapu gdje se sperma par igraca
     }
 
     @Transactional
