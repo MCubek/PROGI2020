@@ -22,4 +22,5 @@ public class CardDTO {
     private Integer uncommonness;
     private Integer difficulty;
     private Integer population;
+    private String createdTime;
 }

@@ -1,0 +1,32 @@
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Photo</th>
+          <th scope="col">Uncommonness</th>
+          <th scope="col">Difficulty</th>
+          <th scope="col">Population</th>
+          <th scope="col">Created by</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let card of allCards">
+          <td>{{ card.name }}</td>
+          <td>{{ card.description }}</td>
+          <td>
+            <div class="card" style="width: 16rem">
+              <img src="{{ card.photoUrl }}" alt="" />
+            </div>
+          </td>
+          <td>{{ card.uncommonness }}</td>
+          <td>{{ card.difficulty }}</td>
+          <td>{{ card.population }}</td>
+          <td>{{ card.createdBy }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
