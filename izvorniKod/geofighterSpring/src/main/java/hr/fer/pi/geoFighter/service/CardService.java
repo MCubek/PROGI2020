@@ -56,6 +56,9 @@ public class CardService {
         locationCard.setPhotoURL(cardDTO.getPhotoUrl());
         locationCard.setLocation(parseLocationString(cardDTO.getLocation()));
         locationCard.setCreatedBy(authService.getCurrentUser());
+        locationCard.setDifficulty(cardDTO.getDifficulty());
+        locationCard.setPopulation(cardDTO.getPopulation());
+        locationCard.setUncommonness(cardDTO.getUncommonness());
 
         if (! urlValidator.isValid(cardDTO.getPhotoUrl().toString()))
             throw new UserInfoInvalidException("Invalid photo URL");
