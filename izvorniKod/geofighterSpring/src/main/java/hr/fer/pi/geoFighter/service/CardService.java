@@ -109,7 +109,7 @@ public class CardService {
                         .description(lc.getDescription())
                         .photoUrl(lc.getPhotoURL())
                         .location(getLocationString(lc.getLocation()))
-                        .createdBy(lc.getCreatedBy().getUsername())
+                        .createdBy(getCreatedBy(lc.getCreatedBy()))
                         .build())
                 .collect(Collectors.toList());
     }
@@ -119,6 +119,7 @@ public class CardService {
     }
 
     private static String getLocationString(Point2D.Double point) {
+        if (point == null) return "";
         return point.getX() + ", " + point.getY();
     }
 
@@ -128,5 +129,10 @@ public class CardService {
         if (array.length != 2) throw new IllegalArgumentException("2 coordinates missing!");
 
         return new Point2D.Double(Double.parseDouble(array[0]), Double.parseDouble(array[1]));
+    }
+
+    private static String getCreatedBy(User user) {
+        if (user == null) return "unknown";
+        else return user.getUsername();
     }
 }
