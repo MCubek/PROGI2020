@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { ApplyCardRequestPayload } from './apply-card-request.payload';
 import { AuthService } from '../../auth/shared/auth.service';
 import { CardService } from '../shared/card.service';
+import {GeolocationService} from '@ng-web-apis/geolocation';
+import {take} from 'rxjs/operators';
 @Component({
   selector: 'app-apply-card',
   templateUrl: './apply-card.component.html',
@@ -17,10 +19,10 @@ export class ApplyCardComponent implements OnInit {
   constructor(
     private cardService: CardService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private readonly geoLocation: GeolocationService
   ) {
     this.applyCardRequestPayload = {
-      id: '',
       name: '',
       description: '',
       photoUrl: '',
@@ -43,8 +45,14 @@ export class ApplyCardComponent implements OnInit {
     });
   }
 
+  applyCardGetLocation() {
+    this.geoLocation.pipe(take(1)).subscribe(position => {
+      this.applyCard(position);
+    })
+  }
+
   // tslint:disable-next-line:typedef
-  applyCard() {
+  applyCard(position: Position) {
     this.applyCardRequestPayload.name = this.applyCardForm.get('name').value;
     this.applyCardRequestPayload.description = this.applyCardForm.get(
       'description'
@@ -52,9 +60,7 @@ export class ApplyCardComponent implements OnInit {
     this.applyCardRequestPayload.photoUrl = this.applyCardForm.get(
       'photoUrl'
     ).value;
-    //this.applyCardRequestPayload.location = this.applyCardForm.get(
-    //  'location'
-    // ).value;
+    this.applyCardRequestPayload.location = position.coords.longitude+" "+position.coords.latitude
 
     this.cardService.applyCard(this.applyCardRequestPayload).subscribe(
       (data) => {
