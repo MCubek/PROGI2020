@@ -1,5 +1,53 @@
 <div class="geofighter-body">
-  <div class="container">
-    HOMEPAGE HERE
-  </div>
+    <div class="wrapper d-flex align-items-stretch">
+      <nav id="sidebar" class="active">
+        <ul class="list-unstyled components mb-5">
+          <li class="active">
+            <a href="#">
+              <img class="logo-icon" src="https://img.icons8.com/material-rounded/48/000000/user-male-circle.png"/>
+              <span></span> User
+            </a>
+          </li>
+          <li >
+            <a href="/battle">
+              <img class="logo-icon" src="https://img.icons8.com/fluent-systems-filled/48/000000/battle.png"/>
+              <span></span> Battle
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img class="logo-icon" src="https://img.icons8.com/ios/50/000000/leaderboard.png"/>
+              <span></span> Leaderboard
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img class="logo-icon" src="https://img.icons8.com/wired/64/000000/add-image.png"/>
+              <span></span> Add new location
+            </a>
+          </li>
+          <li *ngIf="role==='ROLE_CARTOGRAPHER'">
+            <a href="#">
+              <img class="logo-icon" src="https://img.icons8.com/wired/64/000000/product-documents.png"/>
+              <span></span> Card applications
+            </a>
+          </li>
+          <li *ngIf="role==='ROLE_ADMIN'">
+            <a href="#">
+              <img class="logo-icon" src="https://img.icons8.com/metro/52/000000/groups.png"/>
+              <span></span> All users
+            </a>
+          </li>
+          <li *ngIf="role==='ROLE_ADMIN'">
+            <a href="#">
+              <img class="logo-icon" src="https://img.icons8.com/ios-filled/50/000000/product-documents.png"/>
+              <span></span> All cards
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div id="content" class="p-4 p-md-5">
+        <h3>Welcome to Geofighter, {{username}}!</h3>
+      </div>
+    </div>
 </div>
