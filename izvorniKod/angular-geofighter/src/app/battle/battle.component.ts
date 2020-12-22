@@ -32,7 +32,7 @@ export class BattleComponent implements OnInit {
     this.role = this.authService.getRole();
 
     this.match = history.state.data;
-    console.log(this.match.usernameSender+', '+this.match.usernameReceiver);
+    console.log(this.match.usernameSender+', '+this.match.usernameReceiver+' '+this.match.battleId);
 
     this.fightService.getUserCardList(this.username).subscribe(data => {
       this.userCards = data;

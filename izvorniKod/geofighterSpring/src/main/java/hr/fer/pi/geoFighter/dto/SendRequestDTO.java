@@ -14,4 +14,5 @@ public class SendRequestDTO {
     String usernameReceiver;
     String usernameSender;
     boolean answer;
+    Long battleId;
 }

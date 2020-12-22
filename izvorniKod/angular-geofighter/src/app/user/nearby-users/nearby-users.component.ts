@@ -25,7 +25,8 @@ export class NearbyUsersComponent implements OnInit {
     this.sendRequestPayload = {
       usernameReceiver: '',
       usernameSender: '',
-      answer: false
+      answer: false,
+      battleId: 0
     };
   }
 
@@ -45,6 +46,7 @@ export class NearbyUsersComponent implements OnInit {
       if(data.answer){
         this.sendRequestPayload.usernameSender = data.usernameSender;
         this.sendRequestPayload.usernameReceiver = data.usernameReceiver;
+        this.sendRequestPayload.battleId = data.battleId;
         this.router.navigate(["/battle"], {state: {data:this.sendRequestPayload }});
       }
     });

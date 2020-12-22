@@ -20,6 +20,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -32,6 +34,7 @@ public class FightService {
     private final FightRepository fightRepository;
     private final List<SendRequestDTO> requests;
     private final List<SendRequestDTO> startPlaying;
+    private final Map<Long, List<String>> ongoingFight;
 
     @Transactional
     public List<UserCardDTO> getUserCardList(String username) throws MalformedURLException {
@@ -217,13 +220,24 @@ public class FightService {
     public SendRequestDTO getMatches(String username){
         for (SendRequestDTO match:startPlaying){
             if (match.getUsernameSender().equals(username)){
+                List<String> players = new ArrayList<>();
+                players.add(match.getUsernameSender());
+                players.add(match.getUsernameReceiver());
+                Long id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+                ongoingFight.put(id,players);
+                match.setBattleId(id);
+                if(match.getBattleId()>0L){
+                    players.remove(match);
+                }
                 return match;
             }
             else if(match.getUsernameReceiver().equals(username)){
+                if(match.getBattleId()>0L){
+                    startPlaying.remove(match);
+                }
                 return match;
             }
         }
-        return new SendRequestDTO("","",false);
+        return new SendRequestDTO("","",false,0L);
     }
-
 }
