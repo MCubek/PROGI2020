@@ -44,9 +44,9 @@ export class ApplyCardComponent implements OnInit {
           '^https?://(?:[a-z0-9-]+.)+[a-z]{2,6}(?:/[^/#?]+)+.(?:jpg|jpeg|png)$'
         ),
       ]),
-      difficulty: new FormControl('1', Validators.required),
-      population: new FormControl('1', Validators.required),
-      uncommonness: new FormControl('1', Validators.required)
+      difficulty: new FormControl('0', [Validators.required, Validators.min(0), Validators.max(10)]),
+      population: new FormControl('0', [Validators.required, Validators.min(0), Validators.max(10)]),
+      uncommonness: new FormControl('0', [Validators.required, Validators.min(0), Validators.max(10)])
     });
   }
 

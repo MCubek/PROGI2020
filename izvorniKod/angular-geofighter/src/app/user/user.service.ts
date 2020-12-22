@@ -21,10 +21,10 @@ export class UserService {
   }
 
   viewProfile(username: string): Observable<string[]> {
-    return this.httpClient.get<string[]>(`${environment.apiUrl}api/user/userProfile/`+username);
+    return this.httpClient.get<string[]>(`${environment.apiUrl}api/user/userProfile/` + username);
   }
 
   getNearbyUsers(username: string): Observable<string[]>{
-    return this.httpClient.get<string[]>(`${environment.apiUrl}api/user/nearbyUsers`+username);
+    return this.httpClient.get<string[]>(`${environment.apiUrl}api/user/nearbyUsers` + username);
   }
 }

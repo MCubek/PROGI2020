@@ -1,5 +1,3 @@
-import { URL } from 'url';
-
 export interface ApplyCardRequestPayload {
   name: string;
   description: string;

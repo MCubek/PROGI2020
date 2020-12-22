@@ -10,7 +10,7 @@ import {UserService} from '../user.service';
 })
 export class LeaderboardComponent implements OnInit {
 
-  users : Array<LeaderboardUserModel>;
+  users: Array<LeaderboardUserModel>;
 
   constructor(private userService: UserService) {
   }

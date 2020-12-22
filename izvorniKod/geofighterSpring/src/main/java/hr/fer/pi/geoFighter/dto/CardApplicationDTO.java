@@ -19,4 +19,8 @@ public class CardApplicationDTO {
     private String location;
     private String createdBy;
     private boolean needsToBeChecked;
+    private int uncommonness;
+    private int difficulty;
+    private int population;
+    private String createdTime;
 }
