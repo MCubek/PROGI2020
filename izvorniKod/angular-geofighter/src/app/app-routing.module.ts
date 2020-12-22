@@ -7,6 +7,7 @@ import {AuthGuard} from './auth/auth.guard';
 import {SignupCartographerComponent} from './cartographer/signup-cartographer/signup-cartographer.component';
 import {CartographerApplicationsComponent} from './admin/cartographer-applications/cartographer-applications.component';
 import {AdminGuard} from './admin/admin.guard';
+import {CardsPageComponent} from './admin/cards-page/cards-page.component';
 import {UserListComponent} from './admin/user-list/user-list.component';
 import {LeaderboardComponent} from './user/leaderboard/leaderboard.component';
 import {NearbyUsersComponent} from './user/nearby-users/nearby-users.component';
@@ -18,11 +19,16 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'login', component: LoginComponent},
   {path: 'cartographerApply', component: SignupCartographerComponent, canActivate: [AuthGuard]},
-  {path: 'cartographerApplications', component: CartographerApplicationsComponent, canActivate: [AuthGuard, AdminGuard]},
+  {
+    path: 'admin/cartographerApplications',
+    component: CartographerApplicationsComponent,
+    canActivate: [AuthGuard, AdminGuard]
+  },
+  {path: 'admin/cards', component: CardsPageComponent, canActivate: [AuthGuard, AdminGuard]},
   {path: 'leaderboard', component: LeaderboardComponent, canActivate: [AuthGuard]},
-  {path: 'userList', component: UserListComponent, canActivate: [AuthGuard, AdminGuard]},
+  {path: 'admin/users', component: UserListComponent, canActivate: [AuthGuard, AdminGuard]},
   {path: 'nearbyUsers', component: NearbyUsersComponent, canActivate: [AuthGuard]},
-  {path: 'cardApplications', component: CardApplicationsComponent, canActivate: [CartographerGuard]},
+  {path: 'cartographer/cardApplications', component: CardApplicationsComponent, canActivate: [AuthGuard, CartographerGuard]},
   {path: '**', redirectTo: ''}
 ];
 

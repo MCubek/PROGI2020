@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row">
+      <hr/>
+      <div class="col-md-11">
+        <h2>List of Location cards</h2>
+        <ul *ngIf="cards!==undefined" class="list-group">
+          <li *ngFor="let card of cards" class="list-group-item">
+            <p>Id: {{card.id}}</p>
+            <p>Name: {{card.name}}</p>
+            <p>Description: {{card.description}}</p>
+            <button class="btn btn-primary" (click)="delete(card.id)">Delete</button>
+          </li>
+        </ul>
+        <p *ngIf="cards===undefined || cards.length==0"> No Cards</p>
+      </div>
+    </div>
+  </div>
+  
