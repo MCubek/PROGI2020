@@ -39,4 +39,10 @@ public class FightController {
     public ResponseEntity<List<UserCardDTO>> getUserCardList(@PathVariable String username) throws MalformedURLException {
         return new ResponseEntity<>(fightService.getUserCardList(username), OK);
     }
+
+    @DeleteMapping("/delete/{fightId}")
+    public ResponseEntity<Void> deleteFight(@PathVariable Long fightId) {
+        fightService.deleteFight(fightId);
+        return new ResponseEntity<>(OK);
+    }
 }

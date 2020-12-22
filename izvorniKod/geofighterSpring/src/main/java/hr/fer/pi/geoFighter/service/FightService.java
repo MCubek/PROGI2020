@@ -55,6 +55,10 @@ public class FightService {
         playerUsernameListCardsMap.put(authService.getCurrentUser().getUsername(), fightCardsDTO.getSelectedCardIds());
     }
 
+    public void deleteFight(Long fightId) {
+        // TODO: 22.12.2020. Obrisati mapu gdje se sperma par igraca 
+    }
+
     @Transactional
     public void startFight() {
         // TODO: 22.12.2020. Fetch usernames and match id
@@ -63,7 +67,7 @@ public class FightService {
         long fightId = 0;
 
         //Nisu jos oba playera poslala svoje karte
-        if(!playerUsernameListCardsMap.containsKey(username1) || !playerUsernameListCardsMap.containsKey(username2))
+        if (! playerUsernameListCardsMap.containsKey(username1) || ! playerUsernameListCardsMap.containsKey(username2))
             return;
 
         //Jedan je vec odradio borbu pa se preskace drugi put
