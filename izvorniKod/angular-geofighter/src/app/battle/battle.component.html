@@ -1,7 +1,7 @@
 <div class="wrapper">
   <h3 class="h3">Battle time!</h3>
   <p class="p">Pick your cards:</p>
-  <div *ngIf="userCards!==undefined"  class="list-group">
+  <div *ngIf="userCards!==undefined" class="list-group">
     <div *ngFor="let userCard of userCards" class="list-group-item">
       <div class="card">
         <img src={{userCard.photoURL}} class="card-img-top"/>
@@ -9,8 +9,8 @@
           <h5 class="card-title">{{userCard.name}}</h5>
           <p class="card-text">{{userCard.description}}</p>
           <div class="btn-bottom">
-            <a href="#" id="btn-card-geo" class="btn btn-primary btn-font">See more</a>
-            <a href="#" id="btn-card-geo" class="btn btn-primary btn-font">Pick card</a>
+            <a [href]="'card/' + userCard.id" id="btn-card-geo1" class="btn btn-primary btn-font">See more</a>
+            <a href="#" id="btn-card-geo2" class="btn btn-primary btn-font">Pick card</a>
           </div>
         </div>
       </div>
