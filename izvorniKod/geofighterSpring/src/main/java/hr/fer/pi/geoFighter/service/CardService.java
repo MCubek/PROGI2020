@@ -3,7 +3,6 @@ package hr.fer.pi.geoFighter.service;
 import hr.fer.pi.geoFighter.dto.CardDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.exceptions.UserInfoInvalidException;
-import hr.fer.pi.geoFighter.model.CartographerStatus;
 import hr.fer.pi.geoFighter.model.LocationCard;
 import hr.fer.pi.geoFighter.model.User;
 import hr.fer.pi.geoFighter.model.UserCard;
@@ -140,8 +139,8 @@ public class CardService {
                         .name(lc.getName())
                         .description(lc.getDescription())
                         .photoUrl(lc.getPhotoURL())
-                        .location(lc.getLocation())
-                        .createdBy(lc.getCreatedBy())
+                        .location(lc.getLocation().getX()+", "+lc.getLocation().getY())
+                        .createdBy(lc.getCreatedBy().getUsername())
                         .build())
                 .collect(Collectors.toList());
     }
