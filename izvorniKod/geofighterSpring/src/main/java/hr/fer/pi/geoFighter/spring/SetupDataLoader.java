@@ -192,6 +192,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         User cart = userRepository.findByUsername("card").orElseThrow(() -> new SpringGeoFighterException("No card user in database"));
         User userA = userRepository.findByUsername("userA").orElseThrow(() -> new SpringGeoFighterException("No userA in database"));
         User userB = userRepository.findByUsername("userB").orElseThrow(() -> new SpringGeoFighterException("No userB in database"));
+        User user = userRepository.findByUsername("user").orElseThrow(() -> new SpringGeoFighterException("No user in database"));
 
         LocationCard l;
         UserCard uc;
@@ -226,13 +227,19 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
             }
+            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+                uc = new UserCard();
+                uc.setUser(user);
+                uc.setLocationCard(l);
+                userCardRepository.save(uc);
+            }
         }
 
         if (locationCardRepository.findByName("Trg Bana Jelačića").isEmpty()) {
             l = new LocationCard();
             l.setName("Trg Bana Jelačića");
             try {
-                l.setPhotoURL(new URL("https://upload.wikimedia.org/wikipedia/commons/1/10/Trg_bana_Jelacica_Zagreb_30102012_2_roberta_f.jpg"));
+                l.setPhotoURL(new URL("https://www.zagrebonline.hr/wp-content/uploads/2012/03/trga-bana-jelacica.jpg"));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -255,6 +262,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             if(userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(userB);
+                uc.setLocationCard(l);
+                userCardRepository.save(uc);
+            }
+            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+                uc = new UserCard();
+                uc.setUser(user);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
             }
@@ -290,6 +303,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
             }
+            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+                uc = new UserCard();
+                uc.setUser(user);
+                uc.setLocationCard(l);
+                userCardRepository.save(uc);
+            }
         }
 
         if (locationCardRepository.findByName("Crkva sv. Marka").isEmpty()) {
@@ -322,6 +341,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
             }
+            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+                uc = new UserCard();
+                uc.setUser(user);
+                uc.setLocationCard(l);
+                userCardRepository.save(uc);
+            }
         }
 
         if (locationCardRepository.findByName("Hrvatsko Narodno Kazalište").isEmpty()) {
@@ -351,6 +376,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             if(userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(userB);
+                uc.setLocationCard(l);
+                userCardRepository.save(uc);
+            }
+            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+                uc = new UserCard();
+                uc.setUser(user);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
             }
