@@ -222,7 +222,7 @@ public class FightService {
                 ongoingFight.put(id,players);
                 match.setBattleId(id);
                 if(match.getBattleId()>0L){
-                    players.remove(match);
+                    startPlaying.remove(match);
                 }
                 return match;
             }
