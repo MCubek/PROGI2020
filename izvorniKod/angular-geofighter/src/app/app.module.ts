@@ -44,7 +44,7 @@ import {BattleComponent} from './battle/battle.component';
     DateTimePickerDialog,
     NearbyUsersComponent,
     CardApplicationsComponent,
-    CartographerMapComponent
+    CartographerMapComponent,
     UserProfileComponent,
     AllUsersComponent,
     BattleComponent
