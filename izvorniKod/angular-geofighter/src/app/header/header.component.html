@@ -11,7 +11,7 @@
         <li class="nav-item active">
           <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="role!=='ROLE_CARTOGRAPHER' && role!=='ROLE_ADMIN'" class="nav-item">
           <a class="nav-link" href="/cartographerApply">Cartographer Apply</a>
         </li>
 	<li class="nav-item">
@@ -25,6 +25,8 @@
             <a *ngIf="role==='ROLE_ADMIN'" class="dropdown-item" href="/cartographerApplications">Cartographer Applications</a>
             <a *ngIf="role==='ROLE_ADMIN'" class="dropdown-item" href="/userList">User List</a>
             <a *ngIf="role==='ROLE_USER'" class="dropdown-item" href="/users">All users</a>
+            <a *ngIf="role==='ROLE_CARTOGRAPHER' || role==='ROLE_ADMIN'" class="dropdown-item" href="/cardApplications">Card Applications</a>
+            <a *ngIf="isLoggedIn" class="dropdown-item" href="/nearbyUsers">Nearby users</a>
             <a class="dropdown-item" href="/login" (click)="logout()">Logout</a>
           </div>
         </li>

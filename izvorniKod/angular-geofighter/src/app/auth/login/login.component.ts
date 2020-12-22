@@ -5,6 +5,10 @@ import {AuthService} from '../shared/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {throwError} from 'rxjs';
+import {UserLocationPayload} from './user-location.payload';
+import {GeolocationService} from '@ng-web-apis/geolocation';
+import {take} from 'rxjs/operators';
+import {MyCoordinate} from '../../cartographer/card-applications/CartographerMap/MyComponent';
 
 @Component({
   selector: 'app-login',
@@ -17,12 +21,18 @@ export class LoginComponent implements OnInit {
   loginRequestPayload: LoginRequestPayload;
   registerSuccessMessage: string;
   isError: boolean;
+  position: Position;
+  userLocationPayload: UserLocationPayload;
 
   constructor(private authService: AuthService, private router: Router, private toastr: ToastrService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute, private readonly geoLocation: GeolocationService) {
     this.loginRequestPayload = {
       username: '',
       password: ''
+    };
+    this.userLocationPayload = {
+      latitude: 0.0,
+      longitude: 0.0
     };
   }
 
@@ -42,8 +52,7 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  // tslint:disable-next-line:typedef
-  login() {
+  login(): void {
     this.loginRequestPayload.username = this.loginForm.get('username').value;
     this.loginRequestPayload.password = this.loginForm.get('password').value;
 
@@ -51,10 +60,24 @@ export class LoginComponent implements OnInit {
       this.isError = false;
       this.router.navigateByUrl('');
       this.toastr.success('Login Successful');
+
+      this.setLocation();
+
     }, error => {
       this.isError = true;
       throwError(error);
     });
   }
 
+  setLocation(): void {
+    this.geoLocation.pipe(take(1)).subscribe(position => {
+      this.position = position;
+      this.userLocationPayload.latitude = this.position.coords.longitude;
+      this.userLocationPayload.longitude = this.position.coords.latitude;
+
+      this.authService.saveLocation(this.userLocationPayload).subscribe(
+        response => console.log(response),
+        err => console.log(err));
+    });
+  }
 }

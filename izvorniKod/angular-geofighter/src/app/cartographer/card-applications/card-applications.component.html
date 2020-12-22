@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="row">
+    <hr/>
+    <div class="col-md-11">
+      <div *ngIf="cardApplications!==undefined && cardApplications.length!=0">
+        <button class="btn btn-primary" (click)="toggleMapShowed()">Toggle Locations Map</button>
+        <div *ngIf="mapShowed">
+          <app-cartographer-map [coordinatesList]="coordinatesList"></app-cartographer-map>
+        </div>
+      </div>
+      <h2>List of Card Applications</h2>
+      <ul *ngIf="cardApplications!==undefined" class="list-group">
+        <li *ngFor="let card of cardApplications" class="list-group-item">
+          <p>Name: {{card.name}}</p>
+          <p>Location: {{card.location}}</p>
+          <p>Created by: {{card.createdBy}}</p>
+          <p>Description: {{card.description}}</p>
+          <button class="btn btn-success mr-2" (click)="accept(card.id)">Accept</button>
+          <button class="btn btn-danger mr-2" (click)="decline(card.id)">Decline</button>
+          <button class="btn btn-primary" (click)="editForm(card)" data-toggle="modal" data-target="#editWindow">Edit
+          </button>
+          <button class="btn btn-primary float-right"
+                  (click)="requestConfirmation(card.id)">{{card.needsToBeChecked ? 'Remove confirmation request' : 'Request confirmation'}}</button>
+        </li>
+      </ul>
+      <p *ngIf="cardApplications===undefined || cardApplications.length==0"> No Card Applications</p>
+    </div>
+  </div>
+</div>
+
+<div id="editWindow" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit card</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editCardForm">
+          <div class="form-group row">
+            <label for="name" class="col-md-4 col-form-label text-md-right"
+            >Name</label>
+            <div class="col-md-6">
+              <input
+                type="text"
+                [formControlName]="'name'"
+                id="name"
+                class="form-control input-radius"
+                name="name"
+                required
+                autofocus
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-form-label text-md-right"
+            >Description</label>
+            <div class="col-md-6">
+              <input
+                type="text"
+                [formControlName]="'description'"
+                class="form-control input-radius"
+                required
+                autofocus
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label
+              for="photoUrl"
+              class="col-md-4 col-form-label text-md-right"
+            >Photo URL</label>
+            <div class="col-md-6">
+              <input
+                type="url"
+                [formControlName]="'photoUrl'"
+                id="photoUrl"
+                class="form-control input-radius"
+                name="photoUrl"
+                required
+              />
+              <span
+                *ngIf="
+                    !editCardForm.get('photoUrl').valid &&
+                    editCardForm.get('photoUrl').touched
+                  "
+              >
+                  Please provide a valid URL
+                </span>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="edit()">Accept</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
