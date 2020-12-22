@@ -2,6 +2,7 @@ package hr.fer.pi.geoFighter.service;
 
 import hr.fer.pi.geoFighter.dto.FightDTO;
 import hr.fer.pi.geoFighter.dto.SendRequestDTO;
+import hr.fer.pi.geoFighter.dto.UserCardDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.*;
 import hr.fer.pi.geoFighter.repository.FightRepository;
@@ -12,16 +13,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-
-import hr.fer.pi.geoFighter.dto.UserCardDTO;
-
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -34,7 +29,7 @@ public class FightService {
     private final FightRepository fightRepository;
     private final List<SendRequestDTO> requests;
     private final List<SendRequestDTO> startPlaying;
-    private final Map<Long, List<String>> ongoingFight;
+    private static final Map<Long, List<String>> ongoingFight = new HashMap<>();
 
     @Transactional
     public List<UserCardDTO> getUserCardList(String username) throws MalformedURLException {
