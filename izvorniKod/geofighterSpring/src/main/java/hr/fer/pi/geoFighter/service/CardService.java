@@ -55,17 +55,13 @@ public class CardService {
         locationCard.setDescription(cardDTO.getDescription());
         locationCard.setPhotoURL(cardDTO.getPhotoUrl());
         locationCard.setLocation(parseLocationString(cardDTO.getLocation()));
-        locationCard.setNeedsToBeChecked(true);
         locationCard.setCreatedBy(authService.getCurrentUser());
 
         if (! urlValidator.isValid(cardDTO.getPhotoUrl().toString()))
             throw new UserInfoInvalidException("Invalid photo URL");
 
-        try {
-            locationCard.setPhotoURL(new URL(cardDTO.getPhotoUrl().toString()));
-        } catch (MalformedURLException exception) {
-            throw new SpringGeoFighterException("Image URL error");
-        }
+        locationCard.setPhotoURL(cardDTO.getPhotoUrl());
+
 
         locationCardRepository.save(locationCard);
     }
