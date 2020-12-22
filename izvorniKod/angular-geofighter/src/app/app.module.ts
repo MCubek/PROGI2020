@@ -25,6 +25,7 @@ import {MatDialogModule } from '@angular/material/dialog';
 import {FormsModule} from '@angular/forms';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import { AllUsersComponent } from './user/all-users/all-users.component';
+import { BattleComponent } from './battle/battle.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AllUsersComponent } from './user/all-users/all-users.component';
     UserListComponent,
     DateTimePickerDialog,
     UserProfileComponent,
-    AllUsersComponent
+    AllUsersComponent,
+    BattleComponent
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -39,4 +41,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "users.user_id=user_card_fight.user_id where username=?1\n" +
             "order by start_time desc limit 10) as lastTen where winner_user_id!=user_id;", nativeQuery = true)
     int findStatisticLoss(String username);
+
+    @Query(value = "select  location_cards.name, location_cards.description, location_cards.photourl\n" +
+            "from users join user_card on users.user_id=user_card.user_id join location_cards on user_card.lcd_id=location_cards.lcd_id\n" +
+            "where users.username=?1\t", nativeQuery=true)
+    List<ArrayList<String>> findLocationCards(String username);
+
 }

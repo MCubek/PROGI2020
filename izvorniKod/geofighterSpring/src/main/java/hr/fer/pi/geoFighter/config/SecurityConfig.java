@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 )
                 .and();
         http.authorizeRequests()
-                .antMatchers("/api/auth/login", "/api/auth/signup", "/api/auth/accountVerification/*", "/api/auth/refresh","/api/user/**")
+                .antMatchers("/api/auth/login", "/api/auth/signup", "/api/auth/accountVerification/*", "/api/auth/refresh")
                 .permitAll()
                 .antMatchers("/v2/api-docs",
                         "/configuration/ui",
@@ -62,6 +62,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-ui.html",
                         "/webjars/**")
                 .permitAll()
+                .antMatchers("/api/user/**")
+                .hasAuthority("USER_PRIVILEGE")
+                .antMatchers("/api/cartographer/**")
+                .hasAuthority("CARTOGRAPHER_PRIVILEGE")
                 .antMatchers("/api/admin/**")
                 .hasAuthority("ADMIN_PRIVILEGE")
                 .anyRequest()

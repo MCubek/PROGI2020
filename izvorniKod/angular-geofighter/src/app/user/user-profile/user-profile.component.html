@@ -1,15 +1,15 @@
 <div *ngIf="users!==undefined && profile!==undefined" class="container mt-5 d-flex justify-content-center">
-  <div class="card p-3">
+  <div class="cardUser p-3">
     <div class="d-flex align-items-center">
       <div class="image"> <img src="{{profile[4]}}" alt = "Profile photo" class="rounded" width="155"> </div>
       <div class="ml-3 w-100">
         <h4 class="mb-0 mt-0">{{profile[0]}}</h4>
-        <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
-          <div class="d-flex flex-column"> <span class="articles">Wins in last 10 games</span> <span class="number1">{{profile[2]}}</span> </div>
-          <div class="d-flex flex-column"> <span class="followers">Losses in last 10 games</span> <span class="number2">{{profile[3]}}</span> </div>
+        <div class="p-2 mt-2 bg-primary d-flex flex-column justify-content-between rounded text-white stats">
+          <div class="d-flex flex-column"> <span class="articles">Wins in last 10 games: </span> <span class="number1">{{profile[2]}}</span> </div>
+          <div class="d-flex flex-column"> <span class="followers">Losses in last 10 games: </span> <span class="number2">{{profile[3]}}</span> </div>
           <div *ngFor="let user of users; let i = index">
             <div *ngIf="user.username==profile[0]">
-                 <div class="d-flex flex-column"> <span class="rating">Global ranking</span> <span class="number3">{{i+1}}</span> </div>
+                 <div class="d-flex flex-column"> <span class="rating">Global ranking: </span> <span class="number3">{{i+1}}</span> </div>
               </div>
             </div>
         </div>
@@ -17,5 +17,24 @@
     </div>
   </div>
 </div>
+<div class="wrapper">
+  <p class="p">This user has cards:</p>
+  <div *ngIf="userCards!==undefined"  class="list-group">
+    <div *ngFor="let userCard of userCards" class="list-group-item">
+      <div class="card">
+        <img src={{userCard.photoURL}} class="card-img-top"/>
+        <div class="card-body">
+          <h5 class="card-title">{{userCard.name}}</h5>
+          <p class="card-text">{{userCard.description}}</p>
+          <div class="btn-bottom">
+            <a href="#" id="btn-card-geo" class="btn btn-primary btn-font">See more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p *ngIf="userCards===undefined || userCards.length==0" class="p2"> No cards yet</p>
+</div>
+
 
 <!-- source: https://bbbootstrap.com/snippets/bootstrap-sidebar-user-profile-62301382 -->
