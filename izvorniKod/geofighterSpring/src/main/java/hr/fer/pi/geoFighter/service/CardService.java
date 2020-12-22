@@ -27,6 +27,7 @@ public class CardService {
     private final UrlValidator urlValidator = new UrlValidator(new String[]{"http", "https"});
     private final LocationCardRepository locationCardRepository;
     private final UserRepository userRepository;
+    private final AuthService authService;
 
     public List<CardDTO> getCardCollection(String username) {
         List<CardDTO> cardCollection = new ArrayList<>();
@@ -47,7 +48,7 @@ public class CardService {
             cardDTO.setDescription(locationCard.getDescription());
             cardDTO.setPhotoUrl(locationCard.getPhotoURL());
             cardDTO.setLocation(getLocationString(locationCard.getLocation()));
-            cardDTO.setCreatedBy(locationCard.getCreatedBy());
+            cardDTO.setCreatedBy(locationCard.getCreatedBy().getUsername());
 
             cardCollection.add(cardDTO);
         }
@@ -66,7 +67,7 @@ public class CardService {
         cardDTO.setDescription(locationCard.getDescription());
         cardDTO.setPhotoUrl(locationCard.getPhotoURL());
         cardDTO.setLocation(getLocationString(locationCard.getLocation()));
-        cardDTO.setCreatedBy(locationCard.getCreatedBy());
+        cardDTO.setCreatedBy(locationCard.getCreatedBy().getUsername());
 
         return cardDTO;
     }
@@ -85,7 +86,7 @@ public class CardService {
         locationCard.setPhotoURL(cardDTO.getPhotoUrl());
         locationCard.setLocation(parseLocationString(cardDTO.getLocation()));
         locationCard.setNeedsToBeChecked(true);
-        locationCard.setCreatedBy(cardDTO.getCreatedBy());
+        locationCard.setCreatedBy(authService.getCurrentUser());
 
         if (! urlValidator.isValid(cardDTO.getPhotoUrl().toString()))
             throw new UserInfoInvalidException("Invalid photo URL");
@@ -108,7 +109,7 @@ public class CardService {
                         .description(lc.getDescription())
                         .photoUrl(lc.getPhotoURL())
                         .location(getLocationString(lc.getLocation()))
-                        .createdBy(lc.getCreatedBy())
+                        .createdBy(lc.getCreatedBy().getUsername())
                         .build())
                 .collect(Collectors.toList());
     }
