@@ -2,7 +2,8 @@
   <nav class="navbar navbar-static navbar-expand-lg navbar-light bg-light">
 
     <a class="navbar-brand mb-0 h1" href="/">GeoFighter</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -11,15 +12,23 @@
         <li class="nav-item active">
           <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
+        <li *ngIf="role!=='ROLE_CARTOGRAPHER' && role!=='ROLE_ADMIN'" class="nav-item">
+          <a class="nav-link" href="/cartographerApply">Cartographer Apply</a>
+        </li>
         <li class="nav-item">
-          <a *ngIf="role==='ROLE_USER'" class="nav-link" href="/cartographerApply">Cartographer Apply</a>
+          <a class="nav-link" href="/leaderboard">Leaderboard</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle font-weight-bolder" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle font-weight-bolder" href="#" id="navbarDropdownMenuLink"
+             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{username}}
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a *ngIf="role==='ROLE_ADMIN'" class="dropdown-item" href="/cartographerApplications">Cartographer Applications</a>
+            <a *ngIf="role==='ROLE_ADMIN'" class="dropdown-item" href="/cartographerApplications">Cartographer
+              Applications</a>
+            <a *ngIf="role==='ROLE_ADMIN'" class="dropdown-item" href="/userList">User List</a>
+            <a *ngIf="role==='ROLE_CARTOGRAPHER' || role==='ROLE_ADMIN'" class="dropdown-item" href="/cardApplications">Card Applications</a>
+            <a *ngIf="isLoggedIn" class="dropdown-item" href="/nearbyUsers">Nearby users</a>
             <a *ngIf="role==='ROLE_ADMIN'" class="dropdown-item" href="/cardsPage">List of cards</a>
             <a class="dropdown-item" href="/login" (click)="logout()">Logout</a>
           </div>

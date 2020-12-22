@@ -36,4 +36,8 @@ input.ng-invalid.ng-touched {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
 
