@@ -24,12 +24,12 @@
             {{username}}
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a *ngIf="role==='ROLE_ADMIN'" class="dropdown-item" href="/cartographerApplications">Cartographer
-              Applications</a>
-            <a *ngIf="role==='ROLE_ADMIN'" class="dropdown-item" href="/userList">User List</a>
-            <a *ngIf="role==='ROLE_CARTOGRAPHER' || role==='ROLE_ADMIN'" class="dropdown-item" href="/cardApplications">Card Applications</a>
             <a *ngIf="isLoggedIn" class="dropdown-item" href="/nearbyUsers">Nearby users</a>
-            <a *ngIf="role==='ROLE_ADMIN'" class="dropdown-item" href="/cardsPage">List of cards</a>
+            <a *ngIf="role==='ROLE_CARTOGRAPHER' || role==='ROLE_ADMIN'" class="dropdown-item" href="/cartographer/cardApplications">Card Applications</a>
+            <a *ngIf="role==='ROLE_ADMIN'" class="dropdown-item" href="/admin/cartographerApplications">ADMIN: Cartographer
+              Applications</a>
+            <a *ngIf="role==='ROLE_ADMIN'" class="dropdown-item" href="/admin/users">ADMIN: Users</a>
+            <a *ngIf="role==='ROLE_ADMIN'" class="dropdown-item" href="/admin/cards">ADMIN: Cards</a>
             <a class="dropdown-item" href="/login" (click)="logout()">Logout</a>
           </div>
         </li>
