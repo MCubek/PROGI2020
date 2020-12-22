@@ -124,7 +124,7 @@ public class CardService {
     }
 
     private static Point2D.Double parseLocationString(String locationString) {
-        var array = locationString.split("\\b+");
+        var array = locationString.split("\\s+");
 
         if (array.length != 2) throw new IllegalArgumentException("2 coordinates missing!");
 
