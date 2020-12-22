@@ -17,7 +17,7 @@ import {TokenInterceptor} from './token-interceptor';
 import {CartographerApplicationsComponent} from './admin/cartographer-applications/cartographer-applications.component';
 import {LeaderboardComponent} from './user/leaderboard/leaderboard.component';
 import {UserListComponent} from './admin/user-list/user-list.component';
-import {DateTimePickerDialog} from './admin/user-list/user-list.component'
+import {DateTimePickerDialog} from './admin/user-list/user-list.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
