@@ -2,7 +2,6 @@ package hr.fer.pi.geoFighter.controller;
 
 import hr.fer.pi.geoFighter.dto.CardApplicationDTO;
 import hr.fer.pi.geoFighter.dto.CardLocationDTO;
-import hr.fer.pi.geoFighter.model.LocationCard;
 import hr.fer.pi.geoFighter.service.CardApplicationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +36,7 @@ public class CartographerController {
     }
 
     @PostMapping("/edit")
-    public ResponseEntity<String> editCardApplication(@RequestBody LocationCard card) {
+    public ResponseEntity<String> editCardApplication(@RequestBody CardApplicationDTO card) {
         cardApplicationService.editCardApplication(card);
         return new ResponseEntity<>("Card application edited", OK);
     }

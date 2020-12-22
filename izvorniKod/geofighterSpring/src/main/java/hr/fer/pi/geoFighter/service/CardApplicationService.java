@@ -60,12 +60,18 @@ public class CardApplicationService {
         locationCardRepository.delete(card);
     }
 
-    public void editCardApplication(LocationCard card) {
-        LocationCard oldCard = locationCardRepository.getLocationCardById(card.getId()).orElseThrow(
+    public void editCardApplication(CardApplicationDTO card) {
+        LocationCard locationCard = locationCardRepository.getLocationCardById(card.getId()).orElseThrow(
                 () -> new SpringGeoFighterException("Card does not exist"));
 
-        locationCardRepository.delete(oldCard);
-        locationCardRepository.save(card);
+        locationCard.setName(card.getName());
+        locationCard.setDescription(card.getDescription());
+        locationCard.setPhotoURL(card.getPhotoUrl());
+        locationCard.setLocation(CardService.parseLocationString(card.getLocation()));
+        locationCard.setUncommonness(card.getUncommonness());
+        locationCard.setDifficulty(card.getDifficulty());
+        locationCard.setPopulation(card.getPopulation());
+
     }
 
     public void requestCardApplicationConfirmation(Long id) {
