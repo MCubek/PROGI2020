@@ -29,6 +29,7 @@ import {CartographerMapComponent} from './cartographer/card-applications/Cartogr
 import {UserProfileComponent} from './user/user-profile/user-profile.component';
 import {AllUsersComponent} from './user/all-users/all-users.component';
 import {BattleComponent} from './battle/battle.component';
+import {CardsPageComponent} from './admin/cards-page/cards-page.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import {BattleComponent} from './battle/battle.component';
     HomeComponent,
     SignupCartographerComponent,
     CartographerApplicationsComponent,
+    CardsPageComponent,
     LeaderboardComponent,
     UserListComponent,
     DateTimePickerDialog,
