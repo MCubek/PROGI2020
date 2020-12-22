@@ -83,6 +83,7 @@ public class CardApplicationService {
 
     public List<CardLocationDTO> getAllCardsThatNeedToBeChecked() {
         return locationCardRepository.getLocationCardByNeedsToBeCheckedIsTrue().stream()
+                .filter(v->v.getLocation()!=null)
                 .map(v -> new CardLocationDTO(v.getId(), v.getLocation().getX(), v.getLocation().getY()))
                 .collect(Collectors.toList());
     }
