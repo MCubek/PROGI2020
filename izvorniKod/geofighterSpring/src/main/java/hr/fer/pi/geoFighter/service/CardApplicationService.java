@@ -31,7 +31,7 @@ public class CardApplicationService {
             card.setName(locationCard.getName());
             card.setDescription(locationCard.getDescription());
             card.setPhotoUrl(locationCard.getPhotoURL());
-            card.setLocation(locationCard.getLocation().x + " " + locationCard.getLocation().y);
+            card.setLocation(CardService.getLocationString(locationCard.getLocation()));
             card.setCreatedBy(locationCard.getCreatedBy() != null ? "locationCard.getCreatedBy().getUsername()" : "unknown");
             card.setNeedsToBeChecked(locationCard.isNeedsToBeChecked());
             card.setUncommonness(locationCard.getUncommonness());
@@ -83,6 +83,7 @@ public class CardApplicationService {
 
     public List<CardLocationDTO> getAllCardsThatNeedToBeChecked() {
         return locationCardRepository.getLocationCardByNeedsToBeCheckedIsTrue().stream()
+                .filter(v->v.getLocation()!=null)
                 .map(v -> new CardLocationDTO(v.getId(), v.getLocation().getX(), v.getLocation().getY()))
                 .collect(Collectors.toList());
     }

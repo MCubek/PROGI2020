@@ -7,9 +7,9 @@
     <tbody>
       <tr *ngFor="let user of usernames">
         <td>{{user}}</td>
-        <td><button class="btn btn-primary" (click)="promoteToAdmin(user)">Promote User to Admin</button></td>
-        <td><button class="btn btn-primary" (click)="deleteUser(user)">Delete User</button></td>
-        <td><button class="btn btn-primary" (click)="disableUser(user)">Set User Timeout</button></td>
+        <td><button class="btn btn-outline-primary" (click)="promoteToAdmin(user)">Promote User to Admin</button></td>
+        <td><button class="btn btn-danger" (click)="deleteUser(user)">Delete User</button></td>
+        <td><button class="btn btn-warning" (click)="disableUser(user)">Set User Timeout</button></td>
       </tr>
     </tbody>
 </table>

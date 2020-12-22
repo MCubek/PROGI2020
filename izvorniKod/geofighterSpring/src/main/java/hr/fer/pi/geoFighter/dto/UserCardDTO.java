@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.net.URL;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -14,6 +13,7 @@ import java.util.Date;
 @Builder
 
 public class UserCardDTO {
+    private Long id;
     private String name;
     private String description;
     private URL photoURL;
