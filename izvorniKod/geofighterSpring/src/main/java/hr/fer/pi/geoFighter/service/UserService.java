@@ -3,7 +3,6 @@ package hr.fer.pi.geoFighter.service;
 import hr.fer.pi.geoFighter.dto.SendRequestDTO;
 import hr.fer.pi.geoFighter.dto.UserEloDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
-import hr.fer.pi.geoFighter.model.LocationCard;
 import hr.fer.pi.geoFighter.model.User;
 import hr.fer.pi.geoFighter.dto.UserLocationDTO;
 import hr.fer.pi.geoFighter.repository.UserRepository;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -23,6 +23,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final AuthService authService;
     private final List<SendRequestDTO> requests;
+    private final List<SendRequestDTO> startPlaying;
 
     public List<UserEloDTO> getUserEloInfo() {
         return new ArrayList<>(userRepository.getUserEloInfo());
@@ -112,5 +113,33 @@ public class UserService {
             }
         }
         return yourRequests;
+    }
+
+    public void processAnswer(SendRequestDTO answer){
+        List<SendRequestDTO> copy = List.copyOf(requests);
+        if(answer.isAnswer()){
+            startPlaying.add(answer);
+            for (SendRequestDTO request: copy) {
+                if(request.getUsernameSender().equals(answer.getUsernameSender())){
+                    requests.remove(request);
+                }
+            }
+        }
+        else{
+            requests.remove(answer);
+        }
+    }
+
+    public String getMatches(String username){
+        String partner = "";
+        for (SendRequestDTO matches:startPlaying){
+            if (matches.getUsernameSender().equals(username)){
+               partner = matches.getUsernameReceiver();
+            }
+            else if(matches.getUsernameReceiver().equals(username)){
+               partner = matches.getUsernameSender();
+            }
+        }
+        return partner;
     }
 }

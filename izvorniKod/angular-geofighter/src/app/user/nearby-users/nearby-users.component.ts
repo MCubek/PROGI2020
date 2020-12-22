@@ -17,12 +17,14 @@ export class NearbyUsersComponent implements OnInit {
   usernames: Array<string>;
   sendRequestPayload: SendRequestPayload;
   requests: Array<String>;
+  partner: string;
 
   constructor(private userService: UserService, private router: Router, private toastr: ToastrService,
               private authService: AuthService) {
     this.sendRequestPayload = {
       usernameReceiver: '',
-      usernameSender: ''
+      usernameSender: '',
+      answer: false
     };
   }
 
@@ -33,8 +35,17 @@ export class NearbyUsersComponent implements OnInit {
       this.toastr.error('Internal server error');
       throwError(error);
     });
+
     interval(1000).pipe(startWith(0),switchMap(() => this.userService.getRequests(this.authService.getUsername()))
     ).subscribe(data => this.requests = data);
+
+    interval(1000).pipe(startWith(0),switchMap(() => this.userService.getMatches(this.authService.getUsername()))
+    ).subscribe(data => {
+      this.partner = data
+      if(data.length!=null){
+        this.router.navigateByUrl("/battle");
+      }
+    });
 
   }
 
@@ -42,6 +53,24 @@ export class NearbyUsersComponent implements OnInit {
     this.sendRequestPayload.usernameSender = this.authService.getUsername();
     this.sendRequestPayload.usernameReceiver = usernameReceive;
     this.userService.sendRequest(this.sendRequestPayload).subscribe(
+      response => console.log(response),
+      err => console.log(err));
+  }
+
+  acceptRequest(usernameSender: string){
+    this.sendRequestPayload.usernameSender = usernameSender;
+    this.sendRequestPayload.usernameReceiver = this.authService.getUsername();
+    this.sendRequestPayload.answer = true;
+    this.userService.sendAnswer(this.sendRequestPayload).subscribe(
+      response => console.log(response),
+      err => console.log(err));
+  }
+
+  declineRequest(usernameSender: string){
+    this.sendRequestPayload.usernameSender = usernameSender;
+    this.sendRequestPayload.usernameReceiver = this.authService.getUsername();
+    this.sendRequestPayload.answer = false;
+    this.userService.sendAnswer(this.sendRequestPayload).subscribe(
       response => console.log(response),
       err => console.log(err));
   }

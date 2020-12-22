@@ -56,4 +56,15 @@ public class UserController {
         return new ResponseEntity<>(userService.getRequests(username),OK);
     }
 
+    @PostMapping("/receiveAnswer")
+    public ResponseEntity<String> receiveAnswer(@RequestBody SendRequestDTO sendRequestDTO){
+        userService.processAnswer(sendRequestDTO);
+        return ResponseEntity.status(OK).body("Answer processed!");
+    }
+
+    @GetMapping("/getMatches{username}")
+    public ResponseEntity<String> getMatches(@PathVariable String username){
+        return new ResponseEntity<>(userService.getMatches(username),OK);
+    }
+
 }

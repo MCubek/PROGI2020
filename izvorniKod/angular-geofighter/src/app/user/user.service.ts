@@ -37,4 +37,12 @@ export class UserService {
   getRequests(username: string): Observable<string[]> {
     return this.httpClient.get<string[]>(`${environment.apiUrl}api/user/getRequests`+username);
   }
+
+  sendAnswer(sendRequestPayload: SendRequestPayload): Observable<any>{
+    return this.httpClient.post(`${environment.apiUrl}api/user/receiveAnswer`, sendRequestPayload, {responseType: 'text'});
+  }
+
+  getMatches(username: string): Observable<string> {
+    return this.httpClient.get<string>(`${environment.apiUrl}api/user/getMatches`+username);
+  }
 }
