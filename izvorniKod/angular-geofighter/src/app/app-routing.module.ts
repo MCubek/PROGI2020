@@ -10,6 +10,7 @@ import {AdminGuard} from './admin/admin.guard';
 import {CollectionComponent} from './card/collection/collection.component';
 import {SingleCardComponent} from './card/single-card/single-card.component';
 import {ApplyCardComponent} from './card/apply-card/apply-card.component';
+import {BattleComponent} from './battle/battle.component';
 import {CardsPageComponent} from './admin/cards-page/cards-page.component';
 import {UserListComponent} from './admin/user-list/user-list.component';
 import {LeaderboardComponent} from './user/leaderboard/leaderboard.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'signup', component: SignupComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'battle', component: BattleComponent, canActivate: [AuthGuard]},
   {path: 'cartographerApply', component: SignupCartographerComponent, canActivate: [AuthGuard]},
   {path: 'card/allCards', component: CollectionComponent},
   {path: 'card/applyCard', component: ApplyCardComponent},
