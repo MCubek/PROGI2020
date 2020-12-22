@@ -22,11 +22,6 @@ public class CardController {
         return cardService.getAllCards();
     }
 
-    @GetMapping("/cardCollection/{username}")
-    public ResponseEntity<List<CardDTO>> getCardCollection(@PathVariable String username) {
-        return new ResponseEntity<>(cardService.getCardCollection(username), OK);
-    }
-
     @GetMapping("/cardCollection")
     public ResponseEntity<List<CardDTO>> getCardCollection() {
         return new ResponseEntity<>(cardService.getCardCollection(), OK);

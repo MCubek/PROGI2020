@@ -36,7 +36,7 @@ export class ApplyCardComponent implements OnInit {
       photoUrl: new FormControl('', [
         Validators.required,
         Validators.pattern(
-          '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'
+          '^https?://(?:[a-z0-9-]+.)+[a-z]{2,6}(?:/[^/#?]+)+.(?:jpg|jpeg|png)$'
         ),
       ]),
       // location: new FormControl('', Validators.required),

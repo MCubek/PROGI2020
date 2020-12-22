@@ -33,26 +33,10 @@ public class CardService {
     public List<CardDTO> getAllCards() {
         List<CardDTO> cardCollection = new ArrayList<>();
 
-        /*
-        for (User user : userRepository.findUsersByCartographerStatus(CartographerStatus.APPROVED)) {
-            for (LocationCard locationCard : locationCardRepository.getLocationCardsByAcceptedBy(user)) {
-                CardDTO cardDTO = new CardDTO();
-                cardDTO.setId(locationCard.getId());
-                cardDTO.setName(locationCard.getName());
-                cardDTO.setDescription(locationCard.getDescription());
-                cardDTO.setPhotoUrl(locationCard.getPhotoURL());
-                cardDTO.setLocation(locationCard.getLocation());
-                cardDTO.setCreatedBy(locationCard.getCreatedBy());
-                cardCollection.add(cardDTO);
-            }
-        }
-
-         */
         for (LocationCard locationCard : locationCardRepository.findAll()) {
-          //  if (locationCard.isNeedsToBeChecked() == false) {
+            if (locationCard.isNeedsToBeChecked() == false) {
 
                 CardDTO cardDTO = new CardDTO();
-
 
                 cardDTO.setId(locationCard.getId());
                 cardDTO.setName(locationCard.getName());
@@ -62,36 +46,8 @@ public class CardService {
                 cardDTO.setDifficulty(locationCard.getDifficulty());
                 cardDTO.setPopulation(locationCard.getPopulation());
                 cardCollection.add(cardDTO);
-           // }
+            }
         }
-
-        return cardCollection;
-    }
-
-    public List<CardDTO> getCardCollection(String username) {
-        List<CardDTO> cardCollection = new ArrayList<>();
-
-        User user = userRepository.findByUsername(username).orElseThrow(
-                () -> new SpringGeoFighterException("User does not exist"));
-
-        if (user.getLocationCardAssoc().isEmpty())
-            throw new SpringGeoFighterException("Collection is empty!");
-
-        for (UserCard userCard : user.getLocationCardAssoc()) {
-
-            LocationCard locationCard = userCard.getLocationCard();
-
-            CardDTO cardDTO = new CardDTO();
-            cardDTO.setId(locationCard.getId());
-            cardDTO.setName(locationCard.getName());
-            cardDTO.setDescription(locationCard.getDescription());
-            cardDTO.setPhotoUrl(locationCard.getPhotoURL());
-            cardDTO.setLocation(getLocationString(locationCard.getLocation()));
-            cardDTO.setCreatedBy(locationCard.getCreatedBy().getUsername());
-
-            cardCollection.add(cardDTO);
-        }
-
         return cardCollection;
     }
 
@@ -114,20 +70,16 @@ public class CardService {
     //PRIJAVA KARTE
 
     public void applyLocationCard(CardDTO cardDTO) {
-        if (locationCardRepository.getLocationCardById(cardDTO.getId()).isPresent()) {
-            throw new SpringGeoFighterException("Card already exists!");
-        }
 
         LocationCard locationCard = new LocationCard();
         locationCard.setName(cardDTO.getName());
-        locationCard.setId(cardDTO.getId());
         locationCard.setDescription(cardDTO.getDescription());
         locationCard.setPhotoURL(cardDTO.getPhotoUrl());
         locationCard.setLocation(parseLocationString(cardDTO.getLocation()));
         locationCard.setNeedsToBeChecked(true);
         locationCard.setCreatedBy(authService.getCurrentUser());
 
-        if (! urlValidator.isValid(cardDTO.getPhotoUrl().toString()))
+        if (!urlValidator.isValid(cardDTO.getPhotoUrl().toString()))
             throw new UserInfoInvalidException("Invalid photo URL");
 
         try {
@@ -135,8 +87,7 @@ public class CardService {
         } catch (MalformedURLException exception) {
             throw new SpringGeoFighterException("Image URL error");
         }
-
-        //?
+        
         locationCardRepository.save(locationCard);
     }
 
