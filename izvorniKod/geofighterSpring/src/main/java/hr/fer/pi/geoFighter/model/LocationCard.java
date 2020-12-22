@@ -41,7 +41,7 @@ public class LocationCard {
     private boolean accepted = false;
 
     @Column(name = "check_needed")
-    private boolean needsToBeChecked;
+    private boolean needsToBeChecked = false;
 
     @Column(name = "enabled_date")
     private Instant enabledDate;

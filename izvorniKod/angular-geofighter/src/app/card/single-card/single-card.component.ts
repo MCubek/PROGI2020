@@ -1,0 +1,55 @@
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {element} from 'protractor';
+import {throwError} from 'rxjs';
+import {AuthService} from 'src/app/auth/shared/auth.service';
+import {CardService} from '../shared/card.service';
+import {SingleCardModel} from '../single-card/single-card-model';
+
+@Component({
+  selector: 'app-single-card',
+  templateUrl: './single-card.component.html',
+  styleUrls: ['./single-card.component.css'],
+})
+export class SingleCardComponent implements OnInit {
+
+  cardName: string;
+  description: string;
+  creator: string;
+  createdTime: string;
+  imageURL: string;
+  difficulty: string;
+  uncommonness: string;
+  population: string;
+  location: string;
+
+  id: string;
+
+  constructor(
+    private cardService: CardService,
+    private authService: AuthService,
+    private router: Router
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.id = this.router.url.replace('/card/', '');
+
+    this.cardService.getCard(this.id).subscribe(
+      (data) => {
+        this.cardName = data.name;
+        this.description = data.description;
+        this.creator = data.createdBy;
+        this.createdTime = data.createdTime;
+        this.imageURL = data.photoUrl;
+        this.difficulty = data.difficulty;
+        this.uncommonness = data.uncommonness;
+        this.population = data.population;
+        this.location = data.location;
+      },
+      (error) => {
+        throwError(error);
+      }
+    );
+  }
+}

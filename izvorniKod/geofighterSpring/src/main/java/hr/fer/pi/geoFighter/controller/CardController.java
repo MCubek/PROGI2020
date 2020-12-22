@@ -17,14 +17,9 @@ public class CardController {
 
     private final CardService cardService;
 
-    @GetMapping("/cardCollection/{username}")
-    public ResponseEntity<List<CardDTO>> getCardCollection(@PathVariable String username) {
-        return new ResponseEntity<>(cardService.getCardCollection(username), OK);
-    }
-
-    @GetMapping("/cardCollection")
-    public ResponseEntity<List<CardDTO>> getCardCollection() {
-        return new ResponseEntity<>(cardService.getCardCollection(), OK);
+    @GetMapping("/allCards")
+    public ResponseEntity<List<CardDTO>> getAllCards() {
+        return new ResponseEntity<>(cardService.getAllCards(), OK);
     }
 
     @GetMapping("/{locationCardId}")
@@ -41,7 +36,7 @@ public class CardController {
 
     //PRIJAVA KARTE
     @PostMapping("/applyCard")
-    public ResponseEntity<String> applyLocationCard(@RequestBody CardDTO cardDTO) {
+    public ResponseEntity<String> applyCard(@RequestBody CardDTO cardDTO) {
         cardService.applyLocationCard(cardDTO);
         return new ResponseEntity<>("Card applied for review", OK);
     }
