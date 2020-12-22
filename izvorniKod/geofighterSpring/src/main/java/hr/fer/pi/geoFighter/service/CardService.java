@@ -93,12 +93,12 @@ public class CardService {
         return cardDTO;
     }
 
-    private static String getLocationString(Point2D.Double point) {
+    static String getLocationString(Point2D.Double point) {
         if (point == null) return "unknown";
         return point.getX() + ", " + point.getY();
     }
 
-    private static Point2D.Double parseLocationString(String locationString) {
+    static Point2D.Double parseLocationString(String locationString) {
         var array = locationString.split("\\s+");
 
         if (array.length != 2) throw new IllegalArgumentException("2 coordinates missing!");
@@ -111,7 +111,7 @@ public class CardService {
         else return user.getUsername();
     }
 
-    private static String getTime(Instant instant) {
+    static String getTime(Instant instant) {
         DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
                 .withZone(ZoneId.systemDefault());
 
