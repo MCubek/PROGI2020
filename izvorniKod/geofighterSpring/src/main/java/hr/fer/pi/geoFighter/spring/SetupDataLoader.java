@@ -232,7 +232,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l = new LocationCard();
             l.setName("Trg Bana Jelačića");
             try {
-                l.setPhotoURL(new URL("https://hr.wikipedia.org/wiki/Datoteka:Trg_bana_Jelacica_Zagreb_30102012_2_roberta_f.jpg"));
+                l.setPhotoURL(new URL("https://upload.wikimedia.org/wikipedia/commons/1/10/Trg_bana_Jelacica_Zagreb_30102012_2_roberta_f.jpg"));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
