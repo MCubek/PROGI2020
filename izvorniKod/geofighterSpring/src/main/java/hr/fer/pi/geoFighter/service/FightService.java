@@ -17,7 +17,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 @AllArgsConstructor
@@ -251,19 +250,18 @@ public class FightService {
         }
     }
 
-    public SendRequestDTO getMatches(String username) {
-        for (SendRequestDTO match : startPlaying) {
-            if (match.getUsernameSender().equals(username)) {
-                List<String> players = new ArrayList<>();
-                players.add(match.getUsernameSender());
-                players.add(match.getUsernameReceiver());
-                Long id = AtomicSequenceGenerator.getNext();
-                ongoingFight.put(id, players);
-                match.setBattleId(id);
+    public SendRequestDTO getMatches(String username){
+        for (SendRequestDTO match:startPlaying){
+            if (match.getUsernameSender().equals(username)){
                 if(match.isSeen()){
                     startPlaying.remove(match);
-                }
-                else{
+                }else {
+                    List<String> players = new ArrayList<>();
+                    players.add(match.getUsernameSender());
+                    players.add(match.getUsernameReceiver());
+                    Long id = AtomicSequenceGenerator.getNext();
+                    ongoingFight.put(id, players);
+                    match.setBattleId(id);
                     match.setSeen(true);
                 }
                 return match;
@@ -271,8 +269,13 @@ public class FightService {
             else if(match.getUsernameReceiver().equals(username)){
                 if(match.isSeen()){
                     startPlaying.remove(match);
-                }
-                else{
+                }else {
+                    List<String> players = new ArrayList<>();
+                    players.add(match.getUsernameSender());
+                    players.add(match.getUsernameReceiver());
+                    Long id = AtomicSequenceGenerator.getNext();
+                    ongoingFight.put(id, players);
+                    match.setBattleId(id);
                     match.setSeen(true);
                 }
                 return match;
