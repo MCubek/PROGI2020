@@ -15,4 +15,5 @@ public class SendRequestDTO {
     String usernameSender;
     boolean answer;
     Long battleId;
+    boolean seen;
 }

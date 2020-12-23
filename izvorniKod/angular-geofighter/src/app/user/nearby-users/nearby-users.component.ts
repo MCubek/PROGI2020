@@ -17,8 +17,6 @@ export class NearbyUsersComponent implements OnInit {
   usernames: Array<string>;
   sendRequestPayload: SendRequestPayload;
   requests: Array<string>;
-  partner: string;
-
 
   constructor(private userService: UserService, private router: Router, private toastr: ToastrService,
               private authService: AuthService) {
@@ -26,7 +24,8 @@ export class NearbyUsersComponent implements OnInit {
       usernameReceiver: '',
       usernameSender: '',
       answer: false,
-      battleId: 0
+      battleId: 0,
+      seen: false
     };
   }
 
