@@ -31,9 +31,13 @@ public class CardApplicationService {
             card.setName(locationCard.getName());
             card.setDescription(locationCard.getDescription());
             card.setPhotoUrl(locationCard.getPhotoURL());
-            card.setLocation(locationCard.getLocation().x + ", " + locationCard.getLocation().y);
+            card.setLocation(CardService.getLocationString(locationCard.getLocation()));
             card.setCreatedBy(locationCard.getCreatedBy() != null ? "locationCard.getCreatedBy().getUsername()" : "unknown");
             card.setNeedsToBeChecked(locationCard.isNeedsToBeChecked());
+            card.setUncommonness(locationCard.getUncommonness());
+            card.setDifficulty(locationCard.getDifficulty());
+            card.setPopulation(locationCard.getPopulation());
+            card.setCreatedTime(CardService.getTime(locationCard.getCreatedDate()));
             cardCollection.add(card);
         }
 
@@ -56,12 +60,18 @@ public class CardApplicationService {
         locationCardRepository.delete(card);
     }
 
-    public void editCardApplication(LocationCard card) {
-        LocationCard oldCard = locationCardRepository.getLocationCardById(card.getId()).orElseThrow(
+    public void editCardApplication(CardApplicationDTO card) {
+        LocationCard locationCard = locationCardRepository.getLocationCardById(card.getId()).orElseThrow(
                 () -> new SpringGeoFighterException("Card does not exist"));
 
-        locationCardRepository.delete(oldCard);
-        locationCardRepository.save(card);
+        locationCard.setName(card.getName());
+        locationCard.setDescription(card.getDescription());
+        locationCard.setPhotoURL(card.getPhotoUrl());
+        locationCard.setLocation(CardService.parseLocationString(card.getLocation()));
+        locationCard.setUncommonness(card.getUncommonness());
+        locationCard.setDifficulty(card.getDifficulty());
+        locationCard.setPopulation(card.getPopulation());
+
     }
 
     public void requestCardApplicationConfirmation(Long id) {
@@ -73,6 +83,7 @@ public class CardApplicationService {
 
     public List<CardLocationDTO> getAllCardsThatNeedToBeChecked() {
         return locationCardRepository.getLocationCardByNeedsToBeCheckedIsTrue().stream()
+                .filter(v->v.getLocation()!=null)
                 .map(v -> new CardLocationDTO(v.getId(), v.getLocation().getX(), v.getLocation().getY()))
                 .collect(Collectors.toList());
     }

@@ -3,6 +3,7 @@ package hr.fer.pi.geoFighter.service;
 import hr.fer.pi.geoFighter.dto.FightDTO;
 import hr.fer.pi.geoFighter.dto.SendRequestDTO;
 import hr.fer.pi.geoFighter.dto.UserCardDTO;
+import hr.fer.pi.geoFighter.dto.UserCardDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.*;
 import hr.fer.pi.geoFighter.repository.FightRepository;
@@ -10,6 +11,7 @@ import hr.fer.pi.geoFighter.repository.LocationCardRepository;
 import hr.fer.pi.geoFighter.repository.UserCardRepository;
 import hr.fer.pi.geoFighter.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,55 +24,92 @@ import java.util.*;
 @AllArgsConstructor
 public class FightService {
 
-    //private final UserCardRepository userCardRepository;
     private final UserRepository userRepository;
     private final LocationCardRepository locationCardRepository;
     private final UserCardRepository userCardRepository;
     private final FightRepository fightRepository;
+
     private final List<SendRequestDTO> requests;
     private final List<SendRequestDTO> startPlaying;
     private static final Map<Long, List<String>> ongoingFight = new HashMap<>();
+
+    private final AuthService authService;
+
+    private final static Map<Long, String> fightIdWinnerMap = new HashMap<>();
+    private final static Map<String, List<Long>> playerUsernameListCardsMap = new HashMap<>();
 
     @Transactional
     public List<UserCardDTO> getUserCardList(String username) throws MalformedURLException {
         List<UserCardDTO> userCards = new ArrayList<>();
         for (ArrayList<String> card : userRepository.findLocationCards(username)) {
-            String name = new String(card.get(0));
-            String description = new String(card.get(1));
-            URL photoURL = new URL(card.get(2));
-            userCards.add(new UserCardDTO(name, description, photoURL));
+            Long id = Long.valueOf(card.get(0));
+            String name = card.get(1);
+            String description = card.get(2);
+            URL photoURL = new URL(card.get(3));
+            userCards.add(new UserCardDTO(id, name, description, photoURL));
         }
         return userCards;
     }
 
+    public String getWinnerOfFight(long fightId) {
+        return fightIdWinnerMap.getOrDefault(fightId, null);
+    }
+
+    public void submitCards(Long[] fightCards) {
+        playerUsernameListCardsMap.put(authService.getCurrentUser().getUsername(), Arrays.asList(fightCards));
+    }
+
+    public void deleteFight(Long fightId) {
+        // TODO: 22.12.2020. Obrisati mapu gdje se sperma par igraca
+    }
+
+    @Transactional
+    public void startFight() {
+        // TODO: 22.12.2020. Fetch usernames and match id
+        String username1 = "";
+        String username2 = "";
+        long fightId = 0;
+
+        //Nisu jos oba playera poslala svoje karte
+        if (! playerUsernameListCardsMap.containsKey(username1) || ! playerUsernameListCardsMap.containsKey(username2))
+            return;
+
+        //Jedan je vec odradio borbu pa se preskace drugi put
+        if (! fightIdWinnerMap.containsKey(fightId))
+            fightIdWinnerMap.put(fightId, fight(new FightObject(username1, username2,
+                    playerUsernameListCardsMap.get(username1), playerUsernameListCardsMap.get(username2))));
+    }
 
     /**
      * Računa pobjednika na temelju primljenih karata
      *
-     * @param fightDTO objekt sa borcima i njihovim kartama
+     * @param fightObject objekt sa borcima i njihovim kartama
      * @return ime pobjednika, ili prazan string ako je draw
      */
     @Transactional
-    public String fight(FightDTO fightDTO) {
-        if (fightDTO.getUser1selectedCardIds().size() != 3 ||
-                fightDTO.getUser2selectedCardIds().size() != 3)
+    public String fight(FightObject fightObject) {
+        if (fightObject.getUser1selectedCardIds().size() != 3 ||
+                fightObject.getUser2selectedCardIds().size() != 3)
             throw new SpringGeoFighterException("Bad request: users must have 3 selected cards each");
 
-        User user1 = userRepository.findByUsername(fightDTO.getUsername1()).orElseThrow(() -> new SpringGeoFighterException("User " + fightDTO.getUsername1() + " not in database"));
-        User user2 = userRepository.findByUsername(fightDTO.getUsername2()).orElseThrow(() -> new SpringGeoFighterException("User " + fightDTO.getUsername2() + " not in database"));
+        User user1 = userRepository.findByUsername(fightObject.getUsername1()).orElseThrow(() -> new SpringGeoFighterException("User " + fightObject.getUsername1() + " not in database"));
+        User user2 = userRepository.findByUsername(fightObject.getUsername2()).orElseThrow(() -> new SpringGeoFighterException("User " + fightObject.getUsername2() + " not in database"));
 
         List<UserCard> user1Cards = new ArrayList<>();
         List<UserCard> user2Cards = new ArrayList<>();
         List<UserCardFight> usersCardsFights = new ArrayList<>();
 
+        playerUsernameListCardsMap.remove(fightObject.getUsername1());
+        playerUsernameListCardsMap.remove(fightObject.getUsername2());
+
         // validate cards, check timeouts
 
-        for (Long id : fightDTO.getUser1selectedCardIds()) {
+        for (Long id : fightObject.getUser1selectedCardIds()) {
             // location card exists
             LocationCard assocCard = locationCardRepository.findById(id).orElseThrow(() -> new SpringGeoFighterException("No card with such ID in database: " + id));
 
             // user has that card
-            UserCard assocUserCard = userCardRepository.findById(new UserCardId(user1.getUserId(), assocCard.getId())).orElseThrow(() -> new SpringGeoFighterException("User " + fightDTO.getUsername1() + " doesn't have card with id: " + id));
+            UserCard assocUserCard = userCardRepository.findById(new UserCardId(user1.getUserId(), assocCard.getId())).orElseThrow(() -> new SpringGeoFighterException("User " + fightObject.getUsername1() + " doesn't have card with id: " + id));
             // card is not on cooldown
             LocalDateTime cd = assocUserCard.getCooldownEndTime();
             if (cd != null && cd.isAfter(LocalDateTime.now()))
@@ -78,12 +117,12 @@ public class FightService {
 
             user1Cards.add(assocUserCard);
         }
-        for (Long id : fightDTO.getUser2selectedCardIds()) {
+        for (Long id : fightObject.getUser2selectedCardIds()) {
             // location card exists
             LocationCard assocCard = locationCardRepository.findById(id).orElseThrow(() -> new SpringGeoFighterException("No card with such ID in database: " + id));
 
             // user has that card
-            UserCard assocUserCard = userCardRepository.findById(new UserCardId(user2.getUserId(), assocCard.getId())).orElseThrow(() -> new SpringGeoFighterException("User " + fightDTO.getUsername2() + " doesn't have card with id: " + id));
+            UserCard assocUserCard = userCardRepository.findById(new UserCardId(user2.getUserId(), assocCard.getId())).orElseThrow(() -> new SpringGeoFighterException("User " + fightObject.getUsername2() + " doesn't have card with id: " + id));
             // card is not on cooldown
             LocalDateTime cd = assocUserCard.getCooldownEndTime();
             if (cd != null && cd.isAfter(LocalDateTime.now()))
@@ -180,9 +219,6 @@ public class FightService {
         loser.setEloScore(Math.round(score2));
     }
 
-
-
-
     public void sendRequest(SendRequestDTO sendRequestDTO){
         requests.add(sendRequestDTO);
     }
@@ -234,5 +270,15 @@ public class FightService {
             }
         }
         return new SendRequestDTO("","",false,0L);
+    }
+
+    @AllArgsConstructor
+    @Getter
+    private static class FightObject {
+        String username1;
+        String username2;
+
+        List<Long> user1selectedCardIds;
+        List<Long> user2selectedCardIds;
     }
 }

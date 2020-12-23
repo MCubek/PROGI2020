@@ -1,29 +1,61 @@
 <div class="container">
   <div class="row">
-    <hr/>
+    <hr />
     <div class="col-md-11">
-      <div *ngIf="cardApplications!==undefined && cardApplications.length!=0">
-        <button class="btn btn-primary" (click)="toggleMapShowed()">Toggle Locations Map</button>
+      <div
+        *ngIf="cardApplications !== undefined && cardApplications.length != 0"
+      >
+        <button class="btn btn-primary" (click)="toggleMapShowed()">
+          Toggle Locations Map
+        </button>
         <div *ngIf="mapShowed">
-          <app-cartographer-map [coordinatesList]="coordinatesList"></app-cartographer-map>
+          <app-cartographer-map
+            [coordinatesList]="coordinatesList"
+          ></app-cartographer-map>
         </div>
       </div>
       <h2>List of Card Applications</h2>
-      <ul *ngIf="cardApplications!==undefined" class="list-group">
+      <ul *ngIf="cardApplications !== undefined" class="list-group">
         <li *ngFor="let card of cardApplications" class="list-group-item">
-          <p>Name: {{card.name}}</p>
-          <p>Location: {{card.location}}</p>
-          <p>Created by: {{card.createdBy}}</p>
-          <p>Description: {{card.description}}</p>
-          <button class="btn btn-success mr-2" (click)="accept(card.id)">Accept</button>
-          <button class="btn btn-danger mr-2" (click)="decline(card.id)">Decline</button>
-          <button class="btn btn-primary" (click)="editForm(card)" data-toggle="modal" data-target="#editWindow">Edit
+          <p>Name: {{ card.name }}</p>
+          <p>Description: {{ card.description }}</p>
+          <p>Location: {{ card.location }}</p>
+          <p>Created by: {{ card.createdBy }}</p>
+          <p>Uncommonness: {{ card.uncommonness }}</p>
+          <p>Difficulty: {{ card.difficulty }}</p>
+          <p>Population: {{ card.population }}</p>
+          <div class="card" style="width: 16rem">
+            <img src="{{ card.photoUrl }}" alt="" />
+          </div>
+          <button class="btn btn-success mr-2" (click)="accept(card.id)">
+            Accept
           </button>
-          <button class="btn btn-primary float-right"
-                  (click)="requestConfirmation(card.id)">{{card.needsToBeChecked ? 'Remove confirmation request' : 'Request confirmation'}}</button>
+          <button class="btn btn-danger mr-2" (click)="decline(card.id)">
+            Decline
+          </button>
+          <button
+            class="btn btn-primary"
+            (click)="editForm(card)"
+            data-toggle="modal"
+            data-target="#editWindow"
+          >
+            Edit
+          </button>
+          <button
+            class="btn btn-primary float-right"
+            (click)="requestConfirmation(card.id)"
+          >
+            {{
+              card.needsToBeChecked
+                ? "Remove confirmation request"
+                : "Request confirmation"
+            }}
+          </button>
         </li>
       </ul>
-      <p *ngIf="cardApplications===undefined || cardApplications.length==0"> No Card Applications</p>
+      <p *ngIf="cardApplications === undefined || cardApplications.length == 0">
+        No Card Applications
+      </p>
     </div>
   </div>
 </div>
@@ -33,13 +65,16 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Edit card</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
       </div>
       <div class="modal-body">
         <form [formGroup]="editCardForm">
           <div class="form-group row">
             <label for="name" class="col-md-4 col-form-label text-md-right"
-            >Name</label>
+              >Name</label
+            >
             <div class="col-md-6">
               <input
                 type="text"
@@ -54,7 +89,8 @@
           </div>
           <div class="form-group row">
             <label class="col-md-4 col-form-label text-md-right"
-            >Description</label>
+              >Description</label
+            >
             <div class="col-md-6">
               <input
                 type="text"
@@ -66,10 +102,23 @@
             </div>
           </div>
           <div class="form-group row">
-            <label
-              for="photoUrl"
-              class="col-md-4 col-form-label text-md-right"
-            >Photo URL</label>
+            <label class="col-md-4 col-form-label text-md-right"
+              >Location</label
+            >
+            <div class="col-md-6">
+              <input
+                type="text"
+                [formControlName]="'location'"
+                class="form-control input-radius"
+                required
+                autofocus
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="photoUrl" class="col-md-4 col-form-label text-md-right"
+              >Photo URL</label
+            >
             <div class="col-md-6">
               <input
                 type="url"
@@ -81,19 +130,70 @@
               />
               <span
                 *ngIf="
-                    !editCardForm.get('photoUrl').valid &&
-                    editCardForm.get('photoUrl').touched
-                  "
+                  !editCardForm.get('photoUrl').valid &&
+                  editCardForm.get('photoUrl').touched
+                "
               >
-                  Please provide a valid URL
-                </span>
+                Please provide a valid URL
+              </span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-form-label text-md-right"
+              >Uncommonness</label
+            >
+            <div class="col-md-6">
+              <input
+                type="number"
+                [formControlName]="'uncommonness'"
+                class="form-control input-radius"
+                required
+                autofocus
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-form-label text-md-right"
+              >Difficulty</label
+            >
+            <div class="col-md-6">
+              <input
+                type="number"
+                [formControlName]="'difficulty'"
+                class="form-control input-radius"
+                required
+                autofocus
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-form-label text-md-right"
+              >Population</label
+            >
+            <div class="col-md-6">
+              <input
+                type="number"
+                [formControlName]="'population'"
+                class="form-control input-radius"
+                required
+                autofocus
+              />
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="edit()">Accept</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button
+          type="button"
+          class="btn btn-success"
+          data-dismiss="modal"
+          (click)="edit()"
+        >
+          Accept
+        </button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          Close
+        </button>
       </div>
     </div>
   </div>

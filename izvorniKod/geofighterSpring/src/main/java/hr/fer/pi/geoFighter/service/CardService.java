@@ -12,8 +12,6 @@ import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.stereotype.Service;
 
 import java.awt.geom.Point2D;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -56,6 +54,9 @@ public class CardService {
         locationCard.setPhotoURL(cardDTO.getPhotoUrl());
         locationCard.setLocation(parseLocationString(cardDTO.getLocation()));
         locationCard.setCreatedBy(authService.getCurrentUser());
+        locationCard.setDifficulty(cardDTO.getDifficulty());
+        locationCard.setPopulation(cardDTO.getPopulation());
+        locationCard.setUncommonness(cardDTO.getUncommonness());
 
         if (! urlValidator.isValid(cardDTO.getPhotoUrl().toString()))
             throw new UserInfoInvalidException("Invalid photo URL");
@@ -84,20 +85,20 @@ public class CardService {
         cardDTO.setPhotoUrl(locationCard.getPhotoURL());
         cardDTO.setLocation(getLocationString(locationCard.getLocation()));
         cardDTO.setCreatedBy(getCreatedBy(locationCard.getCreatedBy()));
-        cardDTO.setUncommonness(locationCard.getUncommonness());
-        cardDTO.setDifficulty(locationCard.getDifficulty());
-        cardDTO.setPopulation(locationCard.getPopulation());
+        cardDTO.setUncommonness(locationCard.getUncommonness() % 11);
+        cardDTO.setDifficulty(locationCard.getDifficulty() % 11);
+        cardDTO.setPopulation(locationCard.getPopulation() % 11);
         cardDTO.setCreatedTime(getTime(locationCard.getCreatedDate()));
 
         return cardDTO;
     }
 
-    private static String getLocationString(Point2D.Double point) {
+    static String getLocationString(Point2D.Double point) {
         if (point == null) return "unknown";
         return point.getX() + ", " + point.getY();
     }
 
-    private static Point2D.Double parseLocationString(String locationString) {
+    static Point2D.Double parseLocationString(String locationString) {
         var array = locationString.split("\\s+");
 
         if (array.length != 2) throw new IllegalArgumentException("2 coordinates missing!");
@@ -110,7 +111,7 @@ public class CardService {
         else return user.getUsername();
     }
 
-    private static String getTime(Instant instant) {
+    static String getTime(Instant instant) {
         DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
                 .withZone(ZoneId.systemDefault());
 

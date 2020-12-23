@@ -1,9 +1,9 @@
 package hr.fer.pi.geoFighter.service;
 
 import hr.fer.pi.geoFighter.dto.UserEloDTO;
+import hr.fer.pi.geoFighter.dto.UserLocationDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.User;
-import hr.fer.pi.geoFighter.dto.UserLocationDTO;
 import hr.fer.pi.geoFighter.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -97,5 +97,9 @@ public class UserService {
         userRepository.save(user);
     }
 
-
+    public void removeLocation(){
+        User user = authService.getCurrentUser();
+        user.setCurrentLocation(null);
+        userRepository.save(user);
+    }
 }

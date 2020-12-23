@@ -6,4 +6,8 @@ export interface CardApplicationModel {
   location: string;
   createdBy: string;
   needsToBeChecked: boolean;
+  uncommonness?: string;
+  difficulty?: string;
+  population?: string;
+  createdTime?: string;
 }

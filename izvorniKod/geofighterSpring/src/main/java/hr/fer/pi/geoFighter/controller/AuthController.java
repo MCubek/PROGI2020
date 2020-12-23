@@ -3,6 +3,7 @@ package hr.fer.pi.geoFighter.controller;
 import hr.fer.pi.geoFighter.dto.*;
 import hr.fer.pi.geoFighter.service.AuthService;
 import hr.fer.pi.geoFighter.service.RefreshTokenService;
+import hr.fer.pi.geoFighter.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ public class AuthController {
 
     private final AuthService authService;
     private final RefreshTokenService refreshTokenService;
+    private final UserService userService;
 
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest) {
@@ -50,6 +52,7 @@ public class AuthController {
     @PostMapping("/logout")
     public ResponseEntity<String> logout(@Valid @RequestBody LogoutRequest logoutRequest) {
         refreshTokenService.deleteRefreshToken(logoutRequest.getRefreshToken());
+        userService.removeLocation();
         return ResponseEntity.status(OK).body("Refresh token deleted!");
     }
 }
