@@ -3,4 +3,5 @@ export interface SendRequestPayload{
   usernameReceiver: string;
   answer: boolean;
   battleId: number;
+  seen: boolean;
 }
