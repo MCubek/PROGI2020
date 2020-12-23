@@ -1,8 +1,6 @@
 package hr.fer.pi.geoFighter.service;
 
-import hr.fer.pi.geoFighter.dto.FightDTO;
 import hr.fer.pi.geoFighter.dto.SendRequestDTO;
-import hr.fer.pi.geoFighter.dto.UserCardDTO;
 import hr.fer.pi.geoFighter.dto.UserCardDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.*;
