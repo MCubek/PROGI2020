@@ -17,6 +17,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 @AllArgsConstructor
@@ -256,7 +257,7 @@ public class FightService {
                 List<String> players = new ArrayList<>();
                 players.add(match.getUsernameSender());
                 players.add(match.getUsernameReceiver());
-                Long id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+                Long id = AtomicSequenceGenerator.getNext();
                 ongoingFight.put(id, players);
                 match.setBattleId(id);
                 if (match.getBattleId() > 0L) {
@@ -281,5 +282,14 @@ public class FightService {
 
         List<Long> user1selectedCardIds;
         List<Long> user2selectedCardIds;
+    }
+
+    private static class AtomicSequenceGenerator {
+
+        private static final AtomicLong value = new AtomicLong(1);
+
+        public static long getNext() {
+            return value.getAndIncrement();
+        }
     }
 }
