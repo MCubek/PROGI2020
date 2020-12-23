@@ -20,11 +20,11 @@ export class FightService {
     return this.httpClient.put<Array<bigint>>('${environment.apiUrl}api/fight/submitCards/', 'text');
   }
 
-  startFight(): Observable<any> {
-    return this.httpClient.put('${environment.apiUrl}api/fight/startFight/', 'text');
+  startFight(fightId: number): Observable<any> {
+    return this.httpClient.put('${environment.apiUrl}api/fight/startFight/' + fightId, 'text');
   }
 
-  getWinner(fightId: bigint): Observable<string> {
+  getWinner(fightId: number): Observable<string> {
     return this.httpClient.get<string>('${environment.apiUrl}api/fight/getWinner/' + fightId);
   }
 
