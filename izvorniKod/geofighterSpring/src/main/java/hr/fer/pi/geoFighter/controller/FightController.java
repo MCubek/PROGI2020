@@ -24,9 +24,9 @@ public class FightController {
         return new ResponseEntity<>(OK);
     }
 
-    @PutMapping("/startFight")
-    public ResponseEntity<Void> startFight() {
-        fightService.startFight();
+    @PutMapping("/startFight/{fightId}")
+    public ResponseEntity<Void> startFight(@PathVariable Long fightId) {
+        fightService.startFight(fightId);
         return new ResponseEntity<>(OK);
     }
 
@@ -38,6 +38,28 @@ public class FightController {
     @GetMapping("/userCardList/{username}")
     public ResponseEntity<List<UserCardDTO>> getUserCardList(@PathVariable String username) throws MalformedURLException {
         return new ResponseEntity<>(fightService.getUserCardList(username), OK);
+    }
+
+    @PostMapping("/sendRequest")
+    public ResponseEntity<String> sendRequest(@RequestBody SendRequestDTO sendRequestDTO){
+        fightService.sendRequest(sendRequestDTO);
+        return ResponseEntity.status(OK).body("Request sent!");
+    }
+
+    @GetMapping("/getRequests{username}")
+    public ResponseEntity<List<String>> getRequests(@PathVariable String username){
+        return new ResponseEntity<>(fightService.getRequests(username),OK);
+    }
+
+    @PostMapping("/receiveAnswer")
+    public ResponseEntity<String> receiveAnswer(@RequestBody SendRequestDTO sendRequestDTO){
+        fightService.processAnswer(sendRequestDTO);
+        return ResponseEntity.status(OK).body("Answer processed!");
+    }
+
+    @GetMapping("/getMatches{username}")
+    public ResponseEntity<SendRequestDTO> getMatches(@PathVariable String username){
+        return new ResponseEntity<>(fightService.getMatches(username),OK);
     }
 
     @DeleteMapping("/delete/{fightId}")

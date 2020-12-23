@@ -4,6 +4,7 @@ import {FightService} from './fight.service';
 import {CardModel} from './card.model';
 import {AuthService} from '../auth/shared/auth.service';
 import {Router} from '@angular/router';
+import {SendRequestPayload} from '../user/nearby-users/send-request-payload';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
@@ -16,6 +17,7 @@ export class BattleComponent implements OnInit {
   isLoggedIn: boolean;
   username: string;
   userCards: Array<CardModel>;
+  match: SendRequestPayload;
 
   cardsPicked = false;
   pickedCards: Array<bigint> = new Array<bigint>();
@@ -35,6 +37,10 @@ export class BattleComponent implements OnInit {
     }, error => {
       throwError(error);
     });
+
+    this.match = history.state.data;
+    console.log(this.match.usernameSender + ', ' + this.match.usernameReceiver + ' ' + this.match.battleId);
+
   }
 
   clickCard(event, id: bigint): void {
@@ -79,7 +85,7 @@ export class BattleComponent implements OnInit {
   startFightIfAllPresent(): void {
     // TODO dodati provjeru za drugo igraca
     if (this.pickedCards) {
-      this.fightService.startFight().subscribe(data => {
+      this.fightService.startFight(this.match.battleId).subscribe(data => {
         // TODO redirect na stranicu gdje se ocekuju rezultati borbe
 
       }, error => {

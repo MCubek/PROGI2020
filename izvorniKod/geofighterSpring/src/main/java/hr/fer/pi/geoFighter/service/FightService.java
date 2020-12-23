@@ -1,5 +1,6 @@
 package hr.fer.pi.geoFighter.service;
 
+import hr.fer.pi.geoFighter.dto.SendRequestDTO;
 import hr.fer.pi.geoFighter.dto.UserCardDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.*;
@@ -16,6 +17,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 @AllArgsConstructor
@@ -25,6 +27,11 @@ public class FightService {
     private final LocationCardRepository locationCardRepository;
     private final UserCardRepository userCardRepository;
     private final FightRepository fightRepository;
+
+    private final List<SendRequestDTO> requests;
+    private final List<SendRequestDTO> startPlaying;
+    private static final Map<Long, List<String>> ongoingFight = new HashMap<>();
+
     private final AuthService authService;
 
     private final static Map<Long, String> fightIdWinnerMap = new HashMap<>();
@@ -52,15 +59,20 @@ public class FightService {
     }
 
     public void deleteFight(Long fightId) {
-        // TODO: 22.12.2020. Obrisati mapu gdje se sperma par igraca
+        ongoingFight.remove(fightId);
+        fightIdWinnerMap.remove(fightId);
     }
 
     @Transactional
-    public void startFight() {
-        // TODO: 22.12.2020. Fetch usernames and match id
-        String username1 = "";
-        String username2 = "";
-        long fightId = 0;
+    public void startFight(Long fightId) {
+        var list = ongoingFight.get(fightId);
+        String username1 = list.get(0);
+        String username2 = list.get(1);
+
+        String username = authService.getCurrentUser().getUsername();
+
+        if (! username1.equals(username) && ! username2.equals(username))
+            throw new SpringGeoFighterException("User not in fight!");
 
         //Nisu jos oba playera poslala svoje karte
         if (! playerUsernameListCardsMap.containsKey(username1) || ! playerUsernameListCardsMap.containsKey(username2))
@@ -211,6 +223,68 @@ public class FightService {
         loser.setEloScore(Math.round(score2));
     }
 
+    public void sendRequest(SendRequestDTO sendRequestDTO) {
+        requests.add(sendRequestDTO);
+    }
+
+    public List<String> getRequests(String username) {
+        List<String> yourRequests = new ArrayList<>();
+        for (SendRequestDTO u : requests) {
+            if (u.getUsernameReceiver().equals(username)) {
+                yourRequests.add(u.getUsernameSender());
+            }
+        }
+        return yourRequests;
+    }
+
+    public void processAnswer(SendRequestDTO answer) {
+        List<SendRequestDTO> copy = List.copyOf(requests);
+        if (answer.isAnswer()) {
+            startPlaying.add(answer);
+            for (SendRequestDTO request : copy) {
+                if (request.getUsernameSender().equals(answer.getUsernameSender())) {
+                    requests.remove(request);
+                }
+            }
+        } else {
+            requests.remove(answer);
+        }
+    }
+
+    public SendRequestDTO getMatches(String username){
+        for (SendRequestDTO match:startPlaying){
+            if (match.getUsernameSender().equals(username)){
+                if(match.isSeen()){
+                    startPlaying.remove(match);
+                }else {
+                    List<String> players = new ArrayList<>();
+                    players.add(match.getUsernameSender());
+                    players.add(match.getUsernameReceiver());
+                    Long id = AtomicSequenceGenerator.getNext();
+                    ongoingFight.put(id, players);
+                    match.setBattleId(id);
+                    match.setSeen(true);
+                }
+                return match;
+            }
+            else if(match.getUsernameReceiver().equals(username)){
+                if(match.isSeen()){
+                    startPlaying.remove(match);
+                }else {
+                    List<String> players = new ArrayList<>();
+                    players.add(match.getUsernameSender());
+                    players.add(match.getUsernameReceiver());
+                    Long id = AtomicSequenceGenerator.getNext();
+                    ongoingFight.put(id, players);
+                    match.setBattleId(id);
+                    match.setSeen(true);
+                }
+                return match;
+            }
+        }
+        return new SendRequestDTO("","",false,0L,false);
+    }
+
     @AllArgsConstructor
     @Getter
     private static class FightObject {
@@ -221,4 +295,12 @@ public class FightService {
         List<Long> user2selectedCardIds;
     }
 
+    private static class AtomicSequenceGenerator {
+
+        private static final AtomicLong value = new AtomicLong(1);
+
+        public static long getNext() {
+            return value.getAndIncrement();
+        }
+    }
 }

@@ -1,13 +1,35 @@
+<div class="box">
 <table *ngIf="usernames!==undefined" class="table table-hover" style="margin:0 auto; width:50%;">
   <thead>
   <tr>
-    <th scope="col">Nearby users</th>
+    <th class = "title" colspan="2">Nearby users</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let user of usernames">
     <td>{{user}}</td>
+    <td><button class="btn btn-primary" (click)="sendRequest(user)">Send battle request</button></td>
   </tr>
   </tbody>
 </table>
 <h3 *ngIf="usernames===undefined || usernames.length==0" style="text-align: center;"> No users. Server may be down.</h3>
+
+<div>
+<table class="table table-hover" style="margin:0 auto; width:50%;">
+  <thead>
+  <tr>
+    <th class="title" colspan="2" >You got requests from:</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let requestFrom of requests">
+    <td>{{requestFrom}}</td>
+    <td><button class="btn btn-primary" (click)="acceptRequest(requestFrom)">Accept request</button></td>
+    <td><button class="btn btn-primary" (click)="declineRequest(requestFrom)">Decline request</button></td>
+  </tr>
+  </tbody>
+</table>
+<h3 *ngIf="requests===undefined || requests.length==0" style="text-align: center; font-size: medium"> No requests.</h3>
+</div>
+</div>
+

@@ -1,6 +1,6 @@
 <div class="wrapper">
   <h3 class="h3">Battle time!</h3>
-  <div *ngIf="cardsPicked===false">
+  <div class="cards" *ngIf="cardsPicked===false">
     <p class="p">Pick your cards:</p>
     <a id="btn-card-submit" class="btn btn-primary btn-font" (click)="submitCards()">Submit cards</a>
     <div *ngIf="userCards!==undefined && !cardsPicked" class="list-group">
@@ -23,5 +23,7 @@
   </div>
   <p *ngIf="cardsPicked===true" class="p">Cards picked!s</p>
 
-  <p class="p">Pick your opponent:<a href="#" class="btn btn-primary btn-players">See players around you</a></p>
+  <div class="opponents">
+    <p class="p">Pick your opponent:<a href="/nearbyUsers" class="btn btn-primary btn-players">See players around you</a></p>
+  </div>
 </div>

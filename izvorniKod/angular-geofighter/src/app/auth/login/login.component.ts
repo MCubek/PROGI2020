@@ -8,7 +8,6 @@ import {throwError} from 'rxjs';
 import {UserLocationPayload} from './user-location.payload';
 import {GeolocationService} from '@ng-web-apis/geolocation';
 import {take} from 'rxjs/operators';
-import {MyCoordinate} from '../../cartographer/card-applications/CartographerMap/MyComponent';
 
 @Component({
   selector: 'app-login',
