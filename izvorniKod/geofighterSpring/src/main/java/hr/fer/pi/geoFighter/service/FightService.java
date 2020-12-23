@@ -260,18 +260,25 @@ public class FightService {
                 Long id = AtomicSequenceGenerator.getNext();
                 ongoingFight.put(id, players);
                 match.setBattleId(id);
-                if (match.getBattleId() > 0L) {
+                if(match.isSeen()){
                     startPlaying.remove(match);
                 }
+                else{
+                    match.setSeen(true);
+                }
                 return match;
-            } else if (match.getUsernameReceiver().equals(username)) {
-                if (match.getBattleId() > 0L) {
+            }
+            else if(match.getUsernameReceiver().equals(username)){
+                if(match.isSeen()){
                     startPlaying.remove(match);
+                }
+                else{
+                    match.setSeen(true);
                 }
                 return match;
             }
         }
-        return new SendRequestDTO("", "", false, 0L);
+        return new SendRequestDTO("","",false,0L,false);
     }
 
     @AllArgsConstructor
