@@ -24,9 +24,9 @@ public class FightController {
         return new ResponseEntity<>(OK);
     }
 
-    @PutMapping("/startFight")
-    public ResponseEntity<Void> startFight() {
-        fightService.startFight();
+    @PutMapping("/startFight/{fightId}")
+    public ResponseEntity<Void> startFight(@PathVariable Long fightId) {
+        fightService.startFight(fightId);
         return new ResponseEntity<>(OK);
     }
 

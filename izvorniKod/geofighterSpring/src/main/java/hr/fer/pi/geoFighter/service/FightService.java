@@ -58,15 +58,20 @@ public class FightService {
     }
 
     public void deleteFight(Long fightId) {
-        // TODO: 22.12.2020. Obrisati mapu gdje se sperma par igraca
+        ongoingFight.remove(fightId);
+        fightIdWinnerMap.remove(fightId);
     }
 
     @Transactional
-    public void startFight() {
-        // TODO: 22.12.2020. Fetch usernames and match id
-        String username1 = "";
-        String username2 = "";
-        long fightId = 0;
+    public void startFight(Long fightId) {
+        var list = ongoingFight.get(fightId);
+        String username1 = list.get(0);
+        String username2 = list.get(1);
+
+        String username = authService.getCurrentUser().getUsername();
+
+        if (! username1.equals(username) && ! username2.equals(username))
+            throw new SpringGeoFighterException("User not in fight!");
 
         //Nisu jos oba playera poslala svoje karte
         if (! playerUsernameListCardsMap.containsKey(username1) || ! playerUsernameListCardsMap.containsKey(username2))
@@ -217,57 +222,55 @@ public class FightService {
         loser.setEloScore(Math.round(score2));
     }
 
-    public void sendRequest(SendRequestDTO sendRequestDTO){
+    public void sendRequest(SendRequestDTO sendRequestDTO) {
         requests.add(sendRequestDTO);
     }
 
-    public List<String> getRequests(String username){
+    public List<String> getRequests(String username) {
         List<String> yourRequests = new ArrayList<>();
-        for (SendRequestDTO u:requests) {
-            if(u.getUsernameReceiver().equals(username)){
+        for (SendRequestDTO u : requests) {
+            if (u.getUsernameReceiver().equals(username)) {
                 yourRequests.add(u.getUsernameSender());
             }
         }
         return yourRequests;
     }
 
-    public void processAnswer(SendRequestDTO answer){
+    public void processAnswer(SendRequestDTO answer) {
         List<SendRequestDTO> copy = List.copyOf(requests);
-        if(answer.isAnswer()){
+        if (answer.isAnswer()) {
             startPlaying.add(answer);
-            for (SendRequestDTO request: copy) {
-                if(request.getUsernameSender().equals(answer.getUsernameSender())){
+            for (SendRequestDTO request : copy) {
+                if (request.getUsernameSender().equals(answer.getUsernameSender())) {
                     requests.remove(request);
                 }
             }
-        }
-        else{
+        } else {
             requests.remove(answer);
         }
     }
 
-    public SendRequestDTO getMatches(String username){
-        for (SendRequestDTO match:startPlaying){
-            if (match.getUsernameSender().equals(username)){
+    public SendRequestDTO getMatches(String username) {
+        for (SendRequestDTO match : startPlaying) {
+            if (match.getUsernameSender().equals(username)) {
                 List<String> players = new ArrayList<>();
                 players.add(match.getUsernameSender());
                 players.add(match.getUsernameReceiver());
                 Long id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-                ongoingFight.put(id,players);
+                ongoingFight.put(id, players);
                 match.setBattleId(id);
-                if(match.getBattleId()>0L){
+                if (match.getBattleId() > 0L) {
                     startPlaying.remove(match);
                 }
                 return match;
-            }
-            else if(match.getUsernameReceiver().equals(username)){
-                if(match.getBattleId()>0L){
+            } else if (match.getUsernameReceiver().equals(username)) {
+                if (match.getBattleId() > 0L) {
                     startPlaying.remove(match);
                 }
                 return match;
             }
         }
-        return new SendRequestDTO("","",false,0L);
+        return new SendRequestDTO("", "", false, 0L);
     }
 
     @AllArgsConstructor
