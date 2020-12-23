@@ -4,7 +4,7 @@ import {FightService} from './fight.service';
 import {CardModel} from './card.model';
 import {AuthService} from '../auth/shared/auth.service';
 import {Router} from '@angular/router';
-import {SendRequestPayload} from "../user/nearby-users/send-request-payload";
+import {SendRequestPayload} from '../user/nearby-users/send-request-payload';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
@@ -33,7 +33,7 @@ export class BattleComponent implements OnInit {
     this.username = this.authService.getUsername();
 
     this.match = history.state.data;
-    console.log(this.match.usernameSender+', '+this.match.usernameReceiver+' '+this.match.battleId);
+    console.log(this.match.usernameSender + ', ' + this.match.usernameReceiver + ' ' + this.match.battleId);
 
     this.fightService.getUserCardList(this.username).subscribe(data => {
       this.userCards = data;
@@ -84,7 +84,7 @@ export class BattleComponent implements OnInit {
   startFightIfAllPresent(): void {
     // TODO dodati provjeru za drugo igraca
     if (this.pickedCards) {
-      this.fightService.startFight().subscribe(data => {
+      this.fightService.startFight(this.match.battleId).subscribe(data => {
         // TODO redirect na stranicu gdje se ocekuju rezultati borbe
 
       }, error => {

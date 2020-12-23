@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from '../user.service';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {interval, throwError} from 'rxjs';
 import {AuthService} from '../../auth/shared/auth.service';
-import {SendRequestPayload} from "./send-request-payload";
-import {startWith, switchMap} from "rxjs/operators";
+import {SendRequestPayload} from './send-request-payload';
+import {startWith, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-nearby-users',
@@ -16,7 +16,7 @@ export class NearbyUsersComponent implements OnInit {
 
   usernames: Array<string>;
   sendRequestPayload: SendRequestPayload;
-  requests: Array<String>;
+  requests: Array<string>;
 
   constructor(private userService: UserService, private router: Router, private toastr: ToastrService,
               private authService: AuthService) {
@@ -37,22 +37,22 @@ export class NearbyUsersComponent implements OnInit {
       throwError(error);
     });
 
-    interval(1000).pipe(startWith(0),switchMap(() => this.userService.getRequests(this.authService.getUsername()))
+    interval(1000).pipe(startWith(0), switchMap(() => this.userService.getRequests(this.authService.getUsername()))
     ).subscribe(data => this.requests = data);
 
-    interval(1000).pipe(startWith(0),switchMap(() => this.userService.getMatches(this.authService.getUsername()))
+    interval(1000).pipe(startWith(0), switchMap(() => this.userService.getMatches(this.authService.getUsername()))
     ).subscribe(data => {
-      if(data.answer){
+      if (data.answer) {
         this.sendRequestPayload.usernameSender = data.usernameSender;
         this.sendRequestPayload.usernameReceiver = data.usernameReceiver;
         this.sendRequestPayload.battleId = data.battleId;
-        this.router.navigate(["/battle"], {state: {data:this.sendRequestPayload }});
+        this.router.navigate(['/battle'], {state: {data: this.sendRequestPayload}});
       }
     });
 
   }
 
-  sendRequest(usernameReceive: string){
+  sendRequest(usernameReceive: string): void {
     this.sendRequestPayload.usernameSender = this.authService.getUsername();
     this.sendRequestPayload.usernameReceiver = usernameReceive;
     this.userService.sendRequest(this.sendRequestPayload).subscribe(
@@ -60,7 +60,7 @@ export class NearbyUsersComponent implements OnInit {
       err => console.log(err));
   }
 
-  acceptRequest(usernameSender: string){
+  acceptRequest(usernameSender: string): void {
     this.sendRequestPayload.usernameSender = usernameSender;
     this.sendRequestPayload.usernameReceiver = this.authService.getUsername();
     this.sendRequestPayload.answer = true;
@@ -69,7 +69,7 @@ export class NearbyUsersComponent implements OnInit {
       err => console.log(err));
   }
 
-  declineRequest(usernameSender: string){
+  declineRequest(usernameSender: string): void {
     this.sendRequestPayload.usernameSender = usernameSender;
     this.sendRequestPayload.usernameReceiver = this.authService.getUsername();
     this.sendRequestPayload.answer = false;
