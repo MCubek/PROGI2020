@@ -6,6 +6,7 @@ import hr.fer.pi.geoFighter.exceptions.UserInfoInvalidException;
 import hr.fer.pi.geoFighter.model.LocationCard;
 import hr.fer.pi.geoFighter.model.User;
 import hr.fer.pi.geoFighter.model.UserCard;
+import hr.fer.pi.geoFighter.model.UserCardId;
 import hr.fer.pi.geoFighter.repository.LocationCardRepository;
 import hr.fer.pi.geoFighter.repository.UserCardRepository;
 import hr.fer.pi.geoFighter.repository.UserRepository;
@@ -128,6 +129,10 @@ public class CardService {
         LocationCard card = locationCardRepository.getLocationCardById(id).orElseThrow();
         User user = authService.getCurrentUser();
 
+        //Vec ima kartu
+        if(userCardRepository.findById(new UserCardId(user.getUserId(), card.getId())).isPresent())
+            return;
+
         var userLocation = Objects.requireNonNull(user.getCurrentLocation());
         var cardLocation = Objects.requireNonNull(card.getLocation());
 
@@ -146,6 +151,7 @@ public class CardService {
         var userLocation = Objects.requireNonNull(user.getCurrentLocation());
 
         return locationCardRepository.findAll().stream()
+                .filter(l -> userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty())
                 .filter(l -> l.getLocation() != null)
                 .filter(l -> {
                     var cardLocation = l.getLocation();
