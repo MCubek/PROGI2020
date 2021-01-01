@@ -96,6 +96,8 @@ public class CardService {
         cardDTO.setDifficulty(locationCard.getDifficulty() % 11);
         cardDTO.setPopulation(locationCard.getPopulation() % 11);
         cardDTO.setCreatedTime(getTime(locationCard.getCreatedDate()));
+        cardDTO.setLatitude(locationCard.getLocation().getX());
+        cardDTO.setLongitude(locationCard.getLocation().getY());
 
         return cardDTO;
     }
