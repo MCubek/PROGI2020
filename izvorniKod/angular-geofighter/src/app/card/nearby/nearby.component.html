@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <hr/>
+    <div class="col-md-11">
+      <div class="map-container">
+        <div class="map-frame">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+    <h2>List of nearby cards</h2>
+    <ul *ngIf="nearbyCards !== undefined" class="list-group">
+      <li *ngFor="let card of nearbyCards" class="list-group-item">
+        <p>Name: {{ card.name }}</p>
+        <p>Description: {{ card.description }}</p>
+        <p>Created by: {{ card.createdBy }}</p>
+        <p>Uncommonness: {{ card.uncommonness }}</p>
+        <p>Difficulty: {{ card.difficulty }}</p>
+        <p>Population: {{ card.population }}</p>
+        <div class="card" style="width: 16rem">
+          <img src="{{ card.photoUrl }}" alt="" height="400"/>
+        </div>
+        <button class="btn btn-success mr-2" (click)="collect(card.id)">
+          Collect
+        </button>
+      </li>
+    </ul>
+    <div>
+      <p *ngIf="nearbyCards === undefined || nearbyCards.length == 0">
+        No Card Applications
+      </p>
+    </div>
+  </div>
+</div>
