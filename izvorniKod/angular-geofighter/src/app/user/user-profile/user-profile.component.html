@@ -18,14 +18,30 @@
   </div>
 </div>
 <div class="wrapper">
-  <p class="p">This user has cards:</p>
+  <p class="p" style="padding-left: 30px;">This user has cards:</p>
   <div *ngIf="userCards!==undefined"  class="list-group">
     <div *ngFor="let userCard of userCards" class="list-group-item">
       <div class="card">
         <img src={{userCard.photoURL}} class="card-img-top"/>
         <div class="card-body">
           <h5 class="card-title">{{userCard.name}}</h5>
-          <p class="card-text">{{userCard.description}}</p>
+          <div class="container">
+            <div class="row text-center">
+              <div class="col-sm">
+                <p>Difficulty: {{userCard.difficulty}}</p>
+              </div>
+            </div>
+            <div class="row text-center">
+              <div class="col-sm">
+                <p>Population: {{userCard.population}}</p>
+              </div>
+            </div>
+            <div class="row text-center">
+              <div class="col-sm">
+                <p>Uncommonness: {{userCard.uncommonness}}</p>
+              </div>
+            </div>
+          </div>
           <div class="btn-bottom">
             <a href="#" id="btn-card-geo" class="btn btn-primary btn-font">See more</a>
           </div>
