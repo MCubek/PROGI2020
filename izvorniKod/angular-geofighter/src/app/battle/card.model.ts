@@ -1,6 +1,8 @@
 export interface CardModel {
   id: bigint;
   name: string;
-  description: string;
+  difficulty: string;
+  population: string;
+  uncommonness: string;
   photoURL?: string;
 }
