@@ -43,9 +43,11 @@ public class FightService {
         for (ArrayList<String> card : userRepository.findLocationCards(username)) {
             Long id = Long.valueOf(card.get(0));
             String name = card.get(1);
-            String description = card.get(2);
-            URL photoURL = new URL(card.get(3));
-            userCards.add(new UserCardDTO(id, name, description, photoURL));
+            String difficulty = card.get(2);
+            String population = card.get(3);
+            String uncommonness = card.get(4);
+            URL photoURL = new URL(card.get(5));
+            userCards.add(new UserCardDTO(id, name, difficulty, population, uncommonness, photoURL));
         }
         return userCards;
     }
