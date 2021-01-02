@@ -112,6 +112,8 @@ export class AuthService {
     this.localStorage.clear('refreshToken');
     this.localStorage.clear('expiresAt');
     this.localStorage.clear('role');
+    this.localStorage.clear('lat');
+    this.localStorage.clear('long');
   }
 
   cartographerSignup(
@@ -141,6 +143,12 @@ export class AuthService {
   }
 
   saveLocation(userLocationPayload: UserLocationPayload): Observable<any> {
+    this.localStorage.clear('lat');
+    this.localStorage.clear('long');
+
+    this.localStorage.store('lat', userLocationPayload.latitude);
+    this.localStorage.store('long', userLocationPayload.longitude);
+
     return this.httpClient.post(`${environment.apiUrl}api/user/storeLocation`, userLocationPayload, {responseType: 'text'});
   }
 }
