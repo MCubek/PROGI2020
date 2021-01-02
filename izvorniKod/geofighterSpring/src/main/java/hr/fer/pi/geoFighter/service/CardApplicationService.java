@@ -51,6 +51,7 @@ public class CardApplicationService {
         card.setAccepted(true);
         card.setEnabledDate(Instant.now());
         card.setAcceptedBy(authService.getCurrentUser());
+        card.setNeedsToBeChecked(false);
     }
 
     public void declineCardApplication(Long id) {
