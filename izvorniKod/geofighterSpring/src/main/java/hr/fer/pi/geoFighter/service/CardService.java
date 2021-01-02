@@ -138,7 +138,7 @@ public class CardService {
         var userLocation = Objects.requireNonNull(user.getCurrentLocation());
         var cardLocation = Objects.requireNonNull(card.getLocation());
 
-        if (LocationService.calculateDistance(userLocation.getX(), cardLocation.getY(), userLocation.getY(), cardLocation.getY()) > MAX_CARD_DISTANCE) {
+        if (LocationService.calculateDistance(userLocation.getX(), cardLocation.getX(), userLocation.getY(), cardLocation.getY()) > MAX_CARD_DISTANCE) {
             throw new SpringGeoFighterException("Location is too far!");
         }
 
