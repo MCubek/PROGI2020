@@ -1,8 +1,10 @@
-export interface CardApplicationModel {
+export interface NearbyCardModel {
   id: string;
   name: string;
   description: string;
   photoUrl: string;
+  latitude: number;
+  longitude: number;
   location: string;
   createdBy: string;
   needsToBeChecked: boolean;
@@ -10,6 +12,4 @@ export interface CardApplicationModel {
   difficulty?: string;
   population?: string;
   createdTime?: string;
-  latitude?: number;
-  longitude?: number;
 }

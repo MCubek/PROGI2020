@@ -33,6 +33,7 @@ import {CardsPageComponent} from './admin/cards-page/cards-page.component';
 import {CollectionComponent} from './card/collection/collection.component';
 import {SingleCardComponent} from './card/single-card/single-card.component';
 import {ApplyCardComponent} from './card/apply-card/apply-card.component';
+import { NearbyComponent } from './card/nearby/nearby.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import {ApplyCardComponent} from './card/apply-card/apply-card.component';
     CartographerMapComponent,
     UserProfileComponent,
     AllUsersComponent,
-    BattleComponent
+    BattleComponent,
+    NearbyComponent
   ],
   imports: [
     BrowserModule,
