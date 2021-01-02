@@ -424,5 +424,45 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
             locationCardRepository.save(l);
         }
+
+        if (locationCardRepository.getLocationCardsByName("Ogulin").isEmpty()) {
+            l = new LocationCard();
+            l.setName("Ogulin");
+            try {
+                l.setPhotoURL(new URL("https://upload.wikimedia.org/wikipedia/commons/d/da/Burg_Ogulin.jpg"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            l.setDescription("Ogulin grad.");
+            l.setNeedsToBeChecked(false);
+            l.setPopulation(7);
+            l.setUncommonness(5);
+            l.setDifficulty(3);
+            l.setAccepted(true);
+            l.setLocation(new Point2D.Double(45.26686, 15.225076));
+            l.setCreatedBy(userA);
+
+            locationCardRepository.save(l);
+        }
+
+        if (locationCardRepository.getLocationCardsByName("Ogulin Sirana").isEmpty()) {
+            l = new LocationCard();
+            l.setName("Ogulin Sirana");
+            try {
+                l.setPhotoURL(new URL("https://ogulin.hr/old-site/slike/131006-opg_tounj6.jpg"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            l.setDescription("Ogulin sirevi. Ne rade ponedjeljkom.");
+            l.setNeedsToBeChecked(false);
+            l.setPopulation(0);
+            l.setUncommonness(6);
+            l.setDifficulty(7);
+            l.setAccepted(true);
+            l.setLocation(new Point2D.Double(45.267038080101, 15.224458936594164));
+            l.setCreatedBy(userA);
+
+            locationCardRepository.save(l);
+        }
     }
 }

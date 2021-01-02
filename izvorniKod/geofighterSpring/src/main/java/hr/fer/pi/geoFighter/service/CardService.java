@@ -33,7 +33,7 @@ public class CardService {
     private final UserCardRepository userCardRepository;
     private final AuthService authService;
 
-    private static final int MAX_CARD_DISTANCE = 4;
+    private static final int MAX_CARD_DISTANCE = 3;
 
 
     public List<CardDTO> getAllCards() {
@@ -158,7 +158,7 @@ public class CardService {
                 .filter(l -> {
                     var cardLocation = l.getLocation();
 
-                    return LocationService.calculateDistance(userLocation.getX(), cardLocation.getY(), userLocation.getY(), cardLocation.getY()) <= MAX_CARD_DISTANCE;
+                    return LocationService.calculateDistance(userLocation.getX(), cardLocation.getX(), userLocation.getY(), cardLocation.getY()) <= MAX_CARD_DISTANCE;
                 })
                 .map(CardService::createCardDTO)
                 .collect(Collectors.toList());
