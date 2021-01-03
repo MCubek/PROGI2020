@@ -62,6 +62,7 @@ public class CardService {
             throw new UserInfoInvalidException("Invalid photo URL");
 
         if (locationCard.getCreatedBy().getWins() < 5){
+            System.out.println("Exp too low");
             throw new UserInfoInvalidException("Experience too low (minimum 5 wins required)");
         }else{
             locationCard.setPhotoURL(cardDTO.getPhotoUrl());
