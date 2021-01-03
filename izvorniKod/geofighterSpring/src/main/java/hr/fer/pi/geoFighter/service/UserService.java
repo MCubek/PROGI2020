@@ -12,6 +12,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -22,11 +23,23 @@ public class UserService {
     private final AuthService authService;
 
     public List<UserEloDTO> getUserEloInfo() {
-        return new ArrayList<>(userRepository.getUserEloInfo());
+        return userRepository.findUsersByEnabledTrueOrderByEloScoreDesc()
+                .stream()
+                .map(user -> {
+                    UserEloDTO userEloDTO = new UserEloDTO();
+                    userEloDTO.setUsername(user.getUsername());
+                    userEloDTO.setWins(user.getWins());
+                    userEloDTO.setLosses(user.getLosses());
+                    userEloDTO.setEloScore(user.getEloScore());
+                    return userEloDTO;
+                })
+                .collect(Collectors.toList());
     }
 
     public List<String> getEnabledUsers() {
-        return new ArrayList<>(userRepository.findEnabledUsernames());
+        return userRepository.findUsersByEnabledTrue().stream()
+                .map(User::getUsername)
+                .collect(Collectors.toList());
     }
 
     public List<String> userProfile(String username) {

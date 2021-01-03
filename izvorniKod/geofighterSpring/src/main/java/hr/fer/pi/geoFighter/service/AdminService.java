@@ -16,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -56,7 +57,9 @@ public class AdminService {
     }
 
     public List<String> getEnabledUsernames() {
-        return new ArrayList<>(userRepository.findEnabledUsernames());
+        return userRepository.findUsersByEnabledTrue().stream()
+                .map(User::getUsername)
+                .collect(Collectors.toList());
     }
 
     public void promoteToAdmin(String username) {

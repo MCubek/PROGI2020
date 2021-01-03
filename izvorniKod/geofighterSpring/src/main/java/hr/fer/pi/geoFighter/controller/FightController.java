@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.MalformedURLException;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.OK;
@@ -36,7 +35,7 @@ public class FightController {
     }
 
     @GetMapping("/userCardList/{username}")
-    public ResponseEntity<List<UserCardDTO>> getUserCardList(@PathVariable String username) throws MalformedURLException {
+    public ResponseEntity<List<UserCardDTO>> getUserCardList(@PathVariable String username) {
         return new ResponseEntity<>(fightService.getUserCardList(username), OK);
     }
 

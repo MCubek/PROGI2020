@@ -13,11 +13,10 @@ import lombok.Getter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -38,15 +37,25 @@ public class FightService {
     private final static Map<String, List<Long>> playerUsernameListCardsMap = new HashMap<>();
 
     @Transactional
-    public List<UserCardDTO> getUserCardList(String username) throws MalformedURLException {
+    public List<UserCardDTO> getUserCardList(String username) {
         List<UserCardDTO> userCards = new ArrayList<>();
-        for (ArrayList<String> card : userRepository.findLocationCards(username)) {
-            Long id = Long.valueOf(card.get(0));
-            String name = card.get(1);
-            String description = card.get(2);
-            URL photoURL = new URL(card.get(3));
-            userCards.add(new UserCardDTO(id, name, description, photoURL));
+        User user = userRepository.findByUsername(username).orElseThrow(
+                () -> new SpringGeoFighterException("User does not exist")
+        );
+        List<LocationCard> locationCards = userCardRepository.findUserCardByUser(user)
+                .stream()
+                .map(UserCard::getLocationCard)
+                .collect(Collectors.toList());
+
+        for (LocationCard locationCard : locationCards) {
+            UserCardDTO userCard = new UserCardDTO();
+            userCard.setId(locationCard.getId());
+            userCard.setName(locationCard.getName());
+            userCard.setDescription(locationCard.getDescription());
+            userCard.setPhotoURL(locationCard.getPhotoURL());
+            userCards.add(userCard);
         }
+
         return userCards;
     }
 
