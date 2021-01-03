@@ -5,7 +5,9 @@ import {ToastrService} from 'ngx-toastr';
 import {interval, throwError} from 'rxjs';
 import {AuthService} from '../../auth/shared/auth.service';
 import {SendRequestPayload} from './send-request-payload';
-import {startWith, switchMap} from 'rxjs/operators';
+import {startWith, switchMap, take} from 'rxjs/operators';
+import {GeolocationService} from "@ng-web-apis/geolocation";
+import {UserLocationPayload} from "../../auth/login/user-location.payload";
 
 @Component({
   selector: 'app-nearby-users',
@@ -17,9 +19,11 @@ export class NearbyUsersComponent implements OnInit {
   usernames: Array<string>;
   sendRequestPayload: SendRequestPayload;
   requests: Array<string>;
+  position: Position;
+  userLocationPayload: UserLocationPayload;
 
   constructor(private userService: UserService, private router: Router, private toastr: ToastrService,
-              private authService: AuthService) {
+              private authService: AuthService, private readonly geoLocation: GeolocationService) {
     this.sendRequestPayload = {
       usernameReceiver: '',
       usernameSender: '',
@@ -27,10 +31,15 @@ export class NearbyUsersComponent implements OnInit {
       battleId: 0,
       seen: false
     };
+    this.userLocationPayload = {
+      latitude: 0.0,
+      longitude: 0.0
+    };
   }
 
   ngOnInit(): void {
-    this.userService.getNearbyUsers(this.authService.getUsername()).subscribe(data => {
+    this.setLocation();
+    interval(3000).pipe(startWith(0), switchMap(() => this.userService.getNearbyUsers(this.authService.getUsername()))).subscribe(data => {
       this.usernames = data;
     }, error => {
       this.toastr.error('Internal server error');
@@ -76,5 +85,17 @@ export class NearbyUsersComponent implements OnInit {
     this.userService.sendAnswer(this.sendRequestPayload).subscribe(
       response => console.log(response),
       err => console.log(err));
+  }
+
+  setLocation(): void {
+    this.geoLocation.pipe(take(1)).subscribe(position => {
+      this.position = position;
+      this.userLocationPayload.latitude = this.position.coords.longitude;
+      this.userLocationPayload.longitude = this.position.coords.latitude;
+
+      this.authService.saveLocation(this.userLocationPayload).subscribe(
+        response => console.log(response),
+        err => console.log(err));
+    });
   }
 }
