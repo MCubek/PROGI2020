@@ -1,12 +1,10 @@
 package hr.fer.pi.geoFighter.service;
 
-import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.Privilege;
 import hr.fer.pi.geoFighter.model.Role;
 import hr.fer.pi.geoFighter.model.User;
 import hr.fer.pi.geoFighter.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -36,15 +33,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username));
 
-        boolean enabled = user.isEnabled()
-                && (user.getForcedTimeoutEnd() == null
-                || user.getForcedTimeoutEnd().isBefore(LocalDateTime.now()));
-
+        boolean notLocked = user.getForcedTimeoutEnd() == null || user.getForcedTimeoutEnd().isBefore(LocalDateTime.now());
 
         return new org.springframework.security
                 .core.userdetails.User(user.getUsername(), user.getPassword(),
-                enabled, true, true,
-                true, getAuthorities(user.getRole()));
+                user.isEnabled(), true, true,
+                notLocked, getAuthorities(user.getRole()));
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(Role role) {
