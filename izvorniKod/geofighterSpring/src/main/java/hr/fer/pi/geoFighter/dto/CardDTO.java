@@ -18,6 +18,8 @@ public class CardDTO {
     private String description;
     private URL photoUrl;
     private String location;
+    private Double longitude;
+    private Double latitude;
     private String createdBy;
     private Integer uncommonness;
     private Integer difficulty;

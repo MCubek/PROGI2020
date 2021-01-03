@@ -5,7 +5,10 @@ import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.exceptions.UserInfoInvalidException;
 import hr.fer.pi.geoFighter.model.LocationCard;
 import hr.fer.pi.geoFighter.model.User;
+import hr.fer.pi.geoFighter.model.UserCard;
+import hr.fer.pi.geoFighter.model.UserCardId;
 import hr.fer.pi.geoFighter.repository.LocationCardRepository;
+import hr.fer.pi.geoFighter.repository.UserCardRepository;
 import hr.fer.pi.geoFighter.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.apache.commons.validator.routines.UrlValidator;
@@ -16,6 +19,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,7 +30,10 @@ public class CardService {
     private final UrlValidator urlValidator = new UrlValidator(new String[]{"http", "https"});
     private final LocationCardRepository locationCardRepository;
     private final UserRepository userRepository;
+    private final UserCardRepository userCardRepository;
     private final AuthService authService;
+
+    private static final int MAX_CARD_DISTANCE = 3;
 
 
     public List<CardDTO> getAllCards() {
@@ -89,6 +96,8 @@ public class CardService {
         cardDTO.setDifficulty(locationCard.getDifficulty() % 11);
         cardDTO.setPopulation(locationCard.getPopulation() % 11);
         cardDTO.setCreatedTime(getTime(locationCard.getCreatedDate()));
+        cardDTO.setLatitude(locationCard.getLocation().getX());
+        cardDTO.setLongitude(locationCard.getLocation().getY());
 
         return cardDTO;
     }
@@ -116,5 +125,42 @@ public class CardService {
                 .withZone(ZoneId.systemDefault());
 
         return DATE_TIME_FORMATTER.format(instant);
+    }
+
+    public void collectLocationCard(Long id) {
+        LocationCard card = locationCardRepository.getLocationCardById(id).orElseThrow();
+        User user = authService.getCurrentUser();
+
+        //Vec ima kartu
+        if(userCardRepository.findById(new UserCardId(user.getUserId(), card.getId())).isPresent())
+            return;
+
+        var userLocation = Objects.requireNonNull(user.getCurrentLocation());
+        var cardLocation = Objects.requireNonNull(card.getLocation());
+
+        if (LocationService.calculateDistance(userLocation.getX(), cardLocation.getX(), userLocation.getY(), cardLocation.getY()) > MAX_CARD_DISTANCE) {
+            throw new SpringGeoFighterException("Location is too far!");
+        }
+
+        var uc = new UserCard();
+        uc.setUser(user);
+        uc.setLocationCard(card);
+        userCardRepository.save(uc);
+    }
+
+    public List<CardDTO> getNearbyCards() {
+        User user = authService.getCurrentUser();
+        var userLocation = Objects.requireNonNull(user.getCurrentLocation());
+
+        return locationCardRepository.findAll().stream()
+                .filter(l -> userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty())
+                .filter(l -> l.getLocation() != null)
+                .filter(l -> {
+                    var cardLocation = l.getLocation();
+
+                    return LocationService.calculateDistance(userLocation.getX(), cardLocation.getX(), userLocation.getY(), cardLocation.getY()) <= MAX_CARD_DISTANCE;
+                })
+                .map(CardService::createCardDTO)
+                .collect(Collectors.toList());
     }
 }

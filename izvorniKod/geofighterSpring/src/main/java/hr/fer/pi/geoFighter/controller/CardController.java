@@ -41,4 +41,14 @@ public class CardController {
         return new ResponseEntity<>("Card applied for review", OK);
     }
 
+    @GetMapping("/getNearby")
+    public ResponseEntity<List<CardDTO>> getNearbyCards() {
+        return new ResponseEntity<>(cardService.getNearbyCards(), OK);
+    }
+
+    @PostMapping("/collect")
+    public ResponseEntity<Void> collectCard(@RequestBody Long cardId) {
+        cardService.collectLocationCard(cardId);
+        return new ResponseEntity<>(OK);
+    }
 }
