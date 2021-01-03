@@ -3,7 +3,10 @@ package hr.fer.pi.geoFighter.service;
 import hr.fer.pi.geoFighter.dto.UserEloDTO;
 import hr.fer.pi.geoFighter.dto.UserLocationDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
+import hr.fer.pi.geoFighter.model.Fight;
 import hr.fer.pi.geoFighter.model.User;
+import hr.fer.pi.geoFighter.model.UserCardFight;
+import hr.fer.pi.geoFighter.repository.UserCardFightRepository;
 import hr.fer.pi.geoFighter.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +24,7 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserCardFightRepository userCardFightRepository;
     private final AuthService authService;
 
     public List<UserEloDTO> getUserEloInfo() {
@@ -42,10 +47,32 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
+    private long getWinsInLast10FightsForUser(User user) {
+        return userCardFightRepository.findUserCardFightByUser(user)
+                .stream()
+                .map(UserCardFight::getFight)
+                .sorted(Comparator.comparing(Fight::getStartTime).reversed())
+                .limit(10)
+                .map(Fight::getWinner)
+                .filter(w -> w.getUserId().equals(user.getUserId()))
+                .count();
+    }
+
+    private long getLosesInLast10FightsForUser(User user) {
+        return userCardFightRepository.findUserCardFightByUser(user)
+                .stream()
+                .map(UserCardFight::getFight)
+                .sorted(Comparator.comparing(Fight::getStartTime).reversed())
+                .limit(10)
+                .map(Fight::getWinner)
+                .filter(w -> !w.getUserId().equals(user.getUserId()))
+                .count();
+    }
+
     public List<String> userProfile(String username) {
         User user = userRepository.findByUsername(username).orElseThrow(()-> new SpringGeoFighterException("User does not exist"));
-        int wins = userRepository.findStatisticWins(username);
-        int losses = userRepository.findStatisticLoss(username);
+        long wins = getWinsInLast10FightsForUser(user);
+        long losses = getLosesInLast10FightsForUser(user);
         ArrayList<String> data = new ArrayList<>();
         data.add(user.getUsername());
         data.add(String.valueOf(user.getEloScore()));
