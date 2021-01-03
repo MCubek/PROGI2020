@@ -123,7 +123,7 @@ public class AdminService {
 
     public void editUser(UserDTO userDTO) {
 
-        User user = userRepository.findById(userDTO.getId()).orElseThrow(
+        User user = userRepository.findByUsername(userDTO.getUsername()).orElseThrow(
                 () -> new SpringGeoFighterException("User does not exist"));
 
         user.setUsername(userDTO.getUsername());
