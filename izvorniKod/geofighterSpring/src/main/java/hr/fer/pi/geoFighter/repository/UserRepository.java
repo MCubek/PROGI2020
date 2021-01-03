@@ -21,5 +21,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Collection<User> findUsersByEnabledTrueOrderByEloScoreDesc();
 
-    Collection<User> findUsersByEnabledTrue();
+    Collection<User> findUsersByEnabledTrueOrderByUsernameAsc();
 }

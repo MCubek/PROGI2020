@@ -42,7 +42,7 @@ public class UserService {
     }
 
     public List<String> getEnabledUsers() {
-        return userRepository.findUsersByEnabledTrue().stream()
+        return userRepository.findUsersByEnabledTrueOrderByUsernameAsc().stream()
                 .map(User::getUsername)
                 .collect(Collectors.toList());
     }

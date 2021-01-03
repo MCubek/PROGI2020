@@ -57,7 +57,7 @@ public class AdminService {
     }
 
     public List<String> getEnabledUsernames() {
-        return userRepository.findUsersByEnabledTrue().stream()
+        return userRepository.findUsersByEnabledTrueOrderByUsernameAsc().stream()
                 .map(User::getUsername)
                 .collect(Collectors.toList());
     }
