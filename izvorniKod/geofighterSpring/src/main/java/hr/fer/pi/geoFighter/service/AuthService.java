@@ -13,6 +13,7 @@ import hr.fer.pi.geoFighter.repository.VerificationTokenRepository;
 import hr.fer.pi.geoFighter.security.JwtProvider;
 import hr.fer.pi.geoFighter.util.ImageValidateUtility;
 import lombok.AllArgsConstructor;
+import org.apache.commons.validator.routines.IBANValidator;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
@@ -45,6 +46,7 @@ public class AuthService {
     private final JwtProvider jwtProvider;
     private final RefreshTokenService refreshingTokenService;
     private final UrlValidator urlValidator = new UrlValidator(new String[]{"http", "https"});
+    private final IBANValidator ibanValidator = new IBANValidator();
 
     public void signup(RegisterRequest registerRequest) {
         if (userRepository.findByUsername(registerRequest.getUsername()).isPresent() ||
@@ -96,6 +98,10 @@ public class AuthService {
     public void cartographerApply(CartographerRegisterRequest registerRequest) {
         User user = getCurrentUser();
         user.setCartographerStatus(CartographerStatus.APPLIED);
+
+        if (! ibanValidator.isValid(registerRequest.getIban()))
+            throw new UserInfoInvalidException("Invalid IBAN");
+
         user.setIban(registerRequest.getIban());
 
         if (! urlValidator.isValid(registerRequest.getIdPhotoURL()))
