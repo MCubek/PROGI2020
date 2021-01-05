@@ -18,5 +18,6 @@ public class UserCardDTO {
     private String difficulty;
     private String population;
     private String uncommonness;
+    private String description;
     private URL photoURL;
 }
