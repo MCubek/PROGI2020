@@ -5,7 +5,6 @@ import { throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MyCoordinate } from './CartographerMap/MyComponent';
-import { CardCheckedCoordinates } from './card-to-be-checked.model';
 
 @Component({
   selector: 'app-card-applications',

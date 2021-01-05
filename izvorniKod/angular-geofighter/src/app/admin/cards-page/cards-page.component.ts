@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {throwError} from 'rxjs';
 import {AdminService} from '../admin.service';
 import {LocationCardModel} from './location-card.model';
-
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
 
 
 @Component({
@@ -13,9 +14,13 @@ import {LocationCardModel} from './location-card.model';
 export class CardsPageComponent implements OnInit {
 
   cards: Array<LocationCardModel>;
+  editCardForm: FormGroup;
 
 
-  constructor(private adminService: AdminService) { }
+  constructor(
+    private adminService: AdminService,
+    private toastr: ToastrService
+  ) { }
 
 
   // Dohvati sve dostupne i odobrene karte
@@ -25,9 +30,57 @@ export class CardsPageComponent implements OnInit {
     }, error => {
       throwError(error);
     });
+    this.editCardForm = new FormGroup({
+      id: new FormControl('', Validators.required),
+      name: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      photoUrl: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^https?://(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg|jpeg|png)$')]),
+      uncommonness: new FormControl('0', [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(10),
+      ]),
+      difficulty: new FormControl('0', [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(10),
+      ]),
+      population: new FormControl('0', [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(10),
+      ]),
+    });
   }
 
-  // Brisanje karte po id-u
+  editForm(locationCardModel: LocationCardModel): void {
+    this.editCardForm.patchValue({
+      id: locationCardModel.id,
+      name: locationCardModel.name,
+      description: locationCardModel.description,
+      photoUrl: locationCardModel.photoUrl,
+      uncommonness: locationCardModel.uncommonness,
+      difficulty: locationCardModel.difficulty,
+      population: locationCardModel.population,
+    });
+  }
+
+  edit(): void {
+    this.adminService
+      .editCard(this.editCardForm.getRawValue())
+      .subscribe(
+        (data) => {
+          this.ngOnInit();
+          this.toastr.success('Card edited!');
+        },
+        (error) => {
+          this.toastr.error('Internal server error!');
+          throwError(error);
+        }
+      );
+  }
 
   delete(cardId: number): void{
     this.adminService.deleteCard(cardId).

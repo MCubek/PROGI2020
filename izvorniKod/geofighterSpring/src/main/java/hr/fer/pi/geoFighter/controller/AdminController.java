@@ -57,7 +57,19 @@ public class AdminController {
 
     @GetMapping("/allCards")
     public ResponseEntity<List<CardDTO>> getCardCollection() {
-        return new ResponseEntity<>(cardService.getCardCollection(), OK);
+        return new ResponseEntity<>(adminService.getCardCollection(), OK);
+    }
+
+    @PostMapping("/edit")
+    public ResponseEntity<String> editLocationCard(@RequestBody CardDTO card) {
+        adminService.editLocationCard(card);
+        return new ResponseEntity<>("Card application edited", OK);
+    }
+
+    @DeleteMapping("/{locationCardId}")
+    public ResponseEntity<Void> deleteLocationCard(@PathVariable long locationCardId) {
+        adminService.deleteLocationCard(locationCardId);
+        return ResponseEntity.noContent().build();
     }
 
 }
