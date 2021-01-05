@@ -92,12 +92,17 @@ public class CardService {
         cardDTO.setPhotoUrl(locationCard.getPhotoURL());
         cardDTO.setLocation(getLocationString(locationCard.getLocation()));
         cardDTO.setCreatedBy(getCreatedBy(locationCard.getCreatedBy()));
-        cardDTO.setUncommonness(locationCard.getUncommonness() % 11);
-        cardDTO.setDifficulty(locationCard.getDifficulty() % 11);
-        cardDTO.setPopulation(locationCard.getPopulation() % 11);
+        if (locationCard.getUncommonness() != null)
+            cardDTO.setUncommonness(locationCard.getUncommonness() % 11);
+        if (locationCard.getDifficulty() != null)
+            cardDTO.setDifficulty(locationCard.getDifficulty() % 11);
+        if (locationCard.getPopulation() != null)
+            cardDTO.setPopulation(locationCard.getPopulation() % 11);
         cardDTO.setCreatedTime(getTime(locationCard.getCreatedDate()));
-        cardDTO.setLatitude(locationCard.getLocation().getX());
-        cardDTO.setLongitude(locationCard.getLocation().getY());
+        if (locationCard.getLocation() != null) {
+            cardDTO.setLatitude(locationCard.getLocation().getX());
+            cardDTO.setLongitude(locationCard.getLocation().getY());
+        }
 
         return cardDTO;
     }

@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
 
+import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
@@ -63,16 +64,16 @@ public class User {
 
     private Boolean online;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<UserCard> locationCardAssoc;
 
-    @OneToMany(mappedBy = "createdBy", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "createdBy", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<LocationCard> createdCards;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<UserCardFight> cardFightAssoc;
 
-    @OneToMany(mappedBy = "winner", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "winner", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<Fight> fightsWon;
 
     @OneToOne(mappedBy = "user", orphanRemoval = true)

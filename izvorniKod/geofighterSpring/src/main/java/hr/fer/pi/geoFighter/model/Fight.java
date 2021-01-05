@@ -26,6 +26,6 @@ public class Fight {
     @JoinColumn(name = "winner_user_id", referencedColumnName = "user_id")
     private User winner;
 
-    @OneToMany(mappedBy = "fight", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "fight", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserCardFight> userCardAssoc;
 }

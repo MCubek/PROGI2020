@@ -56,10 +56,10 @@ public class LocationCard {
     @NotNull
     private User acceptedBy;
 
-    @OneToMany(mappedBy = "locationCard")
+    @OneToMany(mappedBy = "locationCard", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<UserCard> userAssoc;
 
-    @OneToMany(mappedBy = "locationCard")
+    @OneToMany(mappedBy = "locationCard", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<UserCardFight> userFightAssoc;
 
     private Integer uncommonness;
