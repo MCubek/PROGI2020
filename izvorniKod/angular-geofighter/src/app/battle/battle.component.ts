@@ -18,6 +18,7 @@ export class BattleComponent implements OnInit {
   username: string;
   userCards: Array<CardModel>;
   match: SendRequestPayload;
+  opponent: string;
 
   cardsPicked = false;
   pickedCards: Array<bigint> = new Array<bigint>();
@@ -32,14 +33,25 @@ export class BattleComponent implements OnInit {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.username = this.authService.getUsername();
 
-    this.fightService.getUserCardList(this.username).subscribe(data => {
-      this.userCards = data;
-    }, error => {
-      throwError(error);
-    });
-
     this.match = history.state.data;
-    console.log(this.match.usernameSender + ', ' + this.match.usernameReceiver + ' ' + this.match.battleId);
+    if(this.match == undefined){
+      this.router.navigateByUrl('/nearbyUsers');
+    }
+    else {
+      this.fightService.getUserCardList(this.username).subscribe(data => {
+        this.userCards = data;
+      }, error => {
+        throwError(error);
+      });
+
+      //this.match = history.state.data;
+      //console.log(this.match.usernameSender + ', ' + this.match.usernameReceiver + ' ' + this.match.battleId);
+      if (this.match.usernameReceiver == this.username) {
+        this.opponent = this.match.usernameSender;
+      } else {
+        this.opponent = this.match.usernameReceiver;
+      }
+    }
 
   }
 
