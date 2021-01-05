@@ -35,6 +35,14 @@ export class AdminService {
     return this.httpClient.delete(`${environment.apiUrl}api/card/` + cardId);
   }
 
+  editCard(locationCardModel: LocationCardModel): Observable<any> {
+    return this.httpClient.post(
+      `${environment.apiUrl}api/card/edit`,
+      locationCardModel,
+      {responseType: 'text'}
+    );
+  }
+
   getEnabledUsernames(): Observable<string[]> {
     return this.httpClient.get<string[]>(`${environment.apiUrl}api/admin/userList`);
   }

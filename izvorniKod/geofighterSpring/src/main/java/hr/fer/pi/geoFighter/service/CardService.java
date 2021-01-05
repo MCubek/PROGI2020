@@ -168,4 +168,17 @@ public class CardService {
                 .map(CardService::createCardDTO)
                 .collect(Collectors.toList());
     }
+
+    public void editLocatioCard(CardDTO card) {
+        LocationCard locationCard = locationCardRepository.getLocationCardById(card.getId()).orElseThrow(
+                () -> new SpringGeoFighterException("Card does not exist"));
+
+        locationCard.setName(card.getName());
+        locationCard.setDescription(card.getDescription());
+        locationCard.setPhotoURL(card.getPhotoUrl());
+        locationCard.setUncommonness(card.getUncommonness());
+        locationCard.setDifficulty(card.getDifficulty());
+        locationCard.setPopulation(card.getPopulation());
+
+    }
 }
