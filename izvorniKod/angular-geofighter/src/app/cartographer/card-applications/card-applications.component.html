@@ -5,7 +5,7 @@
       <div
         *ngIf="cardApplications !== undefined && cardApplications.length != 0"
       >
-        <button class="btn btn-primary" (click)="toggleMapShowed()">
+        <button class="btn btn-primary" (click)="toggleMapShowed()" style="margin-top: 20px;">
           Toggle Locations Map
         </button>
         <div *ngIf="mapShowed">
@@ -14,7 +14,7 @@
           ></app-cartographer-map>
         </div>
       </div>
-      <h2>List of Card Applications</h2>
+      <h3 style="margin: 20px auto;">List of Card Applications</h3>
       <ul *ngIf="cardApplications !== undefined" class="list-group">
         <li *ngFor="let card of cardApplications" class="list-group-item">
           <p>Name: {{ card.name }}</p>
@@ -24,8 +24,8 @@
           <p>Uncommonness: {{ card.uncommonness }}</p>
           <p>Difficulty: {{ card.difficulty }}</p>
           <p>Population: {{ card.population }}</p>
-          <div class="card" style="width: 16rem">
-            <img src="{{ card.photoUrl }}" alt="" />
+          <div style="width: 300px; margin-bottom: 20px;">
+            <img src="{{ card.photoUrl }}" alt="" style="width: 300px; height:400px; object-fit: cover;"/>
           </div>
           <button class="btn btn-success mr-2" (click)="accept(card.id)">
             Accept

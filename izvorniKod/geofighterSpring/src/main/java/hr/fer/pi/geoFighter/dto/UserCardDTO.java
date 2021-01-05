@@ -15,6 +15,8 @@ import java.net.URL;
 public class UserCardDTO {
     private Long id;
     private String name;
-    private String description;
+    private String difficulty;
+    private String population;
+    private String uncommonness;
     private URL photoURL;
 }
