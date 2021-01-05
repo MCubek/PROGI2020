@@ -10,6 +10,7 @@ import hr.fer.pi.geoFighter.model.UserCardId;
 import hr.fer.pi.geoFighter.repository.LocationCardRepository;
 import hr.fer.pi.geoFighter.repository.UserCardRepository;
 import hr.fer.pi.geoFighter.repository.UserRepository;
+import hr.fer.pi.geoFighter.util.ImageValidateUtility;
 import lombok.AllArgsConstructor;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.stereotype.Service;
@@ -74,17 +75,7 @@ public class CardService {
         locationCardRepository.save(locationCard);
     }
 
-    public List<CardDTO> getCardCollection() {
-        return locationCardRepository.findAll().stream()
-                .map(CardService::createCardDTO)
-                .collect(Collectors.toList());
-    }
-
-    public void deleteLocationCard(long locationCardId) {
-        locationCardRepository.deleteById(locationCardId);
-    }
-
-    private static CardDTO createCardDTO(LocationCard locationCard) {
+    public static CardDTO createCardDTO(LocationCard locationCard) {
         CardDTO cardDTO = new CardDTO();
         cardDTO.setId(locationCard.getId());
         cardDTO.setName(locationCard.getName());
@@ -167,18 +158,5 @@ public class CardService {
                 })
                 .map(CardService::createCardDTO)
                 .collect(Collectors.toList());
-    }
-
-    public void editLocatioCard(CardDTO card) {
-        LocationCard locationCard = locationCardRepository.getLocationCardById(card.getId()).orElseThrow(
-                () -> new SpringGeoFighterException("Card does not exist"));
-
-        locationCard.setName(card.getName());
-        locationCard.setDescription(card.getDescription());
-        locationCard.setPhotoURL(card.getPhotoUrl());
-        locationCard.setUncommonness(card.getUncommonness());
-        locationCard.setDifficulty(card.getDifficulty());
-        locationCard.setPopulation(card.getPopulation());
-
     }
 }

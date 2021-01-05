@@ -1,13 +1,17 @@
 package hr.fer.pi.geoFighter.service;
 
+import hr.fer.pi.geoFighter.dto.CardDTO;
 import hr.fer.pi.geoFighter.dto.CartographerUserDTO;
 import hr.fer.pi.geoFighter.dto.DisableUserDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.CartographerStatus;
+import hr.fer.pi.geoFighter.model.LocationCard;
 import hr.fer.pi.geoFighter.model.Role;
 import hr.fer.pi.geoFighter.model.User;
+import hr.fer.pi.geoFighter.repository.LocationCardRepository;
 import hr.fer.pi.geoFighter.repository.RoleRepository;
 import hr.fer.pi.geoFighter.repository.UserRepository;
+import hr.fer.pi.geoFighter.util.ImageValidateUtility;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +29,7 @@ public class AdminService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final LocationCardRepository locationCardRepository;
 
     public List<CartographerUserDTO> getCartographerApplications() {
         List<CartographerUserDTO> usernames = new ArrayList<>();
@@ -87,6 +92,31 @@ public class AdminService {
             throw new SpringGeoFighterException("Timeout end cannot be a past date");
 
         user.setForcedTimeoutEnd(timeoutEnd);
+    }
+
+    public List<CardDTO> getCardCollection() {
+        return locationCardRepository.findAll().stream()
+                .map(CardService::createCardDTO)
+                .collect(Collectors.toList());
+    }
+
+    public void editLocationCard(CardDTO card) {
+        LocationCard locationCard = locationCardRepository.getLocationCardById(card.getId()).orElseThrow(
+                () -> new SpringGeoFighterException("Card does not exist"));
+
+        ImageValidateUtility.validateImage(card.getPhotoUrl());
+
+        locationCard.setName(card.getName());
+        locationCard.setDescription(card.getDescription());
+        locationCard.setPhotoURL(card.getPhotoUrl());
+        locationCard.setUncommonness(card.getUncommonness());
+        locationCard.setDifficulty(card.getDifficulty());
+        locationCard.setPopulation(card.getPopulation());
+
+    }
+
+    public void deleteLocationCard(long locationCardId) {
+        locationCardRepository.deleteById(locationCardId);
     }
 
 }

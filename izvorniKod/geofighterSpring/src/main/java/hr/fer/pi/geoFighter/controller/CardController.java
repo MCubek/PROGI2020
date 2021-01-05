@@ -28,18 +28,6 @@ public class CardController {
         return new ResponseEntity<>(cardService.getLocationCard(locationCardId), OK);
     }
 
-    @DeleteMapping("/{locationCardId}")
-    public ResponseEntity<Void> deleteLocationCard(@PathVariable long locationCardId) {
-        cardService.deleteLocationCard(locationCardId);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PostMapping("/edit")
-    public ResponseEntity<String> editCardApplication(@RequestBody CardDTO card) {
-        cardService.editLocatioCard(card);
-        return new ResponseEntity<>("Card application edited", OK);
-    }
-
     //PRIJAVA KARTE
     @PostMapping("/applyCard")
     public ResponseEntity<String> applyCard(@RequestBody CardDTO cardDTO) {
