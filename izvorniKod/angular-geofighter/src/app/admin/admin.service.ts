@@ -32,12 +32,12 @@ export class AdminService {
   }
 
   deleteCard(cardId: number): Observable<any> {
-    return this.httpClient.delete(`${environment.apiUrl}api/card/` + cardId);
+    return this.httpClient.delete(`${environment.apiUrl}api/admin/` + cardId);
   }
 
   editCard(locationCardModel: LocationCardModel): Observable<any> {
     return this.httpClient.post(
-      `${environment.apiUrl}api/card/edit`,
+      `${environment.apiUrl}api/admin/edit`,
       locationCardModel,
       {responseType: 'text'}
     );

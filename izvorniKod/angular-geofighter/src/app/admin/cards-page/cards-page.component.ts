@@ -34,7 +34,9 @@ export class CardsPageComponent implements OnInit {
       id: new FormControl('', Validators.required),
       name: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
-      photoURL: new FormControl('', Validators.required),
+      photoUrl: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^https?://(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg|jpeg|png)$')]),
       uncommonness: new FormControl('0', [
         Validators.required,
         Validators.min(0),
@@ -58,7 +60,7 @@ export class CardsPageComponent implements OnInit {
       id: locationCardModel.id,
       name: locationCardModel.name,
       description: locationCardModel.description,
-      photoURL: locationCardModel.photoURL,
+      photoUrl: locationCardModel.photoUrl,
       uncommonness: locationCardModel.uncommonness,
       difficulty: locationCardModel.difficulty,
       population: locationCardModel.population,
