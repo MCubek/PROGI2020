@@ -1,3 +1,19 @@
+<h3 class="h3">Choose your opponent!</h3>
+<div class="box">
+<table *ngIf="usernames!==undefined" class="table table-hover" style="margin:0 auto; width:50%;">
+  <thead>
+  <tr>
+    <th class = "title" colspan="2">Nearby users</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of usernames">
+    <td>{{user}}</td>
+    <td><button class="btn btn-primary" (click)="sendRequest(user)">Send battle request</button></td>
+  </tr>
+  </tbody>
+</table>
+<h3 *ngIf="usernames===undefined || usernames.length==0" style="text-align: center;"> No users. Server may be down.</h3>
 
 <div class="box" style="margin: 20px;">
   <div>

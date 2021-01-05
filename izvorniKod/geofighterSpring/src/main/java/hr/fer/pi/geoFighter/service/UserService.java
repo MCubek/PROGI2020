@@ -3,7 +3,10 @@ package hr.fer.pi.geoFighter.service;
 import hr.fer.pi.geoFighter.dto.UserEloDTO;
 import hr.fer.pi.geoFighter.dto.UserLocationDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
+import hr.fer.pi.geoFighter.model.Fight;
 import hr.fer.pi.geoFighter.model.User;
+import hr.fer.pi.geoFighter.model.UserCardFight;
+import hr.fer.pi.geoFighter.repository.UserCardFightRepository;
 import hr.fer.pi.geoFighter.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +14,9 @@ import org.springframework.stereotype.Service;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -19,20 +24,55 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserCardFightRepository userCardFightRepository;
     private final AuthService authService;
 
     public List<UserEloDTO> getUserEloInfo() {
-        return new ArrayList<>(userRepository.getUserEloInfo());
+        return userRepository.findUsersByEnabledTrueOrderByEloScoreDesc()
+                .stream()
+                .map(user -> {
+                    UserEloDTO userEloDTO = new UserEloDTO();
+                    userEloDTO.setUsername(user.getUsername());
+                    userEloDTO.setWins(user.getWins());
+                    userEloDTO.setLosses(user.getLosses());
+                    userEloDTO.setEloScore(user.getEloScore());
+                    return userEloDTO;
+                })
+                .collect(Collectors.toList());
     }
 
     public List<String> getEnabledUsers() {
-        return new ArrayList<>(userRepository.findEnabledUsernames());
+        return userRepository.findUsersByEnabledTrueOrderByUsernameAsc().stream()
+                .map(User::getUsername)
+                .collect(Collectors.toList());
+    }
+
+    private long getWinsInLast10FightsForUser(User user) {
+        return userCardFightRepository.findUserCardFightByUser(user)
+                .stream()
+                .map(UserCardFight::getFight)
+                .sorted(Comparator.comparing(Fight::getStartTime).reversed())
+                .limit(10)
+                .map(Fight::getWinner)
+                .filter(w -> w.getUserId().equals(user.getUserId()))
+                .count();
+    }
+
+    private long getLosesInLast10FightsForUser(User user) {
+        return userCardFightRepository.findUserCardFightByUser(user)
+                .stream()
+                .map(UserCardFight::getFight)
+                .sorted(Comparator.comparing(Fight::getStartTime).reversed())
+                .limit(10)
+                .map(Fight::getWinner)
+                .filter(w -> !w.getUserId().equals(user.getUserId()))
+                .count();
     }
 
     public List<String> userProfile(String username) {
         User user = userRepository.findByUsername(username).orElseThrow(()-> new SpringGeoFighterException("User does not exist"));
-        int wins = userRepository.findStatisticWins(username);
-        int losses = userRepository.findStatisticLoss(username);
+        long wins = getWinsInLast10FightsForUser(user);
+        long losses = getLosesInLast10FightsForUser(user);
         ArrayList<String> data = new ArrayList<>();
         data.add(user.getUsername());
         data.add(String.valueOf(user.getEloScore()));
@@ -67,27 +107,12 @@ public class UserService {
 
             double uLongitude = location.getX();
             double uLatitude = location.getY();
-            double distance = calculateDistance(userLatitude, uLatitude, userLongitude, uLongitude);
+            double distance = LocationService.calculateDistance(userLatitude, uLatitude, userLongitude, uLongitude);
             if (distance <= 50.0 && (!user.getUsername().equals(u.getUsername()))) {
                 nearbyUsers.add(u.getUsername());
             }
         }
         return nearbyUsers;
-    }
-
-    public double calculateDistance (double lat1, double lat2, double lon1, double lon2){
-        final int R = 6371;
-
-        double latDistance = Math.toRadians(lat2 - lat1);
-        double lonDistance = Math.toRadians(lon2 - lon1);
-        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
-                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        double distance = R * c;
-
-        distance = Math.pow(distance, 2);
-        return Math.sqrt(distance);
     }
 
     public void storeLocation(UserLocationDTO userLocationDTO){

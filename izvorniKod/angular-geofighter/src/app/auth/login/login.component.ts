@@ -64,19 +64,33 @@ export class LoginComponent implements OnInit {
 
     }, error => {
       this.isError = true;
+      this.toastr.error(error.error.message);
       throwError(error);
     });
   }
 
   setLocation(): void {
-    this.geoLocation.pipe(take(1)).subscribe(position => {
+    navigator.geolocation.getCurrentPosition(position => {
       this.position = position;
-      this.userLocationPayload.latitude = this.position.coords.longitude;
-      this.userLocationPayload.longitude = this.position.coords.latitude;
+      this.userLocationPayload.latitude = position.coords.latitude;
+      this.userLocationPayload.longitude = position.coords.longitude;
 
       this.authService.saveLocation(this.userLocationPayload).subscribe(
-        response => console.log(response),
-        err => console.log(err));
+        response => {
+        },
+        err => throwError(err));
+    }, err => {
+      this.toastr.error('Location not gathered. Some stuff won\'t work!');
     });
+/*    this.geoLocation.pipe(take(1)).subscribe(position => {
+      this.position = position;
+      this.userLocationPayload.latitude = this.position.coords.latitude;
+      this.userLocationPayload.longitude = this.position.coords.longitude;
+
+      this.authService.saveLocation(this.userLocationPayload).subscribe(
+        response => {
+        },
+        err => throwError(err));
+    });*/
   }
 }
