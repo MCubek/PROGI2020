@@ -21,7 +21,7 @@ export class BattleComponent implements OnInit {
   opponent: string;
 
   cardsPicked = false;
-  pickedCards: Array<bigint> = new Array<bigint>();
+  pickedCards: Array<number> = new Array<number>();
 
   constructor(private authService: AuthService, private router: Router, private fightService: FightService, private toastr: ToastrService) {
   }
@@ -34,7 +34,7 @@ export class BattleComponent implements OnInit {
     this.username = this.authService.getUsername();
 
     this.match = history.state.data;
-    if(this.match == undefined){
+    if (this.match === undefined){
       this.router.navigateByUrl('/nearbyUsers');
     }
     else {
@@ -44,9 +44,9 @@ export class BattleComponent implements OnInit {
         throwError(error);
       });
 
-      //this.match = history.state.data;
-      //console.log(this.match.usernameSender + ', ' + this.match.usernameReceiver + ' ' + this.match.battleId);
-      if (this.match.usernameReceiver == this.username) {
+      // this.match = history.state.data;
+      // console.log(this.match.usernameSender + ', ' + this.match.usernameReceiver + ' ' + this.match.battleId);
+      if (this.match.usernameReceiver === this.username) {
         this.opponent = this.match.usernameSender;
       } else {
         this.opponent = this.match.usernameReceiver;
@@ -55,7 +55,7 @@ export class BattleComponent implements OnInit {
 
   }
 
-  clickCard(event, id: bigint): void {
+  clickCard(event, id: number): void {
     const notAdded = 'Pick card';
     const added = 'Remove card';
 

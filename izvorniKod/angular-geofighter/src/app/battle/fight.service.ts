@@ -16,16 +16,16 @@ export class FightService {
     return this.httpClient.get<CardModel[]>(`${environment.apiUrl}api/fight/userCardList/` + username);
   }
 
-  submitCards(cardList: Array<bigint>): Observable<any> {
-    return this.httpClient.put<Array<bigint>>('${environment.apiUrl}api/fight/submitCards/', 'text');
+  submitCards(cardList: Array<number>): Observable<any> {
+    return this.httpClient.put<Array<number>>(`${environment.apiUrl}api/fight/submitCards/`, 'text');
   }
 
   startFight(fightId: number): Observable<any> {
-    return this.httpClient.put('${environment.apiUrl}api/fight/startFight/' + fightId, 'text');
+    return this.httpClient.put(`${environment.apiUrl}api/fight/startFight/` + fightId, 'text');
   }
 
   getWinner(fightId: number): Observable<string> {
-    return this.httpClient.get<string>('${environment.apiUrl}api/fight/getWinner/' + fightId);
+    return this.httpClient.get<string>(`${environment.apiUrl}api/fight/getWinner/` + fightId);
   }
 
 }
