@@ -95,7 +95,9 @@ export class ApplyCardComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-        this.toastr.error(error.error.message);
+        this.toastr.error(
+          'Error. Make sure you have enough experience, at least 5 wins'
+        );
       }
     );
   }
