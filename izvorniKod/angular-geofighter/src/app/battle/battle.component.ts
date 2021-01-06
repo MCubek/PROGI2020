@@ -6,6 +6,7 @@ import {AuthService} from '../auth/shared/auth.service';
 import {Router} from '@angular/router';
 import {SendRequestPayload} from '../user/nearby-users/send-request-payload';
 import {ToastrService} from 'ngx-toastr';
+import {SubmitCardModel} from './submitCard.model';
 
 @Component({
   selector: 'app-battle',
@@ -81,7 +82,14 @@ export class BattleComponent implements OnInit {
     if (this.pickedCards.length !== 3) {
       this.toastr.warning('3 cards required!');
     } else {
-      this.fightService.submitCards(this.pickedCards).subscribe(data => {
+      const array = [];
+      for (const id of this.pickedCards) {
+        array.push(new (class MyDTO implements SubmitCardModel{
+          cardId = id;
+        }));
+      }
+
+      this.fightService.submitCards(array).subscribe(data => {
           this.cardsPicked = true;
           this.toastr.success('Cards submitted.');
         }, error => {

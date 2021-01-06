@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {CardModel} from './card.model';
 import {environment} from '../../environments/environment';
+import {SubmitCardModel} from "./submitCard.model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class FightService {
     return this.httpClient.get<CardModel[]>(`${environment.apiUrl}api/fight/userCardList/` + username);
   }
 
-  submitCards(cardList: Array<number>): Observable<any> {
-    return this.httpClient.put<Array<number>>(`${environment.apiUrl}api/fight/submitCards/`, 'text');
+  submitCards(cardList: Array<SubmitCardModel>): Observable<any> {
+    return this.httpClient.put(`${environment.apiUrl}api/fight/submitCards/`, cardList);
   }
 
   startFight(fightId: number): Observable<any> {
