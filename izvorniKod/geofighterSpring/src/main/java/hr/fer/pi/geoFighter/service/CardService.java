@@ -69,10 +69,14 @@ public class CardService {
         if (! urlValidator.isValid(cardDTO.getPhotoUrl().toString()))
             throw new UserInfoInvalidException("Invalid photo URL");
 
-        locationCard.setPhotoURL(cardDTO.getPhotoUrl());
+        if (locationCard.getCreatedBy().getWins() < 5){
+            System.out.println("Exp too low");
+            throw new UserInfoInvalidException("Experience too low (minimum 5 wins required)");
+        }else{
+            locationCard.setPhotoURL(cardDTO.getPhotoUrl());
 
-
-        locationCardRepository.save(locationCard);
+            locationCardRepository.save(locationCard);
+        }
     }
 
     public static CardDTO createCardDTO(LocationCard locationCard) {
