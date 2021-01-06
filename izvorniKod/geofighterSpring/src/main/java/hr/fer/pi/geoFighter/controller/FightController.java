@@ -18,7 +18,7 @@ public class FightController {
     private final FightService fightService;
 
     @PutMapping("/submitCards")
-    public ResponseEntity<Void> submitCards(@RequestBody Long[] fightCards) {
+    public ResponseEntity<Void> submitCards(@RequestBody List<SubmitCardFightDTO> fightCards) {
         fightService.submitCards(fightCards);
         return new ResponseEntity<>(OK);
     }

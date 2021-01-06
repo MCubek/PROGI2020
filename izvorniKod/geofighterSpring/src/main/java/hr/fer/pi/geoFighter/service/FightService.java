@@ -1,6 +1,7 @@
 package hr.fer.pi.geoFighter.service;
 
 import hr.fer.pi.geoFighter.dto.SendRequestDTO;
+import hr.fer.pi.geoFighter.dto.SubmitCardFightDTO;
 import hr.fer.pi.geoFighter.dto.UserCardDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.*;
@@ -63,8 +64,10 @@ public class FightService {
         return fightIdWinnerMap.getOrDefault(fightId, null);
     }
 
-    public void submitCards(Long[] fightCards) {
-        playerUsernameListCardsMap.put(authService.getCurrentUser().getUsername(), Arrays.asList(fightCards));
+    public void submitCards(List<SubmitCardFightDTO> fightCards) {
+        playerUsernameListCardsMap.put(authService.getCurrentUser().getUsername(), fightCards.stream()
+                .map(SubmitCardFightDTO::getCardId)
+                .collect(Collectors.toList()));
     }
 
     public void deleteFight(Long fightId) {
@@ -260,12 +263,12 @@ public class FightService {
         }
     }
 
-    public SendRequestDTO getMatches(String username){
-        for (SendRequestDTO match:startPlaying){
-            if (match.getUsernameSender().equals(username)){
-                if(match.isSeen()){
+    public SendRequestDTO getMatches(String username) {
+        for (SendRequestDTO match : startPlaying) {
+            if (match.getUsernameSender().equals(username)) {
+                if (match.isSeen()) {
                     startPlaying.remove(match);
-                }else {
+                } else {
                     List<String> players = new ArrayList<>();
                     players.add(match.getUsernameSender());
                     players.add(match.getUsernameReceiver());
@@ -275,11 +278,10 @@ public class FightService {
                     match.setSeen(true);
                 }
                 return match;
-            }
-            else if(match.getUsernameReceiver().equals(username)){
-                if(match.isSeen()){
+            } else if (match.getUsernameReceiver().equals(username)) {
+                if (match.isSeen()) {
                     startPlaying.remove(match);
-                }else {
+                } else {
                     List<String> players = new ArrayList<>();
                     players.add(match.getUsernameSender());
                     players.add(match.getUsernameReceiver());
@@ -291,7 +293,7 @@ public class FightService {
                 return match;
             }
         }
-        return new SendRequestDTO("","",false,0L,false);
+        return new SendRequestDTO("", "", false, 0L, false);
     }
 
     @AllArgsConstructor
