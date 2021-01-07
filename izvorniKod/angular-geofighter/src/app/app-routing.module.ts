@@ -20,6 +20,7 @@ import {NearbyUsersComponent} from './user/nearby-users/nearby-users.component';
 import {CardApplicationsComponent} from './cartographer/card-applications/card-applications.component';
 import {CartographerGuard} from './cartographer/cartographer.guard';
 import {NearbyComponent} from './card/nearby/nearby.component';
+import {GetWinnerComponent} from "./battle/get-winner/get-winner.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path: 'nearbyUsers', component: NearbyUsersComponent, canActivate: [AuthGuard]},
   {path: 'users', component: AllUsersComponent, canActivate: [AuthGuard]},
   {path: 'users/:username', component: UserProfileComponent, canActivate: [AuthGuard]},
+  {path: 'battle/getWinner', component: GetWinnerComponent, canActivate: [AuthGuard]},
 
   {
     path: 'cartographer/cardApplications',

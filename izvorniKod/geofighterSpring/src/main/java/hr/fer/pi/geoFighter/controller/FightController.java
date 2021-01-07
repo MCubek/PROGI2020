@@ -18,20 +18,20 @@ public class FightController {
     private final FightService fightService;
 
     @PutMapping("/submitCards")
-    public ResponseEntity<Void> submitCards(@RequestBody Long[] fightCards) {
+    public ResponseEntity<Void> submitCards(@RequestBody List<SubmitCardFightDTO> fightCards) {
         fightService.submitCards(fightCards);
         return new ResponseEntity<>(OK);
     }
 
     @PutMapping("/startFight/{fightId}")
-    public ResponseEntity<Void> startFight(@PathVariable Long fightId) {
-        fightService.startFight(fightId);
-        return new ResponseEntity<>(OK);
+    public ResponseEntity<Boolean> startFight(@PathVariable Long fightId) {
+        Boolean result = fightService.startFight(fightId);
+        return new ResponseEntity<>(result, OK);
     }
 
     @GetMapping("/getWinner/{fightId}")
-    public ResponseEntity<String> getWinner(@PathVariable Long fightId) {
-        return new ResponseEntity<>(fightService.getWinnerOfFight(fightId), OK);
+    public ResponseEntity<WinnerDTO> getWinner(@PathVariable Long fightId) {
+        return new ResponseEntity<WinnerDTO>(fightService.getWinnerOfFight(fightId), OK);
     }
 
     @GetMapping("/userCardList/{username}")

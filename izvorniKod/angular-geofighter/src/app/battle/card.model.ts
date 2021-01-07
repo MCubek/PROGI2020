@@ -1,5 +1,5 @@
 export interface CardModel {
-  id: bigint;
+  id: number;
   name: string;
   difficulty: string;
   population: string;

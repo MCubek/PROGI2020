@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {throwError} from 'rxjs';
+import {interval, throwError, timer} from 'rxjs';
 import {FightService} from './fight.service';
 import {CardModel} from './card.model';
 import {AuthService} from '../auth/shared/auth.service';
 import {Router} from '@angular/router';
 import {SendRequestPayload} from '../user/nearby-users/send-request-payload';
 import {ToastrService} from 'ngx-toastr';
+import {SubmitCardModel} from './submitCard.model';
+import {startWith, switchMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-battle',
@@ -19,11 +21,13 @@ export class BattleComponent implements OnInit {
   userCards: Array<CardModel>;
   match: SendRequestPayload;
   opponent: string;
+  ready: boolean;
 
   cardsPicked = false;
-  pickedCards: Array<bigint> = new Array<bigint>();
+  pickedCards: Array<number> = new Array<number>();
 
   constructor(private authService: AuthService, private router: Router, private fightService: FightService, private toastr: ToastrService) {
+    this.ready = false;
   }
 
   ngOnInit(): void {
@@ -34,7 +38,7 @@ export class BattleComponent implements OnInit {
     this.username = this.authService.getUsername();
 
     this.match = history.state.data;
-    if(this.match == undefined){
+    if (this.match === undefined){
       this.router.navigateByUrl('/nearbyUsers');
     }
     else {
@@ -44,9 +48,7 @@ export class BattleComponent implements OnInit {
         throwError(error);
       });
 
-      //this.match = history.state.data;
-      //console.log(this.match.usernameSender + ', ' + this.match.usernameReceiver + ' ' + this.match.battleId);
-      if (this.match.usernameReceiver == this.username) {
+      if (this.match.usernameReceiver === this.username) {
         this.opponent = this.match.usernameSender;
       } else {
         this.opponent = this.match.usernameReceiver;
@@ -55,7 +57,7 @@ export class BattleComponent implements OnInit {
 
   }
 
-  clickCard(event, id: bigint): void {
+  clickCard(event, id: number): void {
     const notAdded = 'Pick card';
     const added = 'Remove card';
 
@@ -81,7 +83,14 @@ export class BattleComponent implements OnInit {
     if (this.pickedCards.length !== 3) {
       this.toastr.warning('3 cards required!');
     } else {
-      this.fightService.submitCards(this.pickedCards).subscribe(data => {
+      const array = [];
+      for (const id of this.pickedCards) {
+        array.push(new (class MyDTO implements SubmitCardModel{
+          cardId = id;
+        }));
+      }
+
+      this.fightService.submitCards(array).subscribe(data => {
           this.cardsPicked = true;
           this.toastr.success('Cards submitted.');
         }, error => {
@@ -95,10 +104,15 @@ export class BattleComponent implements OnInit {
 
   // Pozvano kada su poslane karte i igrac ima para
   startFightIfAllPresent(): void {
-    // TODO dodati provjeru za drugo igraca
+
     if (this.pickedCards) {
       this.fightService.startFight(this.match.battleId).subscribe(data => {
-        // TODO redirect na stranicu gdje se ocekuju rezultati borbe
+          this.ready = data;
+          if (this.ready){
+            setTimeout(() => {
+            this.router.navigate(['battle/getWinner'], {state: {data: this.match.battleId}});
+          }, 3000);
+          }
 
       }, error => {
         throwError(error);

@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {CardModel} from './card.model';
 import {environment} from '../../environments/environment';
+import {SubmitCardModel} from "./submitCard.model";
+import {GetWinnerModel} from "./get-winner/getWinner.model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,16 +18,16 @@ export class FightService {
     return this.httpClient.get<CardModel[]>(`${environment.apiUrl}api/fight/userCardList/` + username);
   }
 
-  submitCards(cardList: Array<bigint>): Observable<any> {
-    return this.httpClient.put<Array<bigint>>('${environment.apiUrl}api/fight/submitCards/', 'text');
+  submitCards(cardList: Array<SubmitCardModel>): Observable<any> {
+    return this.httpClient.put(`${environment.apiUrl}api/fight/submitCards/`, cardList);
   }
 
   startFight(fightId: number): Observable<any> {
-    return this.httpClient.put('${environment.apiUrl}api/fight/startFight/' + fightId, 'text');
+    return this.httpClient.put(`${environment.apiUrl}api/fight/startFight/` + fightId, 'text');
   }
 
-  getWinner(fightId: number): Observable<string> {
-    return this.httpClient.get<string>('${environment.apiUrl}api/fight/getWinner/' + fightId);
+  getWinner(fightId: number): Observable<GetWinnerModel> {
+    return this.httpClient.get<GetWinnerModel>(`${environment.apiUrl}api/fight/getWinner/` + fightId);
   }
 
 }

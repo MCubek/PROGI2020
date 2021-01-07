@@ -45,5 +45,6 @@
     </div>
     <p *ngIf="userCards===undefined || userCards.length==0" class="p2"> No cards yet</p>
   </div>
-  <p *ngIf="cardsPicked===true" class="p">Cards picked!s</p>
+  <p *ngIf="cardsPicked===true && ready===false" class="p">Cards picked! Waiting for your opponent. </p>
+  <p *ngIf="cardsPicked===true && ready===true" class="p">All players ready! Starting game! </p>
 </div>
