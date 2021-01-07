@@ -34,6 +34,7 @@ import {CollectionComponent} from './card/collection/collection.component';
 import {SingleCardComponent} from './card/single-card/single-card.component';
 import {ApplyCardComponent} from './card/apply-card/apply-card.component';
 import { NearbyComponent } from './card/nearby/nearby.component';
+import { GetWinnerComponent } from './battle/get-winner/get-winner.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { NearbyComponent } from './card/nearby/nearby.component';
     UserProfileComponent,
     AllUsersComponent,
     BattleComponent,
-    NearbyComponent
+    NearbyComponent,
+    GetWinnerComponent
   ],
   imports: [
     BrowserModule,

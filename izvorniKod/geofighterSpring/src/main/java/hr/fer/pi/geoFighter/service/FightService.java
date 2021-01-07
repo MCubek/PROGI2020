@@ -76,7 +76,7 @@ public class FightService {
     }
 
     @Transactional
-    public void startFight(Long fightId) {
+    public boolean startFight(Long fightId) {
         var list = ongoingFight.get(fightId);
         String username1 = list.get(0);
         String username2 = list.get(1);
@@ -87,13 +87,16 @@ public class FightService {
             throw new SpringGeoFighterException("User not in fight!");
 
         //Nisu jos oba playera poslala svoje karte
-        if (! playerUsernameListCardsMap.containsKey(username1) || ! playerUsernameListCardsMap.containsKey(username2))
-            return;
-
+        while (! playerUsernameListCardsMap.containsKey(username1) || ! playerUsernameListCardsMap.containsKey(username2)) {
+        }
         //Jedan je vec odradio borbu pa se preskace drugi put
-        if (! fightIdWinnerMap.containsKey(fightId))
+        if (authService.getCurrentUser().getUsername().equals(username1)) {
             fightIdWinnerMap.put(fightId, fight(new FightObject(username1, username2,
                     playerUsernameListCardsMap.get(username1), playerUsernameListCardsMap.get(username2))));
+            System.out.println(fightIdWinnerMap);
+        }
+        return true;
+
     }
 
     /**
@@ -119,7 +122,6 @@ public class FightService {
         playerUsernameListCardsMap.remove(fightObject.getUsername2());
 
         // validate cards, check timeouts
-
         for (Long id : fightObject.getUser1selectedCardIds()) {
             // location card exists
             LocationCard assocCard = locationCardRepository.findById(id).orElseThrow(() -> new SpringGeoFighterException("No card with such ID in database: " + id));
@@ -148,7 +150,6 @@ public class FightService {
         }
 
         // fight
-
         User winner = null;
         User loser = null;
         boolean draw = false;
@@ -188,7 +189,6 @@ public class FightService {
         }
 
         // save fight
-
         Fight fight = new Fight();
 
         for (UserCard uc : user1Cards)
@@ -209,7 +209,6 @@ public class FightService {
             loser.setLosses(loser.getLosses() + 1);
             calculateEloScore(winner, loser);
         }
-
         return draw ? "" : winner.getUsername();
     }
 

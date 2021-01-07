@@ -24,9 +24,9 @@ public class FightController {
     }
 
     @PutMapping("/startFight/{fightId}")
-    public ResponseEntity<Void> startFight(@PathVariable Long fightId) {
-        fightService.startFight(fightId);
-        return new ResponseEntity<>(OK);
+    public ResponseEntity<Boolean> startFight(@PathVariable Long fightId) {
+        Boolean result = fightService.startFight(fightId);
+        return new ResponseEntity<>(result, OK);
     }
 
     @GetMapping("/getWinner/{fightId}")
