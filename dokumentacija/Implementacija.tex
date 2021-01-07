@@ -49,7 +49,7 @@
 		
 			\textit{Za puštanje u pogon GeoFighter aplikacije iz izvornog kôda potrebno je nekoliko preduvjeta: \textbf{PostgreSQL13, JDK11 i Node.js 15}. Uz sve te aplikacije skinute i instalirane lako je kompajlirati i aplikaciju pokrenuti na vlastitom računalu. Aplikacija je također pokrenuta na javno dostupnom poslužitelju \textbf{Heroku} o čemu piše više u nastavku.\\}
 			
-			\textbf{\textit{Koraci za pokretanje:}}
+			\textbf{\textit{Koraci za pokretanje na lokalnom računalu:}}
 			
 			\begin{itemize}
 				
@@ -61,18 +61,28 @@
 					
 					\item \textit{spring.mail} parametre sa parametrima željenog mail servisa kako bi se mogli slati mailovi potvrde. (mail servis može biti javan kao što je trenutni \textit{gmail}, a moguće je koristiti testni kao što je \textit{mailtrap}\\ \url{https://mailtrap.io})
 				\end{packed_enum}
+			
+				\begin{figure}[H]
+					\centering
+					\includegraphics[scale=0.4]{slike/Properties} \\%veličina u odnosu na širinu linije
+					\caption{Što promijeniti u application-local.properties}
+					\label{fig:properties} %label mora biti drugaciji za svaku sliku
+				\end{figure}
+			
 				
 				\item Otvoriti konzolu i pozicionirati se unutar \textit{/izvorniKod/geoFighterSpring/} i pokrenuti naredbu \textit{"./gradlew bootRun -Dspring.profiles.active=local"} s kojom se izkompajlira i pokrene backend servis.
 				
 				\item Otvoriti drugu konzolu i pozicionirati se unutar \textit{/izvorniKod/angular-geofighter/} i pokrenuti naredbu \textit{"npm install"} s kojom se instaliraju sve potrebno za frontend servis. Zatim pokrenuti naredbu \textit{"ng build"}, te na kraju \textit{"npm start"} kojim se pokreće frontend servis na portu 4200.
 				
-				\item Ukoliko su pokrenuti backend i frontend servis i ne javlju se greške u konzoli, aplikacija je spremna za korištenje na lokalnom računalu.
+				\item Ukoliko su pokrenuti backend i frontend servis i ne javlju se greške u konzoli, aplikacija je spremna za korištenje na lokalnom računalu.\\\\
 				
 			\end{itemize}
 		
-			\eject
 			
 			\textit{Aplikacija je puštena u pogon na javno dostupnom poslužitelju \textbf{Heroku} tako da su sve tri komponente (DB, FrontEnd i BackEnd) tamo pokrenute i moguće joj je pristupiti sa linka:}\\
-			\url{https://angularfrontend-release.herokuapp.com/}
+			\url{https://angularfrontend-release.herokuapp.com/}\\
 						
+			\textit{GitLab repozitorij \url{https://gitlab.com/MatejC_FER/pi} također sadrži CI/CD (Continuous integration and continuous delivery) implementiran pomoću kojeg se pri svakom commitu na \textbf{Master} branch automatski aplikacija izgradila i deployala na \textbf{Heroku} javni poslužitelj. Tako nije potrebno lokalno pokretati aplikaciju nakon izmjena, već je dovoljno na repozitorij pohraniti primjene.}
+			
+			
 			\eject 
