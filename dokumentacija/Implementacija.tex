@@ -47,12 +47,32 @@
 		
 		\section{Upute za puštanje u pogon}
 		
-			\textbf{\textit{dio 2. revizije}}\\
+			\textit{Za puštanje u pogon GeoFighter aplikacije iz izvornog kôda potrebno je nekoliko preduvjeta: \textbf{PostgreSQL13, JDK11 i Node.js 15}. Uz sve te aplikacije skinute i instalirane lako je kompajlirati i aplikaciju pokrenuti na vlastitom računalu. Aplikacija je također pokrenuta na javno dostupnom poslužitelju \textbf{Heroku} o čemu piše više u nastavku.\\}
+			
+			\textbf{\textit{Koraci za pokretanje:}}
+			
+			\begin{itemize}
+				
+				\item U PostgreSQL DBMSu stvoriti novu bazu podataka te zapisati njeno ime(baze podataka) uz ime korisnika-vlasnika baze podataka, njegove šifre i portu baze.
+				
+				\item Unutar root direktorija otvoriti datoteku čiji je path\\ \textit{/izvorniKod/geoFighterSpring/src/main/resources/application-local.properties}\\ i unutar nje promijeniti sljedeće parametre: \begin{packed_enum}
+					
+					\item \textit{spring.datasource} parametre sa parametrima novo-kreirane baze podataka. (Voditi brigu o portu, imenu baze podataka, te korisničkom imenu i lozinci vlasnika te baze)
+					
+					\item \textit{spring.mail} parametre sa parametrima željenog mail servisa kako bi se mogli slati mailovi potvrde. (mail servis može biti javan kao što je trenutni \textit{gmail}, a moguće je koristiti testni kao što je \textit{mailtrap}\\ \url{https://mailtrap.io})
+				\end{packed_enum}
+				
+				\item Otvoriti konzolu i pozicionirati se unutar \textit{/izvorniKod/geoFighterSpring/} i pokrenuti naredbu \textit{"./gradlew bootRun -Dspring.profiles.active=local"} s kojom se izkompajlira i pokrene backend servis.
+				
+				\item Otvoriti drugu konzolu i pozicionirati se unutar \textit{/izvorniKod/angular-geofighter/} i pokrenuti naredbu \textit{"npm install"} s kojom se instaliraju sve potrebno za frontend servis. Zatim pokrenuti naredbu \textit{"ng build"}, te na kraju \textit{"npm start"} kojim se pokreće frontend servis na portu 4200.
+				
+				\item Ukoliko su pokrenuti backend i frontend servis i ne javlju se greške u konzoli, aplikacija je spremna za korištenje na lokalnom računalu.
+				
+			\end{itemize}
 		
-			 \textit{U ovom poglavlju potrebno je dati upute za puštanje u pogon (engl. deployment) ostvarene aplikacije. Na primjer, za web aplikacije, opisati postupak kojim se od izvornog kôda dolazi do potpuno postavljene baze podataka i poslužitelja koji odgovara na upite korisnika. Za mobilnu aplikaciju, postupak kojim se aplikacija izgradi, te postavi na neku od trgovina. Za stolnu (engl. desktop) aplikaciju, postupak kojim se aplikacija instalira na računalo. Ukoliko mobilne i stolne aplikacije komuniciraju s poslužiteljem i/ili bazom podataka, opisati i postupak njihovog postavljanja. Pri izradi uputa preporučuje se \textbf{naglasiti korake instalacije uporabom natuknica} te koristiti što je više moguće \textbf{slike ekrana} (engl. screenshots) kako bi upute bile jasne i jednostavne za slijediti.}
+			\eject
 			
-			
-			 \textit{Dovršenu aplikaciju potrebno je pokrenuti na javno dostupnom poslužitelju. Studentima se preporuča korištenje neke od sljedećih besplatnih usluga: \href{https://aws.amazon.com/}{Amazon AWS}, \href{https://azure.microsoft.com/en-us/}{Microsoft Azure} ili \href{https://www.heroku.com/}{Heroku}. Mobilne aplikacije trebaju biti objavljene na F-Droid, Google Play ili Amazon App trgovini.}
-			
-			
+			\textit{Aplikacija je puštena u pogon na javno dostupnom poslužitelju \textbf{Heroku} tako da su sve tri komponente (DB, FrontEnd i BackEnd) tamo pokrenute i moguće joj je pristupiti sa linka:}\\
+			\url{https://angularfrontend-release.herokuapp.com/}
+						
 			\eject 
