@@ -3,6 +3,7 @@ package hr.fer.pi.geoFighter.service;
 import hr.fer.pi.geoFighter.dto.SendRequestDTO;
 import hr.fer.pi.geoFighter.dto.SubmitCardFightDTO;
 import hr.fer.pi.geoFighter.dto.UserCardDTO;
+import hr.fer.pi.geoFighter.dto.WinnerDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.*;
 import hr.fer.pi.geoFighter.repository.FightRepository;
@@ -60,8 +61,10 @@ public class FightService {
         return userCards;
     }
 
-    public String getWinnerOfFight(long fightId) {
-        return fightIdWinnerMap.getOrDefault(fightId, null);
+    public WinnerDTO getWinnerOfFight(long fightId) {
+        WinnerDTO sendWinner = new WinnerDTO(fightIdWinnerMap.getOrDefault(fightId, "error"));
+        return sendWinner;
+
     }
 
     public void submitCards(List<SubmitCardFightDTO> fightCards) {
@@ -93,7 +96,6 @@ public class FightService {
         if (authService.getCurrentUser().getUsername().equals(username1)) {
             fightIdWinnerMap.put(fightId, fight(new FightObject(username1, username2,
                     playerUsernameListCardsMap.get(username1), playerUsernameListCardsMap.get(username2))));
-            System.out.println(fightIdWinnerMap);
         }
         return true;
 

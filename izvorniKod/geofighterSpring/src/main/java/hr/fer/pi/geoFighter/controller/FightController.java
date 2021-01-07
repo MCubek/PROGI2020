@@ -30,8 +30,8 @@ public class FightController {
     }
 
     @GetMapping("/getWinner/{fightId}")
-    public ResponseEntity<String> getWinner(@PathVariable Long fightId) {
-        return new ResponseEntity<>(fightService.getWinnerOfFight(fightId), OK);
+    public ResponseEntity<WinnerDTO> getWinner(@PathVariable Long fightId) {
+        return new ResponseEntity<WinnerDTO>(fightService.getWinnerOfFight(fightId), OK);
     }
 
     @GetMapping("/userCardList/{username}")
