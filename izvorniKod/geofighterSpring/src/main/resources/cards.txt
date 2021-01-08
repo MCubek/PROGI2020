@@ -69,3 +69,93 @@ longitude=15.971130578551724
 population=2
 uncommonness=4
 difficulty=10
+
+name=Stari grad Sisak
+description=Tvrđava na ušću Kupe i Save
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Sisak_fortress.jpg/1280px-Sisak_fortress.jpg
+latitude=45.47040126143121
+longitude=16.38596314834875
+population=0
+uncommonness=6
+difficulty=3
+
+name=HNK Segesta
+description=Sisački stadion
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/SegestaStadion.JPG/1280px-SegestaStadion.JPG
+latitude=45.47804536837759
+longitude=16.376180587763866
+population=0
+uncommonness=3
+difficulty=2
+
+name=Sisačka katedrala
+description=Katedrala Uzvišenja Sv. Križa
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Sisak_Cathedral_view.jpg/800px-Sisak_Cathedral_view.jpg
+latitude=45.48435541085313
+longitude=16.372411024115575
+population=0
+uncommonness=5
+difficulty=2
+
+name=Sisak
+description=Grad u Sisačko-Moslavačkoj županiji
+photoUrl=https://turizam-smz.hr/wp-content/uploads/2020/05/Sisak-5-2-min-scaled.jpg
+latitude=45.487372027059536
+longitude=16.372519006993482
+population=5
+uncommonness=3
+difficulty=3
+
+name=Gradska vijećnica Sisak
+description=Gradska vijećnica u Sisku
+photoUrl=https://sisak.hr/wp-content/uploads/2021/01/DSC_3640-1024x683.jpg
+latitude=45.490500366243346
+longitude=16.371281930604763
+population=0
+uncommonness=3
+difficulty=2
+
+name=Stari most
+description=Stari most u Sisku izgrađen prije gotovo sto godina
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/6/65/Sisak_bridge_croatia1.jpg
+latitude=45.48287331900633
+longitude=16.370008577515346
+population=0
+uncommonness=4
+difficulty=3
+
+name=Bandićeve fontane
+description=Najveća kulturna znamenitost grada Zagreba
+photoUrl=https://www.tportal.hr/media/thumbnail/w1000/360497.jpeg
+latitude=45.79778415050926
+longitude=15.979148856320485
+population=0
+uncommonness=10
+difficulty=10
+
+name=Filozofski Fakultet u Zagrebu
+description=Sastajalište najvećih umova današnjice
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/c/c6/Filozofski_fakultet_u_Zagrebu.jpg
+latitude=45.79667069262539
+longitude=15.970965393462327
+population=0
+uncommonness=6
+difficulty=3
+
+name=Plitvička jezera
+description=Nacionalni park u Lici
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Plitvice_lakes.JPG/800px-Plitvice_lakes.JPG
+latitude=44.87451386657364
+longitude=15.591582292158686
+population=0
+uncommonness=8
+difficulty=4
+
+name=Lonjsko Polje
+description=Park prirode kraj rijeke Save
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Lonjsko_Polje.JPG/1280px-Lonjsko_Polje.JPG
+latitude=45.40078167084041
+longitude=16.22509181397707
+population=0
+uncommonness=6
+difficulty=4
