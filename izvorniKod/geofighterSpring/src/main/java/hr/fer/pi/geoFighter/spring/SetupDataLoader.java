@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -483,8 +485,10 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         }
     }
 
-    private static List<LocationCard> parseLocationCards(User defaultOwner) throws IOException {
-        Path file = Path.of("izvorniKod/geofighterSpring/src/main/resources/cards.txt");
+    private List<LocationCard> parseLocationCards(User defaultOwner) throws IOException {
+        Resource resource = new ClassPathResource("cards.txt");
+
+        Path file = resource.getFile().toPath();
 
         return Arrays.stream(Files.readString(file, StandardCharsets.UTF_8).split("\r?\n[\n\r]+"))
                 .map(loc -> {
