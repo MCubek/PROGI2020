@@ -8,7 +8,7 @@ uncommonness=4
 difficulty=1
 
 name=Plitvice
-description=Nacionalni park sa valikim slapovima.
+description=Nacionalni park s velikim slapovima.
 photoUrl=https://en.wikipedia.org/wiki/Plitvice_Lakes_National_Park#/media/File:Plitvice_lakes.JPG
 latitude=44.880556
 longitude=15.616111
@@ -69,3 +69,93 @@ longitude=15.971130578551724
 population=2
 uncommonness=4
 difficulty=10
+
+name=jezero Jarun
+description= Omiljeno okupljalište svih Zagrepčana željnih raznih oblika rekreacije te zaljubljenika u veslačke i jedriličarske regate.
+photoUrl= http://www.apartmani-altis.com/wp-content/uploads/2014/04/jarun_zagreb_iz_zraka__moj_kvart_363951246.jpg
+latitude= 45.78086707365797
+longitude=15.917265074744481
+population=4
+uncommonness=3
+difficulty=4
+
+name=grad Krk
+description=Administrativno, političko, gospodarsko i vjersko središte otoka Krka.
+photoUrl=https://www.aurea-krk.com/resources/imagesUpload/33508.jpg
+latitude=45.06449237432147
+longitude=14.577661904037134
+population=6
+uncommonness=6
+difficulty=5
+
+name=NP Brijuni
+description=Nacionalni park koji čini 14 otoka i otočića duž zapadnoistarske obale s izuzetno bogatom kulturno-povijesnom baštinom.
+photoUrl=https://www.np-brijuni.hr/imagecache/maxsize/6f67e492-4a50-4136-93fd-89f06287a549/28-12-2018/brijuni_iz_zraka2.jpg
+latitude=44.94643062655231
+longitude=13.76853480548619
+population=2
+uncommonness=8
+difficulty=7
+
+name=Dubrovnik
+description=Grad na jugu Hrvatske poznat po svojim brojnim znamenitostima i bogatoj kulturi.
+photoUrl=https://www.costacruises.eu/content/dam/costa/inventory-assets/ports/DBV/24-DUBROVNIK_2880x1536.jpg
+latitude=42.68692006790624
+longitude=18.102823465454467
+population=5
+uncommonness=5
+difficulty=6
+
+name=Aquapark Adamovec
+description=Vodeni park s wellness i spa centrom nedaleko od Zagreba.
+photoUrl=https://www.aquaparkadamovec.hr/wp-content/uploads/2013/08/20_Aquapark_Adamovec.jpg
+latitude=45.902603661043464
+longitude=16.16250434164756
+population=4
+uncommonness=6
+difficulty=3
+
+name=Biserujka
+description= Špilja koja se nalazi na sjeveroistočnom dijelu otoka Krka, poznata i pod nazivima Vitezićeva špilja ili Slivanjska jama.
+photoUrl=https://lh3.googleusercontent.com/proxy/TJwH-RkTAzAHfcuhjXb6T-Tw5btTNMInGxORJTAMY6k10KxPcQP3LszfFSXlwoFIiyhknU_DCwLWKmmsNKC6Exe5pIMvEv5w1pKaWJPa8zsRNyHSv6xf
+latitude=45.1875923487907
+longitude=14.609835670451213
+population=1
+uncommonness=8
+difficulty=8
+
+name=Kumrovec
+description=Mjesto u Hrvatskom Zagorju gdje se nalazi jedinstveni muzej na otvorenom, s očuvanim izvornim seoskim kućama s prijelaza 19. u 20. stoljeće.
+photoUrl=https://img.itinari.com/pages/images/original/eb90e093-54dc-4471-b57f-e732579d2154-dreamer4787-istock-1020187298.jpg?ch=DPR&dpr=1&w=1600&s=5bf1bc470bcfaeb769ccfea9eaf0be0f
+latitude=46.07870568225186
+longitude=15.677456936784962
+population=2
+uncommonness=9
+difficulty=6
+
+name=Rastoke
+description=Mjesto u kojem se rijeka Slunjčica preko sedrenih stijena ulijeva u rijeku Koranu, a u svojemu toku stvara mnoštvo malih jezera, brzaka i slapova.
+photoUrl=https://cdn.hkm.hr/2020/02/TZ-54-1024x683.jpg
+latitude=45.12350281034146
+longitude=15.587593754287164
+population=3
+uncommonness=6
+difficulty=6
+
+name=Veliki Tabor
+description=Utvrda u Hrvatskom zagorju koja je jedan je od najočuvanijih srednjovjekovnih gradova u Hrvatskoj i predstavnik arhitekture kasnog srednjeg vijeka.
+photoUrl=https://croatia.hr/sites/default/files/styles/image_full_width/public/2018-03/veliki-tabor-optimizirano-za-web-ivo-biocina_1600x900_0.jpeg?itok=pgsxpFG1
+latitude=46.155173010068296
+longitude=15.65196434165911
+population=2
+uncommonness=7
+difficulty=7
+
+name=Trakošćan
+description=Dvor Trakošćan je kulturno dobro, zaštićena je povijesna cjelina koja se sastoji od dvorca, građevina uz dvorac, perivoja i park šume s jezerom.
+photoUrl=https://croatia.hr/sites/default/files/styles/image_full_width/public/2017-11/dvorac_2.jpg?itok=Kg8GXcdG
+latitude=46.281575916222636
+longitude=15.948316126334776
+population=2
+uncommonness=6
+difficulty=5
