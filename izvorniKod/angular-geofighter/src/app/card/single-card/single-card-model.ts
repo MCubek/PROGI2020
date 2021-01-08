@@ -2,7 +2,7 @@ export interface SingleCardModel {
   id: string;
   name: string;
   description: string;
-  photoUrl?: string;
+  photoURL?: string;
   location?: string;
   createdBy?: string;
   uncommonness?: string;

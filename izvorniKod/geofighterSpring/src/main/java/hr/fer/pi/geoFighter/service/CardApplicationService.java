@@ -30,7 +30,7 @@ public class CardApplicationService {
             card.setId(locationCard.getId());
             card.setName(locationCard.getName());
             card.setDescription(locationCard.getDescription());
-            card.setPhotoUrl(locationCard.getPhotoURL());
+            card.setPhotoURL(locationCard.getPhotoURL());
             card.setLocation(CardService.getLocationString(locationCard.getLocation()));
             card.setCreatedBy(locationCard.getCreatedBy() != null ? "locationCard.getCreatedBy().getUsername()" : "unknown");
             card.setNeedsToBeChecked(locationCard.isNeedsToBeChecked());
@@ -67,7 +67,7 @@ public class CardApplicationService {
 
         locationCard.setName(card.getName());
         locationCard.setDescription(card.getDescription());
-        locationCard.setPhotoURL(card.getPhotoUrl());
+        locationCard.setPhotoURL(card.getPhotoURL());
         locationCard.setLocation(CardService.parseLocationString(card.getLocation()));
         locationCard.setUncommonness(card.getUncommonness());
         locationCard.setDifficulty(card.getDifficulty());

@@ -3,6 +3,7 @@ package hr.fer.pi.geoFighter.service;
 import hr.fer.pi.geoFighter.dto.CardDTO;
 import hr.fer.pi.geoFighter.dto.CartographerUserDTO;
 import hr.fer.pi.geoFighter.dto.DisableUserDTO;
+import hr.fer.pi.geoFighter.dto.UserDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.CartographerStatus;
 import hr.fer.pi.geoFighter.model.LocationCard;
@@ -61,9 +62,9 @@ public class AdminService {
         }
     }
 
-    public List<String> getEnabledUsernames() {
+    public List<UserDTO> getEnabledUsers() {
         return userRepository.findUsersByEnabledTrueOrderByUsernameAsc().stream()
-                .map(User::getUsername)
+                .map(UserService::createUserDTO)
                 .collect(Collectors.toList());
     }
 
@@ -104,11 +105,11 @@ public class AdminService {
         LocationCard locationCard = locationCardRepository.getLocationCardById(card.getId()).orElseThrow(
                 () -> new SpringGeoFighterException("Card does not exist"));
 
-        ImageValidateUtility.validateImage(card.getPhotoUrl());
+        ImageValidateUtility.validateImage(card.getPhotoURL());
 
         locationCard.setName(card.getName());
         locationCard.setDescription(card.getDescription());
-        locationCard.setPhotoURL(card.getPhotoUrl());
+        locationCard.setPhotoURL(card.getPhotoURL());
         locationCard.setUncommonness(card.getUncommonness());
         locationCard.setDifficulty(card.getDifficulty());
         locationCard.setPopulation(card.getPopulation());
@@ -117,6 +118,15 @@ public class AdminService {
 
     public void deleteLocationCard(long locationCardId) {
         locationCardRepository.deleteById(locationCardId);
+    }
+
+    public void editUser(UserDTO userDTO) {
+        User user = userRepository.findById(userDTO.getId()).orElseThrow(
+                () -> new SpringGeoFighterException("User does not exist"));
+
+        user.setUsername(userDTO.getUsername());
+        user.setEmail(userDTO.getEmail());
+        user.setPhotoURL(userDTO.getPhotoURL());
     }
 
 }

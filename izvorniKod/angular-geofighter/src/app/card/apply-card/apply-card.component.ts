@@ -26,7 +26,7 @@ export class ApplyCardComponent implements OnInit {
     this.applyCardRequestPayload = {
       name: '',
       description: '',
-      photoUrl: '',
+      photoURL: '',
       location: '',
       difficulty: 1,
       population: 1,
@@ -38,7 +38,7 @@ export class ApplyCardComponent implements OnInit {
     this.applyCardForm = new FormGroup({
       name: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
-      photoUrl: new FormControl('', [
+      photoURL: new FormControl('', [
         Validators.required,
         Validators.pattern(
           '^https?://(?:[a-z0-9-]+.)+[a-z]{2,6}(?:/[^/#?]+)+.(?:jpg|jpeg|png)$'
@@ -74,8 +74,8 @@ export class ApplyCardComponent implements OnInit {
     this.applyCardRequestPayload.description = this.applyCardForm.get(
       'description'
     ).value;
-    this.applyCardRequestPayload.photoUrl = this.applyCardForm.get(
-      'photoUrl'
+    this.applyCardRequestPayload.photoURL = this.applyCardForm.get(
+      'photoURL'
     ).value;
     this.applyCardRequestPayload.location =
       position.coords.longitude + ' ' + position.coords.latitude;

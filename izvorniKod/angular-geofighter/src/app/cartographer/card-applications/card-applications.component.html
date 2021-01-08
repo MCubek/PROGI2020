@@ -25,7 +25,7 @@
           <p>Difficulty: {{ card.difficulty }}</p>
           <p>Population: {{ card.population }}</p>
           <div style="width: 300px; margin-bottom: 20px;">
-            <img src="{{ card.photoUrl }}" alt="" style="width: 300px; height:400px; object-fit: cover;"/>
+            <img src="{{ card.photoURL }}" alt="" style="width: 300px; height:400px; object-fit: cover;"/>
           </div>
           <button class="btn btn-success mr-2" (click)="accept(card.id)">
             Accept
@@ -116,22 +116,22 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="photoUrl" class="col-md-4 col-form-label text-md-right"
+            <label for="photoURL" class="col-md-4 col-form-label text-md-right"
               >Photo URL</label
             >
             <div class="col-md-6">
               <input
                 type="url"
-                [formControlName]="'photoUrl'"
-                id="photoUrl"
+                [formControlName]="'photoURL'"
+                id="photoURL"
                 class="form-control input-radius"
-                name="photoUrl"
+                name="photoURL"
                 required
               />
               <span
                 *ngIf="
-                  !editCardForm.get('photoUrl').valid &&
-                  editCardForm.get('photoUrl').touched
+                  !editCardForm.get('photoURL').valid &&
+                  editCardForm.get('photoURL').touched
                 "
               >
                 Please provide a valid URL

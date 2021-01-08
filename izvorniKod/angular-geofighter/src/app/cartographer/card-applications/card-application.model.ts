@@ -2,7 +2,7 @@ export interface CardApplicationModel {
   id: string;
   name: string;
   description: string;
-  photoUrl: string;
+  photoURL: string;
   location: string;
   createdBy: string;
   needsToBeChecked: boolean;

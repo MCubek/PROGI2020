@@ -1,8 +1,6 @@
 package hr.fer.pi.geoFighter.controller;
 
-import hr.fer.pi.geoFighter.dto.CardDTO;
-import hr.fer.pi.geoFighter.dto.CartographerUserDTO;
-import hr.fer.pi.geoFighter.dto.DisableUserDTO;
+import hr.fer.pi.geoFighter.dto.*;
 import hr.fer.pi.geoFighter.service.AdminService;
 import hr.fer.pi.geoFighter.service.CardService;
 import lombok.AllArgsConstructor;
@@ -33,8 +31,8 @@ public class AdminController {
     }
 
     @GetMapping("/userList")
-    public ResponseEntity<List<String>> getEnabledUsernames() {
-        return new ResponseEntity<>(adminService.getEnabledUsernames(), OK);
+    public ResponseEntity<List<UserDTO>> getEnabledUsers() {
+        return new ResponseEntity<>(adminService.getEnabledUsers(), OK);
     }
 
     @PutMapping("/promoteToAdmin/{username}")
@@ -60,7 +58,7 @@ public class AdminController {
         return new ResponseEntity<>(adminService.getCardCollection(), OK);
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/editCard")
     public ResponseEntity<String> editLocationCard(@RequestBody CardDTO card) {
         adminService.editLocationCard(card);
         return new ResponseEntity<>("Card application edited", OK);
@@ -70,6 +68,12 @@ public class AdminController {
     public ResponseEntity<Void> deleteLocationCard(@PathVariable long locationCardId) {
         adminService.deleteLocationCard(locationCardId);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/editUser")
+    public ResponseEntity<String> editUser(@RequestBody UserDTO userDTO) {
+        adminService.editUser(userDTO);
+        return new ResponseEntity<>("User edited", OK);
     }
 
 }

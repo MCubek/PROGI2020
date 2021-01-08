@@ -2,7 +2,7 @@ export interface NearbyCardModel {
   id: string;
   name: string;
   description: string;
-  photoUrl: string;
+  photoURL: string;
   latitude: number;
   longitude: number;
   location: string;

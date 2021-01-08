@@ -1,5 +1,6 @@
 package hr.fer.pi.geoFighter.service;
 
+import hr.fer.pi.geoFighter.dto.UserDTO;
 import hr.fer.pi.geoFighter.dto.UserEloDTO;
 import hr.fer.pi.geoFighter.dto.UserLocationDTO;
 import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
@@ -126,5 +127,15 @@ public class UserService {
         User user = authService.getCurrentUser();
         user.setCurrentLocation(null);
         userRepository.save(user);
+    }
+
+    public static UserDTO createUserDTO(User user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getUserId());
+        userDTO.setUsername(user.getUsername());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setPhotoURL(user.getPhotoURL());
+
+        return userDTO;
     }
 }

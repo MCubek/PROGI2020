@@ -16,7 +16,7 @@ public class CardDTO {
     private Long id;
     private String name;
     private String description;
-    private URL photoUrl;
+    private URL photoURL;
     private String location;
     private Double longitude;
     private Double latitude;

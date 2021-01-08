@@ -22,7 +22,7 @@ export class CollectionComponent implements OnInit {
       id: '',
       name: '',
       description: '',
-      photoUrl: '',
+      photoURL: '',
       location: '',
       createdBy: '',
       uncommonness: '',
