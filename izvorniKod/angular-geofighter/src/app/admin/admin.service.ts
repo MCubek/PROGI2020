@@ -45,8 +45,8 @@ export class AdminService {
     );
   }
 
-  getEnabledUsernames(): Observable<string[]> {
-    return this.httpClient.get<string[]>(
+  getEnabledUsers(): Observable<UserApplicationModel[]> {
+    return this.httpClient.get<UserApplicationModel[]>(
       `${environment.apiUrl}api/admin/userList`
     );
   }
@@ -77,15 +77,9 @@ export class AdminService {
 
   editUser(userApplicationModel: UserApplicationModel): Observable<any> {
     return this.httpClient.post(
-      `${environment.apiUrl}api/admin/edit`,
+      `${environment.apiUrl}api/admin/editUser`,
       userApplicationModel,
       { responseType: 'text' }
-    );
-  }
-
-  getAllUserModels(): Observable<UserApplicationModel[]> {
-    return this.httpClient.get<UserApplicationModel[]>(
-      `${environment.apiUrl}api/admin/all`
     );
   }
 }

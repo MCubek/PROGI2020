@@ -1,7 +1,6 @@
 package hr.fer.pi.geoFighter.service;
 
 import hr.fer.pi.geoFighter.dto.CardDTO;
-import hr.fer.pi.geoFighter.dto.CardApplicationDTO;
 import hr.fer.pi.geoFighter.dto.CartographerUserDTO;
 import hr.fer.pi.geoFighter.dto.DisableUserDTO;
 import hr.fer.pi.geoFighter.dto.UserDTO;
@@ -63,9 +62,9 @@ public class AdminService {
         }
     }
 
-    public List<String> getEnabledUsernames() {
+    public List<UserDTO> getEnabledUsers() {
         return userRepository.findUsersByEnabledTrueOrderByUsernameAsc().stream()
-                .map(User::getUsername)
+                .map(UserService::createUserDTO)
                 .collect(Collectors.toList());
     }
 
@@ -122,27 +121,12 @@ public class AdminService {
     }
 
     public void editUser(UserDTO userDTO) {
-
-        System.out.println(userDTO.getUsername());
-        User user = userRepository.findByUsername(userDTO.getUsername()).orElseThrow(
+        User user = userRepository.findById(userDTO.getId()).orElseThrow(
                 () -> new SpringGeoFighterException("User does not exist"));
 
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
-    }
-
-    public List<UserDTO> getAllUserModels() {
-        List<UserDTO> userCollection = new ArrayList<>();
-
-        for(User user : userRepository.findAll()){
-            UserDTO userDTO = new UserDTO();
-            userDTO.setId(user.getUserId());
-            userDTO.setUsername(user.getUsername());
-            userDTO.setEmail(user.getEmail());
-            userCollection.add(userDTO);
-        }
-
-        return userCollection;
+        user.setPhotoURL(userDTO.getPhotoURL());
     }
 
 }

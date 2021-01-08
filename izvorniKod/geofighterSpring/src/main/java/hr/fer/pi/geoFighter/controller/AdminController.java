@@ -31,8 +31,8 @@ public class AdminController {
     }
 
     @GetMapping("/userList")
-    public ResponseEntity<List<String>> getEnabledUsernames() {
-        return new ResponseEntity<>(adminService.getEnabledUsernames(), OK);
+    public ResponseEntity<List<UserDTO>> getEnabledUsers() {
+        return new ResponseEntity<>(adminService.getEnabledUsers(), OK);
     }
 
     @PutMapping("/promoteToAdmin/{username}")
@@ -70,15 +70,10 @@ public class AdminController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/editUser")
     public ResponseEntity<String> editUser(@RequestBody UserDTO userDTO) {
         adminService.editUser(userDTO);
         return new ResponseEntity<>("User edited", OK);
-    }
-
-    @GetMapping("/all")
-    public ResponseEntity<List<UserDTO>> getAllUserModels() {
-        return new ResponseEntity<>(adminService.getAllUserModels(), OK);
     }
 
 }

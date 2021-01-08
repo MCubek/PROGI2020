@@ -1,5 +1,6 @@
 export interface UserApplicationModel {
-  id: String;
-  username: String;
-  email: String;
+  id: string;
+  username: string;
+  email: string;
+  photoURL: string;
 }

@@ -18,7 +18,6 @@ import { UserApplicationModel } from './user-application.model';
   styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent implements OnInit {
-  usernames: Array<string>;
 
   users: Array<UserApplicationModel>;
   userTimeoutPayload: UserTimeoutPayload;
@@ -36,21 +35,12 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.adminService.getEnabledUsernames().subscribe(
-      (data) => {
-        this.usernames = data;
-      },
-      (error) => {
-        this.toastr.error('Internal server error');
-        throwError(error);
-      }
-    );
-
-    this.adminService.getAllUserModels().subscribe(
+    this.adminService.getEnabledUsers().subscribe(
       (data) => {
         this.users = data;
       },
       (error) => {
+        this.toastr.error('Internal server error');
         throwError(error);
       }
     );
@@ -59,7 +49,7 @@ export class UserListComponent implements OnInit {
       id: new FormControl('', Validators.required),
       username: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
-      iban: new FormControl('', Validators.required),
+      photoURL: new FormControl('', Validators.required)
     });
   }
 
@@ -122,10 +112,13 @@ export class UserListComponent implements OnInit {
       }
     });
   }
+
   editForm(userApplicationModel: UserApplicationModel): void {
     this.editUserForm.patchValue({
       id: userApplicationModel.id,
       username: userApplicationModel.username,
+      email: userApplicationModel.email,
+      photoURL: userApplicationModel.photoURL
     });
   }
 
