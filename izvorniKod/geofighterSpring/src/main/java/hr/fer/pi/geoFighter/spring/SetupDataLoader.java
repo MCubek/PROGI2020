@@ -13,11 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
 import java.awt.geom.Point2D;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -52,11 +55,29 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         createRoleIfNotFound("ROLE_CARTOGRAPHER", Arrays.asList(userPrivilege, cartographerPrivilege));
         createRoleIfNotFound("ROLE_ADMIN", Arrays.asList(userPrivilege, cartographerPrivilege, adminPrivilege));
 
-        if (address.equals("http://localhost:8080/")) {
-            createDefaultUsersIfNotFound();
-            createDefaultCardsIfNotFound();
-        }
+
+        createDefaultUsersIfNotFound();
+        User admin = userRepository.findByUsername("admin").orElseThrow();
+
+        createDefaultCardsIfNotFound(admin);
+
+        loadCards(admin);
+
         alreadySetup = true;
+    }
+
+    @Transactional
+    void loadCards(User defaultUser) {
+
+
+        try {
+            parseLocationCards(defaultUser).stream()
+                    .filter(locationCard -> locationCardRepository.findByName(locationCard.getName()).isEmpty())
+                    .forEach(locationCardRepository::save);
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
     }
 
     @Transactional
@@ -86,6 +107,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     @Transactional
     void createDefaultUsersIfNotFound() {
+        boolean local = address.equals("http://localhost:8080/");
+
         User user;
         if (userRepository.findByUsername("admin").isEmpty()) {
             user = new User();
@@ -97,6 +120,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
             userRepository.save(user);
         }
+
+        //Ostali se stvaraju samo kada se lokalno pokrene
+        if (! local) return;
 
         if (userRepository.findByUsername("user").isEmpty()) {
             user = new User();
@@ -188,11 +214,20 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     }
 
     @Transactional
-    void createDefaultCardsIfNotFound() {
-        User cart = userRepository.findByUsername("card").orElseThrow(() -> new SpringGeoFighterException("No card user in database"));
-        User userA = userRepository.findByUsername("userA").orElseThrow(() -> new SpringGeoFighterException("No userA in database"));
-        User userB = userRepository.findByUsername("userB").orElseThrow(() -> new SpringGeoFighterException("No userB in database"));
-        User user = userRepository.findByUsername("user").orElseThrow(() -> new SpringGeoFighterException("No user in database"));
+    void createDefaultCardsIfNotFound(User defaultUser) {
+        boolean local = address.equals("http://localhost:8080/");
+
+        User cart = null;
+        User userA = null;
+        User userB = null;
+        User user = null;
+
+        if (local) {
+            cart = userRepository.findByUsername("card").orElseThrow(() -> new SpringGeoFighterException("No card user in database"));
+            userA = userRepository.findByUsername("userA").orElseThrow(() -> new SpringGeoFighterException("No userA in database"));
+            userB = userRepository.findByUsername("userB").orElseThrow(() -> new SpringGeoFighterException("No userB in database"));
+            user = userRepository.findByUsername("user").orElseThrow(() -> new SpringGeoFighterException("No user in database"));
+        }
 
         LocationCard l;
         UserCard uc;
@@ -211,27 +246,30 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setUncommonness(5);
             l.setDifficulty(5);
             l.setAccepted(true);
-            l.setAcceptedBy(cart);
+            l.setAcceptedBy(local ? cart : defaultUser);
+            l.setCreatedBy(local ? cart : defaultUser);
 
             l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
-                uc = new UserCard();
-                uc.setUser(userA);
-                uc.setLocationCard(l);
-                userCardRepository.save(uc);
-            }
-            if(userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
-                uc = new UserCard();
-                uc.setUser(userB);
-                uc.setLocationCard(l);
-                userCardRepository.save(uc);
-            }
-            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
-                uc = new UserCard();
-                uc.setUser(user);
-                uc.setLocationCard(l);
-                userCardRepository.save(uc);
+            if (local) {
+                if (userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
+                    uc = new UserCard();
+                    uc.setUser(userA);
+                    uc.setLocationCard(l);
+                    userCardRepository.save(uc);
+                }
+                if (userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
+                    uc = new UserCard();
+                    uc.setUser(userB);
+                    uc.setLocationCard(l);
+                    userCardRepository.save(uc);
+                }
+                if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+                    uc = new UserCard();
+                    uc.setUser(user);
+                    uc.setLocationCard(l);
+                    userCardRepository.save(uc);
+                }
             }
         }
 
@@ -249,27 +287,30 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setUncommonness(6);
             l.setDifficulty(6);
             l.setAccepted(true);
-            l.setAcceptedBy(cart);
+            l.setAcceptedBy(local ? cart : defaultUser);
+            l.setCreatedBy(local ? cart : defaultUser);
 
             l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
-                uc = new UserCard();
-                uc.setUser(userA);
-                uc.setLocationCard(l);
-                userCardRepository.save(uc);
-            }
-            if(userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
-                uc = new UserCard();
-                uc.setUser(userB);
-                uc.setLocationCard(l);
-                userCardRepository.save(uc);
-            }
-            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
-                uc = new UserCard();
-                uc.setUser(user);
-                uc.setLocationCard(l);
-                userCardRepository.save(uc);
+            if (local) {
+                if (userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
+                    uc = new UserCard();
+                    uc.setUser(userA);
+                    uc.setLocationCard(l);
+                    userCardRepository.save(uc);
+                }
+                if (userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
+                    uc = new UserCard();
+                    uc.setUser(userB);
+                    uc.setLocationCard(l);
+                    userCardRepository.save(uc);
+                }
+                if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+                    uc = new UserCard();
+                    uc.setUser(user);
+                    uc.setLocationCard(l);
+                    userCardRepository.save(uc);
+                }
             }
         }
 
@@ -287,27 +328,30 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setUncommonness(7);
             l.setDifficulty(7);
             l.setAccepted(true);
-            l.setAcceptedBy(cart);
+            l.setAcceptedBy(local ? cart : defaultUser);
+            l.setCreatedBy(local ? cart : defaultUser);
 
             l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
-                uc = new UserCard();
-                uc.setUser(userA);
-                uc.setLocationCard(l);
-                userCardRepository.save(uc);
-            }
-            if(userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
-                uc = new UserCard();
-                uc.setUser(userB);
-                uc.setLocationCard(l);
-                userCardRepository.save(uc);
-            }
-            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
-                uc = new UserCard();
-                uc.setUser(user);
-                uc.setLocationCard(l);
-                userCardRepository.save(uc);
+            if (local) {
+                if (userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
+                    uc = new UserCard();
+                    uc.setUser(userA);
+                    uc.setLocationCard(l);
+                    userCardRepository.save(uc);
+                }
+                if (userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
+                    uc = new UserCard();
+                    uc.setUser(userB);
+                    uc.setLocationCard(l);
+                    userCardRepository.save(uc);
+                }
+                if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+                    uc = new UserCard();
+                    uc.setUser(user);
+                    uc.setLocationCard(l);
+                    userCardRepository.save(uc);
+                }
             }
         }
 
@@ -325,27 +369,30 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setUncommonness(4);
             l.setDifficulty(4);
             l.setAccepted(true);
-            l.setAcceptedBy(cart);
+            l.setAcceptedBy(local ? cart : defaultUser);
+            l.setCreatedBy(local ? cart : defaultUser);
 
             l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
-                uc = new UserCard();
-                uc.setUser(userA);
-                uc.setLocationCard(l);
-                userCardRepository.save(uc);
-            }
-            if(userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
-                uc = new UserCard();
-                uc.setUser(userB);
-                uc.setLocationCard(l);
-                userCardRepository.save(uc);
-            }
-            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
-                uc = new UserCard();
-                uc.setUser(user);
-                uc.setLocationCard(l);
-                userCardRepository.save(uc);
+            if (local) {
+                if (userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
+                    uc = new UserCard();
+                    uc.setUser(userA);
+                    uc.setLocationCard(l);
+                    userCardRepository.save(uc);
+                }
+                if (userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
+                    uc = new UserCard();
+                    uc.setUser(userB);
+                    uc.setLocationCard(l);
+                    userCardRepository.save(uc);
+                }
+                if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+                    uc = new UserCard();
+                    uc.setUser(user);
+                    uc.setLocationCard(l);
+                    userCardRepository.save(uc);
+                }
             }
         }
 
@@ -363,29 +410,34 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setUncommonness(8);
             l.setDifficulty(8);
             l.setAccepted(true);
-            l.setAcceptedBy(cart);
+            l.setAcceptedBy(local ? cart : defaultUser);
+            l.setCreatedBy(local ? cart : defaultUser);
 
             l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
-                uc = new UserCard();
-                uc.setUser(userA);
-                uc.setLocationCard(l);
-                userCardRepository.save(uc);
-            }
-            if(userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
-                uc = new UserCard();
-                uc.setUser(userB);
-                uc.setLocationCard(l);
-                userCardRepository.save(uc);
-            }
-            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
-                uc = new UserCard();
-                uc.setUser(user);
-                uc.setLocationCard(l);
-                userCardRepository.save(uc);
+            if (local) {
+                if (userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
+                    uc = new UserCard();
+                    uc.setUser(userA);
+                    uc.setLocationCard(l);
+                    userCardRepository.save(uc);
+                }
+                if (userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
+                    uc = new UserCard();
+                    uc.setUser(userB);
+                    uc.setLocationCard(l);
+                    userCardRepository.save(uc);
+                }
+                if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+                    uc = new UserCard();
+                    uc.setUser(user);
+                    uc.setLocationCard(l);
+                    userCardRepository.save(uc);
+                }
             }
         }
+
+        if (! local) return;
 
         if (locationCardRepository.getLocationCardsByName("Jarun").isEmpty()) {
             l = new LocationCard();
@@ -402,6 +454,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setDifficulty(8);
             l.setAccepted(false);
             l.setLocation(new Point2D.Double(45.783333, 15.916667));
+            l.setCreatedBy(userA);
 
             locationCardRepository.save(l);
         }
@@ -421,48 +474,38 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setDifficulty(10);
             l.setAccepted(false);
             l.setLocation(new Point2D.Double(45.766667, 16.016667));
+            l.setCreatedBy(userB);
 
             locationCardRepository.save(l);
         }
+    }
 
-        if (locationCardRepository.getLocationCardsByName("Ogulin").isEmpty()) {
-            l = new LocationCard();
-            l.setName("Ogulin");
-            try {
-                l.setPhotoURL(new URL("https://upload.wikimedia.org/wikipedia/commons/d/da/Burg_Ogulin.jpg"));
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-            l.setDescription("Ogulin grad.");
-            l.setNeedsToBeChecked(false);
-            l.setPopulation(7);
-            l.setUncommonness(5);
-            l.setDifficulty(3);
-            l.setAccepted(true);
-            l.setLocation(new Point2D.Double(45.26686, 15.225076));
-            l.setCreatedBy(userA);
+    private static List<LocationCard> parseLocationCards(User defaultOwner) throws IOException {
+        Path file = Path.of("izvorniKod/geofighterSpring/src/main/resources/cards.txt");
 
-            locationCardRepository.save(l);
-        }
+        return Arrays.stream(Files.readString(file, StandardCharsets.UTF_8).split("\n[\n]+"))
+                .map(loc -> {
+                    var lines = Arrays.stream(loc.split("\n"))
+                            .filter(l -> ! l.isBlank())
+                            .map(line -> line.substring(line.indexOf("=") + 1).trim())
+                            .collect(Collectors.toList());
 
-        if (locationCardRepository.getLocationCardsByName("Ogulin Sirana").isEmpty()) {
-            l = new LocationCard();
-            l.setName("Ogulin Sirana");
-            try {
-                l.setPhotoURL(new URL("https://ogulin.hr/old-site/slike/131006-opg_tounj6.jpg"));
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-            l.setDescription("Ogulin sirevi. Ne rade ponedjeljkom.");
-            l.setNeedsToBeChecked(false);
-            l.setPopulation(0);
-            l.setUncommonness(6);
-            l.setDifficulty(7);
-            l.setAccepted(true);
-            l.setLocation(new Point2D.Double(45.267038080101, 15.224458936594164));
-            l.setCreatedBy(userA);
-
-            locationCardRepository.save(l);
-        }
+                    var card = new LocationCard();
+                    card.setName(lines.get(0));
+                    card.setDescription(lines.get(1));
+                    try {
+                        card.setPhotoURL(new URL(lines.get(2)));
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                    card.setLocation(new Point2D.Double(Double.parseDouble(lines.get(3)), Double.parseDouble(lines.get(4))));
+                    card.setPopulation(Integer.valueOf(lines.get(5)));
+                    card.setUncommonness(Integer.valueOf(lines.get(6)));
+                    card.setDifficulty(Integer.valueOf(lines.get(7)));
+                    card.setCreatedBy(defaultOwner);
+                    card.setAcceptedBy(defaultOwner);
+                    card.setAccepted(true);
+                    return card;
+                }).collect(Collectors.toList());
     }
 }
