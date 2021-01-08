@@ -24,3 +24,48 @@ longitude=15.145556
 population=2
 uncommonness=8
 difficulty=9
+
+name=Sirevi u Ogulinu
+description=Ogulin sirevi. Ne rade ponedjeljkom.
+photoUrl=https://ogulin.hr/old-site/slike/131006-opg_tounj6.jpg
+latitude=45.267038080101
+longitude=15.224458936594164
+population=0
+uncommonness=6
+difficulty=7
+
+name=Ogulin
+description=Grad u Karlovačkoj županiji.
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/d/da/Burg_Ogulin.jpg
+latitude=45.26686
+longitude=15.225076
+population=7
+uncommonness=5
+difficulty=3
+
+name=West Gate
+description=Napušten shopping centar pored Zaprešića.
+photoUrl=https://www.dnevno.hr/wp-content/uploads/2018/11/ulaz-2-02-775-440-775x440-660x440.jpg
+latitude=45.871002
+longitude=15.825845
+population=0
+uncommonness=5
+difficulty=3
+
+name=Remetinec zatvor
+description=Dom za neke političare i ostale kriminalce.
+photoUrl=https://www.tportal.hr/media/thumbnail/w1000/4401.jpeg
+latitude=45.76533339803725
+longitude=15.946961883467717
+population=10
+uncommonness=2
+difficulty=1
+
+name=FER
+description=Fakultet Elektrotehnike i računarstva.
+photoUrl=https://previews.123rf.com/images/dtiberio/dtiberio1902/dtiberio190200895/117721366-crying-young-male-student.jpg
+latitude=45.80104620375517
+longitude=15.971130578551724
+population=2
+uncommonness=4
+difficulty=10
