@@ -117,7 +117,7 @@ difficulty=3
 
 name=Biserujka
 description= Špilja koja se nalazi na sjeveroistočnom dijelu otoka Krka, poznata i pod nazivima Vitezićeva špilja ili Slivanjska jama.
-photoUrl=https://lh3.googleusercontent.com/proxy/TJwH-RkTAzAHfcuhjXb6T-Tw5btTNMInGxORJTAMY6k10KxPcQP3LszfFSXlwoFIiyhknU_DCwLWKmmsNKC6Exe5pIMvEv5w1pKaWJPa8zsRNyHSv6xf
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/c/c2/Biserujka_H%C3%B6hle_2007_Kroatien_112.jpg
 latitude=45.1875923487907
 longitude=14.609835670451213
 population=1
@@ -224,7 +224,7 @@ uncommonness=10
 difficulty=10
 
 name=Filozofski Fakultet u Zagrebu
-description=Sastajalište najvećih umova današnjice
+description=Sastajalište najvećih umova današnjice, ali bez zeke dobri su to studenti.
 photoUrl=https://upload.wikimedia.org/wikipedia/commons/c/c6/Filozofski_fakultet_u_Zagrebu.jpg
 latitude=45.79667069262539
 longitude=15.970965393462327
@@ -234,7 +234,7 @@ difficulty=3
 
 name=Plitvička jezera
 description=Nacionalni park u Lici
-photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Plitvice_lakes.JPG/800px-Plitvice_lakes.JPG
+photoUrl=https://www.roselinde.me/wp-content/uploads/2019/02/legends_plitvice_lakes_1.jpg
 latitude=44.87451386657364
 longitude=15.591582292158686
 population=0
