@@ -222,18 +222,22 @@ public class FightService {
 
     public void calculateEloScore(User winner, User loser) {
 
-        float score1;
-        float score2;
-        int K = 40;
-        float expectancyA = 1 / (1 + (float) Math.pow(10.0, (winner.getEloScore() - loser.getEloScore()) / 400f));
-        float expectancyB = 1 - expectancyA;
+        float scoreWinner;
+        float scoreLoser;
+        int K = 30;
+        float expectancyWinner = 1 / (1 + (float) Math.pow(10.0, (loser.getEloScore() - winner.getEloScore()) / 400f));
+        float expectancyLoser = 1 - expectancyWinner;
 
         //calculating score in case of win/lose
-        score1 = winner.getEloScore() + K * (1 - expectancyA);
-        score2 = loser.getEloScore() - K * expectancyB;
+        scoreWinner = winner.getEloScore() + K * (1 - expectancyWinner);
+        scoreLoser = loser.getEloScore() - K * expectancyLoser;
+        if(scoreLoser < 0){
+            scoreWinner = winner.getEloScore()+loser.getEloScore();
+            scoreLoser = 0;
+        }
 
-        winner.setEloScore(Math.round(score1));
-        loser.setEloScore(Math.round(score2));
+        winner.setEloScore(Math.round(scoreWinner));
+        loser.setEloScore(Math.round(scoreLoser));
     }
 
     public void sendRequest(SendRequestDTO sendRequestDTO) {
