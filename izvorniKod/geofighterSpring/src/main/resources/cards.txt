@@ -1,0 +1,26 @@
+name=Bundek
+description=Jezero u gradu Zagrebu gdje se može sjesti na kavicu.
+photoUrl=https://www.infozagreb.hr/media/places/large_bundek1-54d0c975856c6.jpg
+latitude=45.785278
+longitude=15.987222
+population=5
+uncommonness=4
+difficulty=1
+
+name=Plitvice
+description=Nacionalni park sa valikim slapovima.
+photoUrl=https://en.wikipedia.org/wiki/Plitvice_Lakes_National_Park#/media/File:Plitvice_lakes.JPG
+latitude=44.880556
+longitude=15.616111
+population=2
+uncommonness=10
+difficulty=8
+
+name=Klek
+description=Planina pored Ogulina
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/d/d9/Klek_mountain.jpg
+latitude=45.258611
+longitude=15.145556
+population=2
+uncommonness=8
+difficulty=9

@@ -13,11 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
 import java.awt.geom.Point2D;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -215,19 +218,19 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
             l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(userA);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
             }
-            if(userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(userB);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
             }
-            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(user);
                 uc.setLocationCard(l);
@@ -253,19 +256,19 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
             l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(userA);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
             }
-            if(userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(userB);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
             }
-            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(user);
                 uc.setLocationCard(l);
@@ -291,19 +294,19 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
             l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(userA);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
             }
-            if(userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(userB);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
             }
-            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(user);
                 uc.setLocationCard(l);
@@ -329,19 +332,19 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
             l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(userA);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
             }
-            if(userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(userB);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
             }
-            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(user);
                 uc.setLocationCard(l);
@@ -367,19 +370,19 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
             l = locationCardRepository.save(l);
 
-            if(userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(userA.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(userA);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
             }
-            if(userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(userB.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(userB);
                 uc.setLocationCard(l);
                 userCardRepository.save(uc);
             }
-            if(userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
+            if (userCardRepository.findById(new UserCardId(user.getUserId(), l.getId())).isEmpty()) {
                 uc = new UserCard();
                 uc.setUser(user);
                 uc.setLocationCard(l);
@@ -464,5 +467,32 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
             locationCardRepository.save(l);
         }
+    }
+
+    private static List<LocationCard> parseLocationCards(User defaultOwner) throws IOException {
+        Path file = Path.of("resources/cards.txt");
+
+        return Arrays.stream(Files.readString(file, StandardCharsets.UTF_8).split("\n[\n]+"))
+                .map(loc -> {
+                    var lines = Arrays.stream(loc.split("\n"))
+                            .map(line -> line.substring(line.indexOf("=")))
+                            .collect(Collectors.toList());
+
+                    var card = new LocationCard();
+                    card.setName(lines.get(0));
+                    card.setDescription(lines.get(1));
+                    try {
+                        card.setPhotoURL(new URL(lines.get(2)));
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                    card.setLocation(new Point2D.Double(Double.parseDouble(lines.get(3)), Double.parseDouble(lines.get(4))));
+                    card.setPopulation(Integer.valueOf(lines.get(5)));
+                    card.setUncommonness(Integer.valueOf(lines.get(6)));
+                    card.setDifficulty(Integer.valueOf(lines.get(7)));
+                    card.setCreatedBy(defaultOwner);
+                    card.setAcceptedBy(defaultOwner);
+                    return card;
+                }).collect(Collectors.toList());
     }
 }
