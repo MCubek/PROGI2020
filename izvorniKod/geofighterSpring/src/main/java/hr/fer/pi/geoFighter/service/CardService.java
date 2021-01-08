@@ -10,7 +10,6 @@ import hr.fer.pi.geoFighter.model.UserCardId;
 import hr.fer.pi.geoFighter.repository.LocationCardRepository;
 import hr.fer.pi.geoFighter.repository.UserCardRepository;
 import hr.fer.pi.geoFighter.repository.UserRepository;
-import hr.fer.pi.geoFighter.util.ImageValidateUtility;
 import lombok.AllArgsConstructor;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.stereotype.Service;
@@ -56,6 +55,11 @@ public class CardService {
 
     public void applyLocationCard(CardDTO cardDTO) {
 
+        User user = authService.getCurrentUser();
+
+        if (user.getWins() < 5)
+            throw new UserInfoInvalidException("Experience too low (minimum 5 wins required)");
+
         LocationCard locationCard = new LocationCard();
         locationCard.setName(cardDTO.getName());
         locationCard.setDescription(cardDTO.getDescription());
@@ -69,14 +73,9 @@ public class CardService {
         if (! urlValidator.isValid(cardDTO.getPhotoURL().toString()))
             throw new UserInfoInvalidException("Invalid photo URL");
 
-        if (locationCard.getCreatedBy().getWins() < 5){
-            System.out.println("Exp too low");
-            throw new UserInfoInvalidException("Experience too low (minimum 5 wins required)");
-        }else{
-            locationCard.setPhotoURL(cardDTO.getPhotoURL());
+        locationCard.setPhotoURL(cardDTO.getPhotoURL());
+        locationCardRepository.save(locationCard);
 
-            locationCardRepository.save(locationCard);
-        }
     }
 
     public static CardDTO createCardDTO(LocationCard locationCard) {
@@ -132,7 +131,7 @@ public class CardService {
         User user = authService.getCurrentUser();
 
         //Vec ima kartu
-        if(userCardRepository.findById(new UserCardId(user.getUserId(), card.getId())).isPresent())
+        if (userCardRepository.findById(new UserCardId(user.getUserId(), card.getId())).isPresent())
             return;
 
         var userLocation = Objects.requireNonNull(user.getCurrentLocation());
