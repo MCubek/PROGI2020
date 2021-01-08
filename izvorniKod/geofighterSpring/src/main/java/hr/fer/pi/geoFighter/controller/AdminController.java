@@ -58,7 +58,7 @@ public class AdminController {
         return new ResponseEntity<>(adminService.getCardCollection(), OK);
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/editCard")
     public ResponseEntity<String> editLocationCard(@RequestBody CardDTO card) {
         adminService.editLocationCard(card);
         return new ResponseEntity<>("Card application edited", OK);

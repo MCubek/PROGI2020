@@ -39,7 +39,7 @@ export class AdminService {
 
   editCard(locationCardModel: LocationCardModel): Observable<any> {
     return this.httpClient.post(
-      `${environment.apiUrl}api/admin/edit`,
+      `${environment.apiUrl}api/admin/editCard`,
       locationCardModel,
       {responseType: 'text'}
     );
