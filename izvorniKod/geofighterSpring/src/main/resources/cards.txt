@@ -249,3 +249,93 @@ longitude=16.22509181397707
 population=0
 uncommonness=6
 difficulty=4
+
+name=Kalnik
+description=Gora smještena u sjeverozapadnoj Hrvatskoj
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/0/0d/Kalnik_panorama.jpg
+latitude=46.139523
+longitude=16.458507
+population=4
+uncommonness=8
+difficulty=5
+
+name=Pulska Arena
+description=Najveći je i najsačuvaniji spomenik antičkog graditeljstva u Hrvatskoj
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Anfiteatro_de_Pula%2C_Croacia%2C_2017-04-17%2C_DD_13-18_HDR_PAN.jpg/1920px-Anfiteatro_de_Pula%2C_Croacia%2C_2017-04-17%2C_DD_13-18_HDR_PAN.jpg
+latitude=44.86833
+longitude=13.84806
+population=7
+uncommonness=4
+difficulty=4
+
+name=Dvorac Trakošćan
+description=Jedan je od najatraktivnijih dvoraca u Hrvatskoj; nalazi se u Hrvatskom zagorju, 23 km sjeveroistočno od Krapine, 40 km jugozapadno od Varaždina; nadmorska visina 250 m.
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Trako%C5%A1%C4%87an_2007.JPG/1280px-Trako%C5%A1%C4%87an_2007.JPG
+latitude=46.259167
+longitude=15.95
+population=2
+uncommonness=8
+difficulty=8
+
+name=Dioklecijanova palača
+description=Antička palača cara Dioklecijana u Splitu.Oko 300. godine podigao ju je rimski car Dioklecijan i u njoj je boravio nakon povlačenja s prijestolja (305.g.) do smrti (316.g.).
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Peristyle_of_Diocletian%27s_Palace%2C_Split_%2811908116224%29.jpg/1280px-Peristyle_of_Diocletian%27s_Palace%2C_Split_%2811908116224%29.jpg
+latitude=43.504831314
+longitude=16.436331588
+population=9
+uncommonness=3
+difficulty=3
+
+name=Uspinjača
+description=Uspinjača je u prošlosti imala važnu ulogu u životu stanovnika Zagreba, a danas je značajna turistička atrakcija u kojoj se vole prevesti mnogobrojni turisti. Ideja uspinjače bila je povezati Donji i Gornji grad, a s prugom od samo 66 metara – ovo je najkraća žičana željeznica na svijetu.
+photoUrl=https://www.internationalbusinesshotel.com/uploads/images/_1024x682_fit_center-center_75_none/funicular-m-vrdoljak-592bfbe3415b2_190809_095319.png
+latitude=45.81432321944631
+longitude=15.973064933772061
+population=9
+uncommonness=1
+difficulty=1
+
+name=Hrvatsko narodno kazalište u Zagrebu
+description=Hrvatsko narodno kazalište ima iznimno važnu ulogu u kulturnom životu grada Zagreba kroz povijest. Iako je kazalište započelo s radom 1860. godine, zgrada kazališta kakvu danas poznajemo izgrađena je 1895. godine. Kazalište je izgrađeno u neobaroknom stilu i jedan je od najprepoznatljivijih simbola grada Zagreba.
+photoUrl=https://www.internationalbusinesshotel.com/uploads/images/_1024x682_fit_center-center_75_none/the-white-night-1-m-vrdoljak.png
+latitude=45.80952541360068
+longitude=15.970041098545025
+population=8
+uncommonness=1
+difficulty=1
+
+name=Tunel Grič
+description= Tunel ispod Gradeca (Griča) koji povezuje Mesničku i Radićevu ulicu, a okomito izlazi na tri mjesta u Ilici i jednom u Tomićevoj ulici prema jugu. Tunel je dugačak 350 metara, svojim većim dijelom širok je 3,2 metra dok je u središnjem dijelu širok 5,5 metara. Otvoren je za javnost u srpnju 2016. godine, iako je ranije bio otvoren kao sklonište za građane i mjesto kulturnih događanja tijekom Domovinskog rata.
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Tunel_Gri%C4%8D_Mesni%C4%8Dka_2016.jpg/800px-Tunel_Gri%C4%8D_Mesni%C4%8Dka_2016.jpg
+latitude=45.8150475662807
+longitude=15.9710197
+population=6
+uncommonness=5
+difficulty=5
+
+name=Aleja Skulptura
+description=Skultpure su postavljene na inicijativu akademskog kipara Ratka Petrića u okviru sekcije Prijedlog zagrebačkog salona 1985. godine.
+photoUrl=http://licegrada.hr/wp-content/uploads/2016/08/aleja-skulptura-01032015-2.jpg
+latitude=45.78929551610913
+longitude=15.965722786637688
+population=4
+uncommonness=8
+difficulty=5
+
+name=Odlagalište Otpada "Jakuševec"
+description=Odlagalište komunalnog i neopasnog otpada grada Zagreba i njegove okolice i građevina je koja se gradi u skladu sa Zakonom o gradnji.
+photoUrl=https://www.zgh.hr/UserDocsImages/galerije/zgos/zgos001.jpg
+latitude=45.76353811131214
+longitude=16.028174898543757
+population=1
+uncommonness=9
+difficulty=9
+
+name=Ševin mural na Knežiji, Zagreb
+description=Zvonimir "Ševa" Levačić (Zagreb, 12. prosinca 1943. – 5. svibnja 2010.), hrvatska televizijska osoba. Jedan od sudionika i "glavnih sporednih" zvijezda televizijske emisije Noćne more Željka Malnara. Dionik komičarskog parodijskog projekta države Pešćenice. Pobijedio je Dennisa Rodmana na izvođenju slobodnih bacanja. 
+photoUrl=https://img.24sata.hr/xXQg9b--nCIzFU1iDkXM_qbYjsk=/1600x1066/smart/media/images/2020-46/pxl-191120-30886840.jpg
+latitude=45.78999684
+longitude=15.95166286
+population=9
+uncommonness=9
+difficulty=9
