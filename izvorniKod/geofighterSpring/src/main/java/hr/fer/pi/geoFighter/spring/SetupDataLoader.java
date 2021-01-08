@@ -4,11 +4,11 @@ import hr.fer.pi.geoFighter.exceptions.SpringGeoFighterException;
 import hr.fer.pi.geoFighter.model.*;
 import hr.fer.pi.geoFighter.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,10 +18,10 @@ import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -30,6 +30,10 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     @Value("${server.developer.address}")
     private String address;
+
+    @Autowired
+    @Qualifier("cards")
+    public String cards;
 
     boolean alreadySetup;
 
@@ -486,11 +490,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     }
 
     private List<LocationCard> parseLocationCards(User defaultOwner) throws IOException {
-        Resource resource = new ClassPathResource("cards.txt");
 
-        Path file = resource.getFile().toPath();
-
-        return Arrays.stream(Files.readString(file, StandardCharsets.UTF_8).split("\r?\n[\n\r]+"))
+        return Arrays.stream(cards.split("\r?\n[\n\r]+"))
                 .map(loc -> {
                     var lines = Arrays.stream(loc.split("\n"))
                             .filter(l -> ! l.isBlank())
