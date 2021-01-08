@@ -76,6 +76,14 @@ public class AdminService {
         user.setRole(adminRole);
     }
 
+    public void demoteFromAdmin(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new SpringGeoFighterException("User does not exist"));
+
+        Role userRole = roleRepository.findByName("ROLE_USER").orElseThrow(() -> new SpringGeoFighterException("Can't find role!"));
+
+        user.setRole(userRole);
+    }
+
     public void deleteUser(String username) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new SpringGeoFighterException("User does not exist"));
 

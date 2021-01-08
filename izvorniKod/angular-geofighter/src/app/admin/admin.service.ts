@@ -59,6 +59,14 @@ export class AdminService {
     );
   }
 
+  demoteFromAdmin(username: string): Observable<any> {
+    return this.httpClient.put(
+      `${environment.apiUrl}api/admin/demoteFromAdmin/` + username,
+      null,
+      { responseType: 'text' }
+    );
+  }
+
   deleteUser(username: string): Observable<any> {
     return this.httpClient.put(
       `${environment.apiUrl}api/admin/deleteUser/` + username,

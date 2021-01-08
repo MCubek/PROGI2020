@@ -41,6 +41,12 @@ public class AdminController {
         return new ResponseEntity<>("User promoted to admin", OK);
     }
 
+    @PutMapping("/demoteFromAdmin/{username}")
+    public ResponseEntity<String> demoteFromAdmin(@PathVariable String username) {
+        adminService.demoteFromAdmin(username);
+        return new ResponseEntity<>("User demoted from admin", OK);
+    }
+
     @PutMapping("/deleteUser/{username}")
     public ResponseEntity<String> deleteUser(@PathVariable String username) {
         adminService.deleteUser(username);

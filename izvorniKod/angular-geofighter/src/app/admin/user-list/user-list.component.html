@@ -11,9 +11,14 @@
   <tbody>
     <tr *ngFor="let user of users">
       <td>{{ user.username }}</td>
-      <td>
+      <td *ngIf="user.role!=='ROLE_ADMIN'">
         <button class="btn btn-outline-primary" (click)="promoteToAdmin(user.username)">
           Promote User to Admin
+        </button>
+      </td>
+      <td *ngIf="user.role==='ROLE_ADMIN'">
+        <button class="btn btn-outline-primary" (click)="demoteFromAdmin(user.username)">
+          Demote User from Admin
         </button>
       </td>
       <td>

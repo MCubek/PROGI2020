@@ -15,4 +15,5 @@ public class UserDTO {
     private String username;
     private String email;
     private URL photoURL;
+    private String role;
 }

@@ -60,6 +60,24 @@ export class UserListComponent implements OnInit {
       this.adminService.promoteToAdmin(username).subscribe(
         (data) => {
           this.toastr.success('User ' + username + ' promoted to admin');
+          window.location.reload();
+        },
+        (error) => {
+          this.toastr.error('Internal server error');
+          throwError(error);
+        }
+      );
+    }
+  }
+
+  demoteFromAdmin(username: string): void {
+    if (
+      confirm('Are you sure you want to demote ' + username + ' from admin?')
+    ) {
+      this.adminService.demoteFromAdmin(username).subscribe(
+        (data) => {
+          this.toastr.success('User ' + username + ' demoted.');
+          window.location.reload();
         },
         (error) => {
           this.toastr.error('Internal server error');

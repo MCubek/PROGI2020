@@ -135,6 +135,7 @@ public class UserService {
         userDTO.setUsername(user.getUsername());
         userDTO.setEmail(user.getEmail());
         userDTO.setPhotoURL(user.getPhotoURL());
+        userDTO.setRole(user.getRole().getName());
 
         return userDTO;
     }
