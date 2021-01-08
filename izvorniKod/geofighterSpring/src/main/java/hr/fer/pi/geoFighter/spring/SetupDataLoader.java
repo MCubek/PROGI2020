@@ -68,8 +68,6 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     @Transactional
     void loadCards(User defaultUser) {
-
-
         try {
             parseLocationCards(defaultUser).stream()
                     .filter(locationCard -> locationCardRepository.findByName(locationCard.getName()).isEmpty())
@@ -245,6 +243,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setPopulation(0);
             l.setUncommonness(5);
             l.setDifficulty(5);
+            l.setLocation(new Point2D.Double(45.89941353227559, 15.947867270990336));
             l.setAccepted(true);
             l.setAcceptedBy(local ? cart : defaultUser);
             l.setCreatedBy(local ? cart : defaultUser);
@@ -286,6 +285,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setPopulation(0);
             l.setUncommonness(6);
             l.setDifficulty(6);
+            l.setLocation(new Point2D.Double(45.813122071220235, 15.977104348245451));
             l.setAccepted(true);
             l.setAcceptedBy(local ? cart : defaultUser);
             l.setCreatedBy(local ? cart : defaultUser);
@@ -324,6 +324,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             }
             l.setDescription("Katedrala Uznesenja Blažene Djevice Marije i svetih Stjepana i Ladislava ili Zagrebačka katedrala, najveća je hrvatska sakralna građevina i jedan od najvrjednijih spomenika hrvatske kulturne baštine. Prva je i najznačajnija gotička građevina Hrvatske. Najmonumentalija je gotička sakralna građevina jugoistočno od Alpa.");
             l.setNeedsToBeChecked(false);
+            l.setLocation(new Point2D.Double(45.81409233434517, 15.979440552226094));
             l.setPopulation(0);
             l.setUncommonness(7);
             l.setDifficulty(7);
@@ -367,6 +368,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setNeedsToBeChecked(false);
             l.setPopulation(0);
             l.setUncommonness(4);
+            l.setLocation(new Point2D.Double(45.816090294051854, 15.9736456397399));
             l.setDifficulty(4);
             l.setAccepted(true);
             l.setAcceptedBy(local ? cart : defaultUser);
@@ -409,6 +411,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             l.setPopulation(0);
             l.setUncommonness(8);
             l.setDifficulty(8);
+            l.setLocation(new Point2D.Double(45.80952550045766, 15.970039409659902));
             l.setAccepted(true);
             l.setAcceptedBy(local ? cart : defaultUser);
             l.setCreatedBy(local ? cart : defaultUser);
@@ -439,15 +442,15 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
         if (! local) return;
 
-        if (locationCardRepository.getLocationCardsByName("Jarun").isEmpty()) {
+        if (locationCardRepository.getLocationCardsByName("Jarun Veliko Jezero").isEmpty()) {
             l = new LocationCard();
-            l.setName("Jarun");
+            l.setName("Jarun Veliko Jezero");
             try {
                 l.setPhotoURL(new URL("https://upload.wikimedia.org/wikipedia/commons/1/1b/Jarun_Lake_aerial_view.jpg"));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
-            l.setDescription("Bla bla jarun.");
+            l.setDescription("Veliko jarunsko jezero");
             l.setNeedsToBeChecked(true);
             l.setPopulation(0);
             l.setUncommonness(8);
@@ -467,7 +470,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
-            l.setDescription("Bla bla skijalište.");
+            l.setDescription("Skijalište i odlagalište otpada.");
             l.setNeedsToBeChecked(true);
             l.setPopulation(0);
             l.setUncommonness(8);
@@ -483,7 +486,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     private static List<LocationCard> parseLocationCards(User defaultOwner) throws IOException {
         Path file = Path.of("izvorniKod/geofighterSpring/src/main/resources/cards.txt");
 
-        return Arrays.stream(Files.readString(file, StandardCharsets.UTF_8).split("\n[\n]+"))
+        return Arrays.stream(Files.readString(file, StandardCharsets.UTF_8).split("\r?\n[\n\r]+"))
                 .map(loc -> {
                     var lines = Arrays.stream(loc.split("\n"))
                             .filter(l -> ! l.isBlank())
