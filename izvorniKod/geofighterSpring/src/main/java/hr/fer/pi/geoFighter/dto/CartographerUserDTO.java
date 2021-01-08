@@ -22,7 +22,7 @@ public class CartographerUserDTO {
     private String username;
     private String email;
     private Date joinedDate;
-    private URL photoUrl;
+    private URL photoURL;
     private Integer eloScore;
     private URL idUrl;
 }

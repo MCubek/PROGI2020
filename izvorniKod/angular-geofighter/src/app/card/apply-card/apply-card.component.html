@@ -42,23 +42,23 @@
 
             <div class="form-group row">
               <label
-                for="photoUrl"
+                for="photoURL"
                 class="col-md-4 col-form-label text-md-right"
                 >Photo URL</label
               >
               <div class="col-md-6">
                 <input
                   type="url"
-                  [formControlName]="'photoUrl'"
-                  id="photoUrl"
+                  [formControlName]="'photoURL'"
+                  id="photoURL"
                   class="form-control input-radius"
-                  name="photoUrl"
+                  name="photoURL"
                   required
                 />
                 <span
                   *ngIf="
-                    !applyCardForm.get('photoUrl').valid &&
-                    applyCardForm.get('photoUrl').touched
+                    !applyCardForm.get('photoURL').valid &&
+                    applyCardForm.get('photoURL').touched
                   "
                 >
                   Please provide a valid URL

@@ -39,7 +39,7 @@ export class SingleCardComponent implements OnInit {
         this.description = data.description;
         this.creator = data.createdBy;
         this.createdTime = data.createdTime;
-        this.imageURL = data.photoUrl;
+        this.imageURL = data.photoURL;
         this.difficulty = data.difficulty;
         this.uncommonness = data.uncommonness;
         this.population = data.population;

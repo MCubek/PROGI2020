@@ -1,7 +1,7 @@
 export interface ApplyCardRequestPayload {
   name: string;
   description: string;
-  photoUrl: string;
+  photoURL: string;
   location: string;
   difficulty: number;
   population: number;

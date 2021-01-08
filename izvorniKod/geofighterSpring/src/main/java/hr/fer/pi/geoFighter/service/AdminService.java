@@ -106,11 +106,11 @@ public class AdminService {
         LocationCard locationCard = locationCardRepository.getLocationCardById(card.getId()).orElseThrow(
                 () -> new SpringGeoFighterException("Card does not exist"));
 
-        ImageValidateUtility.validateImage(card.getPhotoUrl());
+        ImageValidateUtility.validateImage(card.getPhotoURL());
 
         locationCard.setName(card.getName());
         locationCard.setDescription(card.getDescription());
-        locationCard.setPhotoURL(card.getPhotoUrl());
+        locationCard.setPhotoURL(card.getPhotoURL());
         locationCard.setUncommonness(card.getUncommonness());
         locationCard.setDifficulty(card.getDifficulty());
         locationCard.setPopulation(card.getPopulation());

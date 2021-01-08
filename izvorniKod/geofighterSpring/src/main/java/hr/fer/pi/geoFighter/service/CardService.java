@@ -59,21 +59,21 @@ public class CardService {
         LocationCard locationCard = new LocationCard();
         locationCard.setName(cardDTO.getName());
         locationCard.setDescription(cardDTO.getDescription());
-        locationCard.setPhotoURL(cardDTO.getPhotoUrl());
+        locationCard.setPhotoURL(cardDTO.getPhotoURL());
         locationCard.setLocation(parseLocationString(cardDTO.getLocation()));
         locationCard.setCreatedBy(authService.getCurrentUser());
         locationCard.setDifficulty(cardDTO.getDifficulty());
         locationCard.setPopulation(cardDTO.getPopulation());
         locationCard.setUncommonness(cardDTO.getUncommonness());
 
-        if (! urlValidator.isValid(cardDTO.getPhotoUrl().toString()))
+        if (! urlValidator.isValid(cardDTO.getPhotoURL().toString()))
             throw new UserInfoInvalidException("Invalid photo URL");
 
         if (locationCard.getCreatedBy().getWins() < 5){
             System.out.println("Exp too low");
             throw new UserInfoInvalidException("Experience too low (minimum 5 wins required)");
         }else{
-            locationCard.setPhotoURL(cardDTO.getPhotoUrl());
+            locationCard.setPhotoURL(cardDTO.getPhotoURL());
 
             locationCardRepository.save(locationCard);
         }
@@ -84,7 +84,7 @@ public class CardService {
         cardDTO.setId(locationCard.getId());
         cardDTO.setName(locationCard.getName());
         cardDTO.setDescription(locationCard.getDescription());
-        cardDTO.setPhotoUrl(locationCard.getPhotoURL());
+        cardDTO.setPhotoURL(locationCard.getPhotoURL());
         cardDTO.setLocation(getLocationString(locationCard.getLocation()));
         cardDTO.setCreatedBy(getCreatedBy(locationCard.getCreatedBy()));
         if (locationCard.getUncommonness() != null)
