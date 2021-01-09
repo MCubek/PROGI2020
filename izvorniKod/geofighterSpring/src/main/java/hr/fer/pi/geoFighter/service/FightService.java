@@ -16,7 +16,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
@@ -39,12 +42,15 @@ public class FightService {
     private final static Map<String, List<Long>> playerUsernameListCardsMap = new HashMap<>();
 
     @Transactional
-    public List<UserCardDTO> getUserCardList(String username) {
+    public List<UserCardDTO> getUserCardList() {
         List<UserCardDTO> userCards = new ArrayList<>();
-        User user = userRepository.findByUsername(username).orElseThrow(
-                () -> new SpringGeoFighterException("User does not exist")
-        );
-        List<LocationCard> locationCards = userCardRepository.findUserCardByUser(user)
+        User user = authService.getCurrentUser();;
+
+        var userCardsRepo = userCardRepository.findUserCardByUser(user);
+
+        updateCooldown(userCardsRepo);
+
+        List<LocationCard> locationCards = userCardsRepo
                 .stream()
                 .map(UserCard::getLocationCard)
                 .collect(Collectors.toList());
@@ -57,10 +63,26 @@ public class FightService {
             userCard.setPopulation(locationCard.getPopulation());
             userCard.setUncommonness(locationCard.getUncommonness());
             userCard.setPhotoURL(locationCard.getPhotoURL());
+
+            var userCardItem = userCardRepository.findUserCardByUserAndLocationCard(user, locationCard);
+            var multiplier = (userCardItem.getCooldownMultiplier()==null) ?
+                    0 : userCardItem.getCooldownMultiplier();
+
+            userCard.setCooldownMultiplier(multiplier);
             userCards.add(userCard);
         }
 
         return userCards;
+    }
+
+    private void updateCooldown(List<UserCard> userCardsRepo) {
+        userCardsRepo.stream()
+                .filter(i -> i.getCooldownEndTime() == null || i.getCooldownEndTime().isBefore(LocalDateTime.now()))
+                .forEach(i-> {
+                    i.setCooldownEndTime(null);
+                    i.setCooldownMultiplier(0.);
+                    userCardRepository.save(i);
+                });
     }
 
     public WinnerDTO getWinnerOfFight(long fightId) {

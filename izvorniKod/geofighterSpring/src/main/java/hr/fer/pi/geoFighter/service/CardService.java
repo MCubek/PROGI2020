@@ -119,7 +119,7 @@ public class CardService {
         else return user.getUsername();
     }
 
-    static String getTime(Instant instant) {
+    public static String getTime(Instant instant) {
         DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
                 .withZone(ZoneId.systemDefault());
 

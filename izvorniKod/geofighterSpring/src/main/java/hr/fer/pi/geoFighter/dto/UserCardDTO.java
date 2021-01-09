@@ -18,5 +18,6 @@ public class UserCardDTO {
     private Integer difficulty;
     private Integer population;
     private Integer uncommonness;
+    private Double cooldownMultiplier;
     private URL photoURL;
 }

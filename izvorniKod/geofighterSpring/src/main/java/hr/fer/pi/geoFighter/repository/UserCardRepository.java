@@ -1,5 +1,6 @@
 package hr.fer.pi.geoFighter.repository;
 
+import hr.fer.pi.geoFighter.model.LocationCard;
 import hr.fer.pi.geoFighter.model.User;
 import hr.fer.pi.geoFighter.model.UserCard;
 import hr.fer.pi.geoFighter.model.UserCardId;
@@ -12,4 +13,6 @@ import java.util.List;
 public interface UserCardRepository extends JpaRepository<UserCard, UserCardId> {
 
     List<UserCard> findUserCardByUser(User user);
+
+    UserCard findUserCardByUserAndLocationCard(User user, LocationCard locationCard);
 }
