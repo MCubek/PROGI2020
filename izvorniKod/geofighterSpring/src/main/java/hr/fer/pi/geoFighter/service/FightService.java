@@ -44,14 +44,13 @@ public class FightService {
     @Transactional
     public List<UserCardDTO> getUserCardList() {
         List<UserCardDTO> userCards = new ArrayList<>();
-        User user = authService.getCurrentUser();;
+        User user = authService.getCurrentUser();
 
         var userCardsRepo = userCardRepository.findUserCardByUser(user);
 
-        updateCooldown(userCardsRepo);
-
         List<LocationCard> locationCards = userCardsRepo
                 .stream()
+                .filter(u -> u.getCooldownEndTime() == null || u.getCooldownEndTime().isBefore(LocalDateTime.now()))
                 .map(UserCard::getLocationCard)
                 .collect(Collectors.toList());
 
@@ -65,8 +64,7 @@ public class FightService {
             userCard.setPhotoURL(locationCard.getPhotoURL());
 
             var userCardItem = userCardRepository.findUserCardByUserAndLocationCard(user, locationCard);
-            var multiplier = (userCardItem.getCooldownMultiplier()==null) ?
-                    0 : userCardItem.getCooldownMultiplier();
+            var multiplier = userCardItem.getCooldownMultiplier();
 
             userCard.setCooldownMultiplier(multiplier);
             userCards.add(userCard);
@@ -75,20 +73,8 @@ public class FightService {
         return userCards;
     }
 
-    private void updateCooldown(List<UserCard> userCardsRepo) {
-        userCardsRepo.stream()
-                .filter(i -> i.getCooldownEndTime() == null || i.getCooldownEndTime().isBefore(LocalDateTime.now()))
-                .forEach(i-> {
-                    i.setCooldownEndTime(null);
-                    i.setCooldownMultiplier(0.);
-                    userCardRepository.save(i);
-                });
-    }
-
     public WinnerDTO getWinnerOfFight(long fightId) {
-        WinnerDTO sendWinner = new WinnerDTO(fightIdWinnerMap.getOrDefault(fightId, "error"));
-        return sendWinner;
-
+        return new WinnerDTO(fightIdWinnerMap.getOrDefault(fightId, "error"));
     }
 
     public void submitCards(List<SubmitCardFightDTO> fightCards) {

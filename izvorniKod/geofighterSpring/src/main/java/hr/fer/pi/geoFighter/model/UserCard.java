@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
@@ -26,7 +27,7 @@ public class UserCard {
     private LocationCard locationCard;
 
     @Column(name = "cooldown_multiplier")
-    @Nullable
+    @NotNull
     private Double cooldownMultiplier = 0.;
 
     @Column(name = "cooldown_end")
