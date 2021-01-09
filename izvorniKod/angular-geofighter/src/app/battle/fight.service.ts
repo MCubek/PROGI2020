@@ -14,8 +14,8 @@ export class FightService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getUserCardList(username: string): Observable<CardModel[]> {
-    return this.httpClient.get<CardModel[]>(`${environment.apiUrl}api/fight/userCardList/` + username);
+  getUserCardList(): Observable<CardModel[]> {
+      return this.httpClient.get<CardModel[]>(`${environment.apiUrl}api/fight/userCardList/`);
   }
 
   submitCards(cardList: Array<SubmitCardModel>): Observable<any> {

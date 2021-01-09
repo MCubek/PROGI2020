@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 import {SendRequestPayload} from '../user/nearby-users/send-request-payload';
 import {ToastrService} from 'ngx-toastr';
 import {SubmitCardModel} from './submitCard.model';
-import {startWith, switchMap} from "rxjs/operators";
+import {startWith, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-battle',
@@ -42,7 +42,7 @@ export class BattleComponent implements OnInit {
       this.router.navigateByUrl('/nearbyUsers');
     }
     else {
-      this.fightService.getUserCardList(this.username).subscribe(data => {
+      this.fightService.getUserCardList().subscribe(data => {
         this.userCards = data;
       }, error => {
         throwError(error);
@@ -85,6 +85,7 @@ export class BattleComponent implements OnInit {
     } else {
       const array = [];
       for (const id of this.pickedCards) {
+        // tslint:disable-next-line:new-parens
         array.push(new (class MyDTO implements SubmitCardModel{
           cardId = id;
         }));

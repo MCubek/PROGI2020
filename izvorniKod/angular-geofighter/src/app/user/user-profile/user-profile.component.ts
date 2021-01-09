@@ -40,7 +40,7 @@ export class UserProfileComponent implements OnInit {
     }, error => {
       throwError(error);
     });
-    this.fightService.getUserCardList(this.username).subscribe(data => {
+    this.fightService.getUserCardList().subscribe(data => {
       this.userCards = data;
     }, error => {
       throwError(error);

@@ -5,4 +5,5 @@ export interface CardModel {
   population: number;
   uncommonness: number;
   photoURL?: string;
+  cooldownMultiplier?: number;
 }
