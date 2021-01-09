@@ -11,12 +11,12 @@ body {
   //width: 2000px;
   border: none;
   border-radius: 10px;
-  background-color: #fff
+  background-color: #fff;
 }
 
 .stats {
   background: #f2f5f8 !important;
-  color: #000 !important
+  color: #000 !important;
 }
 
 .articles {
@@ -77,11 +77,6 @@ body {
 }
 
 .list-group {
-  /*display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  overflow: hidden;*/
   display: grid;
   grid-template-columns: auto auto auto auto auto;
   grid-row: auto;
@@ -90,16 +85,14 @@ body {
 
 .list-group-item {
   height: 50vh;
-  border: none;
   padding: 10px;
   overflow: auto;
+  border: none;
 }
 
 .card {
-  height: 45vh;
-  width: 15vw;
-  /*height: 400px;
-  width: 250px;*/
+  min-height: 45vh;
+  max-width: 15vw;
 
 }
 
@@ -142,67 +135,4 @@ body {
   width: 15vw;
 }
 
-#sidebar {
-  min-width: 270px;
-  max-width: 270px;
-  background: rgb(208, 205, 205);
-  color:black;
-  -webkit-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  transition: all 0.3s; }
-#sidebar.active {
-  min-height: 100%;
-  min-width: 180px;
-  max-width: 180px;
-  text-align: center; }
-#sidebar.active ul.components li a {
-  padding: 10px 0; }
-#sidebar.active ul.components li a span {
-  margin-right: 0;
-  display: block;
-  font-size: 24px; }
-
-
-#sidebar ul.components {
-  padding: 0;
-  -webkit-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s; }
-@media (prefers-reduced-motion: reduce) {
-  #sidebar ul.components {
-    -webkit-transition: none;
-    -o-transition: none;
-    transition: none; } }
-#sidebar ul li {
-  font-size: 16px;
-  padding-top: 5%;   }
-#sidebar ul li:hover {
-  background-color: rgb(171, 174, 174);
-}
-#sidebar ul li > ul {
-  margin-left: 10px; }
-#sidebar ul li > ul li {
-  font-size: 14px; }
-#sidebar ul li a {
-  padding: 10px 30px;
-  display: block;
-  color: rgba(0,0,0,.5);
-  font-weight: bolder;
-  border-bottom: 1px solid rgba(250, 250, 250, 0.564); }
-#sidebar ul li a span {
-  margin-right: 15px; }
-@media (max-width: 991.98px) {
-  #sidebar ul li a span {
-    display: block; } }
-#sidebar ul li a:hover {
-  color: rgba(0,0,0,.7); }
-
-@media (max-width: 991.98px) {
-  #sidebar {
-    min-width: 80px;
-    max-width: 80px;
-    text-align: center;
-    margin-left: -80px !important; }
-  #sidebar.active {
-    margin-left: 0 !important; } }
 

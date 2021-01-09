@@ -23,6 +23,7 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a *ngIf="isLoggedIn" class="dropdown-item" href="/card/nearby">Nearby cards</a></li>
+            <li><a *ngIf="isLoggedIn" class="dropdown-item" href="/card/allCards">All cards</a></li>
             <li><a *ngIf="isLoggedIn" class="dropdown-item" href="/card/applyCard">Create new card</a></li>
           </ul>
         </li>
@@ -46,7 +47,7 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a *ngIf="isLoggedIn" class="dropdown-item" [href]="'users/' + username">My profile</a></li>
-            <li *ngIf="role!=='ROLE_CARTOGRAPHER' && role!=='ROLE_ADMIN'" class="dropdown-item"><a class="nav-link" href="/cartographerApply">Cartographer Apply</a></li>
+            <li ><a *ngIf="role!=='ROLE_CARTOGRAPHER' && role!=='ROLE_ADMIN'" class="dropdown-item" href="/cartographerApply">Cartographer Apply</a></li>
             <div *ngIf="role==='ROLE_ADMIN'" class="dropdown-divider"></div>
             <li *ngIf="role==='ROLE_ADMIN'" class="dropdown-header">Admin</li>
             <li><a *ngIf="role==='ROLE_ADMIN'" class="dropdown-item" href="/admin/users">Manage users</a></li>
