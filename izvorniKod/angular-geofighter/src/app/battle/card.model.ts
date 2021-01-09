@@ -1,8 +1,8 @@
 export interface CardModel {
   id: number;
   name: string;
-  difficulty: string;
-  population: string;
-  uncommonness: string;
+  difficulty: number;
+  population: number;
+  uncommonness: number;
   photoURL?: string;
 }
