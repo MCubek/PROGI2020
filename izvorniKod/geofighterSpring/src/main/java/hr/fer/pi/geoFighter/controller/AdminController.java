@@ -30,6 +30,12 @@ public class AdminController {
         return new ResponseEntity<>("Cartographer application accepted", OK);
     }
 
+    @PutMapping("/cartographerApplications/decline/{username}")
+    public ResponseEntity<String> declineCartographerApplication(@PathVariable String username) {
+        adminService.declineCartographerApplication(username);
+        return new ResponseEntity<>("Cartographer application declined", OK);
+    }
+
     @GetMapping("/userList")
     public ResponseEntity<List<UserDTO>> getEnabledUsers() {
         return new ResponseEntity<>(adminService.getEnabledUsers(), OK);

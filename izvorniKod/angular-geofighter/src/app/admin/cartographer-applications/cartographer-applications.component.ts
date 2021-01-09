@@ -18,7 +18,6 @@ export class CartographerApplicationsComponent implements OnInit {
   ngOnInit(): void {
     this.adminService.getAllCartographerApplications().subscribe(data => {
       this.applicants = data;
-      console.log(this.applicants);
     }, error => {
       throwError(error);
     });
@@ -26,6 +25,14 @@ export class CartographerApplicationsComponent implements OnInit {
 
   accept(username: string): void {
     this.adminService.acceptCartographer(username).subscribe(data => {
+    }, error => {
+      throwError(error);
+    });
+    window.location.reload();
+  }
+
+  decline(username: string): void{
+    this.adminService.declineCartographer(username).subscribe(data => {
     }, error => {
       throwError(error);
     });

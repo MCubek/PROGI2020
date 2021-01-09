@@ -43,7 +43,6 @@ public class AdminService {
     }
 
     public void acceptCartographerApplication(String username) {
-        System.out.println(username);
         User user = userRepository.findByUsername(username).orElseThrow(
                 () -> new SpringGeoFighterException("User does not exist"));
 
@@ -59,6 +58,16 @@ public class AdminService {
         if (user.getRole().getRoleId().equals(userRole.getRoleId())) {
             user.setRole(cartographerRole);
         }
+    }
+
+    public void declineCartographerApplication(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(
+                () -> new SpringGeoFighterException("User does not exist"));
+
+        if(user.getCartographerStatus()!=CartographerStatus.APPLIED)
+            throw new SpringGeoFighterException("User has not applied!");
+
+        user.setCartographerStatus(CartographerStatus.NOT_REQUESTED);
     }
 
     public List<UserDTO> getEnabledUsers() {

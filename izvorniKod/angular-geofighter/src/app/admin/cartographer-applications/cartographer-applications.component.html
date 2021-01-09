@@ -11,6 +11,7 @@
           <p><u>Joined:</u> {{applicant.joinedDate}}</p>
           <p><u>IBAN:</u> {{applicant.iban}}</p>
           <button class="btn btn-primary" (click)="accept(applicant.username)">Accept</button>
+          <button class="btn btn-primary" (click)="decline(applicant.username)">Decline</button>
         </li>
       </ul>
       <p *ngIf="applicants===undefined || applicants.length==0"> No Applicants</p>
