@@ -31,12 +31,12 @@ public class FightController {
 
     @GetMapping("/getWinner/{fightId}")
     public ResponseEntity<WinnerDTO> getWinner(@PathVariable Long fightId) {
-        return new ResponseEntity<WinnerDTO>(fightService.getWinnerOfFight(fightId), OK);
+        return new ResponseEntity<>(fightService.getWinnerOfFight(fightId), OK);
     }
 
-    @GetMapping("/userCardList/{username}")
-    public ResponseEntity<List<UserCardDTO>> getUserCardList(@PathVariable String username) {
-        return new ResponseEntity<>(fightService.getUserCardList(username), OK);
+    @GetMapping("/userCardList/")
+    public ResponseEntity<List<UserCardDTO>> getUserCardList() {
+        return new ResponseEntity<>(fightService.getUserCardList(), OK);
     }
 
     @PostMapping("/sendRequest")
