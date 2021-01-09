@@ -31,7 +31,7 @@
 }
 
 .list-group-item {
-  height: 50vh;
+  height: 70vh;
   border: none;
   padding: 10px;
   overflow: auto;
@@ -40,7 +40,7 @@
 .card {
   min-height: 45vh;
   max-width: 15vw;
-  
+
 }
 
 .card-img-top {
@@ -74,7 +74,7 @@
 .btn-bottom {
   padding: 10px;
   display: flex;
-  flex-flow: row; 
+  flex-flow: row;
   justify-content: space-around;
   align-self: center;
   align-items: center;
