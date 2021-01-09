@@ -339,3 +339,94 @@ longitude=15.95166286
 population=9
 uncommonness=9
 difficulty=9
+
+name=Dubrovačke zidine
+description=Zidine grada Dubrovnika, turistička atrakcija
+photoUrl=https://www.apartmanija.hr/slike/slike_gradovi/poi/dubrovacke-zidine_w.jpg
+latitude=42.64095190964842
+longitude=18.106178550193825
+population=0
+uncommonness=9
+difficulty=9
+
+name=Katedrala sv. Jakova
+description=Katedrala u Šibeniku pod UNESCO zaštitom
+photoUrl=https://smart-travel.hr/wp-content/uploads/2014/07/18782042_l-640x544-640x459.jpg
+latitude=43.73585257437353
+longitude=15.889099498021402
+population=2
+uncommonness=5
+difficulty=3
+
+name=Puntijarka
+description=Okupljalište studenata na Medvednici
+photoUrl=https://gastro.24sata.hr/media/img/94/a7/2aa5a149229720ce5867.jpeg
+latitude=45.91705394720696
+longitude=15.96649500654048
+population=9
+uncommonness=5
+difficulty=10
+
+name=Zagrebačka katedrala
+description=Zagrebačka katedrala na Kaptolu.
+photoUrl=https://sveta-misa.org/image/02012020/1d44e0362bcb0f23610018d6d0f6bc64.jpeg
+latitude=45.81474766889802
+longitude=15.979682680895474
+population=2
+uncommonness=3
+difficulty=4
+
+name=Strossmayerovo šetalište
+description=Šetalište gdje se mladi vole.
+photoUrl=https://licegrada.hr/wp-content/uploads/2020/04/prazan-gornji-grad-11042020-21.jpg
+latitude=45.814734746395416
+longitude=15.973087555635503
+population=2
+uncommonness=5
+difficulty=5
+
+name=Hrvatsko narodno kazalište
+description=Kazalište, dom mnogih opera i baleta.
+photoUrl=https://image.dnevnik.hr/media/images/1920x1080/Apr2020/61863020-hnk-zgrada.jpg
+latitude=45.809577763013905
+longitude=15.969998182620051
+population=2
+uncommonness=5
+difficulty=2
+
+name=Cvjetni trg
+description=Trg gdje se prodaje cvijeće i pije kava.
+photoUrl=https://projektvelebit.com/wp-content/uploads/2017/01/cvjetni-trg.jpg
+latitude=45.812332074152536
+longitude=15.974152823540138
+population=2
+uncommonness=7
+difficulty=4
+
+name=Zrinjevac
+description=Zrinjevac je park u centru Zagreba.
+photoUrl=https://licegrada.hr/wp-content/uploads/2018/05/park-zrinjevac-15052018-02.jpg
+latitude=45.81070479445717
+longitude=15.978922240291844
+population=7
+uncommonness=4
+difficulty=4
+
+name=Bolnica Dubrava
+description=Korona bolnica u Zagrebu.
+photoUrl=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6u1dw1lS49croqu7AL5jgyAzFX2omrYdCIw&usqp=CAU
+latitude=45.83452076669887
+longitude=16.035756737025803
+population=10
+uncommonness=9
+difficulty=1
+
+name=Zrće
+description=Party plaža na otoku Pagu.
+photoUrl=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzEy4e5v2D5HTW4iPj0rczoZsYxkwulWdhUw&usqp=CAU
+latitude=44.541016552144086
+longitude=14.91408191262595
+population=10
+uncommonness=6
+difficulty=6
+
