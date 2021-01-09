@@ -5,9 +5,11 @@
       <h3 style="margin: 20px auto;">List of Cartographer Applicants</h3>
       <ul *ngIf="applicants!==undefined" class="list-group">
         <li *ngFor="let applicant of applicants" class="list-group-item">
+          <p><img src={{applicant.idUrl}}></p>
           <p><u>Username:</u> {{applicant.username}}</p>
           <p><u>Email:</u> {{applicant.email}}</p>
           <p><u>Joined:</u> {{applicant.joinedDate}}</p>
+          <p><u>IBAN:</u> {{applicant.iban}}</p>
           <button class="btn btn-primary" (click)="accept(applicant.username)">Accept</button>
         </li>
       </ul>

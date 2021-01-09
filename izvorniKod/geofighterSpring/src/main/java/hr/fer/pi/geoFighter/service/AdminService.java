@@ -36,10 +36,9 @@ public class AdminService {
         List<CartographerUserDTO> usernames = new ArrayList<>();
         for (User user : userRepository.findUsersByCartographerStatus(CartographerStatus.APPLIED)) {
             usernames.add(new CartographerUserDTO
-                    (user.getUsername(), user.getEmail(), Date.from(user.getCreatedTime()), user.getPhotoURL(), user.getEloScore(), user.getIdCardPhotoURL()));
+                    (user.getUsername(), user.getEmail(), Date.from(user.getCreatedTime()), user.getIban(), user.getIdCardPhotoURL()));
 
         }
-
         return usernames;
     }
 

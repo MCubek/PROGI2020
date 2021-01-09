@@ -18,6 +18,7 @@ export class CartographerApplicationsComponent implements OnInit {
   ngOnInit(): void {
     this.adminService.getAllCartographerApplications().subscribe(data => {
       this.applicants = data;
+      console.log(this.applicants);
     }, error => {
       throwError(error);
     });
