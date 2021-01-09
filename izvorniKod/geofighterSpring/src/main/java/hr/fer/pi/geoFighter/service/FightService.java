@@ -53,7 +53,9 @@ public class FightService {
             UserCardDTO userCard = new UserCardDTO();
             userCard.setId(locationCard.getId());
             userCard.setName(locationCard.getName());
-            userCard.setDescription(locationCard.getDescription());
+            userCard.setDifficulty(locationCard.getDifficulty());
+            userCard.setPopulation(locationCard.getPopulation());
+            userCard.setUncommonness(locationCard.getUncommonness());
             userCard.setPhotoURL(locationCard.getPhotoURL());
             userCards.add(userCard);
         }
