@@ -36,15 +36,13 @@ public class AdminService {
         List<CartographerUserDTO> usernames = new ArrayList<>();
         for (User user : userRepository.findUsersByCartographerStatus(CartographerStatus.APPLIED)) {
             usernames.add(new CartographerUserDTO
-                    (user.getUsername(), user.getEmail(), Date.from(user.getCreatedTime()), user.getPhotoURL(), user.getEloScore(), user.getIdCardPhotoURL()));
+                    (user.getUsername(), user.getEmail(), Date.from(user.getCreatedTime()), user.getIban(), user.getIdCardPhotoURL()));
 
         }
-
         return usernames;
     }
 
     public void acceptCartographerApplication(String username) {
-        System.out.println(username);
         User user = userRepository.findByUsername(username).orElseThrow(
                 () -> new SpringGeoFighterException("User does not exist"));
 
@@ -60,6 +58,16 @@ public class AdminService {
         if (user.getRole().getRoleId().equals(userRole.getRoleId())) {
             user.setRole(cartographerRole);
         }
+    }
+
+    public void declineCartographerApplication(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(
+                () -> new SpringGeoFighterException("User does not exist"));
+
+        if(user.getCartographerStatus()!=CartographerStatus.APPLIED)
+            throw new SpringGeoFighterException("User has not applied!");
+
+        user.setCartographerStatus(CartographerStatus.NOT_REQUESTED);
     }
 
     public List<UserDTO> getEnabledUsers() {

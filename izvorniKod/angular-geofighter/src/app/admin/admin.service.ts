@@ -27,6 +27,14 @@ export class AdminService {
     );
   }
 
+  declineCartographer(username: string): Observable<any> {
+    return this.httpClient.put(
+      `${environment.apiUrl}api/admin/cartographerApplications/decline/` +
+      username,
+      null
+    );
+  }
+
   getCardCollection(): Observable<LocationCardModel[]> {
     return this.httpClient.get<LocationCardModel[]>(
       `${environment.apiUrl}api/admin/allCards`
