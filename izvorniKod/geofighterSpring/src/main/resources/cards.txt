@@ -9,7 +9,7 @@ difficulty=1
 
 name=Plitvice
 description=Nacionalni park s velikim slapovima.
-photoUrl=https://en.wikipedia.org/wiki/Plitvice_Lakes_National_Park#/media/File:Plitvice_lakes.JPG
+photoUrl=https://www.adriaticdmc.hr/storage/upload/atrakcije/plitvice_lakes__181617.jpg
 latitude=44.880556
 longitude=15.616111
 population=2
@@ -69,15 +69,6 @@ longitude=15.971130578551724
 population=2
 uncommonness=4
 difficulty=10
-
-name=jezero Jarun
-description= Omiljeno okupljalište svih Zagrepčana željnih raznih oblika rekreacije te zaljubljenika u veslačke i jedriličarske regate.
-photoUrl= http://www.apartmani-altis.com/wp-content/uploads/2014/04/jarun_zagreb_iz_zraka__moj_kvart_363951246.jpg
-latitude= 45.78086707365797
-longitude=15.917265074744481
-population=4
-uncommonness=3
-difficulty=4
 
 name=grad Krk
 description=Administrativno, političko, gospodarsko i vjersko središte otoka Krka.
@@ -295,15 +286,6 @@ population=9
 uncommonness=1
 difficulty=1
 
-name=Hrvatsko narodno kazalište u Zagrebu
-description=Hrvatsko narodno kazalište ima iznimno važnu ulogu u kulturnom životu grada Zagreba kroz povijest. Iako je kazalište započelo s radom 1860. godine, zgrada kazališta kakvu danas poznajemo izgrađena je 1895. godine. Kazalište je izgrađeno u neobaroknom stilu i jedan je od najprepoznatljivijih simbola grada Zagreba.
-photoUrl=https://www.internationalbusinesshotel.com/uploads/images/_1024x682_fit_center-center_75_none/the-white-night-1-m-vrdoljak.png
-latitude=45.80952541360068
-longitude=15.970041098545025
-population=8
-uncommonness=1
-difficulty=1
-
 name=Tunel Grič
 description= Tunel ispod Gradeca (Griča) koji povezuje Mesničku i Radićevu ulicu, a okomito izlazi na tri mjesta u Ilici i jednom u Tomićevoj ulici prema jugu. Tunel je dugačak 350 metara, svojim većim dijelom širok je 3,2 metra dok je u središnjem dijelu širok 5,5 metara. Otvoren je za javnost u srpnju 2016. godine, iako je ranije bio otvoren kao sklonište za građane i mjesto kulturnih događanja tijekom Domovinskog rata.
 photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Tunel_Gri%C4%8D_Mesni%C4%8Dka_2016.jpg/800px-Tunel_Gri%C4%8D_Mesni%C4%8Dka_2016.jpg
@@ -321,15 +303,6 @@ longitude=15.965722786637688
 population=4
 uncommonness=8
 difficulty=5
-
-name=Odlagalište Otpada "Jakuševec"
-description=Odlagalište komunalnog i neopasnog otpada grada Zagreba i njegove okolice i građevina je koja se gradi u skladu sa Zakonom o gradnji.
-photoUrl=https://www.zgh.hr/UserDocsImages/galerije/zgos/zgos001.jpg
-latitude=45.76353811131214
-longitude=16.028174898543757
-population=1
-uncommonness=9
-difficulty=9
 
 name=Ševin mural na Knežiji, Zagreb
 description=Zvonimir "Ševa" Levačić (Zagreb, 12. prosinca 1943. – 5. svibnja 2010.), hrvatska televizijska osoba. Jedan od sudionika i "glavnih sporednih" zvijezda televizijske emisije Noćne more Željka Malnara. Dionik komičarskog parodijskog projekta države Pešćenice. Pobijedio je Dennisa Rodmana na izvođenju slobodnih bacanja. 
@@ -366,15 +339,6 @@ longitude=15.96649500654048
 population=9
 uncommonness=5
 difficulty=10
-
-name=Zagrebačka katedrala
-description=Zagrebačka katedrala na Kaptolu.
-photoUrl=https://sveta-misa.org/image/02012020/1d44e0362bcb0f23610018d6d0f6bc64.jpeg
-latitude=45.81474766889802
-longitude=15.979682680895474
-population=2
-uncommonness=3
-difficulty=4
 
 name=Strossmayerovo šetalište
 description=Šetalište gdje se mladi vole.
@@ -429,4 +393,3 @@ longitude=14.91408191262595
 population=10
 uncommonness=6
 difficulty=6
-
