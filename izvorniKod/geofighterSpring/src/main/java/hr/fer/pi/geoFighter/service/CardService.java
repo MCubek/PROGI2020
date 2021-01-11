@@ -101,12 +101,12 @@ public class CardService {
         return cardDTO;
     }
 
-    static String getLocationString(Point2D.Double point) {
+    public static String getLocationString(Point2D.Double point) {
         if (point == null) return "unknown";
         return point.getX() + ", " + point.getY();
     }
 
-    static Point2D.Double parseLocationString(String locationString) {
+    public static Point2D.Double parseLocationString(String locationString) {
         var array = locationString.split("\\s+");
 
         if (array.length != 2) throw new IllegalArgumentException("2 coordinates missing!");

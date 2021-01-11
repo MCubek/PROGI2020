@@ -88,10 +88,6 @@ public class AuthService {
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        /*org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.
-                getContext().getAuthentication().getPrincipal();
-        return userRepository.findByUsername(principal.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException("User name not found - " + principal.getUsername()));*/
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User name not found - " + username));
     }
@@ -133,7 +129,7 @@ public class AuthService {
 
     public void verifyAccount(String token) {
         Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
-        verificationToken.orElseThrow(() -> new SpringGeoFighterException("Invalid token."));
+        verificationToken.orElseThrow(() -> new ResponseStatusException(HttpStatus.FORBIDDEN, "Invalid token."));
         fetchUserAndEnable(verificationToken.get());
         verificationTokenRepository.delete(verificationToken.get());
     }
@@ -181,8 +177,4 @@ public class AuthService {
                 .build();
     }
 
-    public boolean isLoggedIn() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return ! (authentication instanceof AnonymousAuthenticationToken) && authentication.isAuthenticated();
-    }
 }
