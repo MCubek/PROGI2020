@@ -78,6 +78,14 @@
                   required
                   autofocus
                 />
+                <div
+                  *ngIf="
+                  !applyCardForm.get('difficulty').valid &&
+                  applyCardForm.get('difficulty').touched
+                  "
+                >
+                  Please provide a number between 0 and 10
+                </div>
               </div>
             </div>
 
@@ -93,6 +101,14 @@
                   required
                   autofocus
                 />
+                <div
+                  *ngIf="
+                  !applyCardForm.get('population').valid &&
+                  applyCardForm.get('population').touched
+                  "
+                >
+                  Please provide a number between 0 and 10
+                </div>
               </div>
             </div>
 
@@ -108,6 +124,14 @@
                   required
                   autofocus
                 />
+                <div
+                  *ngIf="
+                  !applyCardForm.get('uncommonness').valid &&
+                  applyCardForm.get('uncommonness').touched
+                  "
+                >
+                  Please provide a number between 0 and 10
+                </div>
               </div>
             </div>
 

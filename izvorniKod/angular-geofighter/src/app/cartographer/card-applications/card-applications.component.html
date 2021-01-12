@@ -150,6 +150,14 @@
                 required
                 autofocus
               />
+              <div
+                  *ngIf="
+                  !editCardForm.get('uncommonness').valid &&
+                  editCardForm.get('uncommonness').touched
+                  "
+                >
+                  Please provide a number between 0 and 10
+                </div>
             </div>
           </div>
           <div class="form-group row">
@@ -164,6 +172,14 @@
                 required
                 autofocus
               />
+              <div
+                  *ngIf="
+                  !editCardForm.get('difficulty').valid &&
+                  editCardForm.get('difficulty').touched
+                  "
+                >
+                  Please provide a number between 0 and 10
+                </div>
             </div>
           </div>
           <div class="form-group row">
@@ -178,6 +194,14 @@
                 required
                 autofocus
               />
+              <div
+                  *ngIf="
+                  !editCardForm.get('population').valid &&
+                  editCardForm.get('population').touched
+                  "
+                >
+                  Please provide a number between 0 and 10
+                </div>
             </div>
           </div>
         </form>
