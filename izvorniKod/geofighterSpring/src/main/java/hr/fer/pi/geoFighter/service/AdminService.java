@@ -140,6 +140,8 @@ public class AdminService {
         User user = userRepository.findById(userDTO.getId()).orElseThrow(
                 () -> new SpringGeoFighterException("User does not exist"));
 
+        ImageValidateUtility.validateImage(userDTO.getPhotoURL());
+
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
         user.setPhotoURL(userDTO.getPhotoURL());

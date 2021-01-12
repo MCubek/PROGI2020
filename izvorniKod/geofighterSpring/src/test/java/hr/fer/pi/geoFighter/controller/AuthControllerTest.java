@@ -124,7 +124,7 @@ public class AuthControllerTest extends BaseIntegrationTest {
                         .contentType(APPLICATION_JSON_UTF8)
                         .content(getJsonObject(new CartographerRegisterRequest(
                                 "HR382484008943",
-                                "https://wrongImageThatDoesntExist.jpg"))
+                                "https://i.ytimg.com/vi/-AVloqiXdk0/maxresdefault.jpg"))
                         ))
                 .andExpect(status().is4xxClientError())
                 .andReturn();
