@@ -112,6 +112,80 @@
 			\subsection{Ispitivanje komponenti}
 			\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
 			
+			\subsubsection{Test 1: Uspješna registracija u sustav}
+			Korisnik se registrira u sustav e-mail adresom, korisničkim imenom, lozinkom i URL-om svoje slike. \\
+			U ovom testu su svi podatci ispravni, pa stoga poslužitelj treba uspješno izvršiti registraciju korisnika i vratiti statusni kod 200 OK.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.75]{slike/test1} \\
+				\caption{ Test registracije u sustav ispravnim podacima}
+				\label{fig:test1}
+			\end{figure}
+		
+		
+			\subsubsection{Test 2: Neuspješna registracija u sustav radi zauzetog korisničkog imena}
+			Korisnik se pokuša registrirati u sustav imenom koje je zauzeto. \\
+			Poslužitelj javlja da registracija nije uspjela,
+			a klijentu se prikazuje tost koji se pojavljuje u gornjem desnom kutu ekrana.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.75]{slike/test2} \\
+				\caption{ Test registracije u sustav zauzetim korisničkim imenom}
+				\label{fig:test2}
+			\end{figure}
+		
+			\subsubsection{Test 3: Neuspješna registracija u sustav radi lošeg URL-a slike}
+			Korisnik se pokuša registrirati u sustav URL-om svoje slike koji je možda ispravno napisan, ali slika s tim URL-om nije dohvatljiva. \\
+			Poslužitelj javlja da registracija nije uspjela, a klijentu se prikazuje tost koji se pojavljuje u gornjem desnom kutu ekrana.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.75]{slike/test3} \\
+				\caption{ Test registracije u sustav lošim URL-om slike}
+				\label{fig:test3}
+			\end{figure}
+		
+			\subsubsection{Test 4: Uspješna prijava za kartografa}
+			Korisnik se prijavljuje za kartografa u sustav IBAN brojem računa i URL-slikom svoje osobne iskaznice. \\
+			U ovom testu su svi podatci ispravni, pa stoga poslužitelj treba uspješno pohraniti prijavu korisnika za kartografa i vratiti statusni kod 200 OK.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.75]{slike/test4} \\
+				\caption{ Test prijave za kartografa ispravnim podacima}
+				\label{fig:test4}
+			\end{figure}
+		
+			\subsubsection{Test 5: Uspješna prijava u sustav}
+			Korisnik se prijavljuje u sustav korisničkim imenom i lozinkom. \\
+			U ovom testu su svi podatci ispravni, pa stoga poslužitelj treba uspješno izvršiti prijavu korisnika i vratiti statusni kod 200 OK.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.75]{slike/test5} \\
+				\caption{ Test prijave u sustav ispravnim podacima}
+				\label{fig:test5}
+			\end{figure}
+		
+			\subsubsection{Test 6: Neuspješna prijava u sustav radi neispravnih podataka}
+			Korisnik se pokuša prijaviti u sustav sa neispravnom kombinacijom korisničkog imena i lozinke. \\
+			Poslužitelj baca iznimku tipa BadCredentialsException a klijentu javlja da prijava nije uspjela.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.75]{slike/test6} \\
+				\caption{ Test prijave u sustav neispravnim podacima}
+				\label{fig:test6}
+			\end{figure}
+		
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=1]{slike/ishodTestova} \\
+				\caption{ Rezultati izvođenja gore spomenutih testova}
+				\label{fig:ishodTestova}
+			\end{figure}
 			
 			
 			\subsection{Ispitivanje sustava}
