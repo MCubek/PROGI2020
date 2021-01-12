@@ -44,22 +44,6 @@ class CardServiceTest {
 
     private User currentUser;
 
-    @BeforeEach
-    void initCard() {
-        locationCard = new LocationCard();
-        locationCard.setLocation(new Point2D.Double(0, 0));
-        locationCard.setId(1L);
-        locationCard.setName("card");
-
-        currentUser = new User();
-        currentUser.setUserId(1L);
-        currentUser.setUsername("user");
-
-        when(locationCardRepository.getLocationCardById(1L)).thenReturn(Optional.of(locationCard));
-        when(authService.getCurrentUser()).thenReturn(currentUser);
-        when(userCardRepository.findById(new UserCardId(currentUser.getUserId(), locationCard.getId()))).thenReturn(Optional.empty());
-    }
-
     @Test
     void getLocationString() {
         var point = new Point2D.Double(11.11, 12.12);
@@ -82,6 +66,19 @@ class CardServiceTest {
 
     @Test
     void collectLocationCardThrowsErrorIfUserIsTooFar() {
+        locationCard = new LocationCard();
+        locationCard.setLocation(new Point2D.Double(0, 0));
+        locationCard.setId(1L);
+        locationCard.setName("card");
+
+        currentUser = new User();
+        currentUser.setUserId(1L);
+        currentUser.setUsername("user");
+
+        when(locationCardRepository.getLocationCardById(1L)).thenReturn(Optional.of(locationCard));
+        when(authService.getCurrentUser()).thenReturn(currentUser);
+        when(userCardRepository.findById(new UserCardId(currentUser.getUserId(), locationCard.getId()))).thenReturn(Optional.empty());
+
         currentUser.setCurrentLocation(new Point2D.Double(15, 15));
 
         Assertions.assertThrows(SpringGeoFighterException.class, () -> cardService.collectLocationCard(1L));
@@ -89,6 +86,19 @@ class CardServiceTest {
 
     @Test
     void collectLocationCardSavesWhenValid() {
+        locationCard = new LocationCard();
+        locationCard.setLocation(new Point2D.Double(0, 0));
+        locationCard.setId(1L);
+        locationCard.setName("card");
+
+        currentUser = new User();
+        currentUser.setUserId(1L);
+        currentUser.setUsername("user");
+
+        when(locationCardRepository.getLocationCardById(1L)).thenReturn(Optional.of(locationCard));
+        when(authService.getCurrentUser()).thenReturn(currentUser);
+        when(userCardRepository.findById(new UserCardId(currentUser.getUserId(), locationCard.getId()))).thenReturn(Optional.empty());
+
         currentUser.setCurrentLocation(new Point2D.Double(0.01, 0.01));
 
         cardService.collectLocationCard(1L);
@@ -102,6 +112,19 @@ class CardServiceTest {
 
     @Test
     void collectLocationCardDoesNothingWhenUserHasCard() {
+        locationCard = new LocationCard();
+        locationCard.setLocation(new Point2D.Double(0, 0));
+        locationCard.setId(1L);
+        locationCard.setName("card");
+
+        currentUser = new User();
+        currentUser.setUserId(1L);
+        currentUser.setUsername("user");
+
+        when(locationCardRepository.getLocationCardById(1L)).thenReturn(Optional.of(locationCard));
+        when(authService.getCurrentUser()).thenReturn(currentUser);
+        when(userCardRepository.findById(new UserCardId(currentUser.getUserId(), locationCard.getId()))).thenReturn(Optional.empty());
+
         currentUser.setCurrentLocation(new Point2D.Double(0.01, 0.01));
 
         var uc = new UserCard();
