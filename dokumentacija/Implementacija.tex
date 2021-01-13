@@ -103,14 +103,9 @@
 		
 	
 		\section{Ispitivanje programskog rješenja}
-			
-			\textbf{\textit{dio 2. revizije}}\\
-			
-			 \textit{U ovom poglavlju je potrebno opisati provedbu ispitivanja implementiranih funkcionalnosti na razini komponenti i na razini cijelog sustava s prikazom odabranih ispitnih slučajeva. Studenti trebaju ispitati temeljnu funkcionalnost i rubne uvjete.}
-	
-			
+						
 			\subsection{Ispitivanje komponenti}
-			\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
+			\textit{Za potrebe testiranja naših Spring backend komponenti koristili smo JUnit testing framework. JUnit nam omogućuje pisanje testova koji se jako brzo izvode pomoću njegovog Mockito frameworka tako da nije potrebno pokrenuti cijelu Spring aplikaciju već možemo falsificirati odgovore nekih metoda koje bi inače razgovarale s bazom. Uz te testove (8-10) napisali smo i integracijske testove (1-6) u kojima koristimo MockMvc kojim simuliramo HTTP zahtjeve na našu backend poslužitelj i na temelju dobivenih HTTP odgovora ispitivamo njihovu ispravnost. Ti testovi zahtijevaju potpuno pokretanje Spring aplikacije te su nešto sporiji. Također napisali smo nekoliko standardnih testova koji ispituju statičke metode. Napisan je i jedan test koji poziva ne-implementiranu funkcionalnost dok ona baca UnsupportedOeprationException, ali on nije prikazan u primjerima ispod i u progamskom je kodu anotacijom onemogućen. Takav test faila pri pokretanju. Od svih testova implementiranih funkcionalnosti prolaze svi i to je vidljivo na slici koja se nalazi na dnu poglavlja.}
 			
 			\subsubsection{Test 1: Uspješna registracija u sustav}
 			Korisnik se registrira u sustav e-mail adresom, korisničkim imenom, lozinkom i URL-om svoje slike. \\
@@ -180,13 +175,68 @@
 				\label{fig:test6}
 			\end{figure}
 		
+			\eject
+		
+			\subsubsection{Test 7: Parsiranje i ispisivajne koordinata}
+			Ispitivanje metode koja parsira String u Point2D.Double u kojem čuvamo lokacije. \\
+			Također ispitivanje da se lokacija iz klase Point2D.Double dobro ispisuje kao string.
+		
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.65]{slike/test7} \\
+				\caption{ Test parsiranja i pretvaranje lokaciju u String }
+				\label{fig:test7}
+			\end{figure}
+		
+			\subsubsection{Test 8: Osvajanje karte ne radi ukoliko je igrač predaleko od nje}
+			Ispitivanje metode koja se poziva prilikom osvajanja karte i očekivanje da će baciti exception koji znači da se karta nije mogla osvojiti zbog udaljenosti od igrača.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.55]{slike/test8} \\
+				\caption{ Test osvajanja karte koji baca exception ukoliko je igrač predaleko }
+				\label{fig:test8}
+			\end{figure}
+		
+			\subsubsection{Test 9: Osvajanje karte ne radi ništa ukoliko je igrač već ima}
+			Ispitivanje metode koja se poziva prilikom osvajanja karte i očekivanje da ona neće napraviti nikakvu akciju spremanja u bazu podataka ukoliko igrač koji pokušava osvojiti kartu nju već posjeduje.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.55]{slike/test9} \\
+				\caption{ Test osvajanja karte koji provjerava da se ne poziva spremanje u bazu ukoliko igrač posjeduje kartu}
+				\label{fig:test9}
+			\end{figure}
+		
+			\subsubsection{Test 10: Osvajanje karte uspješno sprema kartu}
+			Ispitivanje metode uspješnog spremanja relacije karta-igrač u bazu podataka kod njenog osvajanja.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.55]{slike/test10} \\
+				\caption{ Test uspješnog spremanja u bazu podataka kod osvajanja}
+				\label{fig:test10}
+			\end{figure}
+		
+			\subsubsection{Test 11: Test računanja daljine između dvije lokacije}
+			Ispitivanje metode koja računa zračnu udaljenost između svije geografske lokacije.
+			Lokacija se uspoređuje s poznatom udaljenosti u kilometrima između neke dvije točke.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.70]{slike/test11} \\
+				\caption{ Test uspješnog spremanja u bazu podataka kod osvajanja}
+				\label{fig:test10}
+			\end{figure}
+			
 			\begin{figure}[H]
 				\centering
 				\includegraphics[scale=1]{slike/ishodTestova} \\
-				\caption{ Rezultati izvođenja gore spomenutih testova}
+				\caption{ Rezultati izvođenja svih napisanih testova}
 				\label{fig:ishodTestova}
 			\end{figure}
 			
+			\eject
 			
 			\subsection{Ispitivanje sustava}
 			
