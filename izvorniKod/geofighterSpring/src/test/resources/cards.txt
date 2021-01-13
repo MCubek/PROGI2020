@@ -1,0 +1,8 @@
+name=Bundek
+description=Jezero u gradu Zagrebu gdje se može sjesti na kavicu.
+photoUrl=https://www.infozagreb.hr/media/places/large_bundek1-54d0c975856c6.jpg
+latitude=45.785278
+longitude=15.987222
+population=5
+uncommonness=4
+difficulty=1
