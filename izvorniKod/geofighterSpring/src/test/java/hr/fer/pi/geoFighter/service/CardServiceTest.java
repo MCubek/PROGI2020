@@ -138,4 +138,11 @@ class CardServiceTest {
 
         verify(userCardRepository, times(0)).save(uc);
     }
+
+    @Test
+    @Disabled("Not implemented yet")
+    void testSomethingNotImplemented(){
+        Assertions.assertTrue(cardService.somethingNotImplemented());
+    }
+
 }

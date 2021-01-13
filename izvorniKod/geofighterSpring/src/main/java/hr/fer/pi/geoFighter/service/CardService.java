@@ -162,4 +162,8 @@ public class CardService {
                 .map(CardService::createCardDTO)
                 .collect(Collectors.toList());
     }
+
+    public boolean somethingNotImplemented() {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
 }
