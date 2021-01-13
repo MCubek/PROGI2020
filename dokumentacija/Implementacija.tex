@@ -15,7 +15,7 @@
 				
 				Java 11 & \href{https://www.oracle.com/java/technologies/javase-jdk11-downloads.html}{https://www.oracle.com/java} & Objektno-orijentirani programski jezik.	\\ \hline
 				
-				Spring/Spring Boot & \href{https://spring.io/}{https://spring.io/} & Java razvojni okriv. 	\\ \hline
+				Spring/Spring Boot & \href{https://spring.io/}{https://spring.io/} & Java razvojni okvir. 	\\ \hline
 				
 				Spring Web MVC  & \href{https://spring.io/guides/gs/serving-web-content/}{https://spring.io/guides/gs/serving-web-content/} & Spring web razvojni okvir.	\\ \hline
 				
@@ -105,7 +105,7 @@
 		\section{Ispitivanje programskog rješenja}
 						
 			\subsection{Ispitivanje komponenti}
-			\textit{Za potrebe testiranja naših Spring backend komponenti koristili smo JUnit testing framework. JUnit nam omogućuje pisanje testova koji se jako brzo izvode pomoću njegovog Mockito frameworka tako da nije potrebno pokrenuti cijelu Spring aplikaciju već možemo falsificirati odgovore nekih metoda koje bi inače razgovarale s bazom. Uz te testove (8-10) napisali smo i integracijske testove (1-6) u kojima koristimo MockMvc kojim simuliramo HTTP zahtjeve na našu backend poslužitelj i na temelju dobivenih HTTP odgovora ispitivamo njihovu ispravnost. Ti testovi zahtijevaju potpuno pokretanje Spring aplikacije te su nešto sporiji. Također napisali smo nekoliko standardnih testova koji ispituju statičke metode. Napisan je i jedan test koji poziva ne-implementiranu funkcionalnost dok ona baca UnsupportedOeprationException, ali on nije prikazan u primjerima ispod i u progamskom je kodu anotacijom onemogućen. Takav test faila pri pokretanju. Od svih testova implementiranih funkcionalnosti prolaze svi i to je vidljivo na slici koja se nalazi na dnu poglavlja.}
+			\textit{Za potrebe testiranja naših Spring backend komponenti koristili smo JUnit testing framework. JUnit nam omogućuje pisanje testova koji se jako brzo izvode pomoću njegovog Mockito frameworka tako da nije potrebno pokrenuti cijelu Spring aplikaciju već možemo falsificirati odgovore nekih metoda koje bi inače razgovarale s bazom. Uz te testove (8-10) napisali smo i integracijske testove (1-6) u kojima koristimo MockMvc kojim simuliramo HTTP zahtjeve na našu backend poslužitelj i na temelju dobivenih HTTP odgovora ispitivamo njihovu ispravnost. Ti testovi zahtijevaju potpuno pokretanje Spring aplikacije te su nešto sporiji. Također napisali smo nekoliko standardnih testova koji ispituju statičke metode. Napisan je i jedan test koji poziva ne-implementiranu funkcionalnost dok ona baca UnsupportedOeprationException, ali on nije prikazan u primjerima ispod i u programskom je kodu anotacijom onemogućen. Takav test faila pri pokretanju. Od svih testova implementiranih funkcionalnosti prolaze svi i to je vidljivo na slici koja se nalazi na dnu poglavlja.}
 			
 			\subsubsection{Test 1: Uspješna registracija u sustav}
 			Korisnik se registrira u sustav e-mail adresom, korisničkim imenom, lozinkom i URL-om svoje slike. \\
@@ -165,7 +165,7 @@
 			\end{figure}
 		
 			\subsubsection{Test 6: Neuspješna prijava u sustav radi neispravnih podataka}
-			Korisnik se pokuša prijaviti u sustav sa neispravnom kombinacijom korisničkog imena i lozinke. \\
+			Korisnik se pokuša prijaviti u sustav s neispravnom kombinacijom korisničkog imena i lozinke. \\
 			Poslužitelj baca iznimku tipa BadCredentialsException a klijentu javlja da prijava nije uspjela.
 			
 			\begin{figure}[H]
@@ -177,7 +177,7 @@
 		
 			\eject
 		
-			\subsubsection{Test 7: Parsiranje i ispisivajne koordinata}
+			\subsubsection{Test 7: Parsiranje i ispisivanje koordinata}
 			Ispitivanje metode koja parsira String u Point2D.Double u kojem čuvamo lokacije. \\
 			Također ispitivanje da se lokacija iz klase Point2D.Double dobro ispisuje kao string.
 		
@@ -188,23 +188,23 @@
 				\label{fig:test7}
 			\end{figure}
 		
-			\subsubsection{Test 8: Osvajanje karte ne radi ukoliko je igrač predaleko od nje}
+			\subsubsection{Test 8: Osvajanje karte ne radi ako je igrač predaleko od nje}
 			Ispitivanje metode koja se poziva prilikom osvajanja karte i očekivanje da će baciti exception koji znači da se karta nije mogla osvojiti zbog udaljenosti od igrača.
 			
 			\begin{figure}[H]
 				\centering
 				\includegraphics[scale=0.55]{slike/test8} \\
-				\caption{ Test osvajanja karte koji baca exception ukoliko je igrač predaleko }
+				\caption{ Test osvajanja karte koji baca exception ako je igrač predaleko }
 				\label{fig:test8}
 			\end{figure}
 		
-			\subsubsection{Test 9: Osvajanje karte ne radi ništa ukoliko je igrač već ima}
+			\subsubsection{Test 9: Osvajanje karte ne radi ništa ako je igrač već ima}
 			Ispitivanje metode koja se poziva prilikom osvajanja karte i očekivanje da ona neće napraviti nikakvu akciju spremanja u bazu podataka ukoliko igrač koji pokušava osvojiti kartu nju već posjeduje.
 			
 			\begin{figure}[H]
 				\centering
 				\includegraphics[scale=0.55]{slike/test9} \\
-				\caption{ Test osvajanja karte koji provjerava da se ne poziva spremanje u bazu ukoliko igrač posjeduje kartu}
+				\caption{ Test osvajanja karte koji provjerava da se ne poziva spremanje u bazu ako igrač posjeduje kartu}
 				\label{fig:test9}
 			\end{figure}
 		
@@ -254,13 +254,12 @@
 		
 		\section{Dijagram razmještaja}
 			
-			 \textnormal{Dijagram razmještaja opisuje topologiju sklopovlja i programsku potporu koja se koristi u implementaciji sustava u njegovom radnom okruženju. Komponente programske potpore deployane su na oblak platformu Heroku. Heroku je platforma (PaaS) koja razvojnim programerima omogućuje izgradnju, pokretanje i upravljanje aplikacijama u potpunosti u oblaku. Sustav je baziran na arhitekturi klijent - posluzitelj. Komunikacija između njih odvija se HTTP protokolom.}
+			 \textnormal{Dijagram razmještaja opisuje topologiju sklopovlja i programsku potporu koja se koristi u implementaciji sustava u njegovom radnom okruženju. Komponente programske potpore deployane su na oblak platformu Heroku. Heroku je platforma (PaaS) koja razvojnim programerima omogućuje izgradnju, pokretanje i upravljanje aplikacijama u potpunosti u oblaku. Sustav je baziran na arhitekturi klijent - poslužitelj. Komunikacija između njih odvija se HTTP protokolom.}
 			
-			\eject 
 			
 			\begin{figure}[H]
 				\centering
-				\includegraphics[scale=0.60]{dijagrami/Deployment Diagram0} \\
+				\includegraphics[scale=0.58]{dijagrami/Deployment Diagram0} \\
 				\caption{Dijagram razmještaja}
 				\label{fig:UC8_sekvencijski}
 			\end{figure}
@@ -279,9 +278,9 @@
 				
 				\item Unutar root direktorija otvoriti datoteku čiji je path\\ \textit{/izvorniKod/geoFighterSpring/src/main/resources/application-local.properties}\\ i unutar nje promijeniti sljedeće parametre: \begin{packed_enum}
 					
-					\item \textit{spring.datasource} parametre sa parametrima novo-kreirane baze podataka. (Voditi brigu o portu, imenu baze podataka, te korisničkom imenu i lozinci vlasnika te baze)
+					\item \textit{spring.datasource} parametre s parametrima novo-kreirane baze podataka. (Voditi brigu o portu, imenu baze podataka, te korisničkom imenu i lozinci vlasnika te baze)
 					
-					\item \textit{spring.mail} parametre sa parametrima željenog mail servisa kako bi se mogli slati mailovi potvrde. (mail servis može biti javan kao što je trenutni \textit{gmail}, a moguće je koristiti testni kao što je \textit{mailtrap}\\ \url{https://mailtrap.io})
+					\item \textit{spring.mail} parametre s parametrima željenog mail servisa kako bi se mogli slati mailovi potvrde. (mail servis može biti javan kao što je trenutni \textit{gmail}, a moguće je koristiti testni kao što je \textit{mailtrap}\\ \url{https://mailtrap.io})
 				\end{packed_enum}
 			
 				\begin{figure}[H]
@@ -296,12 +295,12 @@
 				
 				\item Otvoriti drugu konzolu i pozicionirati se unutar \textit{/izvorniKod/angular-geofighter/} i pokrenuti naredbu \textit{"npm install"} s kojom se instaliraju sve potrebno za frontend servis. Zatim pokrenuti naredbu \textit{"ng build"}, te na kraju \textit{"npm start"} kojim se pokreće frontend servis na portu 4200.
 				
-				\item Ukoliko su pokrenuti backend i frontend servis i ne javlju se greške u konzoli, aplikacija je spremna za korištenje na lokalnom računalu.\\\\
+				\item Ako su pokrenuti backend i frontend servis i ne javlju se greške u konzoli, aplikacija je spremna za korištenje na lokalnom računalu.\\\\
 				
 			\end{itemize}
 		
 			
-			\textit{Aplikacija je puštena u pogon na javno dostupnom poslužitelju \textbf{Heroku} tako da su sve tri komponente (DB, FrontEnd i BackEnd) tamo pokrenute i moguće joj je pristupiti sa linka:}\\
+			\textit{Aplikacija je puštena u pogon na javno dostupnom poslužitelju \textbf{Heroku} tako da su sve tri komponente (DB, FrontEnd i BackEnd) tamo pokrenute i moguće joj je pristupiti s linka:}\\
 			\url{https://angularfrontend-release.herokuapp.com/}\\
 						
 			\textit{GitLab repozitorij \url{https://gitlab.com/MatejC_FER/pi} također sadrži CI/CD (Continuous integration and continuous delivery) implementiran pomoću kojeg se pri svakom commitu na \textbf{Master} branch automatski aplikacija izgradila i deployala na \textbf{Heroku} javni poslužitelj. Tako nije potrebno lokalno pokretati aplikaciju nakon izmjena, već je dovoljno na repozitorij pohraniti primjene.}

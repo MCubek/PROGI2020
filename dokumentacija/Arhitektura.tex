@@ -427,10 +427,10 @@
 		\section{Dijagram aktivnosti}
 			
 			\textbf{\textnormal{UML dijagram aktivnosti prikazuje detaljan tijek obrazaca uporabe, njegovu proceduralnu logiku te sudionike pojedinog obrasca uporabe. Na slici ispod prikazan je dijagram aktivnosti za uređivanje karata od strane administratora. Administrator se uspješno prijavi u aplikaciju. Nakon prijave administrator odabire u headeru web aplikacije opciju "admin". Nude se razne opcije administratora. Odabiremo "Manage cards". Šalje se zahtjev bazi podataka za dohvat svih raspoloživih karata te se dohvaćene karte prikazuju na aplikaciji u obliku liste svih karata. Kod određenog elementa liste, odnosno kod željene karte odabiremo gumb "Edit". Aplikacija dohvaća detalje te karte i iste prikazuje na ekranu. Detalje je moguće uređivati. Nakon što smo uredili željene podatke odabiremo gumb "Accept". Aplikacija šalje upit za izmjenu podataka karte te se upit izvršava, uređena karta se sprema u bazu podataka.}}\\
-			\eject
+
 			\begin{figure}[H]
 				\centering
-				\includegraphics[scale=0.42]{dijagrami/Dijagram aktivnosti - Uređivanje karata od strane administratora} \\
+				\includegraphics[scale=0.40]{dijagrami/Dijagram aktivnosti - Uređivanje karata od strane administratora} \\
 				\caption{Dijagram aktivnosti}
 				\label{fig:UC8_sekvencijski}
 			\end{figure}
@@ -439,11 +439,10 @@
 		\section{Dijagram komponenti}
 		
 			\textbf{\textnormal{Dijagram komponenti prikazuje zavisnost komponenti i opisuje interne strukture i odnose prema okolini. Graf komponenti povezan je vezama ovisnosti kako bi se omogućila lakša analiza reakcije ostalih komponenti na promjene u jednoj komponenti. Do podataka iz baze podataka dolazi se korištenjem JPA APIja. Podaci koji dolaze iz baze podataka stavljaju se u DTO objekte. API šalje podatke iz backend-a aplikacije u obliku JSON-a frontend aplikaciji. Frontend aplikacija se sastoji od Typescript datoteka koje su raspoređene u logičke cjeline nazvane po tipovima aktora koji im pristupaju. Typescript datoteke ovise o Angular biblioteci iz koje dohvaćaju gotove komponente kao što su gumbi, forme i slično. Router je komponenta koja određuje koje datoteke se prikazuju korisniku. Sustavu se pristupa preko sučelja preko kojega mu se salju HTML i Typescript datoteke iz frontend aplikacije.}}\\
-			\eject
 			
 			\begin{figure}[H]
 				\centering
-				\includegraphics[scale=0.40]{dijagrami/ComponentDiagramGeoF} \\
+				\includegraphics[scale=0.32]{dijagrami/ComponentDiagramGeoF} \\
 				\caption{Dijagram komponenti}
 				\label{fig:UC8_sekvencijski}
 			\end{figure}
