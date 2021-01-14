@@ -393,3 +393,93 @@ longitude=14.91408191262595
 population=10
 uncommonness=6
 difficulty=6
+
+name=Muzej Turopolja
+description=Muzej Turopolja u Velikoj Gorici
+photoUrl=https://www.tzvg.hr/uploads/content/239/single_image/1/large_crop_239.JPG
+latitude=45.713961
+longitude=16.076038
+population=0
+uncommonness=6
+difficulty=5
+
+name=Podravka Koprivnica
+description=Prehrambena i farmaceutska kompanija
+photoUrl=https://lh5.googleusercontent.com/p/AF1QipMGY-2feLBreL3wJjd-LXJxWIplFDXP4AJtuRbE=w426-h240-k-no
+latitude=46.16724
+longitude=16.82330
+population=2
+uncommonness=3
+difficulty=3
+
+name=Košarkaški centar Dražen Petrović
+description=Višenamjenska sportska dvorana u Zagrebu
+photoUrl=https://sites.google.com/site/zagreb0810/_/rsrc/1432217786472/home/kosarkaski-dom-drazen-petrovic/cibona.jpg
+latitude=45.80348
+longitude=15.96357
+population=6
+uncommonness=6
+difficulty=7
+
+name=Stadion Maksimir
+description=Nogometni stadion
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Maksimir_2011.jpg/250px-Maksimir_2011.jpg
+latitude=45.81956
+longitude=16.01748
+population=8
+uncommonness=4
+difficulty=6
+
+name=Klinička bolnica "Merkur"
+description=Bolnica u Zagrebu
+photoUrl=https://i0.wp.com/www.zgportal.com/wp-content/uploads/2020/03/klinicka-bolnica-dubrava-zagreb-201407.jpg?fit=1200%2C675&ssl=1
+latitude=45.82137
+longitude=15.99753
+population=2
+uncommonness=5
+difficulty=3
+
+name=Zoološki vrt grada Zagreba
+description= Jedan od 3 zoološka vrta u Hrvatskoj. Prostire se na površini od 7 hektara, a smješten je u južnom dijelu parka Maksimira.
+photoUrl=https://zoo.hr/wp-content/uploads/2019/05/Glavni-ulaz-skra%C4%87eno-2019-300x178.jpg
+latitude=45.82321
+longitude=16.08797
+population=5
+uncommonness=8
+difficulty=8
+
+name=Aquatika - Slatkovodni akvarij Karlovac
+description=Slatkovodni akvarij u Karlovcu
+photoUrl=http://www.neodoljivahrvatska.eu/wp-content/uploads/2020/03/Pano-Aquatika-WEBmala-1024x589.jpg
+latitude=45.48590
+longitude=15.56238
+population=4
+uncommonness=9
+difficulty=5
+
+name=Velebit
+description=Planina Velebit
+photoUrl=https://www.tzvg.hr/uploads/content/239/single_image/1/large_crop_239.JPG
+latitude=44.54032
+longitude=15.22967
+population=4
+uncommonness=9
+difficulty=9
+
+name=Varaždinske Toplice
+description=Specijalna bolnica za medicinsku rehabilitaciju
+photoUrl=https://cdn.shortpixel.ai/spai/w_680+q_lossy+ret_img+to_webp/https://www.naturala.hr/wp-content/uploads/2019/12/toplice-varazdin5-1-800x600.jpg
+latitude=46.21303
+longitude=16.42248
+population=1
+uncommonness=3
+difficulty=4
+
+name=Zlatni rat
+description=Plaža na Braču
+photoUrl=https://www.visitbrac.com/photos/destinations/thumbs/Plaza-Zlatni-rat-5e5b957de2fd1016074665_huge.jpg
+latitude=43.26167
+longitude=16.63132
+population=8
+uncommonness=7
+difficulty=6
