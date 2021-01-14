@@ -1,0 +1,168 @@
+<div class="register-section">
+  <div class="row justify-content-center">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <div class="card font card-radius" style="text-align: center; margin: 20px auto;">
+        <div class="card-header card-header-radius">
+          <h4>Apply card for review</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="applyCardForm" (ngSubmit)="applyCardGetLocation()">
+            <div class="form-group row">
+              <label for="name" class="col-md-4 col-form-label text-md-right"
+                >Name</label
+              >
+              <div class="col-md-6">
+                <input
+                  type="text"
+                  [formControlName]="'name'"
+                  id="name"
+                  class="form-control input-radius"
+                  name="name"
+                  required
+                  autofocus
+                />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right"
+                >Description</label
+              >
+              <div class="col-md-6">
+                <textarea
+                type="text"
+                [formControlName]="'description'"
+                class="form-control input-radius"
+                required
+                autofocus>
+                </textarea>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label
+                for="photoURL"
+                class="col-md-4 col-form-label text-md-right"
+                >Photo URL</label
+              >
+              <div class="col-md-6">
+                <input
+                  type="url"
+                  [formControlName]="'photoURL'"
+                  id="photoURL"
+                  class="form-control input-radius"
+                  name="photoURL"
+                  required
+                />
+                <span
+                  *ngIf="
+                    !applyCardForm.get('photoURL').valid &&
+                    applyCardForm.get('photoURL').touched
+                  "
+                >
+                  Please provide a valid URL
+                </span>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right"
+                >Difficulty</label
+              >
+              <div class="col-md-6">
+                <input
+                  type="number"
+                  [formControlName]="'difficulty'"
+                  class="form-control input-radius"
+                  required
+                  autofocus
+                />
+                <div
+                  *ngIf="
+                  !applyCardForm.get('difficulty').valid &&
+                  applyCardForm.get('difficulty').touched
+                  "
+                >
+                  Please provide a number between 0 and 10
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right"
+                >Population</label
+              >
+              <div class="col-md-6">
+                <input
+                  type="number"
+                  [formControlName]="'population'"
+                  class="form-control input-radius"
+                  required
+                  autofocus
+                />
+                <div
+                  *ngIf="
+                  !applyCardForm.get('population').valid &&
+                  applyCardForm.get('population').touched
+                  "
+                >
+                  Please provide a number between 0 and 10
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right"
+                >Uncommonness</label
+              >
+              <div class="col-md-6">
+                <input
+                  type="number"
+                  [formControlName]="'uncommonness'"
+                  class="form-control input-radius"
+                  required
+                  autofocus
+                />
+                <div
+                  *ngIf="
+                  !applyCardForm.get('uncommonness').valid &&
+                  applyCardForm.get('uncommonness').touched
+                  "
+                >
+                  Please provide a number between 0 and 10
+                </div>
+              </div>
+            </div>
+
+            <!--
+            <div class="form-group row">
+              <label
+                for="location"
+                class="col-md-4 col-form-label text-md-right"
+                >Location</label
+              >
+              <div class="col-md-6">
+                <input
+                  type="text"
+                  [formControlName]="'location'"
+                  id="location"
+                  class="form-control input-radius"
+                  name="location"
+                  required
+                />
+              </div>
+            </div>
+          -->
+            <div class="form-group row">
+              <div class="col-md-6 offset-md-4">
+                <button type="submit" class="apply-card btn btn-primary float-right">Apply</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>

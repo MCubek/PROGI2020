@@ -31,4 +31,12 @@ export class CartographerApplicationsComponent implements OnInit {
     window.location.reload();
   }
 
+  decline(username: string): void{
+    this.adminService.declineCartographer(username).subscribe(data => {
+    }, error => {
+      throwError(error);
+    });
+    window.location.reload();
+  }
+
 }

@@ -1,0 +1,21 @@
+<div class="container">
+  <h3 class="text-center" style="padding: 20px;">All users</h3>
+  <table *ngIf="usernames!==undefined" class="table table-hover table-striped" style="margin:0 auto; width:50%;">
+    <thead>
+    <tr>
+      <th scope="col">Username</th>
+      <th><button class="btn btn-primary float-right" (click)="moveToMyProfile()">My profile</button></th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let user of usernames">
+    <tr *ngIf="user!=username">
+      <td>{{user}}</td>
+      <td><button class="btn btn-primary float-right" (click)="moveToViewProfile(user)">View profile</button></td>
+    </tr>
+    </ng-container>
+    </tbody>
+  </table>
+</div>
+
+<h3 *ngIf="usernames===undefined || usernames.length==0" style="text-align: center;"> No users. Server may be down.</h3>

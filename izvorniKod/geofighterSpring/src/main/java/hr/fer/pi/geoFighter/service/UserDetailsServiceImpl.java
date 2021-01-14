@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -32,10 +33,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username));
 
+        boolean notLocked = user.getForcedTimeoutEnd() == null || user.getForcedTimeoutEnd().isBefore(LocalDateTime.now());
+
         return new org.springframework.security
                 .core.userdetails.User(user.getUsername(), user.getPassword(),
                 user.isEnabled(), true, true,
-                true, getAuthorities(user.getRole()));
+                notLocked, getAuthorities(user.getRole()));
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(Role role) {

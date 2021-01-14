@@ -1,0 +1,12 @@
+.box{
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+}
+
+.title{
+  text-align: center;
+}
+.h3 {
+  text-align: left;
+  padding: 20px;
+}

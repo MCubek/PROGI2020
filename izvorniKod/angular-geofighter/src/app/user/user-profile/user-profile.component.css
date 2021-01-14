@@ -1,0 +1,138 @@
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+body {
+  background-color: #B3E5FC;
+  border-radius: 10px
+}
+
+.cardUser {
+  //width: 2000px;
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.stats {
+  background: #f2f5f8 !important;
+  color: #000 !important;
+}
+
+.articles {
+  font-size: 20px;
+  color: #a1aab9;
+}
+
+.number1 {
+  font-weight: 500;
+}
+
+.followers {
+  font-size: 20px;
+  color: #a1aab9
+}
+
+.number2 {
+  font-weight: 500
+}
+
+.rating {
+  font-size: 20px;
+  color: #a1aab9
+}
+
+.number3 {
+  font-weight: 500
+}
+
+.wrapper {
+  margin: 0%;
+  padding: 0%;
+  height: 100%;
+  margin-right: 0%;
+}
+.p {
+  text-align: left;
+  font-size: 20px;
+  padding: 20px;
+}
+.p2 {
+  text-align: left;
+  padding: 20px;
+}
+.h3 {
+  text-align: left;
+  padding: 20px;
+}
+
+.btn-font {
+  font-size: 12px;
+  margin: 3%;
+}
+.btn-players {
+  background-color: grey;
+  border-color: grey;
+  margin: 10px;
+}
+
+.list-group {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-row: auto;
+  padding: 20px;
+}
+
+.list-group-item {
+  height: 50vh;
+  padding: 10px;
+  overflow: auto;
+  border: none;
+}
+
+.card {
+  min-height: 45vh;
+  max-width: 15vw;
+
+}
+
+.card-img-top {
+  height: 20vh;
+  width: 15vw;
+  /*height: 170px;*/
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.card-text {
+  font-size: 0.8rem;
+  text-align: justify;
+  text-justify: inter-word;
+  overflow: auto;
+}
+
+.btn {
+  font-size: 1rem;
+}
+
+.btn-bottom {
+  padding: 10px;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  align-self: center;
+  align-items: center;
+  height: 0.5vh;
+  width: 15vw;
+}
+
+

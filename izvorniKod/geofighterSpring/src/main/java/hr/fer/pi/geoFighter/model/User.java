@@ -3,25 +3,26 @@ package hr.fer.pi.geoFighter.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.locationtech.jts.geom.Point;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.awt.geom.Point2D;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
 
+import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "player")
+@Entity
 @Table(name = "\"USERS\"", uniqueConstraints = {@UniqueConstraint(columnNames = "username"), @UniqueConstraint(columnNames = "email")})
 public class User {
     @Id
@@ -59,20 +60,20 @@ public class User {
     private LocalDateTime forcedTimeoutEnd = null;
 
     @Nullable
-    private Point currentLocation;
+    private Point2D.Double currentLocation;
 
     private Boolean online;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<UserCard> locationCardAssoc;
 
-    @OneToMany(mappedBy = "createdBy", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "createdBy", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<LocationCard> createdCards;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<UserCardFight> cardFightAssoc;
 
-    @OneToMany(mappedBy = "winner", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "winner", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<Fight> fightsWon;
 
     @OneToOne(mappedBy = "user", orphanRemoval = true)

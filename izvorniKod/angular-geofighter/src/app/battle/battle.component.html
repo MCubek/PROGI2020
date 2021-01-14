@@ -1,0 +1,58 @@
+<div class="wrapper">
+  <h3 class="h3" style="text-align: center;">Battle time! You are playing with {{opponent}}.</h3>
+  <div class="cards" *ngIf="cardsPicked===false">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <p class="p">Pick your cards and then<a id="btn-card-submit" class="btn btn-primary btn-font"
+                                                  (click)="submitCards()" style="margin:auto 10px;">Submit</a>them!</p>
+        </div>
+        <div class="col-sm">
+          <p class="p">Pick your opponent:<a href="/nearbyUsers" class="btn btn-primary btn-font"
+                                             style="margin:auto 10px;">See players around you</a></p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="userCards!==undefined && !cardsPicked" class="list-group">
+      <div *ngFor="let userCard of userCards" class="list-group-item">
+        <div class="card">
+          <img src={{userCard.photoURL}} class="card-img-top"/>
+          <div class="card-body">
+            <h5 class="card-title">{{userCard.name}}</h5>
+            <div class="container">
+              <div class="row text-center">
+                <div class="col-sm">
+                  <p>Difficulty: {{userCard.difficulty}}</p>
+                </div>
+              </div>
+              <div class="row text-center">
+                <div class="col-sm">
+                  <p>Population: {{userCard.population}}</p>
+                </div>
+              </div>
+              <div class="row text-center">
+                <div class="col-sm">
+                  <p>Uncommonness: {{userCard.uncommonness}}</p>
+                </div>
+              </div>
+              <div class="row text-center" *ngIf="userCard.cooldownMultiplier!=0">
+                <div class="col-sm">
+                  <p>CooldownMultiplier: {{userCard.cooldownMultiplier}}</p>
+                </div>
+              </div>
+            </div>
+            <hr/>
+            <div class="btn-bottom">
+              <a [href]="'card/' + userCard.id" id="btn-card-geo" class="btn btn-primary btn-font">See more</a>
+              <a [id]="'btn-card-geo'+userCard.id" class="btn btn-primary btn-font"
+                 (click)="clickCard($event,userCard.id)">Pick card</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p *ngIf="userCards===undefined || userCards.length==0" class="p2"> No cards yet</p>
+  </div>
+  <p *ngIf="cardsPicked===true && ready===false" class="p">Cards picked! Waiting for your opponent. </p>
+  <p *ngIf="cardsPicked===true && ready===true" class="p">All players ready! Starting game! </p>
+</div>

@@ -2,13 +2,16 @@
   <div class="row">
     <hr/>
     <div class="col-md-11">
-      <h2>List of Cartographer Applicants</h2>
+      <h3 style="margin: 20px auto;">List of Cartographer Applicants</h3>
       <ul *ngIf="applicants!==undefined" class="list-group">
         <li *ngFor="let applicant of applicants" class="list-group-item">
-          <p>Username: {{applicant.username}}</p>
-          <p>Email: {{applicant.email}}</p>
-          <p>Joined: {{applicant.joinedDate}}</p>
+          <p><img src={{applicant.idUrl}}></p>
+          <p><u>Username:</u> {{applicant.username}}</p>
+          <p><u>Email:</u> {{applicant.email}}</p>
+          <p><u>Joined:</u> {{applicant.joinedDate}}</p>
+          <p><u>IBAN:</u> {{applicant.iban}}</p>
           <button class="btn btn-primary" (click)="accept(applicant.username)">Accept</button>
+          <button class="btn btn-primary" (click)="decline(applicant.username)">Decline</button>
         </li>
       </ul>
       <p *ngIf="applicants===undefined || applicants.length==0"> No Applicants</p>

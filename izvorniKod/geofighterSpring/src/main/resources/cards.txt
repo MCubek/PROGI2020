@@ -1,0 +1,476 @@
+name=Bundek
+description=Jezero u gradu Zagrebu gdje se može sjesti na kavicu.
+photoUrl=https://www.infozagreb.hr/media/places/large_bundek1-54d0c975856c6.jpg
+latitude=45.785278
+longitude=15.987222
+population=5
+uncommonness=4
+difficulty=1
+
+name=Plitvice
+description=Nacionalni park s velikim slapovima.
+photoUrl=https://www.adriaticdmc.hr/storage/upload/atrakcije/plitvice_lakes__181617.jpg
+latitude=44.880556
+longitude=15.616111
+population=2
+uncommonness=10
+difficulty=8
+
+name=Klek
+description=Planina pored Ogulina
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/d/d9/Klek_mountain.jpg
+latitude=45.258611
+longitude=15.145556
+population=2
+uncommonness=8
+difficulty=9
+
+name=Sirevi u Ogulinu
+description=Ogulin sirevi. Ne rade ponedjeljkom.
+photoUrl=https://ogulin.hr/old-site/slike/131006-opg_tounj6.jpg
+latitude=45.267038080101
+longitude=15.224458936594164
+population=0
+uncommonness=6
+difficulty=7
+
+name=Ogulin
+description=Grad u Karlovačkoj županiji.
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/d/da/Burg_Ogulin.jpg
+latitude=45.26686
+longitude=15.225076
+population=7
+uncommonness=5
+difficulty=3
+
+name=West Gate
+description=Napušten shopping centar pored Zaprešića.
+photoUrl=https://www.dnevno.hr/wp-content/uploads/2018/11/ulaz-2-02-775-440-775x440-660x440.jpg
+latitude=45.871002
+longitude=15.825845
+population=0
+uncommonness=5
+difficulty=3
+
+name=Remetinec zatvor
+description=Dom za neke političare i ostale kriminalce.
+photoUrl=https://www.tportal.hr/media/thumbnail/w1000/4401.jpeg
+latitude=45.76533339803725
+longitude=15.946961883467717
+population=10
+uncommonness=2
+difficulty=1
+
+name=FER
+description=Fakultet Elektrotehnike i računarstva.
+photoUrl=https://previews.123rf.com/images/dtiberio/dtiberio1902/dtiberio190200895/117721366-crying-young-male-student.jpg
+latitude=45.80104620375517
+longitude=15.971130578551724
+population=2
+uncommonness=4
+difficulty=10
+
+name=grad Krk
+description=Administrativno, političko, gospodarsko i vjersko središte otoka Krka.
+photoUrl=https://www.aurea-krk.com/resources/imagesUpload/33508.jpg
+latitude=45.06449237432147
+longitude=14.577661904037134
+population=6
+uncommonness=6
+difficulty=5
+
+name=NP Brijuni
+description=Nacionalni park koji čini 14 otoka i otočića duž zapadnoistarske obale s izuzetno bogatom kulturno-povijesnom baštinom.
+photoUrl=https://www.np-brijuni.hr/imagecache/maxsize/6f67e492-4a50-4136-93fd-89f06287a549/28-12-2018/brijuni_iz_zraka2.jpg
+latitude=44.94643062655231
+longitude=13.76853480548619
+population=2
+uncommonness=8
+difficulty=7
+
+name=Dubrovnik
+description=Grad na jugu Hrvatske poznat po svojim brojnim znamenitostima i bogatoj kulturi.
+photoUrl=https://www.costacruises.eu/content/dam/costa/inventory-assets/ports/DBV/24-DUBROVNIK_2880x1536.jpg
+latitude=42.68692006790624
+longitude=18.102823465454467
+population=5
+uncommonness=5
+difficulty=6
+
+name=Aquapark Adamovec
+description=Vodeni park s wellness i spa centrom nedaleko od Zagreba.
+photoUrl=https://www.aquaparkadamovec.hr/wp-content/uploads/2013/08/20_Aquapark_Adamovec.jpg
+latitude=45.902603661043464
+longitude=16.16250434164756
+population=4
+uncommonness=6
+difficulty=3
+
+name=Biserujka
+description= Špilja koja se nalazi na sjeveroistočnom dijelu otoka Krka, poznata i pod nazivima Vitezićeva špilja ili Slivanjska jama.
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/c/c2/Biserujka_H%C3%B6hle_2007_Kroatien_112.jpg
+latitude=45.1875923487907
+longitude=14.609835670451213
+population=1
+uncommonness=8
+difficulty=8
+
+name=Kumrovec
+description=Mjesto u Hrvatskom Zagorju gdje se nalazi jedinstveni muzej na otvorenom, s očuvanim izvornim seoskim kućama s prijelaza 19. u 20. stoljeće.
+photoUrl=https://img.itinari.com/pages/images/original/eb90e093-54dc-4471-b57f-e732579d2154-dreamer4787-istock-1020187298.jpg?ch=DPR&dpr=1&w=1600&s=5bf1bc470bcfaeb769ccfea9eaf0be0f
+latitude=46.07870568225186
+longitude=15.677456936784962
+population=2
+uncommonness=9
+difficulty=6
+
+name=Rastoke
+description=Mjesto u kojem se rijeka Slunjčica preko sedrenih stijena ulijeva u rijeku Koranu, a u svojemu toku stvara mnoštvo malih jezera, brzaka i slapova.
+photoUrl=https://cdn.hkm.hr/2020/02/TZ-54-1024x683.jpg
+latitude=45.12350281034146
+longitude=15.587593754287164
+population=3
+uncommonness=6
+difficulty=6
+
+name=Veliki Tabor
+description=Utvrda u Hrvatskom zagorju koja je jedan je od najočuvanijih srednjovjekovnih gradova u Hrvatskoj i predstavnik arhitekture kasnog srednjeg vijeka.
+photoUrl=https://croatia.hr/sites/default/files/styles/image_full_width/public/2018-03/veliki-tabor-optimizirano-za-web-ivo-biocina_1600x900_0.jpeg?itok=pgsxpFG1
+latitude=46.155173010068296
+longitude=15.65196434165911
+population=2
+uncommonness=7
+difficulty=7
+
+name=Trakošćan
+description=Dvor Trakošćan je kulturno dobro, zaštićena je povijesna cjelina koja se sastoji od dvorca, građevina uz dvorac, perivoja i park šume s jezerom.
+photoUrl=https://croatia.hr/sites/default/files/styles/image_full_width/public/2017-11/dvorac_2.jpg?itok=Kg8GXcdG
+latitude=46.281575916222636
+longitude=15.948316126334776
+population=2
+uncommonness=6
+difficulty=5
+
+name=Stari grad Sisak
+description=Tvrđava na ušću Kupe i Save
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Sisak_fortress.jpg/1280px-Sisak_fortress.jpg
+latitude=45.47040126143121
+longitude=16.38596314834875
+population=0
+uncommonness=6
+difficulty=3
+
+name=HNK Segesta
+description=Sisački stadion
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/SegestaStadion.JPG/1280px-SegestaStadion.JPG
+latitude=45.47804536837759
+longitude=16.376180587763866
+population=0
+uncommonness=3
+difficulty=2
+
+name=Sisačka katedrala
+description=Katedrala Uzvišenja Sv. Križa
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Sisak_Cathedral_view.jpg/800px-Sisak_Cathedral_view.jpg
+latitude=45.48435541085313
+longitude=16.372411024115575
+population=0
+uncommonness=5
+difficulty=2
+
+name=Sisak
+description=Grad u Sisačko-Moslavačkoj županiji
+photoUrl=https://turizam-smz.hr/wp-content/uploads/2020/05/Sisak-5-2-min-scaled.jpg
+latitude=45.487372027059536
+longitude=16.372519006993482
+population=5
+uncommonness=3
+difficulty=3
+
+name=Gradska vijećnica Sisak
+description=Gradska vijećnica u Sisku
+photoUrl=https://sisak.hr/wp-content/uploads/2021/01/DSC_3640-1024x683.jpg
+latitude=45.490500366243346
+longitude=16.371281930604763
+population=0
+uncommonness=3
+difficulty=2
+
+name=Stari most
+description=Stari most u Sisku izgrađen prije gotovo sto godina
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/6/65/Sisak_bridge_croatia1.jpg
+latitude=45.48287331900633
+longitude=16.370008577515346
+population=0
+uncommonness=4
+difficulty=3
+
+name=Bandićeve fontane
+description=Najveća kulturna znamenitost grada Zagreba
+photoUrl=https://www.tportal.hr/media/thumbnail/w1000/360497.jpeg
+latitude=45.79778415050926
+longitude=15.979148856320485
+population=0
+uncommonness=10
+difficulty=10
+
+name=Filozofski Fakultet u Zagrebu
+description=Sastajalište najvećih umova današnjice, ali bez zeke dobri su to studenti.
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/c/c6/Filozofski_fakultet_u_Zagrebu.jpg
+latitude=45.79667069262539
+longitude=15.970965393462327
+population=0
+uncommonness=6
+difficulty=3
+
+name=Plitvička jezera
+description=Nacionalni park u Lici
+photoUrl=https://www.roselinde.me/wp-content/uploads/2019/02/legends_plitvice_lakes_1.jpg
+latitude=44.87451386657364
+longitude=15.591582292158686
+population=0
+uncommonness=8
+difficulty=4
+
+name=Lonjsko Polje
+description=Park prirode kraj rijeke Save
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Lonjsko_Polje.JPG/1280px-Lonjsko_Polje.JPG
+latitude=45.40078167084041
+longitude=16.22509181397707
+population=0
+uncommonness=6
+difficulty=4
+
+name=Kalnik
+description=Gora smještena u sjeverozapadnoj Hrvatskoj
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/0/0d/Kalnik_panorama.jpg
+latitude=46.139523
+longitude=16.458507
+population=4
+uncommonness=8
+difficulty=5
+
+name=Pulska Arena
+description=Najveći je i najsačuvaniji spomenik antičkog graditeljstva u Hrvatskoj
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Anfiteatro_de_Pula%2C_Croacia%2C_2017-04-17%2C_DD_13-18_HDR_PAN.jpg/1920px-Anfiteatro_de_Pula%2C_Croacia%2C_2017-04-17%2C_DD_13-18_HDR_PAN.jpg
+latitude=44.86833
+longitude=13.84806
+population=7
+uncommonness=4
+difficulty=4
+
+name=Dioklecijanova palača
+description=Antička palača cara Dioklecijana u Splitu.Oko 300. godine podigao ju je rimski car Dioklecijan i u njoj je boravio nakon povlačenja s prijestolja (305.g.) do smrti (316.g.).
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Peristyle_of_Diocletian%27s_Palace%2C_Split_%2811908116224%29.jpg/1280px-Peristyle_of_Diocletian%27s_Palace%2C_Split_%2811908116224%29.jpg
+latitude=43.504831314
+longitude=16.436331588
+population=9
+uncommonness=3
+difficulty=3
+
+name=Uspinjača
+description=Uspinjača je u prošlosti imala važnu ulogu u životu stanovnika Zagreba, a danas je značajna turistička atrakcija u kojoj se vole prevesti mnogobrojni turisti. Ideja uspinjače bila je povezati Donji i Gornji grad, a s prugom od samo 66 metara – ovo je najkraća žičana željeznica na svijetu.
+photoUrl=https://www.internationalbusinesshotel.com/uploads/images/_1024x682_fit_center-center_75_none/funicular-m-vrdoljak-592bfbe3415b2_190809_095319.png
+latitude=45.81432321944631
+longitude=15.973064933772061
+population=9
+uncommonness=1
+difficulty=1
+
+name=Tunel Grič
+description= Tunel ispod Gradeca (Griča) koji povezuje Mesničku i Radićevu ulicu, a okomito izlazi na tri mjesta u Ilici i jednom u Tomićevoj ulici prema jugu. Tunel je dugačak 350 metara, svojim većim dijelom širok je 3,2 metra dok je u središnjem dijelu širok 5,5 metara. Otvoren je za javnost u srpnju 2016. godine, iako je ranije bio otvoren kao sklonište za građane i mjesto kulturnih događanja tijekom Domovinskog rata.
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Tunel_Gri%C4%8D_Mesni%C4%8Dka_2016.jpg/800px-Tunel_Gri%C4%8D_Mesni%C4%8Dka_2016.jpg
+latitude=45.8150475662807
+longitude=15.9710197
+population=6
+uncommonness=5
+difficulty=5
+
+name=Aleja Skulptura
+description=Skultpure su postavljene na inicijativu akademskog kipara Ratka Petrića u okviru sekcije Prijedlog zagrebačkog salona 1985. godine.
+photoUrl=http://licegrada.hr/wp-content/uploads/2016/08/aleja-skulptura-01032015-2.jpg
+latitude=45.78929551610913
+longitude=15.965722786637688
+population=4
+uncommonness=8
+difficulty=5
+
+name=Ševin mural na Knežiji, Zagreb
+description=Zvonimir "Ševa" Levačić (Zagreb, 12. prosinca 1943. – 5. svibnja 2010.), hrvatska televizijska osoba. Jedan od sudionika i "glavnih sporednih" zvijezda televizijske emisije Noćne more Željka Malnara. Dionik komičarskog parodijskog projekta države Pešćenice. Pobijedio je Dennisa Rodmana na izvođenju slobodnih bacanja. 
+photoUrl=https://img.24sata.hr/xXQg9b--nCIzFU1iDkXM_qbYjsk=/1600x1066/smart/media/images/2020-46/pxl-191120-30886840.jpg
+latitude=45.78999684
+longitude=15.95166286
+population=9
+uncommonness=9
+difficulty=9
+
+name=Dubrovačke zidine
+description=Zidine grada Dubrovnika, turistička atrakcija
+photoUrl=https://www.apartmanija.hr/slike/slike_gradovi/poi/dubrovacke-zidine_w.jpg
+latitude=42.64095190964842
+longitude=18.106178550193825
+population=0
+uncommonness=9
+difficulty=9
+
+name=Katedrala sv. Jakova
+description=Katedrala u Šibeniku pod UNESCO zaštitom
+photoUrl=https://smart-travel.hr/wp-content/uploads/2014/07/18782042_l-640x544-640x459.jpg
+latitude=43.73585257437353
+longitude=15.889099498021402
+population=2
+uncommonness=5
+difficulty=3
+
+name=Puntijarka
+description=Okupljalište studenata na Medvednici
+photoUrl=https://gastro.24sata.hr/media/img/94/a7/2aa5a149229720ce5867.jpeg
+latitude=45.91705394720696
+longitude=15.96649500654048
+population=9
+uncommonness=5
+difficulty=10
+
+name=Strossmayerovo šetalište
+description=Šetalište gdje se mladi vole.
+photoUrl=https://licegrada.hr/wp-content/uploads/2020/04/prazan-gornji-grad-11042020-21.jpg
+latitude=45.814734746395416
+longitude=15.973087555635503
+population=2
+uncommonness=5
+difficulty=5
+
+name=Hrvatsko narodno kazalište
+description=Kazalište, dom mnogih opera i baleta.
+photoUrl=https://image.dnevnik.hr/media/images/1920x1080/Apr2020/61863020-hnk-zgrada.jpg
+latitude=45.809577763013905
+longitude=15.969998182620051
+population=2
+uncommonness=5
+difficulty=2
+
+name=Cvjetni trg
+description=Trg gdje se prodaje cvijeće i pije kava.
+photoUrl=https://projektvelebit.com/wp-content/uploads/2017/01/cvjetni-trg.jpg
+latitude=45.812332074152536
+longitude=15.974152823540138
+population=2
+uncommonness=7
+difficulty=4
+
+name=Zrinjevac
+description=Zrinjevac je park u centru Zagreba.
+photoUrl=https://licegrada.hr/wp-content/uploads/2018/05/park-zrinjevac-15052018-02.jpg
+latitude=45.81070479445717
+longitude=15.978922240291844
+population=7
+uncommonness=4
+difficulty=4
+
+name=Bolnica Dubrava
+description=Korona bolnica u Zagrebu.
+photoUrl=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6u1dw1lS49croqu7AL5jgyAzFX2omrYdCIw&usqp=CAU
+latitude=45.83452076669887
+longitude=16.035756737025803
+population=10
+uncommonness=9
+difficulty=1
+
+name=Zrće
+description=Party plaža na otoku Pagu.
+photoUrl=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzEy4e5v2D5HTW4iPj0rczoZsYxkwulWdhUw&usqp=CAU
+latitude=44.541016552144086
+longitude=14.91408191262595
+population=10
+uncommonness=6
+difficulty=6
+
+name=Muzej Turopolja
+description=Muzej Turopolja u Velikoj Gorici
+photoUrl=https://www.tzvg.hr/uploads/content/239/single_image/1/large_crop_239.JPG
+latitude=45.713961
+longitude=16.076038
+population=0
+uncommonness=6
+difficulty=5
+
+name=Podravka Koprivnica
+description=Prehrambena i farmaceutska kompanija
+photoUrl=https://lh5.googleusercontent.com/p/AF1QipMGY-2feLBreL3wJjd-LXJxWIplFDXP4AJtuRbE=w426-h240-k-no
+latitude=46.16724
+longitude=16.82330
+population=2
+uncommonness=3
+difficulty=3
+
+name=Košarkaški centar Dražen Petrović
+description=Višenamjenska sportska dvorana u Zagrebu
+photoUrl=https://sites.google.com/site/zagreb0810/_/rsrc/1432217786472/home/kosarkaski-dom-drazen-petrovic/cibona.jpg
+latitude=45.80348
+longitude=15.96357
+population=6
+uncommonness=6
+difficulty=7
+
+name=Stadion Maksimir
+description=Nogometni stadion
+photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Maksimir_2011.jpg/250px-Maksimir_2011.jpg
+latitude=45.81956
+longitude=16.01748
+population=8
+uncommonness=4
+difficulty=6
+
+name=Klinička bolnica "Merkur"
+description=Bolnica u Zagrebu
+photoUrl=https://i0.wp.com/www.zgportal.com/wp-content/uploads/2020/03/klinicka-bolnica-dubrava-zagreb-201407.jpg?fit=1200%2C675&ssl=1
+latitude=45.82137
+longitude=15.99753
+population=2
+uncommonness=5
+difficulty=3
+
+name=Zoološki vrt grada Zagreba
+description= Jedan od 3 zoološka vrta u Hrvatskoj. Prostire se na površini od 7 hektara, a smješten je u južnom dijelu parka Maksimira.
+photoUrl=https://zoo.hr/wp-content/uploads/2019/05/Glavni-ulaz-skra%C4%87eno-2019-300x178.jpg
+latitude=45.82321
+longitude=16.08797
+population=5
+uncommonness=8
+difficulty=8
+
+name=Aquatika - Slatkovodni akvarij Karlovac
+description=Slatkovodni akvarij u Karlovcu
+photoUrl=http://www.neodoljivahrvatska.eu/wp-content/uploads/2020/03/Pano-Aquatika-WEBmala-1024x589.jpg
+latitude=45.48590
+longitude=15.56238
+population=4
+uncommonness=9
+difficulty=5
+
+name=Velebit
+description=Planina Velebit
+photoUrl=https://www.tzvg.hr/uploads/content/239/single_image/1/large_crop_239.JPG
+latitude=44.54032
+longitude=15.22967
+population=4
+uncommonness=9
+difficulty=9
+
+name=Varaždinske Toplice
+description=Specijalna bolnica za medicinsku rehabilitaciju
+photoUrl=https://cdn.shortpixel.ai/spai/w_680+q_lossy+ret_img+to_webp/https://www.naturala.hr/wp-content/uploads/2019/12/toplice-varazdin5-1-800x600.jpg
+latitude=46.21303
+longitude=16.42248
+population=1
+uncommonness=3
+difficulty=4
+
+name=Zlatni rat
+description=Plaža na Braču
+photoUrl=https://www.visitbrac.com/photos/destinations/thumbs/Plaza-Zlatni-rat-5e5b957de2fd1016074665_huge.jpg
+latitude=43.26167
+longitude=16.63132
+population=8
+uncommonness=7
+difficulty=6

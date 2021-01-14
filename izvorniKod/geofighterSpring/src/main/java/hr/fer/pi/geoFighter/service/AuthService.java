@@ -11,21 +11,24 @@ import hr.fer.pi.geoFighter.repository.RoleRepository;
 import hr.fer.pi.geoFighter.repository.UserRepository;
 import hr.fer.pi.geoFighter.repository.VerificationTokenRepository;
 import hr.fer.pi.geoFighter.security.JwtProvider;
+import hr.fer.pi.geoFighter.util.ImageValidateUtility;
 import lombok.AllArgsConstructor;
+import org.apache.commons.validator.routines.IBANValidator;
 import org.apache.commons.validator.routines.UrlValidator;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -44,6 +47,7 @@ public class AuthService {
     private final JwtProvider jwtProvider;
     private final RefreshTokenService refreshingTokenService;
     private final UrlValidator urlValidator = new UrlValidator(new String[]{"http", "https"});
+    private final IBANValidator ibanValidator = new IBANValidator();
 
     public void signup(RegisterRequest registerRequest) {
         if (userRepository.findByUsername(registerRequest.getUsername()).isPresent() ||
@@ -61,11 +65,17 @@ public class AuthService {
         if (! urlValidator.isValid(registerRequest.getPhotoURL()))
             throw new UserInfoInvalidException("Invalid photo URL");
 
+        URL url;
         try {
-            user.setPhotoURL(new URL(registerRequest.getPhotoURL()));
+            url = new URL(registerRequest.getPhotoURL());
         } catch (MalformedURLException e) {
             throw new SpringGeoFighterException("Image URL error");
         }
+
+        ImageValidateUtility.validateImage(url);
+
+        user.setPhotoURL(url);
+
         userRepository.save(user);
 
         String token = generateVerificationToken(user);
@@ -78,27 +88,33 @@ public class AuthService {
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        /*org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.
-                getContext().getAuthentication().getPrincipal();
-        return userRepository.findByUsername(principal.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException("User name not found - " + principal.getUsername()));*/
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User name not found - " + username));
     }
 
     public void cartographerApply(CartographerRegisterRequest registerRequest) {
         User user = getCurrentUser();
-        user.setCartographerStatus(CartographerStatus.APPLIED);
-        user.setIban(registerRequest.getIban());
+
+        if (! ibanValidator.isValid(registerRequest.getIban()))
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Invalid IBAN");
 
         if (! urlValidator.isValid(registerRequest.getIdPhotoURL()))
-            throw new UserInfoInvalidException("Invalid photo URL");
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Invalid photo URL");
 
+        URL url;
         try {
-            user.setIdCardPhotoURL(new URL(registerRequest.getIdPhotoURL()));
+            url = new URL(registerRequest.getIdPhotoURL());
         } catch (MalformedURLException e) {
             throw new SpringGeoFighterException("Image URL error");
         }
+
+        ImageValidateUtility.validateImage(url);
+
+        user.setCartographerStatus(CartographerStatus.APPLIED);
+        user.setIban(registerRequest.getIban());
+        user.setIdCardPhotoURL(url);
+        userRepository.save(user);
+
     }
 
     private String generateVerificationToken(User user) {
@@ -113,7 +129,7 @@ public class AuthService {
 
     public void verifyAccount(String token) {
         Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
-        verificationToken.orElseThrow(() -> new SpringGeoFighterException("Invalid token."));
+        verificationToken.orElseThrow(() -> new ResponseStatusException(HttpStatus.FORBIDDEN, "Invalid token."));
         fetchUserAndEnable(verificationToken.get());
         verificationTokenRepository.delete(verificationToken.get());
     }
@@ -126,8 +142,16 @@ public class AuthService {
     }
 
     public AuthenticationResponse login(LoginRequest loginRequest) {
-        Authentication authenticate = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+        Authentication authenticate;
+        try {
+            authenticate = authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+        } catch (LockedException e) {
+            User currentUser = userRepository.findByUsername(loginRequest.getUsername()).orElseThrow(() -> new SpringGeoFighterException("should never throw this"));
+            String timeoutEnd = currentUser.getForcedTimeoutEnd().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+
+            throw new DisabledException("User disabled until " + timeoutEnd);
+        }
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         String token = jwtProvider.generateToken(authenticate);
 
@@ -153,8 +177,4 @@ public class AuthService {
                 .build();
     }
 
-    public boolean isLoggedIn() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return ! (authentication instanceof AnonymousAuthenticationToken) && authentication.isAuthenticated();
-    }
 }

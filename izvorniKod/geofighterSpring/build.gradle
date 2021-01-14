@@ -25,15 +25,15 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.mapstruct:mapstruct:1.4.1.Final'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
-	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.1.Final'
+
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	testImplementation 'org.springframework.security:spring-security-test'
+	testCompile("com.h2database:h2:1.4.200")
 
 	// https://mvnrepository.com/artifact/javax.validation/validation-api
 	compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
@@ -54,6 +54,9 @@ dependencies {
 	compile group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
 
 	compile group: 'commons-validator', name: 'commons-validator', version: '1.7'
+
+	// https://mvnrepository.com/artifact/com.google.code.findbugs/jsr305
+	compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
 }
 
 test {

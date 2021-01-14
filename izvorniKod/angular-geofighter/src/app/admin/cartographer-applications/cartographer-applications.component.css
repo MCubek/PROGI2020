@@ -1,0 +1,10 @@
+img {
+  float: left;
+  width:  400px;
+  height: 200px;
+  object-fit: scale-down;
+}
+
+button {
+  margin-right :20px
+}

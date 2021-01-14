@@ -26,7 +26,7 @@ export class SignupCartographerComponent implements OnInit {
     this.signupForm = new FormGroup({
       iban: new FormControl('', Validators.required),
       idPhotoURL: new FormControl(''
-        , [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')])
+        , [Validators.required, Validators.pattern('^https?://(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg|jpeg|png)$')])
     });
   }
 
