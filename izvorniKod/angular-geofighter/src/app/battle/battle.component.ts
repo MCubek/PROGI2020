@@ -38,10 +38,9 @@ export class BattleComponent implements OnInit {
     this.username = this.authService.getUsername();
 
     this.match = history.state.data;
-    if (this.match === undefined){
+    if (this.match === undefined) {
       this.router.navigateByUrl('/nearbyUsers');
-    }
-    else {
+    } else {
       this.fightService.getUserCardList().subscribe(data => {
         this.userCards = data;
       }, error => {
@@ -86,7 +85,7 @@ export class BattleComponent implements OnInit {
       const array = [];
       for (const id of this.pickedCards) {
         // tslint:disable-next-line:new-parens
-        array.push(new (class MyDTO implements SubmitCardModel{
+        array.push(new (class MyDTO implements SubmitCardModel {
           cardId = id;
         }));
       }
@@ -108,17 +107,23 @@ export class BattleComponent implements OnInit {
 
     if (this.pickedCards) {
       this.fightService.startFight(this.match.battleId).subscribe(data => {
-          this.ready = data;
-          if (this.ready){
-            setTimeout(() => {
+        this.ready = data;
+        if (this.ready) {
+          setTimeout(() => {
             this.router.navigate(['battle/getWinner'], {state: {data: this.match.battleId}});
           }, 3000);
-          }
+        }
 
       }, error => {
         throwError(error);
         this.toastr.error('Fight start error!');
       });
+    }
+  }
+
+  seeMore(id: number): void {
+    if (confirm('Are you sure you want leave battle page and see card details? Battle will be canceled!')) {
+      this.router.navigate(['card/' + id]);
     }
   }
 

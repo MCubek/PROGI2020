@@ -2,15 +2,9 @@
   <h3 class="h3" style="text-align: center;">Battle time! You are playing with {{opponent}}.</h3>
   <div class="cards" *ngIf="cardsPicked===false">
     <div class="container">
-      <div class="row">
-        <div class="col-sm">
-          <p class="p">Pick your cards and then<a id="btn-card-submit" class="btn btn-primary btn-font"
-                                                  (click)="submitCards()" style="margin:auto 10px;">Submit</a>them!</p>
-        </div>
-        <div class="col-sm">
-          <p class="p">Pick your opponent:<a href="/nearbyUsers" class="btn btn-primary btn-font"
-                                             style="margin:auto 10px;">See players around you</a></p>
-        </div>
+      <div class="d-flex justify-content-center">
+        <p class="p">Pick your cards and then<a id="btn-card-submit" class="btn btn-primary btn-font"
+                                                (click)="submitCards()" style="margin:auto 10px;">Submit</a>them!</p>
       </div>
     </div>
     <div *ngIf="userCards!==undefined && !cardsPicked" class="list-group">
@@ -43,7 +37,8 @@
             </div>
             <hr/>
             <div class="btn-bottom">
-              <a [href]="'card/' + userCard.id" id="btn-card-geo" class="btn btn-primary btn-font">See more</a>
+              <a [id]="'btn-card-seeMore'+userCard.id" class="btn btn-primary btn-font"
+                 (click)="seeMore(userCard.id)">See details</a>
               <a [id]="'btn-card-geo'+userCard.id" class="btn btn-primary btn-font"
                  (click)="clickCard($event,userCard.id)">Pick card</a>
             </div>
