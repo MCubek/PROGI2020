@@ -94,11 +94,9 @@ export class NearbyComponent implements OnInit, AfterViewInit {
           continue;
         }
         const marker = L.marker([card.latitude, card.longitude]).addTo(this.map);
-        // TODO Button and such?
         marker.bindPopup('<b>' + card.name + ':</b><br>' + 'uncommonness=' + card.uncommonness + '</b><br>' +
           'population=' + card.population + '</b><br>' +
-          'difficulty=' + card.difficulty + '</b><br>' +
-          '<button class="btn btn-success mr-2" (click)="collect(' + card.id + ')">\nCollect\n </button>');
+          'difficulty=' + card.difficulty + '</b><br>');
       }
     }
   }
