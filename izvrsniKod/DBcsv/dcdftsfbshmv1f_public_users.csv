@@ -1,0 +1,9 @@
+user_id,cartographer_status,created_time,current_location,elo_score,email,enabled,forced_timeout_end,iban,id_card_photourl,losses,online,password,photourl,username,wins,role_id
+1,0,2021-01-14 10:53:54.922241,,0,admin@admin.com,true,,,,0,,$2a$10$EuU7tuVcNJRzRBVC7PmqM.nEFQ1ho40ZbHTd7YSQi6BOElDNk5yn.,,admin,0,6
+3,0,2021-01-14 10:53:56.133855,,0,card@card.com,true,,,,0,,$2a$10$0YXJmjVk3x/nE.O5vjtO8eK1XMuiivJakDssKGeathK8HsApwhWf.,,card,0,5
+5,0,2021-01-14 10:53:56.624396,,123,userb@userb.com,true,,,,16,,$2a$10$f47nKPsZA2PfhxnKALJjqulBh05MQRaZ9MzZprX/OUPBTXDbHPo4a,,userB,15,4
+6,0,2021-01-14 10:53:56.925194,,132,userc@userc.com,true,,,,15,,$2a$10$Zma3WRgfnOec25weE5heK./w7HcTvmRvSRla/CwCtDdE6XCzmW5tq,,userC,17,4
+7,0,2021-01-14 10:53:57.124345,,0,nepotvrdeni@nepotvrdeni.com,false,,,,0,,$2a$10$ppCGC8byek4mA4G5KMCSG.lxnmNMOU9R3PXxWJ86lS8KPc4eRNU7G,,nepotvrdeni,0,4
+8,1,2021-01-14 10:53:57.344867,,0,applied@applied.com,true,,,,0,,$2a$10$QEVu34EQpaFKvI0YRRqOMeyHuH/B5xIzCcuI9XwAacFikLb73.Yme,,applied,0,4
+2,0,2021-01-14 10:53:55.721153,E'\\xACED00057372001C6A6176612E6177742E67656F6D2E506F696E74324424446F75626C65555BF8CA09A31D5F020002440001784400017978704046E5A35B615E75402FD24D8D8562B6',30,user@user.com,true,,,,0,,$2a$10$1.s2t3cHs9IsfG.nj1hMVebiY/9hQals.5.glG7h1HhUgSgG6S90G,,user,1,4
+4,0,2021-01-14 10:53:56.379372,,1204,usera@usera.com,true,,,,25,,$2a$10$amICk/U6zycUEz7jfViRves6SxOL4MBuC2TzAujpKHGVmMsJmB89W,,userA,32,4
