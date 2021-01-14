@@ -323,58 +323,93 @@
 		\section{Dijagram razreda}
 		
 			
-			\textnormal{Na slikama 4.5, 4.6, 4.7 i 4.8 su prikazani razredi i sučelja koji pripadaju \textit{back-end} servisu izrađenom koristeći programski okvir SpringBoot i programski jezik Java. Svi razredi imaju implementirane get i set metode za vlastite atribute iako se to eksplicitno ne navodi na dijagramima.} \\
+			\textnormal{
+				Na slijedećim slikama prikazani su razredi i sučelja koji pripadaju \textit{back-end} servisu izrađenom koristeći programski okvir SpringBoot i programski jezik Java. Svi razredi imaju implementirane get i set metode za vlastite atribute pomoću Lombok sustava iako se to eksplicitno ne navodi na dijagramima.
+			} \\
+			
+			\textnormal{
+				Na slici 4.5 prikazan je Controllers dio \textit{back-end} aplikacije. Upravljači (engl. controllers) su jedina izložena točka u aplikaciji te služe za komunikaciju s \textit{front-end} servisom koji nad njima izvršava upite. U svim upravljačima implementiran je Spring Security koji osigurava zaštićenost upravljača tako što u svakom zahtjevu koji pristigne na upravljač autorizira token koji se nalazi u zaglavlju zahtjeva. Ako zahtjev dobije pristup upravljaču, poziva se odgovarajući servisni sloj aplikacije koji izvršava svu logiku vezanu uz određenu značajku aplikacije. Upravljači zatim na \textit{front-end} vraćaju prikupljene informacije.
+			}
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.45]{dijagrami/Controller_CD} \\
+				\caption{Dijagram razreda - Controllers}
+				\label{fig:ControllerCD}
+			\end{figure}
+		
+			\textnormal{
+				DTO razredi prikazani su na slici 4.6. DTO (engl. data transfer object) služi za prijenos određenog dijela informacija iz \textit{back-end} sustava na \textit{front-end} i obrnuto. Sadrže primitivne tipove podataka u koje zatim spremamo odgovarajuće dijelove podataka iz baze, ili interpretiramo podatke pristigle s \textit{front-end} dijela aplikacije. 
+			}
+		
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.72]{dijagrami/DTO_CD} \\
+				\caption{Dijagram razreda - DTO}
+				\label{fig:DTO_CD}
+			\end{figure}
+		
+			\textnormal{
+				Na slici 4.7.prikazani su razredi servisnog sloja aplikacije. Servisi komuniciraju s
+				repozitorijima koji pristupaju bazi i upravljačima od kojih dobivaju i kojima
+				vraćaju podatke. Servisi iz baze dobivaju podatke te ih zatim obrađuju ovisno o poslovnoj logici i vraćaju rezultat.Servisi sadrže svu poslovnu logiku. Gotovo svaki upravljač ima pripadajući servis, a svaki je servis logički objedinjen skup funkcija poslovne logike.
+			}
+		
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.5]{dijagrami/Service_CD} \\
+				\caption{Dijagram razreda - Service}
+				\label{fig:Service_CD}
+			\end{figure}
+		
+			\textnormal{
+				Slika 4.8 prikazuje repozitorije. U ovoj aplikaciji za svaki entitet definiran
+				je zasebni repozitorij koji nasljeđuje JpaRepository. Jpa Repository sadrži osnovne
+				metode za dohvat podataka, a Spring Boot omogućuje programeru da specificiranjem
+				samo imena metode može koristiti implementaciju iste.
+			}
+		
+				\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.5]{dijagrami/Repository_CD} \\
+				\caption{Dijagram razreda - Repository}
+				\label{fig:Repository_CD}
+			\end{figure}
+							
+			\textnormal{
+				Model razredi prikazani na slici 4.9 preslikavaju strukturu baze podataka u aplikaciju. Razred User predstavlja korisnika koji se može registrirati u sustav koristeći osnovne informacije. Razred LocationCard predstavlja karticu lokacije, dok razred UserCard predstavlja posjedovanje same kartice od strane nekog korisnika.Razredi CartographerStatus, Role i Privilege služe kako bi se pobliže definirao svaki korisnik.
+			}
 			
 			\begin{figure}[H]
 				\centering
 				\includegraphics[scale=0.75]{slike/modelCD} \\
-				\caption{ Model razredi}
+				\caption{Dijagram razreda - Model}
 				\label{fig:modelCD}
 			\end{figure}
 		
-			\textnormal{Model razredi prikazani na slici 4.5 preslikavaju strukturu baze podataka u aplikaciji. Implementirane metode direktno komuniciraju s bazom podataka te vraćaju tražene podatke. Razred User predstavlja korisnika koji se može registrirati u sustav koristeći osnovne informacije. Razred LocationCard predstavlja karticu lokacije, dok razred UserCard predstavlja posjedovanje same kartice od strane nekog korisnika.} \\
-			
-			\begin{figure}[H]
-				\centering
-				\includegraphics[scale=0.7]{slike/suceljaCD} \\
-				\caption{ Dijagram sučelja sustava i razreda koji ih implementiraju}
-				\label{fig:suceljaCD}
-			\end{figure}
-		
-				\textnormal{Na slici 4.6 prikazana su sučelja i razredi koji ih implemenentiraju. Zbog bolje preglednosti dijagrama razredi su navedeni isključivo imenom, a njihov detaljan opis nalazi se na slici 4.7.} \\
-						
-			\begin{figure}[H]
-				\centering
-				\includegraphics[scale=0.6]{slike/ostaloCD} \\
-				\caption{ Dijagram razreda za upravljanje registracijom i prijavom}
-				\label{fig:ostaloCD}
-			\end{figure}
-		
-			\textnormal{Na slici 4.7 nalaze se preostali razredi sustava. Razred AuthController uz razrede AuthService, RefreshTokenService i UserDetailServiceImpl upravlja procesom registracije i prijave.} \\
-			
-			\textnormal{Na slici 4.8 prikazani su DTO (Data transfer object) razredi te razredi stvorenih iznimki. DTO klase služe sa prijenos podataka prilikom registracije, prijave i odjave iz sustava. }
-			
-			\begin{figure}[H]
-				\centering
-				\includegraphics[scale=0.75]{slike/dtoCD} \\
-				\caption{ DTO razredi i razredi iznimki}
-				\label{fig:dtoCD}
-			\end{figure}
-			
-			\textnormal{Na slijedećim slikama nalaze se razredi koje ćemo tek implementirati. Na slici 4.9 nalaze se budući DTO razredi, dok se na slici 4.10 nalaze budući Service i Controller razredi.}
-			
-			\begin{figure}[H]
-				\centering
-				\includegraphics[scale=0.75]{slike/buduciDTO} \\
-				\caption{ Budući DTO razredi}
-				\label{fig:dtoBuduci}
-			\end{figure}
+			\textnormal{
+				Na slici 4.10. prikazan je dijagram razreda vezanih uz Spring Security. Ulazna
+				točka za autorizaciju zahtjeva je definirana u razredu JwtAuthenticationFilter koji poziva UserDetailsServiceImpl te zatim provjerava postoji li u bazi podataka zapis s dozvolama
+				koje se dekodiraju iz jwt tokena. Aplikacija
+				ne pamti sesiju niti stanje tako da korisnik prilikom postavljanja zahtjeva mora dostaviti svoj jwt token putem kojeg se autentificira i autorizira.
+			}
 		
 			\begin{figure}[H]
 				\centering
-				\includegraphics[scale=0.75]{slike/buduciControllerService} \\
-				\caption{ Budući Controller i Service razredi}
-				\label{fig:dtoCiS}
+				\includegraphics[scale=0.56]{dijagrami/Security_CD} \\
+				\caption{Dijagram razreda - Security}
+				\label{fig:Security_CD}
+			\end{figure}
+			
+			\textnormal{
+				Na slici 4.11. prikazani su još neki dodatni razredi, kao što su konfiguracijski razredi, iznimke i validatori. Iznimke koje se pojave u servisima omataju se SpringGeoFighterException-om koji nasljeđuje RuntimeException. Ako se pogreška propagira iz sustava, možemo provjeriti njezin tip. Ako je zamotana u SpringGeoFighterException, to je iznimka koju smo očekivali, dok u protivnom ukazuje na to da se pojavila neočekivana pogreška u sustavu. U sustavu također postoji i UserInfoInvalidException koji se pojavljuje prilikom zahtjeva s krivim korisničkim podatcima.
+			}
+		
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.75]{dijagrami/Misc_CD} \\
+				\caption{Dijagram razreda - Preostali razredi}
+				\label{fig:Misc_CD}
 			\end{figure}
 			
 			\eject
@@ -382,22 +417,39 @@
 		\section{Dijagram stanja}
 			
 			
-			\textbf{\textit{dio 2. revizije}}\\
+			\textnormal{Na slici 4.12 nalazi se dijagram stanja za registriranog igrača, nakon prijave se prikazuje početna stranica na kojoj igrač može poslati zahtjev drugom igraču za borbu, prihvatiti zahtjev od drugog igrača također postoji opcija za traženje borbe među najbližim igračima.  }
 			
-			\textit{Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. }
+						\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.40]{dijagrami/user_diagram} \\
+				\caption{Dijagram stanja - User}
+				\label{fig:user}
+			\end{figure}
 			
 			
 			\eject 
 		
 		\section{Dijagram aktivnosti}
 			
-			\textbf{\textit{dio 2. revizije}}\\
-			
-			 \textit{Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.}
+			\textbf{\textnormal{UML dijagram aktivnosti prikazuje detaljan tijek obrazaca uporabe, njegovu proceduralnu logiku te sudionike pojedinog obrasca uporabe. Na slici ispod prikazan je dijagram aktivnosti za uređivanje karata od strane administratora. Administrator se uspješno prijavi u aplikaciju. Nakon prijave administrator odabire u headeru web aplikacije opciju "admin". Nude se razne opcije administratora. Odabiremo "Manage cards". Šalje se zahtjev bazi podataka za dohvat svih raspoloživih karata te se dohvaćene karte prikazuju na aplikaciji u obliku liste svih karata. Kod određenog elementa liste, odnosno kod željene karte odabiremo gumb "Edit". Aplikacija dohvaća detalje te karte i iste prikazuje na ekranu. Detalje je moguće uređivati. Nakon što smo uredili željene podatke odabiremo gumb "Accept". Aplikacija šalje upit za izmjenu podataka karte te se upit izvršava, uređena karta se sprema u bazu podataka.}}\\
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.40]{dijagrami/Dijagram aktivnosti - Uređivanje karata od strane administratora} \\
+				\caption{Dijagram aktivnosti}
+				\label{fig:UC8_sekvencijski}
+			\end{figure}
 			
 			\eject
 		\section{Dijagram komponenti}
 		
-			\textbf{\textit{dio 2. revizije}}\\
+			\textbf{\textnormal{Dijagram komponenti prikazuje zavisnost komponenti i opisuje interne strukture i odnose prema okolini. Graf komponenti povezan je vezama ovisnosti kako bi se omogućila lakša analiza reakcije ostalih komponenti na promjene u jednoj komponenti. Do podataka iz baze podataka dolazi se korištenjem JPA APIja. Podaci koji dolaze iz baze podataka stavljaju se u DTO objekte. API šalje podatke iz backend-a aplikacije u obliku JSON-a frontend aplikaciji. Frontend aplikacija se sastoji od Typescript datoteka koje su raspoređene u logičke cjeline nazvane po tipovima aktora koji im pristupaju. Typescript datoteke ovise o Angular biblioteci iz koje dohvaćaju gotove komponente kao što su gumbi, forme i slično. Router je komponenta koja određuje koje datoteke se prikazuju korisniku. Sustavu se pristupa preko sučelja preko kojega mu se salju HTML i Typescript datoteke iz frontend aplikacije.}}\\
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.32]{dijagrami/ComponentDiagramGeoF} \\
+				\caption{Dijagram komponenti}
+				\label{fig:UC8_sekvencijski}
+			\end{figure}
+			
 		
-			 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
