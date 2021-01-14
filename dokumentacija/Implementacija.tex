@@ -105,10 +105,10 @@
 		\section{Ispitivanje programskog rješenja}
 						
 			\subsection{Ispitivanje komponenti}
-			\textit{Za potrebe testiranja naših Spring backend komponenti koristili smo JUnit testing framework. JUnit nam omogućuje pisanje testova koji se jako brzo izvode pomoću njegovog Mockito frameworka tako da nije potrebno pokrenuti cijelu Spring aplikaciju već možemo falsificirati odgovore nekih metoda koje bi inače razgovarale s bazom. Uz te testove (8-10) napisali smo i integracijske testove (1-6) u kojima koristimo MockMvc kojim simuliramo HTTP zahtjeve na našu backend poslužitelj i na temelju dobivenih HTTP odgovora ispitivamo njihovu ispravnost. Ti testovi zahtijevaju potpuno pokretanje Spring aplikacije te su nešto sporiji. Također napisali smo nekoliko standardnih testova koji ispituju statičke metode. Napisan je i jedan test koji poziva ne-implementiranu funkcionalnost dok ona baca UnsupportedOeprationException, ali on nije prikazan u primjerima ispod i u programskom je kodu anotacijom onemogućen. Takav test faila pri pokretanju. Od svih testova implementiranih funkcionalnosti prolaze svi i to je vidljivo na slici koja se nalazi na dnu poglavlja.}
+			\textnormal{Za potrebe testiranja naših Spring backend komponenti koristili smo JUnit testing framework. JUnit nam omogućuje pisanje testova koji se jako brzo izvode pomoću njegovog Mockito frameworka tako da nije potrebno pokrenuti cijelu Spring aplikaciju već možemo falsificirati odgovore nekih metoda koje bi inače razgovarale s bazom. Uz te testove (8-10) napisali smo i integracijske testove (1-6) u kojima koristimo MockMvc kojim simuliramo HTTP zahtjeve na naš backend poslužitelj i na temelju dobivenih HTTP odgovora ispitujemo njihovu ispravnost. Ti testovi zahtijevaju potpuno pokretanje Spring aplikacije te su nešto sporiji. Također napisali smo nekoliko standardnih testova koji ispituju statičke metode. Napisan je i jedan test koji poziva ne-implementiranu funkcionalnost dok ona baca UnsupportedOeprationException, ali on nije prikazan u primjerima ispod i u programskom je kodu anotacijom onemogućen. Takav test pada pri pokretanju. Svi testovi implementiranih funkcionalnosti prolaze, što je moguće vidjeti na slici koja se nalazi na dnu poglavlja.}
 			
 			\subsubsection{Test 1: Uspješna registracija u sustav}
-			Korisnik se registrira u sustav e-mail adresom, korisničkim imenom, lozinkom i URL-om svoje slike. \\
+			Korisnik se registrira u sustav e-mail adresom, korisničkim imenom, lozinkom i URL-om svoje slike profila. \\
 			U ovom testu su svi podatci ispravni, pa stoga poslužitelj treba uspješno izvršiti registraciju korisnika i vratiti statusni kod 200 OK.
 			
 			\begin{figure}[H]
@@ -184,7 +184,7 @@
 			\begin{figure}[H]
 				\centering
 				\includegraphics[scale=0.65]{slike/test7} \\
-				\caption{ Test parsiranja i pretvaranje lokaciju u String }
+				\caption{ Test parsiranja i pretvaranja lokacije u String }
 				\label{fig:test7}
 			\end{figure}
 		
@@ -199,7 +199,7 @@
 			\end{figure}
 		
 			\subsubsection{Test 9: Osvajanje karte ne radi ništa ako je igrač već ima}
-			Ispitivanje metode koja se poziva prilikom osvajanja karte i očekivanje da ona neće napraviti nikakvu akciju spremanja u bazu podataka ukoliko igrač koji pokušava osvojiti kartu nju već posjeduje.
+			Ispitivanje metode koja se poziva prilikom osvajanja karte i očekivanje da ona neće napraviti nikakvu akciju spremanja u bazu podataka ukoliko igrač već posjeduje navedenu kartu.
 			
 			\begin{figure}[H]
 				\centering
@@ -219,7 +219,7 @@
 			\end{figure}
 		
 			\subsubsection{Test 11: Test računanja daljine između dvije lokacije}
-			Ispitivanje metode koja računa zračnu udaljenost između svije geografske lokacije.
+			Ispitivanje metode koja računa zračnu udaljenost između dvije geografske lokacije.
 			Lokacija se uspoređuje s poznatom udaljenosti u kilometrima između neke dvije točke.
 			
 			\begin{figure}[H]
@@ -242,7 +242,7 @@
 			
 		    Za potrebe ispitivanja sustava, koristili smo Selenium IDE.
 			\subsubsection{Test 1: Registracija korisnika}
-			\textbf{Očekivano: } Klikom na gumb \textit{Sign Up} učitava se stranica s formom za unos podataka potrebnih za registraciju korisnika: \textit{e-mail adresa, korisničko ime, zaporka} te \textit{poveznica na sliku profila}.\\
+			\textbf{Očekivano: } Klikom na gumb \textit{Sign Up} učitava se stranica s formom za unos podataka potrebnih za registraciju korisnika: \textit{e-mail adresa, korisničko ime, lozinka} te \textit{poveznica na sliku profila}.\\
 			\textbf{Rezultat: } Korisnik  je  uspješno  registriran  u  bazu  podataka  ili  je  sustav  dojavio grešku.\\
 			
 			    Na slici 5.13. prikazana je poruka prilikom neuspješne registracije korisnika u sustav. Na slici 5.14. prikazan je uspješan test registracije u alatu Selenium.
@@ -331,34 +331,34 @@
 		
 		\section{Upute za puštanje u pogon}
 		
-			\textit{Za puštanje u pogon GeoFighter aplikacije iz izvornog kôda potrebno je nekoliko preduvjeta: \textbf{PostgreSQL13, JDK11 i Node.js 15}. Uz sve te aplikacije skinute i instalirane lako je kompajlirati i aplikaciju pokrenuti na vlastitom računalu. Aplikacija je također pokrenuta na javno dostupnom poslužitelju \textbf{Heroku} o čemu piše više u nastavku.\\}
+			\textnormal{Za puštanje u pogon GeoFighter aplikacije iz izvornog kôda potrebno je nekoliko preduvjeta: \textbf{PostgreSQL13, JDK11 i Node.js 15}. Nakon što su navedene aplikacije preuzete i instalirane lako je kompilirati aplikaciju i pokrenuti ju na vlastitom računalu. Aplikacija je također pokrenuta na javno dostupnom poslužitelju \textbf{Heroku} o čemu piše više u nastavku.\\}
 			
 			\textbf{\textit{Koraci za pokretanje na lokalnom računalu:}}
 			
 			\begin{itemize}
 				
-				\item U PostgreSQL DBMSu stvoriti novu bazu podataka te zapisati njeno ime(baze podataka) uz ime korisnika-vlasnika baze podataka, njegove šifre i portu baze.
+				\item U PostgreSQL DBMS-u stvoriti novu bazu podataka te zapisati njeno ime (baze podataka) uz ime korisnika-vlasnika baze podataka, njegovu šifre i vrata (engl. port) baze.
 				
 				\item Unutar root direktorija otvoriti datoteku čiji je path\\ \textit{/izvorniKod/geoFighterSpring/src/main/resources/application-local.properties}\\ i unutar nje promijeniti sljedeće parametre: \begin{packed_enum}
 					
 					\item \textit{spring.datasource} parametre s parametrima novo-kreirane baze podataka. (Voditi brigu o portu, imenu baze podataka, te korisničkom imenu i lozinci vlasnika te baze)
 					
-					\item \textit{spring.mail} parametre s parametrima željenog mail servisa kako bi se mogli slati mailovi potvrde. (mail servis može biti javan kao što je trenutni \textit{gmail}, a moguće je koristiti testni kao što je \textit{mailtrap}\\ \url{https://mailtrap.io})
+					\item \textit{spring.mail} parametre s parametrima željenog mail servisa kako bi se mogli slati mailovi potvrde. Mail servis može biti javan kao što je trenutni \textit{gmail}, a moguće je koristiti testni kao što je \textit{mailtrap}\\ (\url{https://mailtrap.io})
 				\end{packed_enum}
 			
 				\begin{figure}[H]
 					\centering
 					\includegraphics[scale=0.4]{slike/Properties} \\%veličina u odnosu na širinu linije
-					\caption{Što promijeniti u application-local.properties}
+					\caption{Podatci koje je potrebno promijeniti u application-local.properties}
 					\label{fig:properties} %label mora biti drugaciji za svaku sliku
 				\end{figure}
 			
 				
-				\item Otvoriti konzolu i pozicionirati se unutar \textit{/izvorniKod/geoFighterSpring/} i pokrenuti naredbu \textit{"./gradlew bootRun -Dspring.profiles.active=local"} s kojom se izkompajlira i pokrene backend servis.
+				\item Otvoriti konzolu i pozicionirati se unutar \textit{/izvorniKod/geoFighterSpring/} i pokrenuti naredbu \textit{"./gradlew bootRun -Dspring.profiles.active=local"} s kojom se kompilira i zatim pokrene backend servis.
 				
-				\item Otvoriti drugu konzolu i pozicionirati se unutar \textit{/izvorniKod/angular-geofighter/} i pokrenuti naredbu \textit{"npm install"} s kojom se instaliraju sve potrebno za frontend servis. Zatim pokrenuti naredbu \textit{"ng build"}, te na kraju \textit{"npm start"} kojim se pokreće frontend servis na portu 4200.
+				\item Otvoriti drugu konzolu i pozicionirati se unutar \textit{/izvorniKod/angular-geofighter/} i pokrenuti naredbu \textit{"npm install"} kojom se preuzme i instalira sve potrebno za frontend servis. Zatim pokrenuti naredbu \textit{"ng build"}, te na kraju \textit{"npm start"} kojom se pokreće frontend servis na portu 4200.
 				
-				\item Ako su pokrenuti backend i frontend servis i ne javlju se greške u konzoli, aplikacija je spremna za korištenje na lokalnom računalu.\\\\
+				\item Ako su backend i frontend servis pokrenuti i u konzoli nisu dojavljene nikakve pogreške, aplikacija je spremna za korištenje na lokalnom računalu.\\\\
 				
 			\end{itemize}
 		
@@ -366,7 +366,7 @@
 			\textit{Aplikacija je puštena u pogon na javno dostupnom poslužitelju \textbf{Heroku} tako da su sve tri komponente (DB, FrontEnd i BackEnd) tamo pokrenute i moguće joj je pristupiti s linka:}\\
 			\url{https://angularfrontend-release.herokuapp.com/}\\
 						
-			\textit{GitLab repozitorij \url{https://gitlab.com/MatejC_FER/pi} također sadrži CI/CD (Continuous integration and continuous delivery) implementiran pomoću kojeg se pri svakom commitu na \textbf{Master} branch automatski aplikacija izgradila i deployala na \textbf{Heroku} javni poslužitelj. Tako nije potrebno lokalno pokretati aplikaciju nakon izmjena, već je dovoljno na repozitorij pohraniti primjene.}
+			\textit{GitLab repozitorij \url{https://gitlab.com/MatejC_FER/pi} također sadrži implementiran CI/CD (Continuous integration and continuous delivery) pomoću kojeg se pri svakom commitu na \textbf{Master} branch automatski aplikacija izgradila i deployala na \textbf{Heroku} javni poslužitelj. Tako nije potrebno lokalno pokretati aplikaciju nakon izmjena, već je dovoljno na repozitorij pohraniti promjene.}
 			
 			
 			\eject 
