@@ -417,11 +417,11 @@
 		\section{Dijagram stanja}
 			
 			
-			\textnormal{Na slici 4.12 nalazi se dijagram stanja za registriranog igrača, nakon prijave se prikazuje početna stranica na kojoj igrač može poslati zahtjev drugom igraču za borbu, prihvatiti zahtjev od drugog igrača također postoji opcija za traženje borbe među najbližim igračima.  }
+			\textnormal{Na slici 4.12 nalazi se dijagram stanja za registriranog igrača. Nakon prijave i ulaska u komponentu "Battle" prikazuje se početna stranica na kojoj igrač može poslati zahtjev drugom igraču za borbu ili prihvatiti zahtjev od drugog igrača. Prikazuju se samo igrači u blizini.  }
 			
 						\begin{figure}[H]
 				\centering
-				\includegraphics[scale=0.40]{dijagrami/user_diagram} \\
+				\includegraphics[scale=0.58]{dijagrami/user_diagram} \\
 				\caption{Dijagram stanja - User}
 				\label{fig:user}
 			\end{figure}
@@ -443,7 +443,7 @@
 			\eject
 		\section{Dijagram komponenti}
 		
-			\textbf{\textnormal{Dijagram komponenti prikazuje zavisnost komponenti i opisuje interne strukture i odnose prema okolini. Graf komponenti povezan je vezama ovisnosti kako bi se omogućila lakša analiza reakcije ostalih komponenti na promjene u jednoj komponenti. Do podataka iz baze podataka dolazi se korištenjem JPA APIja. Podaci koji dolaze iz baze podataka stavljaju se u DTO objekte. API šalje podatke iz backend-a aplikacije u obliku JSON-a frontend aplikaciji. Frontend aplikacija se sastoji od Typescript datoteka koje su raspoređene u logičke cjeline nazvane po tipovima aktora koji im pristupaju. Typescript datoteke ovise o Angular biblioteci iz koje dohvaćaju gotove komponente kao što su gumbi, forme i slično. Router je komponenta koja određuje koje datoteke se prikazuju korisniku. Sustavu se pristupa preko sučelja preko kojega mu se salju HTML i Typescript datoteke iz frontend aplikacije.}}\\
+			\textbf{\textnormal{Dijagram komponenti prikazuje zavisnost komponenti i opisuje interne strukture i odnose prema okolini. Graf komponenti povezan je vezama ovisnosti kako bi se omogućila lakša analiza reakcije ostalih komponenti na promjene u jednoj komponenti. Do podataka iz baze podataka dolazi se korištenjem JPA API-ja. Podaci koji dolaze iz baze podataka stavljaju se u DTO objekte. API šalje podatke iz backend-a aplikacije u obliku JSON-a frontend aplikaciji. Frontend aplikacija se sastoji od Typescript datoteka koje su raspoređene u logičke cjeline nazvane po tipovima aktora koji im pristupaju. Typescript datoteke ovise o Angular biblioteci iz koje dohvaćaju gotove komponente kao što su gumbi, forme i slično. Router je komponenta koja određuje koje datoteke se prikazuju korisniku. Sustavu se pristupa preko sučelja preko kojega mu se šalju HTML i Typescript datoteke iz frontend aplikacije.}}\\
 			
 			\begin{figure}[H]
 				\centering

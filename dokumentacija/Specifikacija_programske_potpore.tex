@@ -36,7 +36,7 @@
 				
 				\begin{packed_enum}
 					
-					\item se prijaviti u sustav koristeći email i lozinku
+					\item se prijaviti u sustav koristeći e-mail i lozinku
 					\item se odjaviti iz sustava
 					\item pregledati vlastiti profil
 					\begin{packed_enum}
@@ -50,21 +50,21 @@
 				\end{packed_enum}
 			\item pregledati detalje pojedinačne karte iz kolekcije
 			\item pregledati popis igrača u blizini
-			\item pristupiti borbi kroz nasumičnu tražilicu
+			\item pristupiti borbi slanjem ili prihvaćanjem zahtjeva
 			\item se boriti u kartaškom dvoboju protiv drugog igrača
 			\begin{packed_enum}
 				\item odabrati karte za borbu iz svoje kolekcije sakupljenih karata
 				\item odigrati kartaški dvoboj
 			\end{packed_enum}
 		\item prijaviti novu lokaciju
-		\item dobiti novu kartu ako ju je igrač prijavio te je ona odobrena bez izmjena
+		\item dobiti novu kartu ako ju je igrač prijavio te je ona odobrena
 		\item pristupiti pregledu rang ljestvice svih igrača
 					
 				\end{packed_enum}
 			\item  \underbar{Kartograf (inicijator) može:}
 			
 			\begin{packed_enum}
-				\item se prijaviti u sustav preko broja osobne iskaznice
+				\item se prijaviti u sustav koristeći e-mail i lozinku
 				\item se odjaviti iz sustava
 				\item pristupiti prikazu svih prijava:
 				\begin{packed_enum}
@@ -159,7 +159,7 @@
 						\item[2.a] Odbijenica od strane administratora
 						\item[] \begin{packed_enum}
 							
-							\item Pokusati se prijaviti drugi put
+							\item Pokušati se prijaviti ponovno
 							
 						\end{packed_enum}
 						
@@ -176,7 +176,7 @@
 					
 					\item[] \begin{packed_enum}
 						
-						\item Unos emaila i lozinke.
+						\item Unos e-maila i lozinke.
 						\item Potvrda o ispravnosti unesenih podataka.
 						\item Pristup korisničkim funkcijama.
 					\end{packed_enum}
@@ -185,7 +185,7 @@
 					
 					\item[] \begin{packed_item}
 						
-						\item[2.a] Neispravan email ili lozinka
+						\item[2.a] Neispravan e-mail ili lozinka
 						\item[] \begin{packed_enum}
 							
 							\item  Sustav obavještava korisnika o neuspješnoj prijavi. Korisnik pokušava ponovno.
@@ -257,7 +257,7 @@
 					\item[] \begin{packed_enum}
 						
 						\item Korisnik odabire igrača s popisa čiji profil želi otvoriti.
-						\item Prikazuju se detalji drugog igrača: ime, rang, statistika zadnjih 10 borbi te gumb za kolekciju.
+						\item Prikazuju se detalji drugog igrača: ime, rang, statistika zadnjih 10 borbi te sakupljene karte.
 					\end{packed_enum}
 				\end{packed_item}
 				
@@ -306,12 +306,9 @@
 					\item[] \begin{packed_enum}
 						
 						\item Korisnik odabire opciju za pronalazak suparnika, sustav uparuje.
-						\item Baca se novčić kako bi se odredilo koji će igrač imati prvi potez, igrači su naizmjence na potezu
-						\item Igrač koji je prvi na potezu u rundi, odabire jednu od svojih karata te atribut, nakon odabira "baca" kartu na igraču ploču
-						\item Igrač koji je drugi na potezu, primoran je "poštovati" atribut, tj. na svim njegovim kartama pojačano je označen (highlightan) atribut kojeg je izabrao prvi igrač. Igrač odabire kartu dok je atribut izabran sam. (atribut kojeg je u prvom potezu izabrao drugi igrač)
-						\item Kada su obje karte bačene ona s jačim atributom pobjeđuje rundu, te je grafički naznačeno koji igrač je pobjedio rundu
-						\item Obje karte nakon određivanja pobjednika runde idu u "smeće" te se ne mogu koristiti opet do kraja borbe
-						\item Borba traje sve dok se sve kartice ne potroše(5).
+						\item Igrači izabiru po 3 karte iz vlastite kolekcije.
+						\item Borba se izvršava kroz matematički izračun s obzirom na jačine odabranih karata.
+						\item Oba igrača dobivaju obavijest o ishodu borbe.
 					\end{packed_enum}
 					
 					\item  \textbf{Opis mogućih odstupanja:}
@@ -327,13 +324,13 @@
 						\item[2.a] Igrač nema dovoljno karata za borbu
 						\item[] \begin{packed_enum}
 							
-							\item  Prilikom pritiska na gumb "Traži borbu" sustav igraču javlja kako nema dovoljno karata za početak borbe (ili ih nema dovoljno ili su na cooldownu pa nisu trenutno dostupne). Sustav mu predlaže da pođe u istraživanje kako bi sakupio više karata i uvijek bio spreman na borbu.
+							\item  Prilikom pritiska na gumb "Traži borbu" igrač se ne može pridružiti borbi jer nema dovoljno karata za početak borbe (ili ih nema dovoljno ili su na cooldownu pa nisu trenutno dostupne). Sustav mu predlaže da pođe u istraživanje kako bi sakupio više karata i uvijek bio spreman na borbu.
 							
 						\end{packed_enum}
 					\item[5.a] Atributi karti su jednaki
 					\item[] \begin{packed_enum}
 						
-						\item  Ako su atributi karata jednaki gledaju se druga dva atributa zbrojena te karta koja ima veći zbroj druga dva tributa pobjeđuje. Ukoliko se desi rijedak slučaj da su sva tri atributa ista oba igrača dobivaju bod za rundu, tj. runda je neriješena
+						\item  Ako su atributi karata jednaki rezultat borbe je neriješeno.
 						
 					\end{packed_enum}
 						
@@ -352,7 +349,7 @@
 					\item[] \begin{packed_enum}
 						
 						\item Aplikacija prikazuje sve sakupljene karte korisnika koje su dostupne za borbu.
-						\item Korisnik odabire 5 karata za borbu. 
+						\item Korisnik odabire 3 karte za borbu. 
 						\item Korisnik potvrđuje odabir karata
 					\end{packed_enum}
 					
@@ -370,10 +367,9 @@
 					
 					\item[] \begin{packed_enum}
 						
-						\item Aplikacija prikaže poruku koja sadrži statistiku odigranih rundi te pobjednika
+						\item Aplikacija prikaže poruku koja sadrži informaciju o ishodu borbe.
 						\item Statistika oba suigrača se osvježi u bazi podataka.
 						\item Kartama koje su korištene dodjeljuje se cooldown.
-						\item Sustav vraća korisnika na početnu stranicu.
 					\end{packed_enum}
 				\end{packed_item}
 				
@@ -418,12 +414,12 @@
 					
 					\item[] \begin{packed_enum}
 						
-						\item Korisnikova prijava je prihvaćena bez potrebnih daljnjih izmjena.
+						\item Korisnikova prijava je prihvaćena.
 						\item Korisnik dobiva obavijest da mu je dodijeljena nova karta.
-						\item Nova karta(lokacija) se dodaje u kolekciju korisnika.
+						\item Nova karta (lokacija) se dodaje u kolekciju korisnika.
 					\end{packed_enum}
 				\end{packed_item}
-				
+				\newpage
 				\noindent \underbar{\textbf{UC10 - Pregled rang ljestvice}}
 				\begin{packed_item}
 					
@@ -826,7 +822,7 @@
 						
 						\item Kartograf klikom na opciju za pregled prijava lokacija šalje upit bazi podataka.
 						\item Prijavljene lokacije se kartografu prikažu na karti.
-						\item Kartograf klikom na lokaciju otvara prozor s opisom lokacije.
+						\item Kartograf klikom na gumb za uređivanje otvara prozor s podatcima lokacije.
 						\item Kartograf uređuje podatke o prijavi lokacije i odabire opciju za spremanje.
 						\item Prijava lokacije se ažurira u bazi podataka.
 						\item Aplikacija ažurira podatke o prijavi lokacije.
@@ -940,7 +936,7 @@
 			\subsection{Sekvencijski dijagrami}
 				
 				\subsubsection{Obrazac uporabe UC8 - Borba}
-				\textnormal{Igrač šalje zahtjev za borbom. Web aplikacija potom dohvaća suparnika. Borba započinje bacanjem novčića kako bi se odlučilo kreće li igrač prvi. Nakon odluke, igra se 5 rundi. Igrač koji započinje potez u rundi bira kartu i jedan od tri atributa za tu rundu te baca kartu na igraču ploču. Igrač koji kreće drugi izabire samo kartu, a atribut se poštuje te je isti kao od igrača koji je započeo rundu. Nakon što se obje karte nalaze na igračem polju dolazi do odluke koji igrač je pobijedio rundu. Gleda se koja od dvije karte ima veći odabrani atribut. Ukoliko su odabrani atributi jednaki gleda se zbroj drugih dvaju atributa. Karta s većim atributom pobjeđuje rundu. Ukoliko dođe do rijetkog slučaja da su sva tri atributa jednaka dolazi do neriješene runde. Poslije 5 odigranih rundi proglašuje se pobjednik i u bazu podataka se spremaju podaci te borbe.}\\
+				\textnormal{Igrač šalje zahtjev za borbom ili privaća dobiveni zahtjev. Web aplikacija potom dohvaća suparnika. Igrači izabiru po 3 karte s kojima će sudjelovati u borbi. Borba se odvija matematičkim izračunom s obzirom na jačinu atributa odabranih karata. Proglašava se pobjednik i u bazu podataka se spremaju podaci te borbe.}\\
 				\begin{figure}[H]
 					\centering
 					\includegraphics[scale=0.52]{dijagrami/UC8 - Borba} \\
