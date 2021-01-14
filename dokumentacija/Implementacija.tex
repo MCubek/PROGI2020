@@ -240,16 +240,79 @@
 			
 			\subsection{Ispitivanje sustava}
 			
-			 \textit{Potrebno je provesti i opisati ispitivanje sustava koristeći radni okvir Selenium\footnote{\url{https://www.seleniumhq.org/}}. Razraditi \textbf{minimalno 4 ispitna slučaja} u kojima će se ispitati redovni slučajevi, rubni uvjeti te poziv funkcionalnosti koja nije implementirana/izaziva pogrešku kako bi se vidjelo na koji način sustav reagira kada nešto nije u potpunosti ostvareno. Ispitni slučaj se treba sastojati od ulaza (npr. korisničko ime i lozinka), očekivanog izlaza ili rezultata, koraka ispitivanja i dobivenog izlaza ili rezultata.\\ }
-			 
-			 \textit{Izradu ispitnih slučajeva pomoću radnog okvira Selenium moguće je provesti pomoću jednog od sljedeća dva alata:}
-			 \begin{itemize}
-			 	\item \textit{dodatak za preglednik \textbf{Selenium IDE} - snimanje korisnikovih akcija radi automatskog ponavljanja ispita	}
-			 	\item \textit{\textbf{Selenium WebDriver} - podrška za pisanje ispita u jezicima Java, C\#, PHP koristeći posebno programsko sučelje.}
-			 \end{itemize}
-		 	\textit{Detalji o korištenju alata Selenium bit će prikazani na posebnom predavanju tijekom semestra.}
+		    Za potrebe ispitivanja sustava, koristili smo Selenium IDE.
+			\subsubsection{Test 1: Registracija korisnika}
+			\textbf{Očekivano: } Klikom na gumb \textit{Sign Up} učitava se stranica s formom za unos podataka potrebnih za registraciju korisnika: \textit{e-mail adresa, korisničko ime, zaporka} te \textit{poveznica na sliku profila}.\\
+			\textbf{Rezultat: } Korisnik  je  uspješno  registriran  u  bazu  podataka  ili  je  sustav  dojavio grešku.\\
 			
-			\eject 
+			    Na slici 5.13. prikazana je poruka prilikom neuspješne registracije korisnika u sustav. Na slici 5.14. prikazan je uspješan test registracije u alatu Selenium.
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.27]{dokumentacija/slike/SeleniumRegistrationFail.png} \\
+				\caption{ Prikaz poruke za neispravnu registraciju}
+				\label{fig:SeleniumRegistrationFail}
+			\end{figure}
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.27]{dokumentacija/slike/SeleniumRegistrationTest.png} \\
+				\caption{ Selenium test koji prikazuje ispravnu registraciju}
+				\label{fig:SeleniumRegistrationTest}
+			\end{figure}
+
+			\subsubsection{Test 2: Prijava korisnika u aplikaciju}
+			\textbf{Očekivano: } Klikom na gumb \textit{Login} učitava se stranica s formom za unos podataka potrebnih za prijavu korisnika u aplikaciju: \textit{korisničko ime} i \textit{lozinka}.\\
+			\textbf{Rezultat: } Korisnik  je  uspješno  prijavljen u aplikaciju ili  je  sustav  dojavio grešku.\\
+
+			    Na slici 5.15. prikazan je prozor unutar aplikacije nakon uspješne prijave u aplikaciju. Na slici 5.16. prikazan je uspješan test prijave u aplikaciju u alatu Selenium.
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.27]{dokumentacija/slike/SeleniumLoginSuccess.png} \\
+				\caption{ Prozor nakon uspješne prijave u aplikaciju}
+				\label{fig:SeleniumLoginSuccess}
+			\end{figure}
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.27]{dokumentacija/slike/SeleniumLoginTest.png} \\
+				\caption{ Selenium test koji prikazuje ispravnu prijavu u aplikaciju}
+				\label{fig:SeleniumRegistrationFail}
+			\end{figure}
+
+			\subsubsection{Test 3: Prijava korisnika za poziciju kartografa}
+			\textbf{Očekivano: } Nakon uspješne prijave korisnika u aplikaciju i nakon što korisnik stisne gumb \textit{Cartographer Apply} učitava se stranica s formom za unos podataka potrebnih za prijavu korisnika za poziciju kartografa: \textit{IBAN} i \textit{poveznica na sliku osobnog dokumenta}.\\
+			\textbf{Rezultat: } Korisnik  se uspješno prijavio za poziciju kartografa ili  je  sustav  dojavio grešku.\\
+
+			    Na slici 5.17. prikazana je poruka uspješne prijave za poziciju kartografa. Na slici 5.18. prikazan je uspješan test prijave za poziciju kartografa u alatu Selenium.
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.27]{dokumentacija/slike/SeleniumCartographerSuccess.png} \\
+				\caption{ Prozor nakon uspješne prijave korisnika za poziciju kartografa}
+				\label{fig:SeleniumCartographerSuccess}
+			\end{figure}
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.27]{dokumentacija/slike/SeleniumCartographerTest.png} \\
+				\caption{ Selenium test koji prikazuje ispravnu prijavu korisnika za poziciju kartografa}
+				\label{fig:SeleniumCartographerTest}
+			\end{figure}
+
+			\subsubsection{Test 4: Dodavanje nove karte u sustav}
+			\textbf{Očekivano: } Nakon uspješne prijave korisnika u aplikaciju i nakon što korisnik stisne gumb \textit{Create new card} učitava se stranica s formom za unos podataka potrebnih za dodavanje nove karte u sustav: \textit{naziv, opis, poveznica na sliku lokacije} i vrijednost za 3 parametra jačine karte:  \textit{dostupnost, popularnost, rijetkost}.\\
+			\textbf{Rezultat: } Korisnik  je uspješno dodao prijavu za novu kartu ili  je  sustav  dojavio grešku.\\
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.27]{dokumentacija/slike/SeleniumCardSuccess.png} \\
+				\caption{ Selenium test koji prikazuje ispravno dodavanje karte u sustav}
+				\label{fig:SeleniumCartographerSuccess}
+			\end{figure}
+
+		    \eject
 		
 		
 		\section{Dijagram razmještaja}
