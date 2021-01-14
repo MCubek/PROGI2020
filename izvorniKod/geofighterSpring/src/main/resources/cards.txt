@@ -259,15 +259,6 @@ population=7
 uncommonness=4
 difficulty=4
 
-name=Dvorac Trakošćan
-description=Jedan je od najatraktivnijih dvoraca u Hrvatskoj; nalazi se u Hrvatskom zagorju, 23 km sjeveroistočno od Krapine, 40 km jugozapadno od Varaždina; nadmorska visina 250 m.
-photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Trako%C5%A1%C4%87an_2007.JPG/1280px-Trako%C5%A1%C4%87an_2007.JPG
-latitude=46.259167
-longitude=15.95
-population=2
-uncommonness=8
-difficulty=8
-
 name=Dioklecijanova palača
 description=Antička palača cara Dioklecijana u Splitu.Oko 300. godine podigao ju je rimski car Dioklecijan i u njoj je boravio nakon povlačenja s prijestolja (305.g.) do smrti (316.g.).
 photoUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Peristyle_of_Diocletian%27s_Palace%2C_Split_%2811908116224%29.jpg/1280px-Peristyle_of_Diocletian%27s_Palace%2C_Split_%2811908116224%29.jpg
