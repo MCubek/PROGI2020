@@ -6,6 +6,8 @@ import {throwError} from 'rxjs';
 
 import * as L from 'leaflet';
 import {icon} from 'leaflet';
+import {UserLocationPayload} from '../../auth/login/user-location.payload';
+import {AuthService} from '../../auth/shared/auth.service';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -24,10 +26,12 @@ export class NearbyComponent implements OnInit, AfterViewInit {
   private map;
 
   constructor(private cardService: CardService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    this.setLocation();
+
     this.map = L.map('map', {
       center: [0, 0],
       zoom: 13
@@ -39,7 +43,6 @@ export class NearbyComponent implements OnInit, AfterViewInit {
     }, error => {
       throwError(error);
     });
-
 
     L.Marker.prototype.options.icon = icon({
       iconRetinaUrl,
@@ -99,5 +102,19 @@ export class NearbyComponent implements OnInit, AfterViewInit {
           'difficulty=' + card.difficulty + '</b><br>');
       }
     }
+  }
+
+  setLocation(): void {
+    let userLocationPayload: UserLocationPayload;
+    navigator.geolocation.getCurrentPosition(pos => {
+      userLocationPayload = {latitude: pos.coords.latitude, longitude: pos.coords.longitude};
+
+      this.authService.saveLocation(userLocationPayload).subscribe(
+        response => {
+        },
+        err => throwError(err));
+    }, err => {
+      this.toastr.error('Location not gathered!');
+    });
   }
 }
