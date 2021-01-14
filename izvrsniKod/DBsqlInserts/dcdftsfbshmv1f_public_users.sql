@@ -1,0 +1,9 @@
+insert into public.users (user_id, cartographer_status, created_time, current_location, elo_score, email, enabled, forced_timeout_end, iban, id_card_photourl, losses, online, password, photourl, username, wins, role_id)
+values  (1, 0, '2021-01-14 10:53:54.922241', null, 0, 'admin@admin.com', true, null, null, null, 0, null, '$2a$10$EuU7tuVcNJRzRBVC7PmqM.nEFQ1ho40ZbHTd7YSQi6BOElDNk5yn.', null, 'admin', 0, 6),
+        (3, 0, '2021-01-14 10:53:56.133855', null, 0, 'card@card.com', true, null, null, null, 0, null, '$2a$10$0YXJmjVk3x/nE.O5vjtO8eK1XMuiivJakDssKGeathK8HsApwhWf.', null, 'card', 0, 5),
+        (5, 0, '2021-01-14 10:53:56.624396', null, 123, 'userb@userb.com', true, null, null, null, 16, null, '$2a$10$f47nKPsZA2PfhxnKALJjqulBh05MQRaZ9MzZprX/OUPBTXDbHPo4a', null, 'userB', 15, 4),
+        (6, 0, '2021-01-14 10:53:56.925194', null, 132, 'userc@userc.com', true, null, null, null, 15, null, '$2a$10$Zma3WRgfnOec25weE5heK./w7HcTvmRvSRla/CwCtDdE6XCzmW5tq', null, 'userC', 17, 4),
+        (7, 0, '2021-01-14 10:53:57.124345', null, 0, 'nepotvrdeni@nepotvrdeni.com', false, null, null, null, 0, null, '$2a$10$ppCGC8byek4mA4G5KMCSG.lxnmNMOU9R3PXxWJ86lS8KPc4eRNU7G', null, 'nepotvrdeni', 0, 4),
+        (8, 1, '2021-01-14 10:53:57.344867', null, 0, 'applied@applied.com', true, null, null, null, 0, null, '$2a$10$QEVu34EQpaFKvI0YRRqOMeyHuH/B5xIzCcuI9XwAacFikLb73.Yme', null, 'applied', 0, 4),
+        (2, 0, '2021-01-14 10:53:55.721153', E''\\xACED00057372001C6A6176612E6177742E67656F6D2E506F696E74324424446F75626C65555BF8CA09A31D5F020002440001784400017978704046E5A35B615E75402FD24D8D8562B6'', 30, 'user@user.com', true, null, null, null, 0, null, '$2a$10$1.s2t3cHs9IsfG.nj1hMVebiY/9hQals.5.glG7h1HhUgSgG6S90G', null, 'user', 1, 4),
+        (4, 0, '2021-01-14 10:53:56.379372', null, 1204, 'usera@usera.com', true, null, null, null, 25, null, '$2a$10$amICk/U6zycUEz7jfViRves6SxOL4MBuC2TzAujpKHGVmMsJmB89W', null, 'userA', 32, 4);
